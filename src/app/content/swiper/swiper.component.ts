@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
-import { AppState } from '../../reducers';
+import { AppState } from '../../app.reducers';
 
 const swiperSettings = {
   wrapper: '.hero-slider',

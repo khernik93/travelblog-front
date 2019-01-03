@@ -2,8 +2,8 @@ import { routerReducer } from '@ngrx/router-store';
 import * as fromRouter from '@ngrx/router-store';
 import { Params } from '@angular/router';
 
-import * as fromHeader from '../header/header.reducer';
-import * as fromContent from '../content/content.reducer';
+import * as fromHeader from './header/header.reducer';
+import * as fromContent from './content/content.reducer';
 
 export const syncReducers = {
   router: routerReducer,

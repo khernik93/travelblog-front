@@ -6,7 +6,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 
 import { routes } from './app.routing';
-import { syncReducers } from './reducers';
+import { syncReducers } from './app.reducers';
 import { TransferHttpModule } from './shared/transfer-http/transfer-http.module';
 
 import { AppComponent } from './app.component';

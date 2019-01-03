@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { TransferHttp } from '../shared/transfer-http/transfer-http';
-import { AppState } from '../reducers';
+import { AppState } from '../app.reducers';
 import * as HeaderActions from './header.actions';
 
 const urls = {

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 
 import * as ContentActions from './content.actions';
 import { TransferHttp } from '../shared/transfer-http/transfer-http';
-import { AppState } from '../reducers';
+import { AppState } from './app.reducers';
 
 const urls = {
   swiperPhotos: '/swiperphotos'

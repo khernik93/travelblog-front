@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { takeWhile } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { AppState } from '../../reducers';
+import { AppState } from '../../app.reducers';
 import * as HeaderActions from '../header.actions';
 
 @Component({

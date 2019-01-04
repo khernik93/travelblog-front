@@ -15,6 +15,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   selectedTab: number;
   tabs: string[];
+  hamburgerMenuOpened: Boolean = false;
 
   private selectedTab$: Observable<number>;
   private tabs$: Observable<string[]>;
@@ -22,8 +23,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.initialize();
@@ -48,6 +48,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   selectTab(tab: number) {
     this.store.dispatch(new HeaderActions.SelectTab(tab));
+  }
+
+  toggleHamburgerMenu() {
+    this.hamburgerMenuOpened = !this.hamburgerMenuOpened;
   }
 
 }

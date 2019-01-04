@@ -24,7 +24,7 @@ app.get('/countries', (request, response) => {
 
 app.get('/swiperphotos', (request, response) => {
   response.send(JSON.stringify({
-    'China': ['http://localhost:3000/images/rot1.jpg'],
+    'China': ['http://localhost:3000/images/rot1.jpg', 'http://localhost:3000/images/rot2.jpg'],
     'Vietnam': ['http://localhost:3000/images/rot2.jpg', 'http://localhost:3000/images/rot3.jpg'],
   }));
 });

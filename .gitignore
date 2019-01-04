@@ -4,3 +4,4 @@ node_modules
 .awcache
 dist
 template
+dist_root/styles.css

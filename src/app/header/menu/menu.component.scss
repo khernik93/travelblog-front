@@ -1,4 +1,125 @@
-.current-menu-item a {
-  font-weight: bold;
-  color: red !important;
+nav {
+  position: absolute;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 22px;
+  overflow: hidden;
+  background: #fff;
+  list-style: none;
+  transition: all .35s;
+}
+
+// For hamburger menu toggling
+nav.show {
+  height: auto;
+  & .menu {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  nav {
+      margin-top: 12px;
+      margin-bottom: 40px;
+  }
+}
+
+// =============================
+// Hamburger menu
+// =============================
+
+.hamburger-menu {
+  position: relative;
+  width: 100%;
+  max-width: 24px;
+  height: 22px;
+  margin: 0 auto;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+.hamburger-menu span {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #181818;
+  border-radius: 10px;
+  opacity: 1;
+  left: 0;
+  transition: .25s ease-in-out;
+}
+
+.hamburger-menu span:nth-child(1) {
+  top: 2px;
+}
+
+.hamburger-menu span:nth-child(2),
+.hamburger-menu span:nth-child(3) {
+  top: 10px;
+}
+
+.hamburger-menu span:nth-child(4) {
+  top: 18px;
+}
+
+.hamburger-menu.open span:nth-child(1) {
+  top: 18px;
+  width: 0;
+  left: 50%;
+}
+
+.hamburger-menu.open span:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.hamburger-menu.open span:nth-child(3) {
+  transform: rotate(-45deg);
+}
+
+.hamburger-menu.open span:nth-child(4) {
+  top: 18px;
+  width: 0;
+  left: 50%;
+}
+
+// =============================
+// Menu
+// =============================
+
+.menu {
+  padding: 0;
+  margin: 0;
+}
+
+.menu li {
+  display: block;
+  padding: 10px 0;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  &.selected a {
+    font-weight: bold;
+    color: red !important;
+  }
+}
+
+.menu li a {
+  display: block;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  color: #2f2f2f;
+  transition: all 0.35s;
+  text-decoration: none;
+  &:hover {
+    border-color: #2f2f2f;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .menu li {
+      padding: 0 20px;
+  }
 }

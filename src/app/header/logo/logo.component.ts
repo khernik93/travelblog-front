@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'logo-component',
-  styleUrls: [],
+  styleUrls: ['./logo.component.scss'],
   templateUrl: './logo.component.html'
 })
 export class LogoComponent implements OnInit {

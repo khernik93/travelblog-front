@@ -1,8 +1,7 @@
 /* tslint:disable: max-line-length no-shadowed-variable */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { from, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable()

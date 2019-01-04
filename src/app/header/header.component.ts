@@ -11,7 +11,7 @@ const urls = {
 
 @Component({
   selector: 'header-component',
-  styleUrls: [],
+  styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {

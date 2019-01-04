@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'my-app',
-  styleUrls: ['./../styles.scss', './app.component.scss'],
+  styleUrls: [],
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {

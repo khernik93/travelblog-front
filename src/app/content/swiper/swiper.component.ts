@@ -23,7 +23,7 @@ const swiperSettings = {
 
 @Component({
   selector: 'swiper-component',
-  styleUrls: [],
+  styleUrls: ['./swiper.component.scss'],
   templateUrl: './swiper.component.html'
 })
 export class SwiperComponent implements OnInit, AfterViewInit, OnDestroy {

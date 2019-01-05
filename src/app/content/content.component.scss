@@ -1,0 +1,91 @@
+.single-page {
+  padding-top: 165px;
+  padding-bottom: 100px;
+}
+
+.single-page .content-wrap {
+  margin-top: 110px;
+  text-align: center;
+  color: #afafaf;
+}
+
+.single-page .content-wrap .posted-date {
+  font-size: 12px;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.single-page .content-wrap .entry-title {
+  margin-top: 12px;
+  font-size: 30px;
+  color: #2f2f2f;
+}
+
+.single-page .content-wrap .tags-links {
+  margin-top: 35px;
+}
+
+.single-page .content-wrap .tags-links a {
+  margin-right: 15px;
+  font-size: 16px;
+  color: #afafaf;
+}
+
+.single-page .content-wrap .featured-image {
+  margin-top: 42px;
+}
+
+.single-page .content-wrap .featured-image img {
+  max-width: 100%;
+}
+
+.single-page .content-wrap .entry-content {
+  margin-top: 36px;
+}
+
+.single-page .content-wrap .entry-content p {
+  font-size: 14px;
+  line-height: 2rem;
+  text-align: left;
+}
+
+.single-page .blockquote-text {
+  padding-left: 114px;
+  margin-top: 84px;
+  font-size: 18px;
+  line-height: 2.2rem;
+  color: #2f2f2f;
+  text-align: left;
+  background: url("/images/cocktaile.png") no-repeat left center;
+}
+
+.single-page .blockquote-text p::first-letter {
+  font-size: 36px;
+}
+
+.single-page .content-wrap .entry-footer {
+  margin-top: 50px;
+}
+
+@media screen and (min-width: 992px){
+  .single-page {
+      padding-top: 0;
+  }
+
+  .post-share {
+      margin-top: 0;
+  }
+
+  .content-wrap a.read-more {
+      margin-top: 0;
+  }
+
+  .comments-count {
+      text-align: right;
+  }
+
+  .post-share,
+  .comments-count {
+      width: calc(50% - 100px);
+  }
+}

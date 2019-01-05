@@ -11,7 +11,7 @@ const urls = {
 
 @Component({
   selector: 'content-component',
-  styleUrls: [],
+  styleUrls: ['./content.component.scss'],
   templateUrl: './content.component.html'
 })
 export class ContentComponent implements OnInit {

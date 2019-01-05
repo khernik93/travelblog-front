@@ -23,7 +23,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>
-  ) {}
+  ) {
+    this.tabs$ = this.store.select(state => state.header.tabs);
+    this.selectedTab$ = this.store.select(state => state.header.selectedTab);
+  }
 
   ngOnInit() {
     this.initialize();
@@ -34,9 +37,6 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   private initialize() {
-    this.tabs$ = this.store.select(state => state.header.tabs);
-    this.selectedTab$ = this.store.select(state => state.header.selectedTab);
-    
     this.tabs$
     .pipe(takeWhile(() => this.alive))
     .subscribe(tabs => this.tabs = tabs);

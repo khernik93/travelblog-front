@@ -6,6 +6,10 @@ declare var STORE_DEV_TOOLS: string;
 declare var System: SystemJS;
 
 declare var Swiper: any;
+interface Swiper { 
+  removeAllSlides: () => void;
+  update: () => void;
+}
 
 interface SystemJS {
   import: (path?: string) => Promise<any>;

@@ -8,7 +8,7 @@ export enum HeaderActionTypes {
 export class SelectTab implements Action {
   readonly type = HeaderActionTypes.SelectTab;
 
-  constructor(public selectedTab: number) { }
+  constructor(public selectedTab: string) { }
 }
 
 export class SetTabs implements Action {

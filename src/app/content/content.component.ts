@@ -1,33 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
-
-import * as ContentActions from './content.actions';
-import { TransferHttp } from '../shared/transfer-http/transfer-http';
-import { AppState } from '../app.reducers';
-
-const urls = {
-  swiperPhotos: '/swiperphotos'
-};
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'content-component',
   styleUrls: ['./content.component.scss'],
   templateUrl: './content.component.html'
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent {
 
-  constructor(
-    private store: Store<AppState>,
-    private transferHttp: TransferHttp
-  ) { }
-
-  ngOnInit() {
-    this.fetchSwiperPhotos();
-  }
-
-  private fetchSwiperPhotos() {
-    this.transferHttp.get(urls.swiperPhotos)
-    .subscribe(swiperPhotos => this.store.dispatch(new ContentActions.SetPhotos(swiperPhotos)));
-  }
+  constructor() { }
 
 }

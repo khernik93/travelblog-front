@@ -2,12 +2,12 @@
 import { HeaderActions, HeaderActionTypes } from './header.actions';
 
 export interface HeaderState {
-  selectedTab: number;
+  selectedTab: string;
   tabs: string[];
 }
 
 export const initialState: HeaderState = {
-  selectedTab: 0,
+  selectedTab: null,
   tabs: []
 };
 

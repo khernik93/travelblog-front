@@ -1,12 +1,15 @@
 /* tslint:disable: no-switch-case-fall-through */
 import { ContentActions, ContentActionTypes } from './content.actions';
+import { Post } from './content.model';
 
 export interface ContentState {
-  photos: Map<string, string[]>
+  photos: Map<string, string[]>,
+  posts: Post[]
 }
 
 export const initialState: ContentState = {
-  photos: null
+  photos: null,
+  posts: []
 };
 
 export function contentReducer(state = initialState, action: ContentActions): ContentState {
@@ -17,6 +20,13 @@ export function contentReducer(state = initialState, action: ContentActions): Co
         ...state,
         photos: action.photos
       };
+    }
+
+    case ContentActionTypes.SetPosts: {
+      return {
+        ...state,
+        posts: action.posts
+      }
     }
 
     default: {

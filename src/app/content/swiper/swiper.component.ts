@@ -4,6 +4,12 @@ import { Observable, combineLatest } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
 import { AppState } from '../../app.reducers';
+import { TransferHttp } from '../../shared/transfer-http/transfer-http';
+import * as ContentActions from '../content.actions';
+
+const urls = {
+  swiperPhotos: '/swiperphotos'
+};
 
 const swiperSettings = {
   wrapper: '.swiper-container',
@@ -22,6 +28,8 @@ const swiperSettings = {
   }
 };
 
+
+
 @Component({
   selector: 'swiper-component',
   styleUrls: ['./swiper.component.scss'],
@@ -29,37 +37,42 @@ const swiperSettings = {
 })
 export class SwiperComponent implements OnInit, OnDestroy {
 
-  photos: string[];
+  currentPhotos: string[];
 
-  private selectedTab$: Observable<number>;
-  private tabs$: Observable<string[]>;
+  private selectedTab$: Observable<string>;
   private photos$: Observable<Map<string, string[]>>;
   private alive = true;
   private swiper: Swiper;
 
   constructor(
     private store: Store<AppState>,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private transferHttp: TransferHttp
   ) { 
     this.selectedTab$ = this.store.select(state => state.header.selectedTab);
-    this.tabs$ = this.store.select(state => state.header.tabs);
     this.photos$ = this.store.select(state => state.content.photos);
   }
 
   ngOnInit() {
-    this.initializeSwiper();
+    this.getSwiperPhotos();
+    this.watchForSelectedTab();
   }
 
   ngOnDestroy() {
     this.alive = false;
   }
 
-  private initializeSwiper() {
-    combineLatest(this.selectedTab$, this.tabs$, this.photos$)
+  private getSwiperPhotos() {
+    this.transferHttp.get(urls.swiperPhotos)
+    .subscribe(swiperPhotos => this.store.dispatch(new ContentActions.SetPhotos(swiperPhotos)));
+  }
+
+  private watchForSelectedTab() {
+    combineLatest(this.selectedTab$, this.photos$)
     .pipe(takeWhile(() => this.alive))
-    .subscribe(([selectedTab, tabs, photos]) => {
+    .subscribe(([selectedTab, photos]) => {
       if (photos) {
-        this.photos = photos[tabs[selectedTab]];
+        this.currentPhotos = photos[selectedTab];
         this.updateSwiper();
       }
     });

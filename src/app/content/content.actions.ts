@@ -1,7 +1,10 @@
 import { Action } from '@ngrx/store';
 
+import { Post } from './content.model';
+
 export enum ContentActionTypes {
-  SetPhotos = '[Swiper] Set photos'
+  SetPhotos = '[Swiper] Set photos',
+  SetPosts = '[Posts] Set posts'
 }
 
 export class SetPhotos implements Action {
@@ -10,5 +13,12 @@ export class SetPhotos implements Action {
   constructor(public photos: Map<string, string[]>) { }
 }
 
+export class SetPosts implements Action {
+  readonly type = ContentActionTypes.SetPosts;
+
+  constructor(public posts: Post[]) { }
+}
+
 export type ContentActions =
-  | SetPhotos;
+  | SetPhotos
+  | SetPosts;

@@ -1,15 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import { AppState } from '../../app.reducers';
 import * as HeaderActions from '../header.actions';
-import { TransferHttp } from '../../shared/transfer-http/transfer-http';
-
-const urls = {
-  countries: '/countries'
-};
+import { MenuService } from './menu.service';
 
 @Component({
   selector: 'menu-component',
@@ -28,7 +24,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
-    private transferHttp: TransferHttp
+    private menuService: MenuService
   ) {
     this.tabs$ = this.store.select(state => state.header.tabs);
     this.selectedTab$ = this.store.select(state => state.header.selectedTab);
@@ -44,15 +40,13 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   private getTabs() {
-    this.transferHttp.get(urls.countries)
-    .subscribe(countries => this.store.dispatch(new HeaderActions.SetTabs(countries)));
+    this.menuService.getTabs()
+    .subscribe(tabs => this.store.dispatch(new HeaderActions.SetTabs(tabs)));
     
     this.tabs$
     .pipe(takeWhile(() => this.alive))
-    .subscribe(tabs => {
-      this.tabs = tabs;
-      this.selectTab(0);
-    });
+    .pipe(tap(tabs => this.tabs = tabs))
+    .subscribe(() => this.selectTab(this.tabs[0]));
   }
 
   private watchForSelectedTab() {
@@ -61,8 +55,8 @@ export class MenuComponent implements OnInit, OnDestroy {
     .subscribe(selectedTab => this.selectedTab = selectedTab);
   }
 
-  selectTab(tab: number) {
-    this.store.dispatch(new HeaderActions.SelectTab(this.tabs[tab]));
+  selectTab(tab: string) {
+    this.store.dispatch(new HeaderActions.SelectTab(tab));
   }
 
   toggleHamburgerMenu() {

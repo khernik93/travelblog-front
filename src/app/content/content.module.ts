@@ -7,6 +7,9 @@ import { PostsComponent } from './posts/posts.component';
 import { RecentPostsComponent } from './recentPosts/recentPosts.component';
 import { SelfieComponent } from './selfie/selfie.component';
 
+import { SwiperService } from './swiper/swiper.service';
+import { PostsService } from './posts/posts.service';
+
 @NgModule({
   declarations: [
     ContentComponent,
@@ -21,7 +24,10 @@ import { SelfieComponent } from './selfie/selfie.component';
   exports: [
     ContentComponent
   ],
-  providers: []
+  providers: [
+    SwiperService,
+    PostsService
+  ]
 })
 
 export class ContentModule {

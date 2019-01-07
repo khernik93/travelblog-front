@@ -6,6 +6,8 @@ import { HeaderComponent } from './header.component';
 import { LogoComponent } from './logo/logo.component';
 import { MenuComponent } from './menu/menu.component';
 
+import { MenuService } from './menu/menu.service';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -18,7 +20,9 @@ import { MenuComponent } from './menu/menu.component';
   exports: [
     HeaderComponent
   ],
-  providers: []
+  providers: [
+    MenuService
+  ]
 })
 
 export class HeaderModule {

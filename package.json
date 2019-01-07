@@ -5,7 +5,7 @@
   "author": "Karol Hernik <khernik93@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "@TODO"
+    "url": "https://github.com/khernik93/travelblog-front"
   },
   "scripts": {
     "build": "npm run clean:dist && npm run sass && webpack",

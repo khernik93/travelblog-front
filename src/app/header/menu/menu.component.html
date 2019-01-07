@@ -10,8 +10,8 @@
 
   <ul class="menu flex-lg flex-lg-row justify-content-lg-center align-content-lg-center">
     <li *ngFor="let tab of tabs; index as i" 
-        [className]="selectedTab === i ? 'selected' : ''" 
-        (click)="selectTab(i)">
+        [className]="selectedTab === tab ? 'selected' : ''" 
+        (click)="selectTab(tab)">
       <a href="#">{{ tab }}</a>
     </li>
   </ul>

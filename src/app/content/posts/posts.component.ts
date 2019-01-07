@@ -5,12 +5,8 @@ import { takeWhile, tap } from 'rxjs/operators';
 
 import { Post } from '../content.model';
 import { AppState } from '../../app.reducers';
-import { TransferHttp } from '../../shared/transfer-http/transfer-http';
 import * as ContentActions from '../content.actions';
-
-const urls = {
-  posts: '/posts'
-};
+import { PostsService } from './posts.service';
 
 @Component({
   selector: 'posts-component',
@@ -26,27 +22,27 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
-    private transferHttp: TransferHttp
+    private postsService: PostsService
   ) { 
     this.selectedTab$ = this.store.select(state => state.header.selectedTab);
   }
 
   ngOnInit() {
-    this.watchForSelectedTab();
+    this.getPostsOnSelectedTab();
   }
 
   ngOnDestroy() {
     this.alive = false;
   }
 
-  private watchForSelectedTab() {
+  private getPostsOnSelectedTab() {
     this.selectedTab$
     .pipe(takeWhile(() => this.alive))
     .subscribe(selectedTab => this.getPosts(selectedTab));
   }
 
   private getPosts(selectedTab: string) {
-    this.transferHttp.get(urls.posts, {params: {tab: selectedTab}})
+    this.postsService.getPosts(selectedTab)
     .pipe(takeWhile(() => this.alive))
     .pipe(tap(posts => this.posts = posts))
     .subscribe(posts => this.store.dispatch(new ContentActions.SetPosts(posts)));

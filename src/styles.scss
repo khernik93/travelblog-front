@@ -59,10 +59,3 @@ a:hover, a:active {
       display: flex !important;
   }
 }
-
-@media screen and (min-width: 1200px) {
-  .outer-container {
-      width: calc(100% - 90px);
-      margin: 0 auto;
-  }
-}

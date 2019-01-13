@@ -18,12 +18,13 @@ import {
 const { DefinePlugin } = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const { root } = require('./helpers.js');
+const { root, getMultipleFiles } = require('./helpers.js');
 
 const EVENT = process.env.npm_lifecycle_event || '';
 const AOT = EVENT.includes('aot');
 const DEV_SERVER = EVENT.includes('webdev');
 const PROD = EVENT.includes('prod');
+const TEST = EVENT.includes('test');
 
 const PORT = PROD ? PROD_PORT : DEV_PORT;
 const ENV = PROD ? 'production' : 'development';
@@ -113,7 +114,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
           'angular2-template-loader',
           'angular-router-loader?loader=system&genDir=compiled&aot=' + AOT,
         ],
-        exclude: [/\.(spec|e2e|d)\.ts$/],
+        exclude: [/\.(e2e|d)\.ts$/],
       },
       {
         type: 'javascript/auto',
@@ -152,5 +153,10 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
 
   return config;
 })();
+
+if (TEST) {
+  outputConfig.entry = getMultipleFiles('./test/**/*.ts');
+  outputConfig.output.filename = 'bundle.test.js';
+}
 
 module.exports = outputConfig;

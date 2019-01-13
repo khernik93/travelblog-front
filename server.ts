@@ -31,29 +31,42 @@ app.get('/swiperphotos', (request, response) => {
 
 app.get('/posts', (request, response) => {
   const tab = request.query.tab;
-  let output = [];
+  let output = {};
   if (tab === 'China') {
-    output = [
-      {
-        createdAt: '2018-08-01 12:52:22',
-        title: 'djksfdsfdsf',
-        tags: ['#dsfds', '#fsdf', '#fdsf', '#dsasdasd'],
-        content: 'fdsjfkdsjfkdsfjdsjf f dsfdj fds jlfk d'
+    output = {
+      meta: {
+        total: 5,
+        start: 0,
+        end: 2
       },
-      {
-        createdAt: '2018-08-01 12:52:22',
-        title: 'djksfdsfdsf',
-        tags: ['#dsfds', '#fsdf', '#fdsf', '#dsasdasd'],
-        content: 'fdsjfkdsjfkdsfjdsjf f dsfdj fds jlfk d'
-      },
-      {
-        createdAt: '2018-08-01 12:52:22',
-        title: 'djksfdsfdsf',
-        tags: ['#dsfds', '#fsdf', '#fdsf', '#dsasdasd'],
-        content: 'fdsjfkdsjfkdsfjdsjf f dsfdj fds jlfk d'
-      }
-    ];
-  }
+      content: [
+        {
+          id: 1,
+          createdAt: '2018-08-01 12:52:22',
+          title: 'Why I love Winter: A short story',
+          tags: ['#winter', '#love', '#snow', '#january'],
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est. </p>',
+          commentsCount: 3
+        },
+        {
+          id: 2,
+          createdAt: '2018-08-01 12:52:22',
+          title: 'Why I love Winter: A short story',
+          tags: ['#winter', '#love', '#snow', '#january'],
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est. </p>',
+          commentsCount: 3
+        },
+        {
+          id: 3,
+          createdAt: '2018-08-01 12:52:22',
+          title: 'Why I love Winter: A short story',
+          tags: ['#winter', '#love', '#snow', '#january'],
+          content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est. </p>',
+          commentsCount: 3
+        }
+      ]
+    };
+  };
   response.send(JSON.stringify(output));
 });
 

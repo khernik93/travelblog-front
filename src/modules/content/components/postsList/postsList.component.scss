@@ -1,0 +1,179 @@
+.content-wrap {
+  margin-top: 110px;
+  text-align: center;
+  color: #afafaf;
+}
+
+.posted-date {
+  font-size: 12px;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+}
+
+.entry-title {
+  margin-top: 12px;
+  font-size: 30px;
+  color: #2f2f2f;
+}
+
+.tags-links {
+  margin-top: 35px;
+}
+
+.tags-links a {
+  margin-right: 15px;
+  font-size: 16px;
+  color: #afafaf;
+}
+
+.featured-image {
+  margin-top: 42px;
+}
+
+.featured-image img {
+  max-width: 100%;
+}
+
+.entry-content {
+  margin-top: 36px;
+}
+
+.entry-content p {
+  font-size: 14px;
+  line-height: 2rem;
+  text-align: left;
+}
+
+.blockquote-text {
+  padding-left: 114px;
+  margin-top: 84px;
+  font-size: 18px;
+  line-height: 2.2rem;
+  color: #2f2f2f;
+  text-align: left;
+  background: url("/images/cocktaile.png") no-repeat left center;
+}
+
+.blockquote-text p::first-letter {
+  font-size: 36px;
+}
+
+.entry-footer {
+  margin-top: 50px;
+}
+
+.sit-footer {
+  padding-top: 100px;
+  border-top: 1px solid #d8d8d8;
+}
+
+.footer-post-wrap {
+  margin-bottom: 60px;
+}
+
+.footer-post-wrap figure {
+  width: 185px;
+  margin: 0 30px 0 0;
+}
+
+.footer-post-wrap figure img {
+  display: block;
+  width: 100%;
+}
+
+.footer-post-cont {
+  width: calc(100% - 205px);
+}
+
+.footer-post-cont .posted-date {
+  margin-top: 20px;
+  font-size: 11px;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  color: #afafaf;
+}
+
+.footer-post-cont h3 {
+  margin-top: 10px;
+  font-size: 18px;
+}
+
+.footer-post-cont h3 a {
+  color: #2f2f2f;
+}
+
+.footer-post-cont .tags-links {
+  margin-top: 12px;
+}
+
+.footer-post-cont .tags-links a {
+  margin-right: 5px;
+  font-size: 12px;
+  color: #afafaf;
+}
+
+.footer-post-cont .read-more {
+  display: inline-block;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #2f2f2f;
+  text-decoration: underline;
+  text-transform: capitalize;
+}
+
+.pagination {
+  margin-top: 100px;
+}
+
+.pagination ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.pagination li {
+  margin-right: 10px;
+}
+
+.pagination li a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  font-size: 11px;
+  color: #2f2f2f;
+  background: #f0f0f0;
+  text-decoration: none;
+}
+
+.pagination li a:hover,
+.pagination li.active a {
+  color: #fff;
+  background: #2f2f2f;
+}
+
+@media screen and (min-width: 992px){
+  .post-share {
+      margin-top: 0;
+  }
+
+  .content-wrap a.read-more {
+      margin-top: 0;
+  }
+
+  .comments-count {
+      text-align: right;
+  }
+
+  .post-share,
+  .comments-count {
+      width: calc(50% - 100px);
+  }
+}
+
+@media screen and (min-width: 1200px){
+  .footer-post-wrap {
+      margin-bottom: 0;
+  }
+}

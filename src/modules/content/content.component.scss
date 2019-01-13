@@ -1,0 +1,10 @@
+.single-page {
+  padding-top: 165px;
+  padding-bottom: 100px;
+}
+
+@media screen and (min-width: 992px){
+  .single-page {
+      padding-top: 0;
+  }
+}

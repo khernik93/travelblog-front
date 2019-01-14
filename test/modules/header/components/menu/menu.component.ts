@@ -19,7 +19,7 @@ const fakeState: any = {
 describe('MenuComponent', () => {
 
   let testStore: any;
-  let menuService: any;
+  let menuService: jasmine.SpyObj<MenuService>;
 
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;

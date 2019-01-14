@@ -1,4 +1,3 @@
-import * as assert from 'assert';
 import * as swiperActions from '../../../../../src/modules/content/components/swiper/swiper.actions';
 import { swiperReducer, initialState } from '../../../../../src/modules/content/components/swiper/swiper.reducer';
 
@@ -11,19 +10,9 @@ describe('SwiperReducer', () => {
     };
     const action = new swiperActions.SetPhotos(photos);
     const result = swiperReducer(initialState, action);
-    assert.deepEqual(result, {
+    expect(result).toEqual({
       ...initialState,
       photos: photos
-    });
-  });
-
-  it('should get photos - edge cases', () => {
-    const photos: any = {};
-    const action = new swiperActions.SetPhotos(photos);
-    const result = swiperReducer(initialState, action);
-    assert.deepEqual(result, {
-      ...initialState,
-      photos: {}
     });
   });
 

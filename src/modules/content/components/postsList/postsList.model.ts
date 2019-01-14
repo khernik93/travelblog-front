@@ -15,5 +15,5 @@ export type Meta = {
 
 export type PostResponse = {
   meta: Meta,
-  content: Post
+  content: Post[]
 };

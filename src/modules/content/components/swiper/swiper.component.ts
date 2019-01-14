@@ -43,7 +43,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private changeDetectorRef: ChangeDetectorRef,
     private swiperService: SwiperService
-  ) { 
+  ) {
     this.selectedTab$ = this.store.select(state => state.menu.selectedTab);
     this.photos$ = this.store.select(state => state.swiper.photos);
   }

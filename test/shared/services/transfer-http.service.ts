@@ -1,9 +1,10 @@
 import { TransferHttpService } from '../../../src/shared/services/transfer-http.service';
+import { HttpClient } from '@angular/common/http';
 
 describe('Transfer-http service', () => {
 
   let transferHttpService: TransferHttpService;
-  let httpClientSpy: any;
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);

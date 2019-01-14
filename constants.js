@@ -21,7 +21,7 @@ exports.HOST = ip.address();
 exports.DEV_PORT = 3000;
 exports.PROD_PORT = 8088;
 exports.PROD_DEVTOOL = 'source-map';
-exports.DEV_DEVTOOL = 'source-map';
+exports.DEV_DEVTOOL = 'eval-source-map';
 
 /**
  * specifies which @ngrx dev tools will be available when you build and load

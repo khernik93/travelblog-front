@@ -2,12 +2,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { SwiperComponent } from '../../../../../src/modules/content/components/swiper/swiper.component';
 import { SwiperService } from '../../../../../src/modules/content/components/swiper/swiper.service';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { SetPhotos } from '../../../../../src/modules/content/components/swiper/swiper.actions';
-import { ChangeDetectorRef } from '@angular/core';
 
 const photos: Map<string, string[]> = new Map();
 photos.set('tab1', ['photo1', 'photo2']);

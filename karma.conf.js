@@ -1,4 +1,3 @@
-var path = require('path');
 var webpackConfig = require('./webpack.config');
 
 module.exports = function (config) {
@@ -8,11 +7,8 @@ module.exports = function (config) {
         frameworks: ['jasmine'],
         plugins: [
             require('karma-jasmine'),
-            require('karma-phantomjs-launcher'),
             require('karma-chrome-launcher'),
-            require('karma-coverage'),
             require('karma-spec-reporter'),
-            require('karma-junit-reporter'),
             require('karma-sourcemap-loader'),
             require('karma-webpack')
         ],
@@ -22,8 +18,7 @@ module.exports = function (config) {
         ],
 
         preprocessors: {
-            './karma-test-shim.js': ['webpack', 'sourcemap'],
-            'src/**/*.ts': ['coverage']
+            './karma-test-shim.js': ['webpack', 'sourcemap']
         },
 
         webpack: webpackConfig,
@@ -33,30 +28,17 @@ module.exports = function (config) {
         },
 
         webpackServer: {
-            noInfo: true
+            noInfo: false
         },
 
-        reporters: ['spec', 'coverage', 'junit'],
+        reporters: ['spec'],
 
         port: 9876,
         colors: true,
         logLevel: config.LOG_INFO,
         autoWatch: false,
         singleRun: true,
-        customLaunchers: {
-            ChromeHeadless: {
-                base: 'Chrome',
-                flags: [
-                    '--no-sandbox',
-                    // See https://chromium.googlesource.com/chromium/src/+/lkgr/headless/README.md
-                    '--headless',
-                    '--disable-gpu',
-                    // Without a remote debugging port, Google Chrome exits immediately.
-                    ' --remote-debugging-port=9222'
-                ]
-            }
-        },
-        browsers: ['PhantomJS']
+        browsers: ['ChromeHeadless']
     };
 
     config.set(_config);

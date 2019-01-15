@@ -41,6 +41,13 @@ nav {
   letter-spacing: 0.08rem;
   text-transform: uppercase;
   padding: 0 16px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 .menu li.selected a {
@@ -51,7 +58,6 @@ nav {
 .menu li a {
   display: block;
   padding: 4px 0;
-  border-bottom: 2px solid transparent;
   color: $black;
   transition: all 0.35s;
   text-decoration: none;
@@ -68,7 +74,10 @@ nav {
   .menu li {
     margin-bottom: 5px;
   }
-  .menu li a:hover {
-    border-bottom-color: $grey;
+  .menu li a {
+    border-bottom: 2px solid $lightgrey;
+    &:hover {
+      border-bottom: 2px solid $grey;
+    }
   }
 }

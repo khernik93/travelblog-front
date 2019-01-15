@@ -8,7 +8,7 @@ div {
 }
 
 div h1 {
-  font-size: 90px;
+  font-size: 110px;
   font-family: 'BeyondTheMountains';
 }
  
@@ -27,11 +27,11 @@ div p {
   text-align: right;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: $smallPoint) {
   div h1 {
-    font-size: 75px;
+    font-size: 85px;
   }
   div p {
-    width: 200px - (90px - 75px)*2;
+    width: 200px - (110px - 85px)*2;
   }
 }

@@ -1,18 +1,18 @@
-.swiper-container {
-  margin-top: 40px;
-}
+@import '../../../../variables';
 
-.swiper-container img {
-  width: 100%;
-  height: auto;
+.swiper-container {
+  display: flex;
+  margin-top: 20px;
 }
 
 .swiper-content {
   width: 100%;
-  height: 600px;
+  height: 450px;
 }
 
 .swiper-content img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -29,7 +29,9 @@
   width: 54px;
   height: 54px;
   margin-top: -27px;
-  background: #fff;
+  background: $lightgrey;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
   transition: all .35s;
 }
 
@@ -55,7 +57,7 @@
 
 .swiper-button-next path,
 .swiper-button-prev path {
-  fill: #3a3a3a;
+  fill: $black;
 }
 
 .swiper-pagination-bullet {
@@ -69,10 +71,16 @@
 }
 
 .swiper-pagination-bullet-active {
-  background: #fff;
+  background: $lightgrey;
 }
 
-@media screen and (min-width: 768px){
+@media screen and (max-width: $smallPoint){
+  .swiper-content {
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: $smallPoint){
   .swiper-button-next,
   .swiper-button-prev {
       visibility: visible;

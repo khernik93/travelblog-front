@@ -1,9 +1,0 @@
-<nav class="site-navigation">
-  <ul class="flex-lg flex-lg-row justify-content-lg-center align-content-lg-center">
-      <li *ngFor="let tab of tabs; index as i" 
-          [className]="selectedTab === i ? 'current-menu-item' : ''" 
-          (click)="selectTab(i)">
-        <a href="#">{{ tab }}</a>
-      </li>
-  </ul>
-</nav>

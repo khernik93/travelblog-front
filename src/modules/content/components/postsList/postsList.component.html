@@ -1,0 +1,29 @@
+<div class="col-lg-9">
+    <div class="content-wrap" *ngFor="let post of posts">
+        <header class="entry-header">
+            <div class="posted-date">
+                {{ post.createdAt }}
+            </div>
+            <h2 class="entry-title">{{ post.title }}</h2>
+
+            <div class="tags-links">
+                <a href="#" *ngFor="let tag of post.tags">{{ tag }}</a>
+            </div>
+        </header>
+
+        <figure class="featured-image">
+            <img src="images/1.jpg" alt="">
+        </figure>
+
+        <div class="entry-content">
+            <p>{{ post.content }}</p>
+        </div>
+
+        <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
+            <a class="read-more order-2" href="#">Read more</a>
+            <div class="comments-count order-1 order-lg-3">
+                <a href="#">{{ post.commentsCount }} Comments</a>
+            </div>
+        </footer>
+    </div>
+</div>

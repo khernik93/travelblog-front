@@ -1,0 +1,16 @@
+<nav [className]="hamburgerMenuOpened ? 'show' : ''">
+
+  <div class="hamburger-menu"
+       (click)="toggleHamburgerMenu()">
+    <i class="fa fa-bars"></i>
+  </div>
+
+  <ul class="menu" *ngIf="hamburgerMenuOpened">
+    <li *ngFor="let tab of tabs$ | async; index as i" 
+        [className]="(selectedTab$ | async) === tab ? 'selected' : ''" 
+        (click)="selectTab(tab)">
+      <a href="#">{{ tab }}</a>
+    </li>
+  </ul>
+  
+</nav>

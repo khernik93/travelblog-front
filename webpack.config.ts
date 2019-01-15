@@ -1,5 +1,3 @@
-/* tslint:disable: variable-name max-line-length */
-
 import {
   HOST,
   STORE_DEV_TOOLS,
@@ -14,11 +12,9 @@ import {
   MY_CLIENT_DEVSERVER_PLUGINS,
   MY_CLIENT_RULES,
 } from './constants';
-
-const { DefinePlugin } = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-const { root } = require('./helpers.js');
+import { DefinePlugin } from 'webpack';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import { root } from './helpers.js';
 
 const EVENT = process.env.npm_lifecycle_event || '';
 const AOT = EVENT.includes('aot');
@@ -95,7 +91,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
   };
 
   config.resolve = {
-    extensions: ['.ts', '.js', '.json']
+    extensions: ['.ts', '.js', '.json'] 
   };
 
   config.module = {
@@ -113,7 +109,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
           'angular2-template-loader',
           'angular-router-loader?loader=system&genDir=compiled&aot=' + AOT,
         ],
-        exclude: [/\.(spec|e2e|d)\.ts$/],
+        exclude: [/\.(e2e|d)\.ts$/],
       },
       {
         type: 'javascript/auto',

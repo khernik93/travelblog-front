@@ -1,0 +1,74 @@
+@import '../../../../variables';
+
+nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+// =============================
+// Hamburger menu
+// =============================
+
+.hamburger-menu {
+  text-align: center;
+  margin-bottom: 10px;
+  transition: .5s ease-in-out;
+  cursor: pointer;
+}
+
+@media screen and (min-width: $smallPoint) {
+  .hamburger-menu {
+    display: none;
+  }
+}
+
+// =============================
+// Menu items section
+// =============================
+
+.menu {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.menu li {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  padding: 0 16px;
+}
+
+.menu li.selected a {
+  font-weight: bold;
+  color: $red !important;
+}
+
+.menu li a {
+  display: block;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  color: $black;
+  transition: all 0.35s;
+  text-decoration: none;
+  text-align: center;
+  &:hover {
+    color: $red;
+  }
+}
+
+@media screen and (max-width: $smallPoint) {
+  .menu {
+    flex-direction: column;
+  }
+  .menu li {
+    margin-bottom: 5px;
+  }
+  .menu li a:hover {
+    border-bottom-color: $grey;
+  }
+}

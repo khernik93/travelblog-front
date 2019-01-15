@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 import { ContentComponent } from './content.component';
 import { SwiperComponent } from './components/swiper/swiper.component';
@@ -20,8 +19,7 @@ export const MODULE_DECLARATIONS = [
 ];
 
 export const MODULE_IMPORTS = [
-  CommonModule,
-  NgxPaginationModule
+  CommonModule
 ];
 
 export const MODULE_PROVIDERS = [

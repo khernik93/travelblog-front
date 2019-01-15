@@ -1,6 +1,4 @@
-@media screen and (min-width: 768px) {
-  .site-header {
-      margin-top: 12px;
-      margin-bottom: 40px;
-  }
+header {
+  flex-direction: column;
+  justify-content: center;
 }

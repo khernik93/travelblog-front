@@ -1,6 +1,5 @@
-@media screen and (min-width: 1200px) {
-  .outer-container {
-      width: calc(100% - 90px);
-      margin: 0 auto;
-  }
+.outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

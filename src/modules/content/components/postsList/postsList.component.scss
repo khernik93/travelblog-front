@@ -121,38 +121,6 @@
   text-transform: capitalize;
 }
 
-.pagination {
-  margin-top: 100px;
-}
-
-.pagination ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.pagination li {
-  margin-right: 10px;
-}
-
-.pagination li a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  font-size: 11px;
-  color: #2f2f2f;
-  background: #f0f0f0;
-  text-decoration: none;
-}
-
-.pagination li a:hover,
-.pagination li.active a {
-  color: #fff;
-  background: #2f2f2f;
-}
-
 @media screen and (min-width: 992px){
   .post-share {
       margin-top: 0;

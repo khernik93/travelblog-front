@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 
   selectedTab$: Observable<string>;
   tabs$: Observable<string[]>;
-  hamburgerMenuOpened: boolean = false;
+  hamburgerMenuOpened: boolean = true;
 
   private alive: boolean = true;
 

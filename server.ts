@@ -45,7 +45,7 @@ app.get('/posts', (request, response) => {
           createdAt: '2018-08-01 12:52:22',
           title: 'Why I love Winter: A short story',
           tags: ['#winter', '#love', '#snow', '#january'],
-          content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est. </p>',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est.',
           commentsCount: 3
         },
         {
@@ -53,7 +53,7 @@ app.get('/posts', (request, response) => {
           createdAt: '2018-08-01 12:52:22',
           title: 'Why I love Winter: A short story',
           tags: ['#winter', '#love', '#snow', '#january'],
-          content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est. </p>',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est.',
           commentsCount: 3
         },
         {
@@ -61,7 +61,7 @@ app.get('/posts', (request, response) => {
           createdAt: '2018-08-01 12:52:22',
           title: 'Why I love Winter: A short story',
           tags: ['#winter', '#love', '#snow', '#january'],
-          content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est. </p>',
+          content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel tortor facilisis, volutpat nulla placerat, tincidunt mi. Nullam vel orci dui. Suspendisse sit amet laoreet neque. Fusce sagittis suscipit sem a consequat. Proin nec interdum sem. Quisque in porttitor magna, a imperdiet est.',
           commentsCount: 3
         }
       ]

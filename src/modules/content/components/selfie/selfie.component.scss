@@ -1,0 +1,17 @@
+.selfie {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 5%;
+}
+
+.selfie .section {
+  width: 100%;
+  text-align: center;
+}
+
+.selfie img {
+  max-height: 50%;
+  max-width: 50%;
+  text-align: center;
+}

@@ -37,8 +37,7 @@ nav {
 
 .menu li {
   display: block;
-  font-size: 12px;
-  letter-spacing: 0.08rem;
+  letter-spacing: $smallLetterSpacing;
   text-transform: uppercase;
   padding: 0 16px;
   -webkit-touch-callout: none; /* iOS Safari */
@@ -58,13 +57,9 @@ nav {
 .menu li a {
   display: block;
   padding: 4px 0;
-  color: $black;
   transition: all 0.35s;
   text-decoration: none;
   text-align: center;
-  &:hover {
-    color: $red;
-  }
 }
 
 @media screen and (max-width: $smallPoint) {

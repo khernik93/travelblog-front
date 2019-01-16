@@ -1,147 +1,53 @@
-.content-wrap {
-  margin-top: 110px;
-  text-align: center;
-  color: #afafaf;
+@import "../../../../variables";
+
+.posts-list {
+  padding-top: 50px;
 }
 
-.posted-date {
-  font-size: 12px;
-  letter-spacing: 0.08rem;
+.post-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: $grey;
+  margin-bottom: 70px;
+  padding: 3%;
+}
+
+.post-wrap .content-section {
+  width: 100%;
+  text-align: center;
+}
+
+.post-wrap .posted-date {
+  letter-spacing: $smallLetterSpacing;
   text-transform: uppercase;
 }
 
-.entry-title {
+.post-wrap .entry-title {
   margin-top: 12px;
-  font-size: 30px;
-  color: #2f2f2f;
+  color: $black;
 }
 
-.tags-links {
-  margin-top: 35px;
+.post-wrap .tags-links {
+  margin-top: 20px;
+  & span {
+    margin-right: 15px;
+  }
 }
 
-.tags-links a {
-  margin-right: 15px;
-  font-size: 16px;
-  color: #afafaf;
-}
-
-.featured-image {
-  margin-top: 42px;
-}
-
-.featured-image img {
-  max-width: 100%;
-}
-
-.entry-content {
+.post-wrap .entry-content {
   margin-top: 36px;
+  & p {
+    text-align: left;
+  }
 }
 
-.entry-content p {
-  font-size: 14px;
-  line-height: 2rem;
-  text-align: left;
-}
-
-.blockquote-text {
-  padding-left: 114px;
-  margin-top: 84px;
-  font-size: 18px;
-  line-height: 2.2rem;
-  color: #2f2f2f;
-  text-align: left;
-  background: url("/images/cocktaile.png") no-repeat left center;
-}
-
-.blockquote-text p::first-letter {
-  font-size: 36px;
-}
-
-.entry-footer {
+.post-wrap .read-more {
   margin-top: 50px;
 }
 
-.sit-footer {
-  padding-top: 100px;
-  border-top: 1px solid #d8d8d8;
-}
-
-.footer-post-wrap {
-  margin-bottom: 60px;
-}
-
-.footer-post-wrap figure {
-  width: 185px;
-  margin: 0 30px 0 0;
-}
-
-.footer-post-wrap figure img {
-  display: block;
-  width: 100%;
-}
-
-.footer-post-cont {
-  width: calc(100% - 205px);
-}
-
-.footer-post-cont .posted-date {
-  margin-top: 20px;
-  font-size: 11px;
-  letter-spacing: 0.08rem;
-  text-transform: uppercase;
-  color: #afafaf;
-}
-
-.footer-post-cont h3 {
-  margin-top: 10px;
-  font-size: 18px;
-}
-
-.footer-post-cont h3 a {
-  color: #2f2f2f;
-}
-
-.footer-post-cont .tags-links {
-  margin-top: 12px;
-}
-
-.footer-post-cont .tags-links a {
-  margin-right: 5px;
-  font-size: 12px;
-  color: #afafaf;
-}
-
-.footer-post-cont .read-more {
-  display: inline-block;
-  margin-bottom: 15px;
-  font-size: 14px;
-  color: #2f2f2f;
-  text-decoration: underline;
-  text-transform: capitalize;
-}
-
-@media screen and (min-width: 992px){
-  .post-share {
-      margin-top: 0;
-  }
-
-  .content-wrap a.read-more {
-      margin-top: 0;
-  }
-
-  .comments-count {
-      text-align: right;
-  }
-
-  .post-share,
-  .comments-count {
-      width: calc(50% - 100px);
-  }
-}
-
-@media screen and (min-width: 1200px){
-  .footer-post-wrap {
-      margin-bottom: 0;
-  }
+.post-wrap .comments {
+  margin-top: 30px;
+  text-align: right;
+  padding-right: 10%;
 }

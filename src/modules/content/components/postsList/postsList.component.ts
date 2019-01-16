@@ -22,7 +22,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppState>,
-    private postsService: PostsListService
+    private postsListService: PostsListService
   ) { 
     this.selectedTab$ = this.store.select(state => state.menu.selectedTab);
   }
@@ -42,7 +42,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
   }
 
   private getPosts(selectedTab: string) {
-    this.postsService.getPosts(selectedTab)
+    this.postsListService.getPosts(selectedTab)
     .pipe(takeWhile(() => this.alive))
     .pipe(tap((response: any) => this.posts = response.content))
     .subscribe(posts => this.store.dispatch(new PostsListActions.SetPosts(posts)));

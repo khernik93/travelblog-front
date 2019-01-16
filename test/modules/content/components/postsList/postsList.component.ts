@@ -36,7 +36,7 @@ describe('PostsListComponent', () => {
   beforeEach(() => {
 
     postsListService = jasmine.createSpyObj('PostsListService', {
-      getPosts: of(postsResponse)
+      getPosts: of([])
     });
 
     TestBed.configureTestingModule({
@@ -63,14 +63,11 @@ describe('PostsListComponent', () => {
     expect(component).toBeDefined();
   });
 
-  // @TODO Test posts HTML
-
-  it('should call getPosts function on changing selected tab', () => {
+  it('should call getPosts function on changing selected tab', async(() => {
     const tabName = 'some-other-tab';
     store.dispatch(new MockAction({selectedTab: tabName}));
     fixture.detectChanges();
     expect(postsListService.getPosts).toHaveBeenCalledWith(tabName);
-    // @TODO Check if the state was filled up with new posts
-  });
+  }));
 
 });

@@ -1,4 +1,15 @@
-div {
+.content {
   display: flex;
   flex-direction: row;
+  width: 100%;
+}
+
+.left-pane {
+  width: 75%;
+}
+
+.right-pane {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
 }

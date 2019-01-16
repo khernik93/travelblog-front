@@ -1,29 +1,22 @@
-<div class="col-lg-9">
-    <div class="content-wrap" *ngFor="let post of posts">
-        <header class="entry-header">
-            <div class="posted-date">
-                {{ post.createdAt }}
-            </div>
-            <h2 class="entry-title">{{ post.title }}</h2>
-
-            <div class="tags-links">
-                <a href="#" *ngFor="let tag of post.tags">{{ tag }}</a>
-            </div>
-        </header>
-
-        <figure class="featured-image">
-            <img src="images/1.jpg" alt="">
-        </figure>
-
-        <div class="entry-content">
+<div class="posts-list">
+    <div class="post-wrap" *ngFor="let post of posts">
+        <div class="content-section posted-date">
+            <h4>{{ post.createdAt }}</h4>
+        </div>
+        <div class="content-section entry-title">
+            <h1>{{ post.title }}</h1>
+        </div>
+        <div class="content-section tags-links">
+            <span *ngFor="let tag of post.tags">{{ tag }}</span>
+        </div>
+        <div class="content-section entry-content">
             <p>{{ post.content }}</p>
         </div>
-
-        <footer class="entry-footer flex flex-column flex-lg-row justify-content-between align-content-start align-lg-items-center">
-            <a class="read-more order-2" href="#">Read more</a>
-            <div class="comments-count order-1 order-lg-3">
-                <a href="#">{{ post.commentsCount }} Comments</a>
-            </div>
-        </footer>
+        <div class="content-section read-more">
+            <a class="read-more" href="#">Read more</a>
+        </div>
+        <div class="content-section comments">
+            <a href="#">{{ post.commentsCount }} Comments</a>
+        </div>
     </div>
 </div>

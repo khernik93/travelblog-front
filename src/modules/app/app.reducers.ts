@@ -4,8 +4,9 @@ import { Params } from '@angular/router';
 import { ActionReducerMap } from '@ngrx/store';
 
 import * as fromMenu from '../header/components/menu/menu.reducer';
-import * as fromSwiper from '../content/components/swiper/swiper.reducer';
+import * as fromSwiper from '../header/components/swiper/swiper.reducer';
 import * as fromPostsList from '../content/components/postsList/postsList.reducer';
+import * as fromRecentPosts from '../content/components/recentPosts/recentPosts.reducer';
 
 interface RouterStateUrl {
   url: string;
@@ -18,11 +19,13 @@ export interface AppState {
   menu: fromMenu.MenuState;
   swiper: fromSwiper.SwiperState;
   postsList: fromPostsList.PostsListState;
+  recentPosts: fromRecentPosts.RecentPostsState;
 }
 
 export const syncReducers: ActionReducerMap<AppState> = {
   router: routerReducer,
   menu: fromMenu.menuReducer,
   swiper: fromSwiper.swiperReducer,
-  postsList: fromPostsList.postsListReducer
+  postsList: fromPostsList.postsListReducer,
+  recentPosts: fromRecentPosts.recentPostsReducer
 };

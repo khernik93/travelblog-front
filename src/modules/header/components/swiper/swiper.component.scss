@@ -25,22 +25,23 @@
 
 .swiper-button-next,
 .swiper-button-prev {
+  display: flex;
+  align-content: center;
+  align-items: center;
   visibility: hidden;
   width: 54px;
   height: 54px;
-  margin-top: -27px;
   background: $lightgrey;
   opacity: 0.6;
   filter: alpha(opacity=60);
   transition: all .35s;
-}
-
-.swiper-button-next {
-  right: 42px;
-}
-
-.swiper-button-prev {
-  left: 42px;
+  & span {
+    width: 100% !important;
+    text-align: center;
+  }
+  & span svg {
+    width: 12px;
+  }
 }
 
 .swiper-button-next:hover,

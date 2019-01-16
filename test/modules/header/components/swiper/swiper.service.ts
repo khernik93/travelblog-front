@@ -1,5 +1,6 @@
 import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
 import { TransferHttpService } from '../../../../../src/shared/services/transfer-http.service';
+import { TestBed } from '@angular/core/testing';
 
 describe('SwiperService', () => {
 
@@ -8,7 +9,13 @@ describe('SwiperService', () => {
 
   beforeEach(() => {
     transferHttpService = jasmine.createSpyObj('TransferHttpService', ['get']);
-    swiperService = new SwiperService(<any> transferHttpService);
+    TestBed.configureTestingModule({
+      providers: [
+        SwiperService,
+        { provide: TransferHttpService, useValue: transferHttpService }
+      ]
+    });
+    swiperService = TestBed.get(SwiperService);
   });
 
   it('should call TransferHttpService on calling getPhotos method', () => {

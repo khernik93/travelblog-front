@@ -1,5 +1,5 @@
-import * as swiperActions from '../../../../../src/modules/content/components/swiper/swiper.actions';
-import { swiperReducer, initialState } from '../../../../../src/modules/content/components/swiper/swiper.reducer';
+import * as swiperActions from '../../../../../src/modules/header/components/swiper/swiper.actions';
+import { swiperReducer, initialState } from '../../../../../src/modules/header/components/swiper/swiper.reducer';
 
 describe('SwiperReducer', () => {
 

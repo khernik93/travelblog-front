@@ -4,13 +4,16 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { SwiperComponent } from './components/swiper/swiper.component';
 
 import { MenuService } from './components/menu/menu.service';
+import { SwiperService } from './components/swiper/swiper.service';
 
 export const MODULE_DECLARATIONS = [
   HeaderComponent,
   LogoComponent,
-  MenuComponent
+  MenuComponent,
+  SwiperComponent
 ];
 
 export const MODULE_IMPORTS = [
@@ -18,7 +21,8 @@ export const MODULE_IMPORTS = [
 ];
 
 export const MODULE_PROVIDERS = [
-  MenuService
+  MenuService,
+  SwiperService
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { SwiperService } from '../../../../../src/modules/content/components/swiper/swiper.service';
+import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
 import { TransferHttpService } from '../../../../../src/shared/services/transfer-http.service';
 
 describe('SwiperService', () => {

@@ -4,9 +4,9 @@ import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core';
 
-import { SwiperComponent } from '../../../../../src/modules/content/components/swiper/swiper.component';
-import { SwiperService } from '../../../../../src/modules/content/components/swiper/swiper.service';
-import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
+import { SwiperComponent } from '../../../../../src/modules/header/components/swiper/swiper.component';
+import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
+import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
 import { MockStoreModule, MockAction } from '../../../../utils/mock-store';
 
 const tabs: string[] = ['tab1', 'tab2', 'tab3'];

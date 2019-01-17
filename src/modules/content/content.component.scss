@@ -1,13 +1,13 @@
-.content {
+section {
   display: flex;
   width: 100%;
 }
 
-.left-pane {
+section .left-pane {
   width: 75%;
 }
 
-.right-pane {
+section .right-pane {
   display: flex;
   flex-direction: column;
   width: 25%;

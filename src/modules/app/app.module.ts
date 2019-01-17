@@ -12,6 +12,7 @@ import { NotFoundComponent } from '../../shared/components/not-found/not-found.c
 
 import { HeaderModule } from '../header/header.module';
 import { ContentModule } from '../content/content.module';
+import { FooterModule } from '../footer/footer.module';
 
 import { TransferHttpService } from '../../shared/services/transfer-http.service';
 
@@ -27,7 +28,8 @@ export const MODULE_IMPORTS = [
   StoreModule.forRoot(syncReducers),
   StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
   HeaderModule,
-  ContentModule
+  ContentModule,
+  FooterModule
 ];
 
 export const MODULE_PROVIDERS = [

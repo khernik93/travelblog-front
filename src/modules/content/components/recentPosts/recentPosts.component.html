@@ -1,15 +1,21 @@
-<div class="recent-posts">
-    <div class="recent-post-wrap" *ngFor="let post of recentPosts$ | async">
-        <header class="entry-header">
-            <div class="posted-date">
-                    {{ post.createdAt }}
-            </div>
-
-            <h3>{{ post.title }}</h3>
-
-            <div class="content-section tags-links">
-                <span *ngFor="let tag of post.tags">{{ tag }}</span>
-            </div>
-        </header>
+<br><br>
+<div class="posts-list">
+    <div class="recent-posts-title">
+      <h2>Recent posts</h2>
+    </div>
+    <br><br>
+    <div class="post-wrap" *ngFor="let recentPost of recentPosts$ | async">
+        <div class="content-section posted-date">
+            <h4>{{ recentPost.createdAt }}</h4>
+        </div>
+        <br>
+        <div class="content-section entry-title">
+            <h3>{{ recentPost.title }}</h3>
+        </div>
+        <br>
+        <div class="content-section tags-links">
+            <span *ngFor="let tag of recentPost.tags">{{ tag }}</span>
+        </div>
+        <br><br>
     </div>
 </div>

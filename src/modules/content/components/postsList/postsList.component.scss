@@ -1,15 +1,10 @@
 @import "../../../../variables";
 
-.posts-list {
-  padding-top: 50px;
-}
-
 .post-wrap {
   display: flex;
   flex-direction: column;
   width: 100%;
   color: $grey;
-  margin-bottom: 70px;
   padding: 3%;
 }
 
@@ -24,30 +19,27 @@
 }
 
 .post-wrap .entry-title {
-  margin-top: 12px;
   color: $black;
 }
 
 .post-wrap .tags-links {
-  margin-top: 20px;
   & span {
     margin-right: 15px;
   }
 }
 
 .post-wrap .entry-content {
-  margin-top: 36px;
   & p {
     text-align: left;
   }
 }
 
 .post-wrap .read-more {
-  margin-top: 50px;
+  //nothing for now
+  visibility: visible;
 }
 
 .post-wrap .comments {
-  margin-top: 30px;
   text-align: right;
   padding-right: 10%;
 }

@@ -8,7 +8,7 @@ import { SetRecentPosts } from './recentPosts.actions';
 
 @Component({
   selector: 'recentPosts-component',
-  styleUrls: ['./recentPosts.component.scss'],
+  styleUrls: ['../postsList/postsList.component.scss', './recentPosts.component.scss'],
   templateUrl: './recentPosts.component.html'
 })
 export class RecentPostsComponent implements OnInit {

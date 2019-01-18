@@ -1,5 +1,5 @@
 import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
-import { TransferHttpService } from '../../../../../src/shared/services/transfer-http.service';
+import { TransferHttpService } from '../../../../../src/shared/services/transferHttp.service';
 import { TestBed } from '@angular/core/testing';
 
 describe('SwiperService', () => {

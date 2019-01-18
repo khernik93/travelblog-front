@@ -1,17 +1,18 @@
+@import "../../../../variables";
+
 .selfie {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  padding: 5%;
-}
-
-.selfie .section {
+  padding: 0 6%;
+  z-index: 2;
   width: 100%;
   text-align: center;
 }
 
 .selfie img {
-  max-height: 50%;
-  max-width: 50%;
+  height: 200px;
+  width: 200px;
   text-align: center;
+  border-radius: 50%;
+  border: 0;
 }

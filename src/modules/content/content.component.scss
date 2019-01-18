@@ -1,14 +1,40 @@
+@import "../../variables";
+
 section {
   display: flex;
-  width: 100%;
 }
 
-section .left-pane {
+.left-section {
   width: 75%;
+  margin: 0;
 }
 
-section .right-pane {
+.right-section {
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 25%;
+}
+
+.right-section .right-section-inner {
+  position: absolute;
+  top: -170px;
+  z-index: 2;
+  width: 100%;
+}
+
+@media screen and (max-width: $smallPoint) {
+  section {
+    flex-direction: column;
+  }
+  .left-section {
+    width: 100%;
+  }
+  .right-section {
+    width: 100%;
+  }
+  .right-section .right-section-inner {
+    top: 0;
+    margin-bottom: 100px; // to move the footer down on mobile websites
+  }
 }

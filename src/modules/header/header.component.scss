@@ -1,4 +1,7 @@
+@import "../../variables";
+
 header {
   flex-direction: column;
   justify-content: center;
+  background-color: $lightgrey;
 }

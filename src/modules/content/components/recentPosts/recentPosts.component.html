@@ -1,21 +1,19 @@
 <br><br>
-<div class="posts-list">
-    <div class="recent-posts-title">
-      <h2>Recent posts</h2>
-    </div>
-    <br><br>
-    <div class="post-wrap" *ngFor="let recentPost of recentPosts$ | async">
-        <div class="content-section posted-date">
-            <h4>{{ recentPost.createdAt }}</h4>
-        </div>
-        <br>
-        <div class="content-section entry-title">
-            <h3>{{ recentPost.title }}</h3>
-        </div>
-        <br>
-        <div class="content-section tags-links">
-            <span *ngFor="let tag of recentPost.tags">{{ tag }}</span>
-        </div>
-        <br><br>
-    </div>
+<div class="recent-posts-title" *ngIf="recentPosts$ | async">
+  <h1>Recent posts</h1>
+</div>
+<br><br>
+<div class="post-wrap" *ngFor="let recentPost of recentPosts$ | async; let i = index">
+  <div class="content-section posted-date">
+    <h4>{{ recentPost.createdAt }}</h4>
+  </div>
+  <div class="content-section entry-title">
+    <h3>{{ recentPost.title }}</h3>
+  </div>
+  <div class="content-section tags-links">
+    <span *ngFor="let tag of recentPost.tags">{{ tag }}</span>
+  </div>
+  <div *ngIf="i !== ((recentPosts$ | async).length - 1)">
+    <br><hr class="breaking-line"><br>
+  </div>
 </div>

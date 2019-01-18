@@ -11,10 +11,21 @@ nav {
 // =============================
 
 .hamburger-menu {
-  text-align: center;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
   transition: .5s ease-in-out;
   cursor: pointer;
+  border: 1px solid $grey;
+  padding: 10px 0;
+  margin: 0 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.hamburger-menu i {
+  width: 100%;
+  text-align: center;
 }
 
 @media screen and (min-width: $smallPoint) {

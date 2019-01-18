@@ -8,13 +8,13 @@ import { StoreModule } from '@ngrx/store';
 import { routes } from './app.routing';
 import { syncReducers } from './app.reducers';
 import { AppComponent } from './app.component';
-import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
+import { NotFoundComponent } from '../../shared/components/notFound/notFound.component';
 
 import { HeaderModule } from '../header/header.module';
 import { ContentModule } from '../content/content.module';
 import { FooterModule } from '../footer/footer.module';
 
-import { TransferHttpService } from '../../shared/services/transfer-http.service';
+import { TransferHttpService } from '../../shared/services/transferHttp.service';
 
 export const MODULE_DECLARATIONS = [
   AppComponent,

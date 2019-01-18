@@ -80,3 +80,14 @@ a, a:active, a:link, a:visited {
     color: $red;
   }
 }
+
+.ajax-loader {
+  background: transparent url('/images/ajaxLoader.svg') center no-repeat;
+}
+
+hr.breaking-line {
+  width: 20%;
+  text-align: center;
+  border: 1px solid $black;
+  border-radius: 50%;
+}

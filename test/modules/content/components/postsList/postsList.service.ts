@@ -1,4 +1,4 @@
-import { TransferHttpService } from '../../../../../src/shared/services/transfer-http.service';
+import { TransferHttpService } from '../../../../../src/shared/services/transferHttp.service';
 import { PostsListService } from '../../../../../src/modules/content/components/postsList/postsList.service';
 
 describe('PostsListService', () => {

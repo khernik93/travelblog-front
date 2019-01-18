@@ -15,6 +15,7 @@ const swiperSettings = {
     spaceBetween: 0,
     loop: true,
     speed: 500,
+    preloadImages: true,
     pagination: {
         el: '.swiper-pagination'
     },

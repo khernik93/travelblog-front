@@ -6,6 +6,8 @@ import { AppState } from '../../../app/app.reducers';
 import { Post, PostResponse } from '../postsList/postsList.model';
 import { SetRecentPosts } from './recentPosts.actions';
 
+export const RECENT_POSTS_LIMIT = 3;
+
 @Component({
   selector: 'recentPosts-component',
   styleUrls: ['../postsList/postsList.component.scss', './recentPosts.component.scss'],
@@ -30,7 +32,7 @@ export class RecentPostsComponent implements OnInit {
       .pipe(
         takeWhile(() => this.alive),
         filter((posts: PostResponse) => posts.content !== undefined),
-        map((posts: PostResponse) => posts.content.slice(0, 1))
+        map((posts: PostResponse) => posts.content.slice(0, RECENT_POSTS_LIMIT))
       )
       .subscribe((recentPosts: Post[]) => {
         this.alive = false;

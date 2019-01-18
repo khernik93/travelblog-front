@@ -7,6 +7,7 @@ import { RecentPostsComponent } from './components/recentPosts/recentPosts.compo
 import { SelfieComponent } from './components/selfie/selfie.component';
 
 import { PostsListService } from './components/postsList/postsList.service';
+import { RecentPostsService } from './components/recentPosts/recentPosts.service';
 
 export const MODULE_DECLARATIONS = [
   ContentComponent,
@@ -20,7 +21,8 @@ export const MODULE_IMPORTS = [
 ];
 
 export const MODULE_PROVIDERS = [
-  PostsListService
+  PostsListService,
+  RecentPostsService
 ];
 
 @NgModule({

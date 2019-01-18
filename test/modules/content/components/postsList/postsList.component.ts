@@ -1,33 +1,19 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
-import { MockStoreModule, MockAction } from '../../../../utils/mock-store';
-import { PostResponse } from '../../../../../src/modules/content/components/postsList/postsList.model';
 import { PostsListService } from '../../../../../src/modules/content/components/postsList/postsList.service';
 import { PostsListComponent } from '../../../../../src/modules/content/components/postsList/postsList.component';
-
-const postsResponse: PostResponse = {
-  meta: {total: 2, start: 0, end: 1},
-  content: [
-    {id: 1, createdAt: '123', title: 'test_title_1', tags: ['tag1'], content: 'test', commentsCount: 2},
-    {id: 2, createdAt: '1234', title: 'test_title_2', tags: ['tag2', 'tag3'], content: 'test', commentsCount: 3}
-  ]
-};
-const fakeState: any = {
-  postsList: {
-    posts: postsResponse.content
-  },
-  menu: {
-    selectedTab: 'sample-tab'
-  }
-};
+import { AppState, syncReducers } from '../../../../../src/modules/app/app.reducers';
+import { PostsListStubs } from '../../../../utils/stubs/postsListStubs';
+import * as MenuActions from '../../../../../src/modules/header/components/menu/menu.actions';
+import tabsResponse from '../../../../utils/responses/tabs';
+import postsListResponse from '../../../../utils/responses/postsList';
 
 describe('PostsListComponent', () => {
 
-  let store: any;
+  let store: Store<AppState>;
   let postsListService: jasmine.SpyObj<PostsListService>;
   
   let component: PostsListComponent;
@@ -35,27 +21,26 @@ describe('PostsListComponent', () => {
   
   beforeEach(() => {
 
-    postsListService = jasmine.createSpyObj('PostsListService', {
-      getPosts: of([])
-    });
+    postsListService = PostsListStubs.getPostsListService();
 
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        MockStoreModule.forRoot('postsList', fakeState.postsList),
-        MockStoreModule.forRoot('menu', fakeState.menu)
+        StoreModule.forRoot(syncReducers)
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: PostsListService, useValue: postsListService }
       ]
     }).compileComponents();
+
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PostsListComponent);
     component = fixture.componentInstance;
     store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
 
@@ -63,11 +48,30 @@ describe('PostsListComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should call getPosts function on changing selected tab', async(() => {
+  it(`
+    WHEN a new tab is selected
+    THEN PostsListService.getPosts function is being called
+  `, () => {
     const tabName = 'some-other-tab';
-    store.dispatch(new MockAction({selectedTab: tabName}));
+    store.dispatch(new MenuActions.SelectTab(tabName));
     fixture.detectChanges();
     expect(postsListService.getPosts).toHaveBeenCalledWith(tabName);
-  }));
+  });
+
+  it(`
+    WHEN the first tab is selected
+    THEN all relevant posts should be properly displayed
+  `, () => {
+    store.dispatch(new MenuActions.SelectTab(tabsResponse[0]));
+    fixture.detectChanges();
+    
+    // Assure posts count
+    const postWrapsCount: number = fixture.debugElement.queryAll(By.css('.post-wrap')).length;
+    expect(postWrapsCount).toEqual(postsListResponse.content.length);
+
+    // Assure breaking lines count
+    const breakingLinesCount: number = fixture.debugElement.queryAll(By.css('.breaking-line')).length;
+    expect(breakingLinesCount).toEqual(postsListResponse.content.length - 1);
+  });
 
 });

@@ -1,18 +1,18 @@
 import * as swiperActions from '../../../../../src/modules/header/components/swiper/swiper.actions';
 import { swiperReducer, initialState } from '../../../../../src/modules/header/components/swiper/swiper.reducer';
+import photosResponse from '../../../../utils/responses/photos';
 
 describe('SwiperReducer', () => {
 
-  it('should set photos', () => {
-    const photos: any = {
-      tab1: ['photo1', 'photo2'], 
-      tab2: []
-    };
-    const action = new swiperActions.SetPhotos(photos);
+  it(`
+    WHEN SetPhotos action is dispatched
+    THEN all photos should be stored in the store properly
+  `, () => {
+    const action = new swiperActions.SetPhotos(photosResponse);
     const result = swiperReducer(initialState, action);
     expect(result).toEqual({
       ...initialState,
-      photos: photos
+      photos: photosResponse
     });
   });
 

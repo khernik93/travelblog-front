@@ -14,6 +14,7 @@ describe('SelfieComponent', () => {
       imports: MODULE_IMPORTS,
       declarations: MODULE_DECLARATIONS
     }).compileComponents();
+    
   });
 
   beforeEach(() => {

@@ -1,55 +1,34 @@
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Store, StoreModule } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core';
 
 import { SwiperComponent } from '../../../../../src/modules/header/components/swiper/swiper.component';
 import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
-import { MockStoreModule, MockAction } from '../../../../utils/mock-store';
-
-const tabs: string[] = ['tab1', 'tab2', 'tab3'];
-const photos: any = {
-  [tabs[0]]: ['photo1', 'photo2'],
-  [tabs[1]]: ['photo3']
-};
-const fakeState: any = {
-  swiper: {
-    photos: photos
-  },
-  menu: {
-    selectedTab: tabs[0]
-  }
-};
-
-const imagesPath = '.swiper-wrapper img';
+import { syncReducers, AppState } from '../../../../../src/modules/app/app.reducers';
+import { SwiperStubs } from '../../../../utils/stubs/swiperStubs';
+import * as MenuActions from '../../../../../src/modules/header/components/menu/menu.actions';
+import * as SwiperActions from '../../../../../src/modules/header/components/swiper/swiper.actions';
+import tabsResponse from '../../../../utils/responses/tabs';
+import photosResponse from '../../../../utils/responses/photos';
 
 describe('SwiperComponent', () => {
 
-  let store: any;
+  let store: Store<AppState>;
   let swiperService: jasmine.SpyObj<SwiperService>;
   
   let component: SwiperComponent;
   let fixture: ComponentFixture<SwiperComponent>;
-  
-  const checkImagesCount = (expected: number): void => {
-    fixture.detectChanges();
-    const imagesCount: number = fixture.debugElement.queryAll(By.css(imagesPath)).length;
-    expect(imagesCount).toBe(expected);
-  };
 
   beforeEach(() => {
 
-    swiperService = jasmine.createSpyObj('SwiperService', {
-      getPhotos: of(photos)
-    });
+    swiperService = SwiperStubs.getSwiperService();
 
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        MockStoreModule.forRoot('swiper', fakeState.swiper),
-        MockStoreModule.forRoot('menu', fakeState.menu)
+        StoreModule.forRoot(syncReducers)
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [
@@ -57,12 +36,14 @@ describe('SwiperComponent', () => {
         { provide: ChangeDetectorRef }
       ]
     }).compileComponents();
+
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SwiperComponent);
     component = fixture.componentInstance;
     store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
 
@@ -70,18 +51,37 @@ describe('SwiperComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should display all images', () => {
-    checkImagesCount(2);
+  it(`
+    WHEN a tab is selected
+    THEN its photos should be visible
+  `, () => {
+    Helper.setSelectedTabAndItsPhotos(tabsResponse[0]);
+    fixture.detectChanges();
+    Helper.checkImagesCount(2);
   });
 
-  it('should change photos on selecting another tab', async(() => {
-    store.dispatch(new MockAction({selectedTab: tabs[1]}));
-    checkImagesCount(1);
-  }));
+  it(`
+    WHEN a tab is selected
+    AND there are no photos in swiper for that tab
+    THEN there are no photos visible at all
+  `, () => {
+    Helper.setSelectedTabAndItsPhotos(tabsResponse[3]);
+    fixture.detectChanges();
+    Helper.checkImagesCount(0);
+  });
 
-  it('should not show photos if the tab doesnt have them', async(() => {
-    store.dispatch(new MockAction({selectedTab: tabs[2]}));
-    checkImagesCount(0);
-  }));
+  class Helper {
+
+    static setSelectedTabAndItsPhotos (selectedTab: string) {
+      store.dispatch(new MenuActions.SelectTab(selectedTab));
+      store.dispatch(new SwiperActions.SetPhotos(photosResponse));
+    };
+  
+    static checkImagesCount (expected: number): void {
+      const imagesCount: number = fixture.debugElement.queryAll(By.css('.swiper-wrapper img')).length;
+      expect(imagesCount).toBe(expected);
+    };
+
+  }
 
 });

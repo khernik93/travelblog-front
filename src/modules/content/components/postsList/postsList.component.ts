@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { takeWhile, tap } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
 
 import { Post } from './postsList.model';
 import * as PostsListActions from './postsList.actions';
-import { PostsListService } from './postsList.service';
 import { ContentState } from '../../content.reducers';
 import { selectSelectedTab } from '../../../header/components/menu/menu.selectors';
 import { HeaderState } from '../../../header/header.reducers';
+import { selectPosts } from './postsList.selectors';
 
 @Component({
   selector: 'postsList-component',
@@ -17,16 +17,16 @@ import { HeaderState } from '../../../header/header.reducers';
 })
 export class PostsListComponent implements OnInit, OnDestroy {
 
-  posts: Post[] = [];
+  posts$: Observable<Post[]>;
 
   private selectedTab$: Observable<string>;
   private alive = true;
 
   constructor(
-    private store: Store<HeaderState | ContentState>,
-    private postsListService: PostsListService
+    private store: Store<HeaderState | ContentState>
   ) { 
     this.selectedTab$ = this.store.select(selectSelectedTab);
+    this.posts$ = this.store.select(selectPosts);
   }
 
   ngOnInit() {
@@ -43,18 +43,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
         takeWhile(() => this.alive)
       )
       .subscribe(selectedTab => {
-        this.getPosts(selectedTab)
-      });
-  }
-
-  private getPosts(selectedTab: string) {
-    this.postsListService.getPosts(selectedTab)
-      .pipe(
-        takeWhile(() => this.alive),
-        tap((response: any) => this.posts = response.content)
-      )
-      .subscribe(posts => {
-        this.store.dispatch(new PostsListActions.SetPosts(posts));
+        this.store.dispatch(new PostsListActions.GetPosts(selectedTab));
       });
   }
 

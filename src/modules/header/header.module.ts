@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { headerReducers } from './header.reducers';
+import { headerEffects } from './header.effects';
 
 import { HeaderComponent } from './header.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -31,7 +33,10 @@ export const MODULE_PROVIDERS = [
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
-  imports: MODULE_IMPORTS,
+  imports: [
+    ...MODULE_IMPORTS,
+    EffectsModule.forFeature(headerEffects)
+  ],
   exports: [HeaderComponent],
   providers: MODULE_PROVIDERS
 })

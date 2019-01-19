@@ -1,15 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
+import { EffectsModule } from '@ngrx/effects';
 
 import { MenuComponent } from '../../../../../src/modules/header/components/menu/menu.component';
-import { MenuService } from '../../../../../src/modules/header/components/menu/menu.service';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
-import { MenuStubs } from '../../../../utils/stubs/menuStubs';
 import TabsResponse from '../../../../utils/responses/tabs';
 import { CssHelper } from '../../../../utils/helpers/css';
 import { HeaderState } from '../../../../../src/modules/header/header.reducers';
-import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
+import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
+import { MenuStubs } from '../../../../utils/stubs/menuStubs';
+import { MenuService } from '../../../../../src/modules/header/components/menu/menu.service';
+import { MenuEffects } from '../../../../../src/modules/header/components/menu/menu.effects';
 
 describe('MenuComponent', () => {
 
@@ -26,7 +28,8 @@ describe('MenuComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        ROOT_REDUCERS
+        ...APP_MODULE_STORE_AND_EFFECTS,
+        EffectsModule.forFeature([MenuEffects])
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
+import { EffectsModule } from '@ngrx/effects';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { PostsListService } from '../../../../../src/modules/content/components/postsList/postsList.service';
@@ -10,7 +11,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
 import { ContentState } from '../../../../../src/modules/content/content.reducers';
 import { HeaderState } from '../../../../../src/modules/header/header.reducers';
-import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
+import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
+import { PostsListEffects } from '../../../../../src/modules/content/components/postsList/postsList.effects';
 
 describe('PostsListComponent', () => {
 
@@ -27,7 +29,8 @@ describe('PostsListComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        ROOT_REDUCERS,
+        APP_MODULE_STORE_AND_EFFECTS,
+        EffectsModule.forFeature([PostsListEffects]),
         RouterTestingModule.withRoutes([
           { path: 'posts/:id', component: SinglePostComponent }
         ])

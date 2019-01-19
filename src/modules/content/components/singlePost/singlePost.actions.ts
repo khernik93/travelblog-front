@@ -3,7 +3,14 @@ import { Action } from '@ngrx/store';
 import { Post } from '../postsList/postsList.model';
 
 export enum SinglePostActionTypes {
+  GetPost = '[SinglePost] Get post',
   SetPost = '[SinglePost] Set post'
+}
+
+export class GetPost implements Action {
+  readonly type = SinglePostActionTypes.GetPost;
+
+  constructor(public id: string) { }
 }
 
 export class SetPost implements Action {
@@ -12,4 +19,5 @@ export class SetPost implements Action {
   constructor(public post: Post) { }
 }
 
-export type SinglePostActions = SetPost;
+export type SinglePostActions = GetPost
+  | SetPost;

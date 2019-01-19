@@ -61,8 +61,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
   }
 
   private getSwiperPhotos(): void {
-    this.swiperService.getPhotos()
-      .subscribe((photos: Map<string, string[]>) => this.store.dispatch(new SwiperActions.SetPhotos(photos)));
+    this.store.dispatch(new SwiperActions.GetPhotos());
   }
 
   private setCurrentPhotosBasedOnSelectedTab(): void {

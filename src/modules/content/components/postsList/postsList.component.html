@@ -1,5 +1,5 @@
 <br><br><br>
-<div class="post-wrap" *ngFor="let post of posts; let i = index">
+<div class="post-wrap" *ngFor="let post of (posts$ | async); let i = index">
   <div class="content-section posted-date">
     <h4>{{ post.createdAt }}</h4>
   </div>
@@ -20,7 +20,7 @@
     <a class="read-more" [routerLink]="'/post/' + post.id">...read more</a>
   </div>
   <br><br><br><br>
-  <div *ngIf="i !== (posts.length - 1)">
+  <div *ngIf="i !== ((posts$ | async).length - 1)">
     <hr class="breaking-line">
     <br><br><br><br>
   </div>

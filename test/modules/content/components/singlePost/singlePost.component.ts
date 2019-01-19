@@ -3,13 +3,15 @@ import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { SinglePostService } from '../../../../../src/modules/content/components/singlePost/singlePost.service';
 import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
 import { SinglePostStubs } from '../../../../utils/stubs/singlePostStubs';
 import { ContentState } from '../../../../../src/modules/content/content.reducers';
-import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
+import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
+import { SinglePostEffects } from '../../../../../src/modules/content/components/singlePost/singlePost.effects';
 
 describe('SinglePostComponent', () => {
 
@@ -29,7 +31,8 @@ describe('SinglePostComponent', () => {
       imports: [
         ...MODULE_IMPORTS,
         RouterTestingModule,
-        ROOT_REDUCERS
+        ...APP_MODULE_STORE_AND_EFFECTS,
+        EffectsModule.forFeature([SinglePostEffects])
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

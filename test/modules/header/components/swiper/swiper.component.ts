@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core';
+import { EffectsModule } from '@ngrx/effects';
 
 import { SwiperComponent } from '../../../../../src/modules/header/components/swiper/swiper.component';
 import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
@@ -11,8 +12,9 @@ import * as MenuActions from '../../../../../src/modules/header/components/menu/
 import * as SwiperActions from '../../../../../src/modules/header/components/swiper/swiper.actions';
 import tabsResponse from '../../../../utils/responses/tabs';
 import photosResponse from '../../../../utils/responses/photos';
-import { HeaderState, headerReducers } from '../../../../../src/modules/header/header.reducers';
-import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
+import { HeaderState } from '../../../../../src/modules/header/header.reducers';
+import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
+import { SwiperEffects } from '../../../../../src/modules/header/components/swiper/swiper.effects';
 
 describe('SwiperComponent', () => {
 
@@ -29,7 +31,8 @@ describe('SwiperComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        ROOT_REDUCERS
+        ...APP_MODULE_STORE_AND_EFFECTS,
+        EffectsModule.forFeature([SwiperEffects])
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

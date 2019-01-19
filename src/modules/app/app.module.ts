@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 
 import { routes } from './app.routing';
 
@@ -36,13 +37,16 @@ export const MODULE_PROVIDERS = [
   TransferHttpService
 ];
 
-export const ROOT_REDUCERS = StoreModule.forRoot(syncReducers);
+export const APP_MODULE_STORE_AND_EFFECTS = [
+  StoreModule.forRoot(syncReducers),
+  EffectsModule.forRoot([])
+];
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
     ...MODULE_IMPORTS,
-    ROOT_REDUCERS
+    ...APP_MODULE_STORE_AND_EFFECTS
   ],
   providers: MODULE_PROVIDERS,
   bootstrap: [AppComponent],

@@ -1,10 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { takeWhile } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 import * as MenuActions from './menu.actions';
-import { MenuService } from './menu.service';
 import { HeaderState } from '../../header.reducers';
 import { selectTabs, selectSelectedTab } from './menu.selectors';
 
@@ -13,30 +11,21 @@ import { selectTabs, selectSelectedTab } from './menu.selectors';
   styleUrls: ['./menu.component.scss'],
   templateUrl: './menu.component.html'
 })
-export class MenuComponent implements OnInit, OnDestroy {
+export class MenuComponent implements OnInit {
 
   selectedTab$: Observable<string>;
   tabs$: Observable<string[]>;
   hamburgerMenuOpened: boolean = true;
 
-  private alive: boolean = true;
-
   constructor(
-    private store: Store<HeaderState>,
-    private menuService: MenuService
+    private store: Store<HeaderState>
   ) {
     this.tabs$ = this.store.select(selectTabs);
     this.selectedTab$ = this.store.select(selectSelectedTab);
   }
 
   ngOnInit(): void {
-    this.menuService.getTabs()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((tabs: string[]) => this.store.dispatch(new MenuActions.SetTabs(tabs)));
-  }
-
-  ngOnDestroy(): void {
-    this.alive = false;
+    this.store.dispatch(new MenuActions.GetTabs());
   }
 
   selectTab(tab: string): void {

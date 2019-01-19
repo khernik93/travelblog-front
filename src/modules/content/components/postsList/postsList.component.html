@@ -17,7 +17,7 @@
   </div>
   <br>
   <div class="content-section read-more">
-    <a class="read-more" href="#">...read more</a>
+    <a class="read-more" [routerLink]="'/post/' + post.id">...read more</a>
   </div>
   <br><br><br><br>
   <div *ngIf="i !== (posts.length - 1)">

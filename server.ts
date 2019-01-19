@@ -92,6 +92,20 @@ app.get('/recentPosts', (request, response) => {
   response.send(JSON.stringify(output));
 });
 
+app.get('/post/:id', (request, response) => {
+  const output = 
+    {
+      id: 1,
+      createdAt: '2018-08-01 12:52:22',
+      title: 'Why I love Winter: A short story',
+      tags: ['#winter', '#love', '#snow', '#january'],
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sodales, ante id imperdiet blandit, diam augue ullamcorper nibh, id laoreet magna est ac lacus. Aenean bibendum gravida tellus, non pretium nunc consectetur aliquam. Maecenas vitae augue elementum, placerat orci a, venenatis libero. Ut quam lectus, tempus non quam vitae, egestas volutpat odio. Suspendisse in porta massa. Mauris ac lectus hendrerit, vehicula nibh in, dignissim tellus. Ut molestie erat et consequat posuere. Quisque vitae aliquam erat. Nulla imperdiet arcu turpis, et mattis tellus accumsan non. Aenean malesuada metus non auctor posuere. Etiam aliquet eget nisi eget vulputate. Mauris nec ante efficitur, ultricies ligula id, ultricies elit. Donec tincidunt molestie elit, nec sagittis felis tincidunt in. Curabitur molestie, quam at suscipit auctor, neque justo imperdiet tellus, sed ultrices erat est id nibh. Sed at elit dolor. Sed maximus nisl vel massa mollis egestas. Morbi felis ex, luctus et vestibulum sed, tincidunt a lorem. Curabitur commodo tellus consectetur tortor mollis, eget porta enim congue. Praesent rutrum fermentum nunc eget commodo. Quisque ac mi magna. In cursus non tortor a ultricies. Suspendisse sed ultricies tortor. Curabitur maximus turpis ac scelerisque aliquet. Pellentesque facilisis porta aliquam. Donec interdum mattis dignissim. Aliquam vitae gravida risus. Morbi sit amet consequat tellus. Nunc sit amet dui eget augue pretium facilisis sit amet suscipit massa. Nullam imperdiet justo arcu, tristique varius mi fermentum non. Praesent consectetur velit ac justo dapibus sodales. In vel diam eget libero sagittis euismod at sit amet enim. Suspendisse euismod tellus ipsum, nec pellentesque est porttitor non.',
+      commentsCount: 3
+    }
+  ;
+  response.send(JSON.stringify(output));
+});
+
 app.listen(3001, () => {
   console.log(`Listening on port 3001`);
 });

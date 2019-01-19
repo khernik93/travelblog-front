@@ -1,0 +1,23 @@
+<br><br><br>
+<div class="post-wrap" *ngIf="post$ | async">
+  <div class="content-section posted-date">
+    <h4>{{ (post$ | async).createdAt }}</h4>
+  </div>
+  <br>
+  <div class="content-section entry-title">
+    <h1>{{ (post$ | async).title }}</h1>
+  </div>
+  <br><br>
+  <div class="content-section tags-links">
+    <span *ngFor="let tag of (post$ | async).tags">{{ tag }}</span>
+  </div>
+  <br><br>
+  <div class="content-section entry-content">
+    <p>{{ (post$ | async).content }}</p>
+  </div>
+  <br>
+  <div class="content-section read-more">
+    <a class="read-more" href="#">...read more</a>
+  </div>
+  <br><br><br><br>
+</div>

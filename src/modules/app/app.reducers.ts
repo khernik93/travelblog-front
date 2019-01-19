@@ -7,6 +7,7 @@ import * as fromMenu from '../header/components/menu/menu.reducer';
 import * as fromSwiper from '../header/components/swiper/swiper.reducer';
 import * as fromPostsList from '../content/components/postsList/postsList.reducer';
 import * as fromRecentPosts from '../content/components/recentPosts/recentPosts.reducer';
+import * as fromSinglePost from '../content/components/singlePost/singlePost.reducer';
 
 interface RouterStateUrl {
   url: string;
@@ -20,6 +21,7 @@ export interface AppState {
   swiper: fromSwiper.SwiperState;
   postsList: fromPostsList.PostsListState;
   recentPosts: fromRecentPosts.RecentPostsState;
+  singlePost: fromSinglePost.SinglePostState;
 }
 
 export const syncReducers: ActionReducerMap<AppState> = {
@@ -27,5 +29,6 @@ export const syncReducers: ActionReducerMap<AppState> = {
   menu: fromMenu.menuReducer,
   swiper: fromSwiper.swiperReducer,
   postsList: fromPostsList.postsListReducer,
-  recentPosts: fromRecentPosts.recentPostsReducer
+  recentPosts: fromRecentPosts.recentPostsReducer,
+  singlePost: fromSinglePost.singlePostReducer
 };

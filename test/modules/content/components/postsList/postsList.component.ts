@@ -10,6 +10,8 @@ import { PostsListStubs } from '../../../../utils/stubs/postsListStubs';
 import * as MenuActions from '../../../../../src/modules/header/components/menu/menu.actions';
 import tabsResponse from '../../../../utils/responses/tabs';
 import postsListResponse from '../../../../utils/responses/postsList';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
 
 describe('PostsListComponent', () => {
 
@@ -26,7 +28,10 @@ describe('PostsListComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        StoreModule.forRoot(syncReducers)
+        StoreModule.forRoot(syncReducers),
+        RouterTestingModule.withRoutes([
+          { path: 'posts/:id', component: SinglePostComponent }
+        ])
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [
@@ -73,5 +78,7 @@ describe('PostsListComponent', () => {
     const breakingLinesCount: number = fixture.debugElement.queryAll(By.css('.breaking-line')).length;
     expect(breakingLinesCount).toEqual(postsListResponse.content.length - 1);
   });
+
+  /* @TODO Check if read more redirects correctly */
 
 });

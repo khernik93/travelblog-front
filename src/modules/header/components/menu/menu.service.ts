@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { TransferHttpService } from '../../../../shared/services/transfer-http.service';
+import { TransferHttpService } from '../../../../shared/services/transferHttp.service';
 
 const urls = {
   tabs: '/countries'

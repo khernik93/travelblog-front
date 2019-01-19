@@ -5,5 +5,6 @@ node_modules
 dist
 template
 dist_root/styles.css
+dist_root/.DS_Store
 coverage
 TESTS-PhantomJS*

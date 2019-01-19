@@ -1,0 +1,89 @@
+@import '../../../../variables';
+
+.swiper-container {
+  display: flex;
+  margin-top: 20px;
+  height: auto;
+}
+
+.swiper-content {
+  width: 100%;
+  height: 400px;
+}
+
+.swiper-content img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets,
+.swiper-pagination-custom, .swiper-pagination-fraction {
+  bottom: 30px;
+  left: 38px;
+  text-align: left;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+  width: 54px;
+  height: 54px;
+  background: $lightgrey;
+  opacity: 0.6;
+  filter: alpha(opacity=60);
+  transition: all .35s;
+  & span {
+    width: 100% !important;
+    text-align: center;
+  }
+  & span svg {
+    width: 12px;
+  }
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  opacity: 1;
+}
+
+.swiper-button-next span,
+.swiper-button-prev span {
+  display: block;
+  width: 12px;
+  padding-top: 6px;
+}
+
+.swiper-button-next path,
+.swiper-button-prev path {
+  fill: $black;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  border-radius: 0;
+  background: transparent;
+  border: 2px solid #fff;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background: $lightgrey;
+}
+
+@media screen and (max-width: $smallPoint){
+  .swiper-content {
+    height: 300px;
+  }
+}
+
+@media screen and (min-width: $smallPoint){
+  .swiper-button-next,
+  .swiper-button-prev {
+      visibility: visible;
+  }
+}

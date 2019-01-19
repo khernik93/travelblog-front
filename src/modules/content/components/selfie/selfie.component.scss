@@ -1,0 +1,18 @@
+@import "../../../../variables";
+
+.selfie {
+  display: flex;
+  flex-direction: column;
+  padding: 0 6%;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+}
+
+.selfie img {
+  height: 200px;
+  width: 200px;
+  text-align: center;
+  border-radius: 50%;
+  border: 0;
+}

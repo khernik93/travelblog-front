@@ -1,10 +1,11 @@
-<div class="container-fluid">
-  <swiper-component></swiper-component>
-  <selfie-component></selfie-component>
-</div>
-<div class="container single-page">
-  <div class="row">
-    <postsList-component></postsList-component>
-    <recentPosts-component></recentPosts-component>
+<section>
+  <div class="left-section">
+    <router-outlet></router-outlet>
   </div>
-</div>
+  <div class="right-section">
+    <div class="right-section-inner">
+      <selfie-component></selfie-component>
+      <recentPosts-component></recentPosts-component>
+    </div>
+  </div>
+</section>

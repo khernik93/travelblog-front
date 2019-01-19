@@ -4,7 +4,6 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-content: center;
 }
 
 // =============================
@@ -12,10 +11,21 @@ nav {
 // =============================
 
 .hamburger-menu {
-  text-align: center;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
   transition: .5s ease-in-out;
   cursor: pointer;
+  border: 1px solid $grey;
+  padding: 10px 0;
+  margin: 0 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.hamburger-menu i {
+  width: 100%;
+  text-align: center;
 }
 
 @media screen and (min-width: $smallPoint) {
@@ -37,10 +47,16 @@ nav {
 
 .menu li {
   display: block;
-  font-size: 12px;
-  letter-spacing: 0.08rem;
+  letter-spacing: $smallLetterSpacing;
   text-transform: uppercase;
   padding: 0 16px;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 .menu li.selected a {
@@ -51,14 +67,9 @@ nav {
 .menu li a {
   display: block;
   padding: 4px 0;
-  border-bottom: 2px solid transparent;
-  color: $black;
   transition: all 0.35s;
   text-decoration: none;
   text-align: center;
-  &:hover {
-    color: $red;
-  }
 }
 
 @media screen and (max-width: $smallPoint) {
@@ -68,7 +79,10 @@ nav {
   .menu li {
     margin-bottom: 5px;
   }
-  .menu li a:hover {
-    border-bottom-color: $grey;
+  .menu li a {
+    border-bottom: 2px solid $lightgrey;
+    &:hover {
+      border-bottom: 2px solid $grey;
+    }
   }
 }

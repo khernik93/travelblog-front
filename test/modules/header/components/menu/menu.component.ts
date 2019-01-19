@@ -1,24 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { Store, StoreModule } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 
 import { MenuComponent } from '../../../../../src/modules/header/components/menu/menu.component';
 import { MenuService } from '../../../../../src/modules/header/components/menu/menu.service';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
-import { SelectTab } from '../../../../../src/modules/header/components/menu/menu.actions';
-
-const tabs: string[] = ['tab1', 'tab2', 'tab3'];
-const fakeState: any = {
-  menu: {
-    tabs: of(tabs),
-    selectedTab: of(tabs[0])
-  }
-};
+import { AppState, syncReducers } from '../../../../../src/modules/app/app.reducers';
+import { MenuStubs } from '../../../../utils/stubs/menuStubs';
+import TabsResponse from '../../../../utils/responses/tabs';
+import { CssHelper } from '../../../../utils/helpers/css';
 
 describe('MenuComponent', () => {
 
-  let testStore: any;
+  let store: Store<AppState>;
   let menuService: jasmine.SpyObj<MenuService>;
 
   let component: MenuComponent;
@@ -26,27 +20,26 @@ describe('MenuComponent', () => {
 
   beforeEach(() => {
 
-    testStore = {
-      select: state => state(fakeState),
-      dispatch: jasmine.createSpy()
-    };
-    menuService = jasmine.createSpyObj('MenuService', {
-      getTabs: of(tabs)
-    });
+    menuService = MenuStubs.getMenuService();
 
     TestBed.configureTestingModule({
-      imports: MODULE_IMPORTS,
+      imports: [
+        ...MODULE_IMPORTS,
+        StoreModule.forRoot(syncReducers)
+      ],
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: MenuService, useValue: menuService },
-        { provide: Store, useValue: testStore }
+        { provide: MenuService, useValue: menuService }
       ]
     }).compileComponents();
+
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
+    store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
 
@@ -54,33 +47,46 @@ describe('MenuComponent', () => {
     expect(component).toBeDefined();
   });
 
-  it('should display all tabs', () => {
+  it(`
+    WHEN the component is loaded
+    THEN all tabs are visible
+  `, () => {
     const tabsCount: number = fixture.debugElement.queryAll(By.css('.menu li')).length;
-    expect(tabsCount).toBe(3);
+    expect(tabsCount).toBe(TabsResponse.length);
   });
 
-  it('should have the first tab selected', () => {
-    const firstTab: HTMLElement = fixture.nativeElement.querySelector('.menu li[class="selected"]');
-    expect(firstTab).toBeTruthy();
+  it(`
+    WHEN the component is loaded
+    THEN the first tab is selected
+  `, () => {
+    const firstTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(1)');
+    expect(CssHelper.getClass(firstTab)).toEqual('selected');
   });
 
-  it('should dispatch an action after clicking on a new tab', () => {
-    const secondTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(2)');
+  it(`
+    WHEN another tab is selected
+    THEN the photos change properly
+  `, () => {
+    const secondTab = fixture.nativeElement.querySelector('.menu li:nth-child(2)');
     secondTab.click();
     fixture.detectChanges();
-    const action = new SelectTab(tabs[1]);
-    expect(testStore.dispatch).toHaveBeenCalledWith(action);
+    expect(CssHelper.getClass(secondTab)).toEqual('selected');
   });
 
-  it('should toggle hamburger menu on icon click', () => {
+  it(`
+    WHEN user enters the page in mobile version
+    THEN the tabs should be displayed as hamburger menu
+    AND initialy it should be opened
+  `, () => {
+    let hamburgerMenuOpened = true;
     const hamburgerMenuIcon: HTMLElement = fixture.nativeElement.querySelector('.hamburger-menu');
-    expect(fixture.componentInstance.hamburgerMenuOpened).toBe(false);
+    expect(fixture.componentInstance.hamburgerMenuOpened).toBe(hamburgerMenuOpened);
     hamburgerMenuIcon.click();
     fixture.detectChanges();
-    expect(fixture.componentInstance.hamburgerMenuOpened).toBe(true);
+    expect(fixture.componentInstance.hamburgerMenuOpened).toBe(!hamburgerMenuOpened);
     hamburgerMenuIcon.click();
     fixture.detectChanges();
-    expect(fixture.componentInstance.hamburgerMenuOpened).toBe(false);
+    expect(fixture.componentInstance.hamburgerMenuOpened).toBe(hamburgerMenuOpened);
   });
 
 });

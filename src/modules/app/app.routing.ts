@@ -1,9 +1,21 @@
 import { Routes } from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
+import { NotFoundComponent } from './components/notFound/notFound.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { PostsListComponent } from '../content/components/postsList/postsList.component';
+import { SinglePostComponent } from '../content/components/singlePost/singlePost.component';
 
 export const routes: Routes = [
-  { path: '', component: AppComponent, pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent }
+  { 
+    path: '', 
+    component: LayoutComponent, 
+    children: [
+      { path: '', component: PostsListComponent },
+      { path: 'post/:id', component: SinglePostComponent }
+    ]
+  },
+  { 
+    path: '**', 
+    component: NotFoundComponent 
+  }
 ];

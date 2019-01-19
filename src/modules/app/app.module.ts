@@ -1,43 +1,46 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
+import { RouterModule } from '@angular/router';
 
 import { routes } from './app.routing';
+
 import { syncReducers } from './app.reducers';
 import { AppComponent } from './app.component';
-import { NotFoundComponent } from '../../shared/components/not-found/not-found.component';
+import { LayoutComponent } from './components/layout/layout.component';
+import { NotFoundComponent } from './components/notFound/notFound.component';
 
 import { HeaderModule } from '../header/header.module';
 import { ContentModule } from '../content/content.module';
+import { FooterModule } from '../footer/footer.module';
 
-import { TransferHttpService } from '../../shared/services/transfer-http.service';
+import { TransferHttpService } from '../../shared/services/transferHttp.service';
 
-export const MODULE_DECLARATIONS = [
+export const APP_MODULE_DECLARATIONS = [
   AppComponent,
+  LayoutComponent,
   NotFoundComponent
 ];
 
-export const MODULE_IMPORTS = [
+export const APP_MODULE_IMPORTS = [
   BrowserModule,
   HttpClientModule,
-  RouterModule.forRoot(routes, {useHash: false}),
   StoreModule.forRoot(syncReducers),
-  StoreRouterConnectingModule.forRoot({stateKey: 'router'}),
+  RouterModule.forRoot(routes, {useHash: false}),
   HeaderModule,
-  ContentModule
+  ContentModule,
+  FooterModule
 ];
 
-export const MODULE_PROVIDERS = [
+export const APP_MODULE_PROVIDERS = [
   TransferHttpService
 ];
 
 @NgModule({
-  declarations: MODULE_DECLARATIONS,
-  imports: MODULE_IMPORTS,
-  providers: MODULE_PROVIDERS,
+  declarations: APP_MODULE_DECLARATIONS,
+  imports: APP_MODULE_IMPORTS,
+  providers: APP_MODULE_PROVIDERS,
   bootstrap: [AppComponent],
   exports: [AppComponent]
 })

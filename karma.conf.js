@@ -1,45 +1,46 @@
 var webpackConfig = require('./webpack.config');
 
 module.exports = function (config) {
-    var _config = {
-        basePath: '',
+  var _config = {
+    basePath: '',
 
-        frameworks: ['jasmine'],
-        plugins: [
-            require('karma-jasmine'),
-            require('karma-chrome-launcher'),
-            require('karma-spec-reporter'),
-            require('karma-sourcemap-loader'),
-            require('karma-webpack')
-        ],
+    frameworks: ['jasmine'],
 
-        files: [
-            { pattern: './karma-test-shim.js', watched: false }
-        ],
+    plugins: [
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-spec-reporter'),
+      require('karma-sourcemap-loader'),
+      require('karma-webpack'),
+    ],
 
-        preprocessors: {
-            './karma-test-shim.js': ['webpack', 'sourcemap']
-        },
+    files: [
+      { pattern: './karma-test-shim.js', watched: false }
+    ],
 
-        webpack: webpackConfig,
+    preprocessors: {
+      './karma-test-shim.js': ['webpack', 'sourcemap']
+    },
 
-        webpackMiddleware: {
-            stats: 'errors-only'
-        },
+    webpack: webpackConfig,
 
-        webpackServer: {
-            noInfo: false
-        },
+    webpackMiddleware: {
+      stats: 'errors-only'
+    },
 
-        reporters: ['spec'],
+    webpackServer: {
+      noInfo: false
+    },
 
-        port: 9876,
-        colors: true,
-        logLevel: config.LOG_INFO,
-        autoWatch: false,
-        singleRun: true,
-        browsers: ['ChromeHeadless']
-    };
+    reporters: ['spec'],
 
-    config.set(_config);
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: false,
+    singleRun: true,
+    browsers: ['ChromeHeadless']
+  };
+
+  config.set(_config);
 };

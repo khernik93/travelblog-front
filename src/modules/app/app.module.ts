@@ -36,11 +36,13 @@ export const MODULE_PROVIDERS = [
   TransferHttpService
 ];
 
+export const ROOT_REDUCERS = StoreModule.forRoot(syncReducers);
+
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
     ...MODULE_IMPORTS,
-    StoreModule.forRoot(syncReducers)
+    ROOT_REDUCERS
   ],
   providers: MODULE_PROVIDERS,
   bootstrap: [AppComponent],

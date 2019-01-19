@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
@@ -7,7 +7,8 @@ import { RecentPostsComponent } from '../../../../../src/modules/content/compone
 import recentPostsResponse from '../../../../utils/responses/recentPosts';
 import { RecentPostsService } from '../../../../../src/modules/content/components/recentPosts/recentPosts.service';
 import { RecentPostsStubs } from '../../../../utils/stubs/recentPostsStubs';
-import { ContentState, contentReducers } from '../../../../../src/modules/content/content.reducers';
+import { ContentState } from '../../../../../src/modules/content/content.reducers';
+import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
 
 describe('RecentPostsComponent', () => {
 
@@ -24,8 +25,7 @@ describe('RecentPostsComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        StoreModule.forRoot({}),
-        StoreModule.forFeature('content', contentReducers)
+        ROOT_REDUCERS
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

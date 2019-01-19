@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { SelfieComponent } from '../../../../../src/modules/content/components/selfie/selfie.component';
+import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
 
 describe('SelfieComponent', () => {
   
@@ -11,7 +12,10 @@ describe('SelfieComponent', () => {
   beforeEach(() => {
 
     TestBed.configureTestingModule({
-      imports: MODULE_IMPORTS,
+      imports: [
+        ...MODULE_IMPORTS,
+        ROOT_REDUCERS
+      ],
       declarations: MODULE_DECLARATIONS
     }).compileComponents();
     

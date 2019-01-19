@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 
 import { MenuComponent } from '../../../../../src/modules/header/components/menu/menu.component';
@@ -8,7 +8,8 @@ import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/
 import { MenuStubs } from '../../../../utils/stubs/menuStubs';
 import TabsResponse from '../../../../utils/responses/tabs';
 import { CssHelper } from '../../../../utils/helpers/css';
-import { HeaderState, headerReducers } from '../../../../../src/modules/header/header.reducers';
+import { HeaderState } from '../../../../../src/modules/header/header.reducers';
+import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
 
 describe('MenuComponent', () => {
 
@@ -25,8 +26,7 @@ describe('MenuComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        StoreModule.forRoot({}),
-        StoreModule.forFeature('header', headerReducers)
+        ROOT_REDUCERS
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

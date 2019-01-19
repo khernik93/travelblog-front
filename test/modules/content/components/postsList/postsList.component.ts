@@ -1,18 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { PostsListService } from '../../../../../src/modules/content/components/postsList/postsList.service';
 import { PostsListComponent } from '../../../../../src/modules/content/components/postsList/postsList.component';
 import { PostsListStubs } from '../../../../utils/stubs/postsListStubs';
-import * as MenuActions from '../../../../../src/modules/header/components/menu/menu.actions';
-import tabsResponse from '../../../../utils/responses/tabs';
-import postsListResponse from '../../../../utils/responses/postsList';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
-import { ContentState, contentReducers } from '../../../../../src/modules/content/content.reducers';
-import { HeaderState, headerReducers } from '../../../../../src/modules/header/header.reducers';
+import { ContentState } from '../../../../../src/modules/content/content.reducers';
+import { HeaderState } from '../../../../../src/modules/header/header.reducers';
+import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
 
 describe('PostsListComponent', () => {
 
@@ -29,9 +27,7 @@ describe('PostsListComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        StoreModule.forRoot({}),
-        StoreModule.forFeature('header', headerReducers),
-        StoreModule.forFeature('content', contentReducers),
+        ROOT_REDUCERS,
         RouterTestingModule.withRoutes([
           { path: 'posts/:id', component: SinglePostComponent }
         ])

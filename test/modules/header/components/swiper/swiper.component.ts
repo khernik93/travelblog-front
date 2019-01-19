@@ -12,6 +12,7 @@ import * as SwiperActions from '../../../../../src/modules/header/components/swi
 import tabsResponse from '../../../../utils/responses/tabs';
 import photosResponse from '../../../../utils/responses/photos';
 import { HeaderState, headerReducers } from '../../../../../src/modules/header/header.reducers';
+import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
 
 describe('SwiperComponent', () => {
 
@@ -28,8 +29,7 @@ describe('SwiperComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        StoreModule.forRoot({}),
-        StoreModule.forFeature('header', headerReducers)
+        ROOT_REDUCERS
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

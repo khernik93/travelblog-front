@@ -20,7 +20,8 @@ export const MODULE_DECLARATIONS = [
 ];
 
 export const MODULE_IMPORTS = [
-  CommonModule
+  CommonModule,
+  StoreModule.forFeature('header', headerReducers)
 ];
 
 export const MODULE_PROVIDERS = [
@@ -30,10 +31,7 @@ export const MODULE_PROVIDERS = [
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
-  imports: [
-    ...MODULE_IMPORTS,
-    StoreModule.forFeature('header', headerReducers)
-  ],
+  imports: MODULE_IMPORTS,
   exports: [HeaderComponent],
   providers: MODULE_PROVIDERS
 })

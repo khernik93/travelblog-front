@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,8 @@ import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/
 import { SinglePostService } from '../../../../../src/modules/content/components/singlePost/singlePost.service';
 import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
 import { SinglePostStubs } from '../../../../utils/stubs/singlePostStubs';
-import { ContentState, contentReducers } from '../../../../../src/modules/content/content.reducers';
+import { ContentState } from '../../../../../src/modules/content/content.reducers';
+import { ROOT_REDUCERS } from '../../../../../src/modules/app/app.module';
 
 describe('SinglePostComponent', () => {
 
@@ -28,8 +29,7 @@ describe('SinglePostComponent', () => {
       imports: [
         ...MODULE_IMPORTS,
         RouterTestingModule,
-        StoreModule.forRoot({}),
-        StoreModule.forFeature('content', contentReducers)
+        ROOT_REDUCERS
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

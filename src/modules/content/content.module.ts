@@ -25,7 +25,8 @@ export const MODULE_DECLARATIONS = [
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  RouterModule
+  RouterModule,
+  StoreModule.forFeature('content', contentReducers)
 ];
 
 export const MODULE_PROVIDERS = [
@@ -36,10 +37,7 @@ export const MODULE_PROVIDERS = [
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
-  imports: [
-    ...MODULE_IMPORTS,
-    StoreModule.forFeature('content', contentReducers)
-  ],
+  imports: MODULE_IMPORTS,
   exports: [ContentComponent],
   providers: MODULE_PROVIDERS
 })

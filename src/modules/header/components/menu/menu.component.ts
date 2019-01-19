@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { takeWhile } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-import { AppState } from '../../../app/app.reducers';
 import * as MenuActions from './menu.actions';
 import { MenuService } from './menu.service';
+import { HeaderState } from '../../header.reducers';
+import { selectTabs, selectSelectedTab } from './menu.selectors';
 
 @Component({
   selector: 'menu-component',
@@ -21,11 +22,11 @@ export class MenuComponent implements OnInit, OnDestroy {
   private alive: boolean = true;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<HeaderState>,
     private menuService: MenuService
   ) {
-    this.tabs$ = this.store.select(state => state.menu.tabs);
-    this.selectedTab$ = this.store.select(state => state.menu.selectedTab);
+    this.tabs$ = this.store.select(selectTabs);
+    this.selectedTab$ = this.store.select(selectSelectedTab);
   }
 
   ngOnInit(): void {

@@ -4,9 +4,11 @@ import { Observable } from 'rxjs';
 import { takeWhile, tap } from 'rxjs/operators';
 
 import { Post } from './postsList.model';
-import { AppState } from '../../../app/app.reducers';
 import * as PostsListActions from './postsList.actions';
 import { PostsListService } from './postsList.service';
+import { ContentState } from '../../content.reducers';
+import { selectSelectedTab } from '../../../header/components/menu/menu.selectors';
+import { HeaderState } from '../../../header/header.reducers';
 
 @Component({
   selector: 'postsList-component',
@@ -21,10 +23,10 @@ export class PostsListComponent implements OnInit, OnDestroy {
   private alive = true;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<HeaderState | ContentState>,
     private postsListService: PostsListService
   ) { 
-    this.selectedTab$ = this.store.select(state => state.menu.selectedTab);
+    this.selectedTab$ = this.store.select(selectSelectedTab);
   }
 
   ngOnInit() {

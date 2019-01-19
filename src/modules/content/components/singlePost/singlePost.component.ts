@@ -3,10 +3,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { flatMap, takeWhile } from 'rxjs/operators';
 import { Post } from '../postsList/postsList.model';
-import { AppState } from '../../../app/app.reducers';
 import { SinglePostService } from './singlePost.service';
 import { ActivatedRoute } from '@angular/router';
 import { SetPost } from './singlePost.actions';
+import { selectPost } from './singlePost.selectors';
+import { ContentState } from '../../content.reducers';
 
 @Component({
   selector: 'singlePost-component',
@@ -20,11 +21,11 @@ export class SinglePostComponent implements OnInit, OnDestroy {
   private alive = true;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<ContentState>,
     private route: ActivatedRoute,
     private singlePostService: SinglePostService
   ) { 
-    this.post$ = this.store.select(state => state.singlePost.post);
+    this.post$ = this.store.select(selectPost);
   }
 
   ngOnInit() {

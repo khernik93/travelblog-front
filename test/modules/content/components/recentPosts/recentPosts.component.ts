@@ -4,14 +4,14 @@ import { By } from '@angular/platform-browser';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { RecentPostsComponent } from '../../../../../src/modules/content/components/recentPosts/recentPosts.component';
-import { syncReducers, AppState } from '../../../../../src/modules/app/app.reducers';
 import recentPostsResponse from '../../../../utils/responses/recentPosts';
 import { RecentPostsService } from '../../../../../src/modules/content/components/recentPosts/recentPosts.service';
 import { RecentPostsStubs } from '../../../../utils/stubs/recentPostsStubs';
+import { ContentState, contentReducers } from '../../../../../src/modules/content/content.reducers';
 
 describe('RecentPostsComponent', () => {
 
-  let store: Store<AppState>;
+  let store: Store<ContentState>;
   let recentPostsService: jasmine.SpyObj<RecentPostsService>;
   
   let component: RecentPostsComponent;
@@ -24,7 +24,8 @@ describe('RecentPostsComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        StoreModule.forRoot(syncReducers)
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('content', contentReducers)
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

@@ -7,12 +7,12 @@ import { ActivatedRoute } from '@angular/router';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { SinglePostService } from '../../../../../src/modules/content/components/singlePost/singlePost.service';
 import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
-import { AppState, syncReducers } from '../../../../../src/modules/app/app.reducers';
 import { SinglePostStubs } from '../../../../utils/stubs/singlePostStubs';
+import { ContentState, contentReducers } from '../../../../../src/modules/content/content.reducers';
 
 describe('SinglePostComponent', () => {
 
-  let store: Store<AppState>;
+  let store: Store<ContentState>;
   let activatedRoute: any;
   let singlePostService: jasmine.SpyObj<SinglePostService>;
 
@@ -27,8 +27,9 @@ describe('SinglePostComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        StoreModule.forRoot(syncReducers),
-        RouterTestingModule
+        RouterTestingModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('content', contentReducers)
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

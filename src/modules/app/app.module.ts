@@ -17,30 +17,32 @@ import { FooterModule } from '../footer/footer.module';
 
 import { TransferHttpService } from '../../shared/services/transferHttp.service';
 
-export const APP_MODULE_DECLARATIONS = [
+export const MODULE_DECLARATIONS = [
   AppComponent,
   LayoutComponent,
   NotFoundComponent
 ];
 
-export const APP_MODULE_IMPORTS = [
+export const MODULE_IMPORTS = [
   BrowserModule,
   HttpClientModule,
-  StoreModule.forRoot(syncReducers),
   RouterModule.forRoot(routes, {useHash: false}),
   HeaderModule,
   ContentModule,
   FooterModule
 ];
 
-export const APP_MODULE_PROVIDERS = [
+export const MODULE_PROVIDERS = [
   TransferHttpService
 ];
 
 @NgModule({
-  declarations: APP_MODULE_DECLARATIONS,
-  imports: APP_MODULE_IMPORTS,
-  providers: APP_MODULE_PROVIDERS,
+  declarations: MODULE_DECLARATIONS,
+  imports: [
+    ...MODULE_IMPORTS,
+    StoreModule.forRoot(syncReducers)
+  ],
+  providers: MODULE_PROVIDERS,
   bootstrap: [AppComponent],
   exports: [AppComponent]
 })

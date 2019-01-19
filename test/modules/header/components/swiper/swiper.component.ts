@@ -6,16 +6,16 @@ import { ChangeDetectorRef } from '@angular/core';
 import { SwiperComponent } from '../../../../../src/modules/header/components/swiper/swiper.component';
 import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
-import { syncReducers, AppState } from '../../../../../src/modules/app/app.reducers';
 import { SwiperStubs } from '../../../../utils/stubs/swiperStubs';
 import * as MenuActions from '../../../../../src/modules/header/components/menu/menu.actions';
 import * as SwiperActions from '../../../../../src/modules/header/components/swiper/swiper.actions';
 import tabsResponse from '../../../../utils/responses/tabs';
 import photosResponse from '../../../../utils/responses/photos';
+import { HeaderState, headerReducers } from '../../../../../src/modules/header/header.reducers';
 
 describe('SwiperComponent', () => {
 
-  let store: Store<AppState>;
+  let store: Store<HeaderState>;
   let swiperService: jasmine.SpyObj<SwiperService>;
   
   let component: SwiperComponent;
@@ -28,7 +28,8 @@ describe('SwiperComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        StoreModule.forRoot(syncReducers)
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('header', headerReducers)
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

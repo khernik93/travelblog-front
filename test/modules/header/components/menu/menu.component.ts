@@ -5,14 +5,14 @@ import { By } from '@angular/platform-browser';
 import { MenuComponent } from '../../../../../src/modules/header/components/menu/menu.component';
 import { MenuService } from '../../../../../src/modules/header/components/menu/menu.service';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
-import { AppState, syncReducers } from '../../../../../src/modules/app/app.reducers';
 import { MenuStubs } from '../../../../utils/stubs/menuStubs';
 import TabsResponse from '../../../../utils/responses/tabs';
 import { CssHelper } from '../../../../utils/helpers/css';
+import { HeaderState, headerReducers } from '../../../../../src/modules/header/header.reducers';
 
 describe('MenuComponent', () => {
 
-  let store: Store<AppState>;
+  let store: Store<HeaderState>;
   let menuService: jasmine.SpyObj<MenuService>;
 
   let component: MenuComponent;
@@ -25,7 +25,8 @@ describe('MenuComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        StoreModule.forRoot(syncReducers)
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('header', headerReducers)
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

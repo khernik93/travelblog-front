@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { TransferHttpService } from '../../../../shared/services/transferHttp.service';
-
-const urls = {
-  recentPosts: '/recentPosts'
-};
+import { ApiClient } from '../../../app/clients/api.client';
 
 @Injectable()
 export class RecentPostsService {
 
   constructor(
-    private transferHttp: TransferHttpService
+    private apiClient: ApiClient
   ) { }
 
   getRecentPosts() {
-    return this.transferHttp.get(urls.recentPosts);
+    return this.apiClient.getRecentPosts();
   }
 
 }

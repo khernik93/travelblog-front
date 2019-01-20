@@ -1,22 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TransferHttpService } from '../../../../../src/shared/services/transferHttp.service';
 import { SinglePostService } from '../../../../../src/modules/content/components/SinglePost/SinglePost.service';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import { ApiClient } from '../../../../../src/modules/app/clients/api.client';
 
 describe('SinglePostService', () => {
 
   let singlePostService: SinglePostService;
-  let transferHttpService: jasmine.SpyObj<TransferHttpService>;
+  let apiClient: jasmine.SpyObj<ApiClient>;
 
   beforeEach(() => {
 
-    transferHttpService = SharedStubs.getTransferHttpService();
+    apiClient = SharedStubs.getApiClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         SinglePostService,
-        { provide: TransferHttpService, useValue: transferHttpService }
+        { provide: ApiClient, useValue: apiClient }
       ]
     });
 
@@ -32,7 +32,7 @@ describe('SinglePostService', () => {
   `, () => {
     const id = '123';
     singlePostService.getPost(id);
-    expect(transferHttpService.get).toHaveBeenCalled();
+    expect(apiClient.getPost).toHaveBeenCalled();
   });
 
 });

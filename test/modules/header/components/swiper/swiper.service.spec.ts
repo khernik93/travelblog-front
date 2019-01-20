@@ -1,22 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 
 import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
-import { TransferHttpService } from '../../../../../src/shared/services/transferHttp.service';
+import { TransferHttpService } from '../../../../../src/modules/app/services/transferHttp.service';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import { ApiClient } from '../../../../../src/modules/app/clients/api.client';
 
 describe('SwiperService', () => {
 
   let swiperService: SwiperService;
-  let transferHttpService: jasmine.SpyObj<TransferHttpService>;
+  let apiClient: jasmine.SpyObj<ApiClient>;
 
   beforeEach(() => {
 
-    transferHttpService = SharedStubs.getTransferHttpService();
+    apiClient = SharedStubs.getApiClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         SwiperService,
-        { provide: TransferHttpService, useValue: transferHttpService }
+        { provide: ApiClient, useValue: apiClient }
       ]
     });
 
@@ -31,7 +32,7 @@ describe('SwiperService', () => {
     THEN transferHttpService.get method should be called
   `, () => {
     swiperService.getPhotos();
-    expect(transferHttpService.get).toHaveBeenCalled();
+    expect(apiClient.getPhotos).toHaveBeenCalled();
   });
 
 });

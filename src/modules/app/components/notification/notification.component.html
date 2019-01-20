@@ -1,0 +1,8 @@
+<div class="notification-container" *ngIf="(notifications$ | async) && (notifications$ | async).length">
+  <div class="notification"
+       *ngFor="let notification of (notifications$ | async)"
+       [style.background-color]="notification.type">
+      <div class="notification-cross"><i class="fa fa-close"></i></div>
+      {{ notification.message }}
+  </div>
+</div>

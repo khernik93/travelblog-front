@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { TransferHttpService } from '../../../../shared/services/transferHttp.service';
-
-const urls = {
-  tabs: '/countries'
-};
+import { ApiClient } from '../../../app/clients/api.client';
 
 @Injectable()
 export class MenuService {
 
   constructor(
-    private transferHttp: TransferHttpService
+    private apiClient: ApiClient
   ) { }
 
   getTabs() {
-    return this.transferHttp.get(urls.tabs);
+    return this.apiClient.getTabs();
   }
 
 }

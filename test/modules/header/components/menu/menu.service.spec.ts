@@ -1,22 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 
 import { MenuService } from '../../../../../src/modules/header/components/menu/menu.service';
-import { TransferHttpService } from '../../../../../src/shared/services/transferHttp.service';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import { ApiClient } from '../../../../../src/modules/app/clients/api.client';
 
 describe('MenuService', () => {
 
   let menuService: MenuService;
-  let transferHttpService: jasmine.SpyObj<TransferHttpService>;
+  let apiClient: jasmine.SpyObj<ApiClient>;
 
   beforeEach(() => {
 
-    transferHttpService = SharedStubs.getTransferHttpService();
+    apiClient = SharedStubs.getApiClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         MenuService,
-        { provide: TransferHttpService, useValue: transferHttpService }
+        { provide: ApiClient, useValue: apiClient }
       ]
     });
 
@@ -31,7 +31,7 @@ describe('MenuService', () => {
     THEN transferHttpService.get method should be called
   `, () => {
     menuService.getTabs();
-    expect(transferHttpService.get).toHaveBeenCalled();
+    expect(apiClient.getTabs).toHaveBeenCalled();
   });
 
 });

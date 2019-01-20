@@ -11,17 +11,20 @@ import { syncReducers } from './app.reducers';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { NotFoundComponent } from './components/notFound/notFound.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 import { HeaderModule } from '../header/header.module';
 import { ContentModule } from '../content/content.module';
 import { FooterModule } from '../footer/footer.module';
 
-import { TransferHttpService } from '../../shared/services/transferHttp.service';
+import { TransferHttpService } from './services/transferHttp.service';
+import { ApiClient } from './clients/api.client';
 
 export const MODULE_DECLARATIONS = [
   AppComponent,
   LayoutComponent,
-  NotFoundComponent
+  NotFoundComponent,
+  NotificationComponent
 ];
 
 export const MODULE_IMPORTS = [
@@ -31,10 +34,6 @@ export const MODULE_IMPORTS = [
   HeaderModule,
   ContentModule,
   FooterModule
-];
-
-export const MODULE_PROVIDERS = [
-  TransferHttpService
 ];
 
 export const APP_MODULE_STORE_AND_EFFECTS = [
@@ -48,7 +47,10 @@ export const APP_MODULE_STORE_AND_EFFECTS = [
     ...MODULE_IMPORTS,
     ...APP_MODULE_STORE_AND_EFFECTS
   ],
-  providers: MODULE_PROVIDERS,
+  providers: [
+    TransferHttpService,
+    ApiClient
+  ],
   bootstrap: [AppComponent],
   exports: [AppComponent]
 })

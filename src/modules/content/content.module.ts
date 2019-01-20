@@ -31,12 +31,6 @@ export const MODULE_IMPORTS = [
   StoreModule.forFeature('content', contentReducers)
 ];
 
-export const MODULE_PROVIDERS = [
-  PostsListService,
-  RecentPostsService,
-  SinglePostService
-];
-
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
@@ -44,7 +38,11 @@ export const MODULE_PROVIDERS = [
     EffectsModule.forFeature(contentEffects)
   ],
   exports: [ContentComponent],
-  providers: MODULE_PROVIDERS
+  providers: [
+    PostsListService,
+    RecentPostsService,
+    SinglePostService
+  ]
 })
 export class ContentModule {
   constructor() { }

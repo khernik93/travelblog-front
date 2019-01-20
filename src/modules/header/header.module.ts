@@ -26,11 +26,6 @@ export const MODULE_IMPORTS = [
   StoreModule.forFeature('header', headerReducers)
 ];
 
-export const MODULE_PROVIDERS = [
-  MenuService,
-  SwiperService
-];
-
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
@@ -38,7 +33,10 @@ export const MODULE_PROVIDERS = [
     EffectsModule.forFeature(headerEffects)
   ],
   exports: [HeaderComponent],
-  providers: MODULE_PROVIDERS
+  providers: [
+    MenuService,
+    SwiperService
+  ]
 })
 export class HeaderModule {
   constructor() { }

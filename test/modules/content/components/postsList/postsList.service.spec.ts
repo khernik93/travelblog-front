@@ -1,22 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TransferHttpService } from '../../../../../src/shared/services/transferHttp.service';
 import { PostsListService } from '../../../../../src/modules/content/components/postsList/postsList.service';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import { ApiClient } from '../../../../../src/modules/app/clients/api.client';
 
 describe('PostsListService', () => {
 
   let postsListService: PostsListService;
-  let transferHttpService: jasmine.SpyObj<TransferHttpService>;
+  let apiClient: jasmine.SpyObj<ApiClient>;
 
   beforeEach(() => {
 
-    transferHttpService = SharedStubs.getTransferHttpService();
+    apiClient = SharedStubs.getApiClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         PostsListService,
-        { provide: TransferHttpService, useValue: transferHttpService }
+        { provide: ApiClient, useValue: apiClient }
       ]
     });
 
@@ -32,7 +32,7 @@ describe('PostsListService', () => {
   `, () => {
     const tabName = 'sample_tab';
     postsListService.getPosts(tabName);
-    expect(transferHttpService.get).toHaveBeenCalled();
+    expect(apiClient.getPosts).toHaveBeenCalled();
   });
 
 });

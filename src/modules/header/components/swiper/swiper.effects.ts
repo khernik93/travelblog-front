@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { switchMap, map, catchError } from 'rxjs/operators';
 
 import * as swiperActions from './swiper.actions';
 import { SwiperService } from './swiper.service';

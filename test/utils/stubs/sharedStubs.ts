@@ -1,7 +1,13 @@
 export class SharedStubs {
 
-  static getTransferHttpService () {
-    return jasmine.createSpyObj('TransferHttpService', ['get']);
+  static getApiClientStub () {
+    return jasmine.createSpyObj('ApiClient', [
+      'getRecentPosts',
+      'getPosts',
+      'getPost',
+      'getTabs',
+      'getPhotos'
+    ]);
   }
 
 };

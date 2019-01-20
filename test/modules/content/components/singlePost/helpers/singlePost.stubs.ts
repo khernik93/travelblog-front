@@ -1,5 +1,5 @@
 import { of } from "rxjs";
-import singlePostResponse from '../responses/singlePost';
+import singlePostResponse from '../../../../../utils/responses/singlePost.response';
 
 export class SinglePostStubs {
 

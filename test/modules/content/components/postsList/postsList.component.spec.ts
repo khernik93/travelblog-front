@@ -9,9 +9,9 @@ import { SinglePostComponent } from '../../../../../src/modules/content/componen
 import { HeaderState } from '../../../../../src/modules/header/header.reducers';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ContentState } from '../../../../../src/modules/content/content.reducers';
-import postsListState, { INITIALLY_SELECTED_TAB } from '../../../../utils/states/postsList';
+import postsListState, { INITIALLY_SELECTED_TAB } from './helpers/postsList.state';
 import { GetPosts } from '../../../../../src/modules/content/components/postsList/postsList.actions';
-import postsListResponse from '../../../../utils/responses/postsList';
+import postsListResponse from '../../../../utils/responses/postsList.response';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 
 const TEST_ROUTES = [

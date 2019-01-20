@@ -1,6 +1,6 @@
 import * as singlePostActions from '../../../../../src/modules/content/components/singlePost/singlePost.actions';
 import { singlePostReducer, initialState } from '../../../../../src/modules/content/components/singlePost/singlePost.reducer';
-import singlePostResponse from '../../../../utils/responses/singlePost';
+import singlePostResponse from '../../../../utils/responses/singlePost.response';
 
 describe('SinglePostReducer', () => {
 

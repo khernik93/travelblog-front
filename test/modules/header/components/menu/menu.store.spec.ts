@@ -1,6 +1,6 @@
 import * as menuActions from '../../../../../src/modules/header/components/menu/menu.actions';
 import { menuReducer, initialState } from '../../../../../src/modules/header/components/menu/menu.reducer';
-import TabsResponse from '../../../../utils/responses/tabs';
+import TabsResponse from '../../../../utils/responses/tabs.response';
 
 describe('MenuReducer', () => {
 

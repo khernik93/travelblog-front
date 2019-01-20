@@ -2,10 +2,10 @@ import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
 
-import tabsResponse from '../../../../utils/responses/tabs';
+import tabsResponse from '../../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
-import { PostsListStubs } from '../../../../utils/stubs/postsListStubs';
-import postsListResponse from '../../../../utils/responses/postsList';
+import { PostsListStubs } from './helpers/postsList.stubs';
+import postsListResponse from '../../../../utils/responses/postsList.response';
 import { SetPosts, GetPosts } from '../../../../../src/modules/content/components/postsList/postsList.actions';
 import { PostsListService } from '../../../../../src/modules/content/components/postsList/postsList.service';
 import { PostsListEffects } from '../../../../../src/modules/content/components/postsList/postsList.effects';

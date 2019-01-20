@@ -1,4 +1,4 @@
-import tabsResponse from '../responses/tabs';
+import tabsResponse from '../../../../../utils/responses/tabs.response';
 
 const menuState: any = {
   header: {

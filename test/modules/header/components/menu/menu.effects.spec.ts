@@ -4,10 +4,10 @@ import { hot, cold } from 'jasmine-marbles';
 
 import { MenuEffects } from '../../../../../src/modules/header/components/menu/menu.effects';
 import { GetTabs, SetTabs } from '../../../../../src/modules/header/components/menu/menu.actions';
-import tabsResponse from '../../../../utils/responses/tabs';
+import tabsResponse from '../../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { MenuService } from '../../../../../src/modules/header/components/menu/menu.service';
-import { MenuStubs } from '../../../../utils/stubs/menuStubs';
+import { MenuStubs } from './helpers/menu.stubs';
 
 describe('MenuEffects', () => {
 

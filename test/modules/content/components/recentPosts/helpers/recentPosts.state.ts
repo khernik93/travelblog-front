@@ -1,4 +1,4 @@
-import recentPostsResponse from '../responses/recentPosts';
+import recentPostsResponse from '../../../../../utils/responses/recentPosts.response';
 
 const recentPostsState: any = {
   content: {

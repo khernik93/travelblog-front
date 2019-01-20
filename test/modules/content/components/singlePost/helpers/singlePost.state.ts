@@ -1,4 +1,4 @@
-import singlePostResponse from '../responses/singlePost';
+import singlePostResponse from '../../../../../utils/responses/singlePost.response';
 
 const singlePostState: any = {
   content: {

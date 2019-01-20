@@ -9,26 +9,30 @@ export const initialState: NotificationState = {
   notifications: []
 };
 
+const createNotification = (notification: Notification, type: NotificationType): any => {
+  return { ...notification, type: type };
+};
+
 export function notificationReducer(state = initialState, action: NotificationActions): NotificationState {
   switch (action.type) {
 
     case NotificationActionTypes.SetError: {
       return {
         ...state,
-        notifications: [...state.notifications, {
-          ...action.notification,
-          type: NotificationType.error
-        }]
+        notifications: [
+          ...state.notifications, 
+          createNotification(action.notification, NotificationType.error)
+        ]
       }
     }
 
     case NotificationActionTypes.SetSuccess: {
       return {
         ...state,
-        notifications: [...state.notifications, {
-          ...action.notification,
-          type: NotificationType.success
-        }]
+        notifications: [
+          ...state.notifications, 
+          createNotification(action.notification, NotificationType.success)
+        ]
       }
     }
 

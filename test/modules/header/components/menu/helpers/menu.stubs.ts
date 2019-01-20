@@ -1,5 +1,5 @@
 import { of } from "rxjs";
-import tabsResponse from '../responses/tabs';
+import tabsResponse from '../../../../../utils/responses/tabs.response';
 
 export class MenuStubs {
 

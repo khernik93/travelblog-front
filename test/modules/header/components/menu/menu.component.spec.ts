@@ -4,12 +4,12 @@ import { By } from '@angular/platform-browser';
 
 import { MenuComponent } from '../../../../../src/modules/header/components/menu/menu.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
-import TabsResponse from '../../../../utils/responses/tabs';
+import TabsResponse from '../../../../utils/responses/tabs.response';
 import { CssHelper } from '../../../../utils/helpers/css';
 import { HeaderState } from '../../../../../src/modules/header/header.reducers';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
-import menuState from '../../../../utils/states/menu';
+import menuState from './helpers/menu.state';
 
 describe('MenuComponent', () => {
 

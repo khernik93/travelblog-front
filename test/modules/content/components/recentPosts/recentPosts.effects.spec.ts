@@ -3,8 +3,8 @@ import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
 
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
-import { RecentPostsStubs } from '../../../../utils/stubs/recentPostsStubs';
-import recentPostsResponse from '../../../../utils/responses/recentPosts';
+import { RecentPostsStubs } from './helpers/recentPosts.stubs';
+import recentPostsResponse from '../../../../utils/responses/recentPosts.response';
 import { SetRecentPosts, GetRecentPosts } from '../../../../../src/modules/content/components/recentPosts/recentPosts.actions';
 import { RecentPostsService } from '../../../../../src/modules/content/components/recentPosts/recentPosts.service';
 import { RecentPostsEffects } from '../../../../../src/modules/content/components/recentPosts/recentPosts.effects';

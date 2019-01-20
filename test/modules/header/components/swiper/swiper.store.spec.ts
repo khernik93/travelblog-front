@@ -1,6 +1,6 @@
 import * as swiperActions from '../../../../../src/modules/header/components/swiper/swiper.actions';
 import { swiperReducer, initialState } from '../../../../../src/modules/header/components/swiper/swiper.reducer';
-import photosResponse from '../../../../utils/responses/photos';
+import photosResponse from '../../../../utils/responses/photos.response';
 
 describe('SwiperReducer', () => {
 

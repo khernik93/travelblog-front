@@ -8,8 +8,8 @@ import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/
 import { HeaderState } from '../../../../../src/modules/header/header.reducers';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
-import swiperState from '../../../../utils/states/swiper';
-import photosResponse from '../../../../utils/responses/photos';
+import swiperState from '../swiper/helpers/swiper.state';
+import photosResponse from '../../../../utils/responses/photos.response';
 
 describe('SwiperComponent', () => {
 

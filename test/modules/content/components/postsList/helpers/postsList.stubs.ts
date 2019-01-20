@@ -1,5 +1,5 @@
 import { of } from "rxjs";
-import postsListResponse from '../responses/postsList';
+import postsListResponse from '../../../../../utils/responses/postsList.response';
 
 export class PostsListStubs {
 

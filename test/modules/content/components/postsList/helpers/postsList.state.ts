@@ -1,5 +1,5 @@
-import tabsResponse from '../responses/tabs';
-import postsListResponse from '../responses/postsList';
+import tabsResponse from '../../../../../utils/responses/tabs.response';
+import postsListResponse from '../../../../../utils/responses/postsList.response';
 
 export const INITIALLY_SELECTED_TAB = tabsResponse[0];
 

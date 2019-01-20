@@ -1,6 +1,6 @@
 import * as recentPostsActions from '../../../../../src/modules/content/components/recentPosts/recentPosts.actions';
 import { recentPostsReducer, initialState } from '../../../../../src/modules/content/components/recentPosts/recentPosts.reducer';
-import RecentPostsResponse from '../../../../utils/responses/recentPosts';
+import RecentPostsResponse from '../../../../utils/responses/recentPosts.response';
 
 describe('RecentPostsReducer', () => {
 

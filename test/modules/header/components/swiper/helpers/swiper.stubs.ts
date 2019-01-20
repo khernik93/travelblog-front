@@ -1,5 +1,5 @@
 import { of } from "rxjs";
-import photosResponse from '../responses/photos';
+import photosResponse from '../../../../../utils/responses/photos.response';
 
 export class SwiperStubs {
 

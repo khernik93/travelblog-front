@@ -6,13 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
-import { SinglePostStubs } from '../../../../utils/stubs/singlePostStubs';
+import { SinglePostStubs } from './helpers/singlePost.stubs';
 import { ContentState } from '../../../../../src/modules/content/content.reducers';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
-import singlePostState from '../../../../utils/states/singlePost';
+import singlePostState from './helpers/singlePost.state';
 import { GetPost } from '../../../../../src/modules/content/components/singlePost/singlePost.actions';
-import singlePostResponse from '../../../../utils/responses/singlePost';
+import singlePostResponse from '../../../../utils/responses/singlePost.response';
 
 describe('SinglePostComponent', () => {
 

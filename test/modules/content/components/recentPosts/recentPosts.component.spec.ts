@@ -1,17 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
-import { EffectsModule } from '@ngrx/effects';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { RecentPostsComponent } from '../../../../../src/modules/content/components/recentPosts/recentPosts.component';
-import recentPostsResponse from '../../../../utils/responses/recentPosts';
+import recentPostsResponse from '../../../../utils/responses/recentPosts.response';
 import { ContentState } from '../../../../../src/modules/content/content.reducers';
-import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
-import { RecentPostsEffects } from '../../../../../src/modules/content/components/recentPosts/recentPosts.effects';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
-import recentPostsState from '../../../../utils/states/recentPosts';
+import recentPostsState from './helpers/recentPosts.state';
 
 describe('RecentPostsComponent', () => {
 

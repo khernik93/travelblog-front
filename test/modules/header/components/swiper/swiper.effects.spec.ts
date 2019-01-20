@@ -6,8 +6,8 @@ import { SwiperEffects } from '../../../../../src/modules/header/components/swip
 import { GetPhotos, SetPhotos } from '../../../../../src/modules/header/components/swiper/swiper.actions';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
-import { SwiperStubs } from '../../../../utils/stubs/swiperStubs';
-import photosResponse from '../../../../utils/responses/photos';
+import { SwiperStubs } from './helpers/swiper.stubs';
+import photosResponse from '../../../../utils/responses/photos.response';
 
 describe('SwiperEffects', () => {
 

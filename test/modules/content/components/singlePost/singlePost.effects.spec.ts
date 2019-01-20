@@ -2,9 +2,9 @@ import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
 
-import singlePostResponse from '../../../../utils/responses/singlePost';
+import singlePostResponse from '../../../../utils/responses/singlePost.response';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
-import { SinglePostStubs } from '../../../../utils/stubs/singlePostStubs';
+import { SinglePostStubs } from './helpers/singlePost.stubs';
 import { SetPost, GetPost } from '../../../../../src/modules/content/components/singlePost/singlePost.actions';
 import { SinglePostService } from '../../../../../src/modules/content/components/singlePost/singlePost.service';
 import { SinglePostEffects } from '../../../../../src/modules/content/components/singlePost/singlePost.effects';

@@ -1,5 +1,5 @@
 import { of } from "rxjs";
-import recentPostsResponse from '../responses/recentPosts';
+import recentPostsResponse from '../../../../../utils/responses/recentPosts.response';
 
 export class RecentPostsStubs {
 

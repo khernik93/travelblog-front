@@ -1,6 +1,6 @@
 import * as postsListActions from '../../../../../src/modules/content/components/postsList/postsList.actions';
 import { postsListReducer, initialState } from '../../../../../src/modules/content/components/postsList/postsList.reducer';
-import PostsListResponse from '../../../../utils/responses/postsList';
+import PostsListResponse from '../../../../utils/responses/postsList.response';
 
 describe('PostsListReducer', () => {
 

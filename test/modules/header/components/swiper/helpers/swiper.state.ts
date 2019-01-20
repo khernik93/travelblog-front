@@ -1,5 +1,5 @@
-import photosResponse from '../responses/photos';
-import tabsResponse from '../responses/tabs';
+import photosResponse from '../../../../../utils/responses/photos.response';
+import tabsResponse from '../../../../../utils/responses/tabs.response';
 
 const swiperState: any = {
   header: {

@@ -21,19 +21,13 @@ import { TransferHttpService } from '../../shared/services/transferHttp.service'
 import { ApiClient } from '../../shared/clients/api.client';
 
 export const MODULE_DECLARATIONS = [
-  AppComponent,
-  LayoutComponent,
   NotFoundComponent,
   NotificationComponent
 ];
 
 export const MODULE_IMPORTS = [
   BrowserModule,
-  HttpClientModule,
-  RouterModule.forRoot(routes, {useHash: false}),
-  HeaderModule,
-  ContentModule,
-  FooterModule
+  HttpClientModule
 ];
 
 export const APP_MODULE_STORE_AND_EFFECTS = [
@@ -42,10 +36,18 @@ export const APP_MODULE_STORE_AND_EFFECTS = [
 ];
 
 @NgModule({
-  declarations: MODULE_DECLARATIONS,
+  declarations: [
+    ...MODULE_DECLARATIONS,
+    AppComponent,
+    LayoutComponent
+  ],
   imports: [
     ...MODULE_IMPORTS,
-    ...APP_MODULE_STORE_AND_EFFECTS
+    ...APP_MODULE_STORE_AND_EFFECTS,
+    HeaderModule,
+    ContentModule,
+    FooterModule,
+    RouterModule.forRoot(routes, {useHash: false})
   ],
   providers: [
     TransferHttpService,

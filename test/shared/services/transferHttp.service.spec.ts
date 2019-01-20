@@ -1,4 +1,4 @@
-import { TransferHttpService } from '../../../../src/shared/services/transferHttp.service';
+import { TransferHttpService } from '../../../src/shared/services/transferHttp.service';
 import { HttpClient } from '@angular/common/http';
 
 describe('TransferHttp service', () => {

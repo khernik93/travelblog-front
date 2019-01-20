@@ -1,6 +1,8 @@
+import { MockStore } from '../mocks/mockStore';
+
 export class SharedStubs {
 
-  static getApiClientStub () {
+  static getApiClientStub() {
     return jasmine.createSpyObj('ApiClient', [
       'getRecentPosts',
       'getPosts',
@@ -8,6 +10,10 @@ export class SharedStubs {
       'getTabs',
       'getPhotos'
     ]);
+  }
+
+  static getMockStoreStub<T>() {
+    return new MockStore<T>();
   }
 
 };

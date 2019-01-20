@@ -1,39 +1,32 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
-import { EffectsModule } from '@ngrx/effects';
 
 import { MenuComponent } from '../../../../../src/modules/header/components/menu/menu.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
 import TabsResponse from '../../../../utils/responses/tabs';
 import { CssHelper } from '../../../../utils/helpers/css';
 import { HeaderState } from '../../../../../src/modules/header/header.reducers';
-import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
-import { MenuStubs } from '../../../../utils/stubs/menuStubs';
-import { MenuService } from '../../../../../src/modules/header/components/menu/menu.service';
-import { MenuEffects } from '../../../../../src/modules/header/components/menu/menu.effects';
+import { MockStore } from '../../../../utils/mocks/mockStore';
+import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import menuState from '../../../../utils/states/menu';
 
 describe('MenuComponent', () => {
 
-  let store: Store<HeaderState>;
-  let menuService: jasmine.SpyObj<MenuService>;
+  let store: MockStore<HeaderState>;
 
   let component: MenuComponent;
   let fixture: ComponentFixture<MenuComponent>;
 
   beforeEach(() => {
 
-    menuService = MenuStubs.getMenuService();
+    store = SharedStubs.getMockStoreStub<HeaderState>();
 
     TestBed.configureTestingModule({
-      imports: [
-        ...MODULE_IMPORTS,
-        ...APP_MODULE_STORE_AND_EFFECTS,
-        EffectsModule.forFeature([MenuEffects])
-      ],
+      imports: MODULE_IMPORTS,
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: MenuService, useValue: menuService }
+        { provide: Store, useValue: store }
       ]
     }).compileComponents();
 
@@ -42,9 +35,8 @@ describe('MenuComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
-    store = TestBed.get(Store);
+    store.setState(menuState);
     spyOn(store, 'dispatch').and.callThrough();
-    fixture.detectChanges();
   });
 
   it('should check if the component is defined', () => {
@@ -55,26 +47,18 @@ describe('MenuComponent', () => {
     WHEN the component is loaded
     THEN all tabs are visible
   `, () => {
-    const tabsCount: number = fixture.debugElement.queryAll(By.css('.menu li')).length;
-    expect(tabsCount).toBe(TabsResponse.length);
+    fixture.detectChanges();
+    const tabs = fixture.debugElement.queryAll(By.css('.menu li'));
+    expect(tabs.length).toBe(TabsResponse.length);
   });
 
   it(`
     WHEN the component is loaded
     THEN the first tab is selected
   `, () => {
+    fixture.detectChanges();
     const firstTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(1)');
     expect(CssHelper.getClass(firstTab)).toEqual('selected');
-  });
-
-  it(`
-    WHEN another tab is selected
-    THEN the photos change properly
-  `, () => {
-    const secondTab = fixture.nativeElement.querySelector('.menu li:nth-child(2)');
-    secondTab.click();
-    fixture.detectChanges();
-    expect(CssHelper.getClass(secondTab)).toEqual('selected');
   });
 
   it(`
@@ -82,6 +66,7 @@ describe('MenuComponent', () => {
     THEN the tabs should be displayed as hamburger menu
     AND initialy it should be opened
   `, () => {
+    fixture.detectChanges();
     let hamburgerMenuOpened = true;
     const hamburgerMenuIcon: HTMLElement = fixture.nativeElement.querySelector('.hamburger-menu');
     expect(fixture.componentInstance.hamburgerMenuOpened).toBe(hamburgerMenuOpened);

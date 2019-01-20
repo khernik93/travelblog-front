@@ -5,7 +5,6 @@ import { takeWhile, filter } from 'rxjs/operators';
 import Swiper from 'swiper';
 
 import * as SwiperActions from './swiper.actions';
-import { SwiperService } from './swiper.service';
 import { HeaderState } from '../../header.reducers';
 import { selectPhotos } from './swiper.selectors';
 import { selectSelectedTab } from '../menu/menu.selectors';
@@ -44,8 +43,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<HeaderState>,
-    private changeDetectorRef: ChangeDetectorRef,
-    private swiperService: SwiperService
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.selectedTab$ = this.store.select(selectSelectedTab);
     this.photos$ = this.store.select(selectPhotos);

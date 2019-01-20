@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
 import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
-import { TransferHttpService } from '../../../../../src/modules/app/services/transferHttp.service';
+import { TransferHttpService } from '../../../../../src/shared/services/transferHttp.service';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
-import { ApiClient } from '../../../../../src/modules/app/clients/api.client';
+import { ApiClient } from '../../../../../src/shared/clients/api.client';
 
 describe('SwiperService', () => {
 
@@ -29,7 +29,7 @@ describe('SwiperService', () => {
 
   it(`
     WHEN there is a call to getPhotos method
-    THEN transferHttpService.get method should be called
+    THEN ApiClient.getPhotos method should be called
   `, () => {
     swiperService.getPhotos();
     expect(apiClient.getPhotos).toHaveBeenCalled();

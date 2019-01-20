@@ -22,14 +22,14 @@ export const MODULE_DECLARATIONS = [
 ];
 
 export const MODULE_IMPORTS = [
-  CommonModule,
-  StoreModule.forFeature('header', headerReducers)
+  CommonModule
 ];
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
     ...MODULE_IMPORTS,
+    StoreModule.forFeature('header', headerReducers),
     EffectsModule.forFeature(headerEffects)
   ],
   exports: [HeaderComponent],

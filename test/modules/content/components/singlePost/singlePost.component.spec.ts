@@ -3,40 +3,38 @@ import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
-import { SinglePostService } from '../../../../../src/modules/content/components/singlePost/singlePost.service';
 import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
 import { SinglePostStubs } from '../../../../utils/stubs/singlePostStubs';
 import { ContentState } from '../../../../../src/modules/content/content.reducers';
-import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
-import { SinglePostEffects } from '../../../../../src/modules/content/components/singlePost/singlePost.effects';
+import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import { MockStore } from '../../../../utils/mocks/mockStore';
+import singlePostState from '../../../../utils/states/singlePost';
+import { GetPost } from '../../../../../src/modules/content/components/singlePost/singlePost.actions';
+import singlePostResponse from '../../../../utils/responses/singlePost';
 
 describe('SinglePostComponent', () => {
 
-  let store: Store<ContentState>;
+  let store: MockStore<ContentState>;
   let activatedRoute: any;
-  let singlePostService: jasmine.SpyObj<SinglePostService>;
 
   let component: SinglePostComponent;
   let fixture: ComponentFixture<SinglePostComponent>;
   
   beforeEach(() => {
 
+    store = SharedStubs.getMockStoreStub<ContentState>();
     activatedRoute = SinglePostStubs.getActivatedRoute();
-    singlePostService = SinglePostStubs.getSinglePostService();
 
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        RouterTestingModule,
-        ...APP_MODULE_STORE_AND_EFFECTS,
-        EffectsModule.forFeature([SinglePostEffects])
+        RouterTestingModule
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: SinglePostService, useValue: singlePostService },
+        { provide: Store, useValue: store },
         { provide: ActivatedRoute, useValue: activatedRoute }
       ]
     }).compileComponents();
@@ -46,13 +44,32 @@ describe('SinglePostComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SinglePostComponent);
     component = fixture.componentInstance;
-    store = TestBed.get(Store);
+    store.setState(singlePostState);
     spyOn(store, 'dispatch').and.callThrough();
-    fixture.detectChanges();
   });
 
   it('should check if the component is defined', () => {
     expect(component).toBeDefined();
+  });
+
+  it(`
+    WHEN the component is loaded
+    THEN getPost action should be dispatched with initial route post id
+  `, () => {
+    fixture.detectChanges();
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledWith(new GetPost(singlePostResponse.id.toString()));
+  });
+
+  it(`
+    WHEN the component is loaded
+    THEN post should be displayed
+  `, () => {
+    fixture.detectChanges();
+    
+    // Assure posts count
+    const postWraps = fixture.debugElement.queryAll(By.css('.post-wrap'));
+    expect(postWraps.length).toEqual(1);
   });
 
 });

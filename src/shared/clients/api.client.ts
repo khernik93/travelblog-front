@@ -4,8 +4,8 @@ import { of } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { TransferHttpService } from '../services/transferHttp.service';
-import { AppState } from '../app.reducers';
-import { SetError } from '../components/notification/notification.actions';
+import { AppState } from '../../modules/app/app.reducers';
+import { SetError } from '../../modules/app/components/notification/notification.actions';
 
 const urls = {
   posts: '/posts',

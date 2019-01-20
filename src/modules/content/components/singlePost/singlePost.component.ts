@@ -41,7 +41,7 @@ export class SinglePostComponent implements OnInit, OnDestroy {
         takeWhile(() => this.alive)
       )
       .subscribe((params: any) => {
-        this.store.dispatch(new SinglePostActions.GetPost(params.get('id')));
+        this.store.dispatch(new SinglePostActions.GetPost(params.get('id').toString()));
       });
   }
 

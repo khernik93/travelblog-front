@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, filter } from 'rxjs/operators';
 
 import { Post } from './postsList.model';
 import * as PostsListActions from './postsList.actions';
@@ -19,12 +19,12 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   posts$: Observable<Post[]>;
 
-  private selectedTab$: Observable<string>;
+  selectedTab$: Observable<string>;
   private alive = true;
 
   constructor(
     private store: Store<HeaderState | ContentState>
-  ) { 
+  ) {
     this.selectedTab$ = this.store.select(selectSelectedTab);
     this.posts$ = this.store.select(selectPosts);
   }
@@ -40,9 +40,10 @@ export class PostsListComponent implements OnInit, OnDestroy {
   private getPostsOnSelectedTab() {
     this.selectedTab$
       .pipe(
-        takeWhile(() => this.alive)
+        takeWhile(() => this.alive),
+        filter((selectedTab: string) => selectedTab !== null)
       )
-      .subscribe(selectedTab => {
+      .subscribe((selectedTab: string) => {
         this.store.dispatch(new PostsListActions.GetPosts(selectedTab));
       });
   }

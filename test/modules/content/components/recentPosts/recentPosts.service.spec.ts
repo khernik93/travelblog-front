@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MenuService } from '../../../../../src/modules/header/components/menu/menu.service';
+import { RecentPostsService } from '../../../../../src/modules/content/components/recentPosts/recentPosts.service';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ApiClient } from '../../../../../src/shared/clients/api.client';
 
-describe('MenuService', () => {
+describe('RecentPostsService', () => {
 
-  let menuService: MenuService;
+  let recentPostsService: RecentPostsService;
   let apiClient: jasmine.SpyObj<ApiClient>;
 
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe('MenuService', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        MenuService,
+        RecentPostsService,
         { provide: ApiClient, useValue: apiClient }
       ]
     });
@@ -23,15 +23,15 @@ describe('MenuService', () => {
   });
 
   beforeEach(() => {
-    menuService = TestBed.get(MenuService);
+    recentPostsService = TestBed.get(RecentPostsService);
   });
 
   it(`
-    WHEN there is a call to getTabs method
-    THEN ApiClient.getTabs method should be called
+    WHEN there is a call to getRecentPosts method
+    THEN ApiClient.getRecentPosts method should be called
   `, () => {
-    menuService.getTabs();
-    expect(apiClient.getTabs).toHaveBeenCalled();
+    recentPostsService.getRecentPosts();
+    expect(apiClient.getRecentPosts).toHaveBeenCalled();
   });
 
 });

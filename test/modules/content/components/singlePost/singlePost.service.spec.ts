@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { SinglePostService } from '../../../../../src/modules/content/components/SinglePost/SinglePost.service';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
-import { ApiClient } from '../../../../../src/modules/app/clients/api.client';
+import { ApiClient } from '../../../../../src/shared/clients/api.client';
 
 describe('SinglePostService', () => {
 
@@ -28,7 +28,7 @@ describe('SinglePostService', () => {
 
   it(`
     WHEN there is a call to getPost method
-    THEN transferHttpService.get method should be called
+    THEN ApiClient.getPost method should be called
   `, () => {
     const id = '123';
     singlePostService.getPost(id);

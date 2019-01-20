@@ -6,33 +6,29 @@ import { EffectsModule } from '@ngrx/effects';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { RecentPostsComponent } from '../../../../../src/modules/content/components/recentPosts/recentPosts.component';
 import recentPostsResponse from '../../../../utils/responses/recentPosts';
-import { RecentPostsService } from '../../../../../src/modules/content/components/recentPosts/recentPosts.service';
-import { RecentPostsStubs } from '../../../../utils/stubs/recentPostsStubs';
 import { ContentState } from '../../../../../src/modules/content/content.reducers';
 import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
 import { RecentPostsEffects } from '../../../../../src/modules/content/components/recentPosts/recentPosts.effects';
+import { MockStore } from '../../../../utils/mocks/mockStore';
+import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import recentPostsState from '../../../../utils/states/recentPosts';
 
 describe('RecentPostsComponent', () => {
 
-  let store: Store<ContentState>;
-  let recentPostsService: jasmine.SpyObj<RecentPostsService>;
+  let store: MockStore<ContentState>;
   
   let component: RecentPostsComponent;
   let fixture: ComponentFixture<RecentPostsComponent>;
   
   beforeEach(() => {
 
-    recentPostsService = RecentPostsStubs.getRecentPostsService();
+    store = SharedStubs.getMockStoreStub<ContentState>();
 
     TestBed.configureTestingModule({
-      imports: [
-        ...MODULE_IMPORTS,
-        ...APP_MODULE_STORE_AND_EFFECTS,
-        EffectsModule.forFeature([RecentPostsEffects])
-      ],
+      imports: MODULE_IMPORTS,
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: RecentPostsService, useValue: recentPostsService }
+        { provide: Store, useValue: store  }
       ]
     }).compileComponents();
 
@@ -41,9 +37,8 @@ describe('RecentPostsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RecentPostsComponent);
     component = fixture.componentInstance;
-    store = TestBed.get(Store);
+    store.setState(recentPostsState);
     spyOn(store, 'dispatch').and.callThrough();
-    fixture.detectChanges();
   });
 
   it('should check if the component is defined', () => {
@@ -54,13 +49,15 @@ describe('RecentPostsComponent', () => {
     WHEN the component is loaded
     THEN all recent posts should be displayed properly
   `, () => {
+    fixture.detectChanges();
+
     // Assure posts count
-    const postWrapsCount: number = fixture.debugElement.queryAll(By.css('.post-wrap')).length;
-    expect(postWrapsCount).toEqual(recentPostsResponse.length);
+    const postWraps = fixture.debugElement.queryAll(By.css('.post-wrap'));
+    expect(postWraps.length).toEqual(recentPostsResponse.length);
 
     // Assure breaking lines count
-    const breakingLinesCount: number = fixture.debugElement.queryAll(By.css('.breaking-line')).length;
-    expect(breakingLinesCount).toEqual(recentPostsResponse.length - 1);
+    const breakingLines = fixture.debugElement.queryAll(By.css('.breaking-line'));
+    expect(breakingLines.length).toEqual(recentPostsResponse.length - 1);
   });
 
 });

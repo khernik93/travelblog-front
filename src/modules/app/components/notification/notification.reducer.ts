@@ -15,26 +15,29 @@ export function notificationReducer(state = initialState, action: NotificationAc
     case NotificationActionTypes.SetError: {
       return {
         ...state,
-        notifications: [
-          ...state.notifications,
-          {
-            ...action.notification,
-            type: NotificationType.error
-          }
-        ]
+        notifications: [...state.notifications, {
+          ...action.notification,
+          type: NotificationType.error
+        }]
       }
     }
 
     case NotificationActionTypes.SetSuccess: {
       return {
         ...state,
-        notifications: [
-          ...state.notifications,
-          {
-            ...action.notification,
-            type: NotificationType.success
-          }
-        ]
+        notifications: [...state.notifications, {
+          ...action.notification,
+          type: NotificationType.success
+        }]
+      }
+    }
+
+    case NotificationActionTypes.CloseNotification: {
+      return {
+        ...state,
+        notifications: state.notifications.filter((_: any, i: number) => (
+          i !== action.index
+        ))
       }
     }
 

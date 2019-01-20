@@ -17,8 +17,8 @@ import { HeaderModule } from '../header/header.module';
 import { ContentModule } from '../content/content.module';
 import { FooterModule } from '../footer/footer.module';
 
-import { TransferHttpService } from './services/transferHttp.service';
-import { ApiClient } from './clients/api.client';
+import { TransferHttpService } from '../../shared/services/transferHttp.service';
+import { ApiClient } from '../../shared/clients/api.client';
 
 export const MODULE_DECLARATIONS = [
   AppComponent,

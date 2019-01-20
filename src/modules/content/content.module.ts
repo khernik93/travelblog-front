@@ -27,14 +27,14 @@ export const MODULE_DECLARATIONS = [
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  RouterModule,
-  StoreModule.forFeature('content', contentReducers)
+  RouterModule
 ];
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
     ...MODULE_IMPORTS,
+    StoreModule.forFeature('content', contentReducers),
     EffectsModule.forFeature(contentEffects)
   ],
   exports: [ContentComponent],

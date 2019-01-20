@@ -1,43 +1,42 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
-import { EffectsModule } from '@ngrx/effects';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
-import { PostsListService } from '../../../../../src/modules/content/components/postsList/postsList.service';
 import { PostsListComponent } from '../../../../../src/modules/content/components/postsList/postsList.component';
-import { PostsListStubs } from '../../../../utils/stubs/postsListStubs';
-import { RouterTestingModule } from '@angular/router/testing';
 import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
-import { ContentState } from '../../../../../src/modules/content/content.reducers';
 import { HeaderState } from '../../../../../src/modules/header/header.reducers';
-import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
-import { PostsListEffects } from '../../../../../src/modules/content/components/postsList/postsList.effects';
+import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import { ContentState } from '../../../../../src/modules/content/content.reducers';
+import postsListState, { INITIALLY_SELECTED_TAB } from '../../../../utils/states/postsList';
+import { GetPosts } from '../../../../../src/modules/content/components/postsList/postsList.actions';
+import postsListResponse from '../../../../utils/responses/postsList';
+import { MockStore } from '../../../../utils/mocks/mockStore';
+
+const TEST_ROUTES = [
+  { path: 'posts/:id', component: SinglePostComponent }
+];
 
 describe('PostsListComponent', () => {
 
-  let store: Store<HeaderState | ContentState>;
-  let postsListService: jasmine.SpyObj<PostsListService>;
+  let store: MockStore<HeaderState | ContentState>;
   
   let component: PostsListComponent;
   let fixture: ComponentFixture<PostsListComponent>;
   
   beforeEach(() => {
 
-    postsListService = PostsListStubs.getPostsListService();
+    store = SharedStubs.getMockStoreStub<HeaderState | ContentState>();
 
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        APP_MODULE_STORE_AND_EFFECTS,
-        EffectsModule.forFeature([PostsListEffects]),
-        RouterTestingModule.withRoutes([
-          { path: 'posts/:id', component: SinglePostComponent }
-        ])
+        RouterTestingModule.withRoutes(TEST_ROUTES)
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: PostsListService, useValue: postsListService }
+        { provide: Store, useValue: store }
       ]
     }).compileComponents();
 
@@ -46,45 +45,36 @@ describe('PostsListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PostsListComponent);
     component = fixture.componentInstance;
-    store = TestBed.get(Store);
+    store.setState(postsListState);
     spyOn(store, 'dispatch').and.callThrough();
-    fixture.detectChanges();
   });
 
   it('should check if the component is defined', () => {
     expect(component).toBeDefined();
   });
 
-  /*
-
   it(`
-    WHEN a new tab is selected
-    THEN PostsListService.getPosts function is being called
+    WHEN the component is loaded
+    THEN getPosts action should be dispatched with initially selected tab
   `, () => {
-    const tabName = 'some-other-tab';
-    store.dispatch(new MenuActions.SelectTab(tabName));
     fixture.detectChanges();
-    expect(postsListService.getPosts).toHaveBeenCalledWith(tabName);
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledWith(new GetPosts(INITIALLY_SELECTED_TAB));
   });
 
   it(`
-    WHEN the first tab is selected
-    THEN all relevant posts should be properly displayed
+    WHEN the component is loaded
+    THEN posts should be displayed
   `, () => {
-    store.dispatch(new MenuActions.SelectTab(tabsResponse[0]));
     fixture.detectChanges();
     
     // Assure posts count
-    const postWrapsCount: number = fixture.debugElement.queryAll(By.css('.post-wrap')).length;
-    expect(postWrapsCount).toEqual(postsListResponse.content.length);
+    const postWraps = fixture.debugElement.queryAll(By.css('.post-wrap'));
+    expect(postWraps.length).toEqual(postsListResponse.content.length);
 
     // Assure breaking lines count
-    const breakingLinesCount: number = fixture.debugElement.queryAll(By.css('.breaking-line')).length;
-    expect(breakingLinesCount).toEqual(postsListResponse.content.length - 1);
+    const breakingLines = fixture.debugElement.queryAll(By.css('.breaking-line'));
+    expect(breakingLines.length).toEqual(postsListResponse.content.length - 1);
   });
-
-  */
-
-  /* @TODO Check if read more redirects correctly */
 
 });

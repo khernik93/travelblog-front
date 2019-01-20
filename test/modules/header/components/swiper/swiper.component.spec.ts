@@ -2,41 +2,31 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core';
-import { EffectsModule } from '@ngrx/effects';
 
 import { SwiperComponent } from '../../../../../src/modules/header/components/swiper/swiper.component';
-import { SwiperService } from '../../../../../src/modules/header/components/swiper/swiper.service';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
-import { SwiperStubs } from '../../../../utils/stubs/swiperStubs';
-import * as MenuActions from '../../../../../src/modules/header/components/menu/menu.actions';
-import * as SwiperActions from '../../../../../src/modules/header/components/swiper/swiper.actions';
-import tabsResponse from '../../../../utils/responses/tabs';
-import photosResponse from '../../../../utils/responses/photos';
 import { HeaderState } from '../../../../../src/modules/header/header.reducers';
-import { APP_MODULE_STORE_AND_EFFECTS } from '../../../../../src/modules/app/app.module';
-import { SwiperEffects } from '../../../../../src/modules/header/components/swiper/swiper.effects';
+import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import { MockStore } from '../../../../utils/mocks/mockStore';
+import swiperState from '../../../../utils/states/swiper';
+import photosResponse from '../../../../utils/responses/photos';
 
 describe('SwiperComponent', () => {
 
-  let store: Store<HeaderState>;
-  let swiperService: jasmine.SpyObj<SwiperService>;
+  let store: MockStore<HeaderState>;
   
   let component: SwiperComponent;
   let fixture: ComponentFixture<SwiperComponent>;
 
   beforeEach(() => {
 
-    swiperService = SwiperStubs.getSwiperService();
+    store = SharedStubs.getMockStoreStub<HeaderState>();
 
     TestBed.configureTestingModule({
-      imports: [
-        ...MODULE_IMPORTS,
-        ...APP_MODULE_STORE_AND_EFFECTS,
-        EffectsModule.forFeature([SwiperEffects])
-      ],
+      imports: MODULE_IMPORTS,
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: SwiperService, useValue: swiperService },
+        { provide: Store, useValue: store },
         { provide: ChangeDetectorRef }
       ]
     }).compileComponents();
@@ -46,9 +36,8 @@ describe('SwiperComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SwiperComponent);
     component = fixture.componentInstance;
-    store = TestBed.get(Store);
+    store.setState(swiperState);
     spyOn(store, 'dispatch').and.callThrough();
-    fixture.detectChanges();
   });
 
   it('should check if the component is defined', () => {
@@ -59,33 +48,9 @@ describe('SwiperComponent', () => {
     WHEN a tab is selected
     THEN its photos should be visible
   `, () => {
-    Helper.setSelectedTabAndItsPhotos(tabsResponse[0]);
     fixture.detectChanges();
-    Helper.checkImagesCount(2);
+    const images = fixture.debugElement.queryAll(By.css('.swiper-wrapper img'));
+    expect(images.length).toBe(2);
   });
-
-  it(`
-    WHEN a tab is selected
-    AND there are no photos in swiper for that tab
-    THEN there are no photos visible at all
-  `, () => {
-    Helper.setSelectedTabAndItsPhotos(tabsResponse[3]);
-    fixture.detectChanges();
-    Helper.checkImagesCount(0);
-  });
-
-  class Helper {
-
-    static setSelectedTabAndItsPhotos (selectedTab: string) {
-      store.dispatch(new MenuActions.SelectTab(selectedTab));
-      store.dispatch(new SwiperActions.SetPhotos(photosResponse));
-    };
-  
-    static checkImagesCount (expected: number): void {
-      const imagesCount: number = fixture.debugElement.queryAll(By.css('.swiper-wrapper img')).length;
-      expect(imagesCount).toBe(expected);
-    };
-
-  }
 
 });

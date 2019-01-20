@@ -4,7 +4,8 @@ import { Notification } from './notification.model';
 
 export enum NotificationActionTypes {
   SetError = '[Notification] Set error',
-  SetSuccess = '[Notification] Set success'
+  SetSuccess = '[Notification] Set success',
+  CloseNotification = '[Notification] Close notification'
 }
 
 export class SetError implements Action {
@@ -19,5 +20,12 @@ export class SetSuccess implements Action {
   constructor(public notification: Notification) { }
 }
 
+export class CloseNotification implements Action {
+  readonly type = NotificationActionTypes.CloseNotification;
+
+  constructor(public index: number) { }
+}
+
 export type NotificationActions = SetError
-  | SetSuccess;
+  | SetSuccess
+  | CloseNotification;

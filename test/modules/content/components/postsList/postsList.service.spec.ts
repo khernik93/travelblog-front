@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { PostsListService } from '../../../../../src/modules/content/components/postsList/postsList.service';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
-import { ApiClient } from '../../../../../src/modules/app/clients/api.client';
+import { ApiClient } from '../../../../../src/shared/clients/api.client';
 
 describe('PostsListService', () => {
 
@@ -28,7 +28,7 @@ describe('PostsListService', () => {
 
   it(`
     WHEN there is a call to getPosts method
-    THEN transferHttpService.get method should be called
+    THEN ApiClient.getPosts method should be called
   `, () => {
     const tabName = 'sample_tab';
     postsListService.getPosts(tabName);

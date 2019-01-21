@@ -1,0 +1,33 @@
+@import "../../../../variables";
+
+.notification-container {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  overflow: hidden;
+  width: 40%;
+  margin: 2%;
+  z-index: $notification;
+}
+
+.notification {
+  position: relative;
+  padding: 10px;
+  border-radius: 10px;
+  color: $lightgrey;
+  box-shadow: 5px 5px $black;
+  margin-bottom: 20px;
+  height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.notification-cross {
+  position: absolute;
+  top: 4%;
+  right: 1%;
+  cursor: pointer;
+}

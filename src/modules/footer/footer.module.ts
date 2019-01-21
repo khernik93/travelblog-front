@@ -11,13 +11,11 @@ export const MODULE_IMPORTS = [
   CommonModule
 ];
 
-export const MODULE_PROVIDERS = [];
-
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: MODULE_IMPORTS,
   exports: [FooterComponent],
-  providers: MODULE_PROVIDERS
+  providers: []
 })
 export class FooterModule {
   constructor() { }

@@ -1,7 +1,28 @@
-## BackpackingBlog
+# Travelling blog frontend
 
-### TODO
-1. Add DLL support
-2. Add AoT support (in prod mode)
-3. Check HMR
-4. Implement unit tests infrastructure
+## Description
+
+This is a frontend of the travelling blog writen in angular 6 with redux pattern. 
+
+## Prequisites
+
+* npm > v6.5.0
+
+## Installation
+
+```
+$ npm install
+```
+
+## Running in development mode
+
+```
+$ node server.ts
+$ npm run start
+```
+
+## Executing tests
+
+```
+$ npm run test
+```

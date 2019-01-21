@@ -1,22 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { TransferHttpService } from '../../../../shared/services/transferHttp.service';
-
-const urls = {
-  posts: '/posts'
-};
+import { ApiClient } from '../../../../shared/clients/api.client';
 
 @Injectable()
 export class PostsListService {
 
   constructor(
-    private transferHttp: TransferHttpService
+    private apiClient: ApiClient
   ) { }
 
   getPosts(tab: string) {
-    return this.transferHttp.get(urls.posts, {
-      params: {tab}
-    });
+    return this.apiClient.getPosts(tab);
   }
 
 }

@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 
-import { TransferHttpService } from '../../../../shared/services/transferHttp.service';
-
-const urls = {
-  swiperPhotos: '/swiperphotos'
-};
+import { ApiClient } from '../../../../shared/clients/api.client';
 
 @Injectable()
 export class SwiperService {
 
   constructor(
-    private transferHttp: TransferHttpService
+    private apiClient: ApiClient
   ) { }
 
   getPhotos() {
-    return this.transferHttp.get(urls.swiperPhotos);
+    return this.apiClient.getPhotos();
   }
 
 }

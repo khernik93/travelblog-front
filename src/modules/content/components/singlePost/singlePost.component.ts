@@ -1,12 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { flatMap, takeWhile } from 'rxjs/operators';
+import { takeWhile } from 'rxjs/operators';
+
 import { Post } from '../postsList/postsList.model';
-import { AppState } from '../../../app/app.reducers';
-import { SinglePostService } from './singlePost.service';
 import { ActivatedRoute } from '@angular/router';
-import { SetPost } from './singlePost.actions';
+import { selectPost } from './singlePost.selectors';
+import { ContentState } from '../../content.reducers';
+import * as SinglePostActions from './singlePost.actions';
 
 @Component({
   selector: 'singlePost-component',
@@ -20,11 +21,10 @@ export class SinglePostComponent implements OnInit, OnDestroy {
   private alive = true;
 
   constructor(
-    private store: Store<AppState>,
-    private route: ActivatedRoute,
-    private singlePostService: SinglePostService
+    private store: Store<ContentState>,
+    private route: ActivatedRoute
   ) { 
-    this.post$ = this.store.select(state => state.singlePost.post);
+    this.post$ = this.store.select(selectPost);
   }
 
   ngOnInit() {
@@ -38,11 +38,10 @@ export class SinglePostComponent implements OnInit, OnDestroy {
   private getPostOnNewRequest() {
     this.route.paramMap
       .pipe(
-        takeWhile(() => this.alive),
-        flatMap(params => this.singlePostService.getPost(params.get('id')))
+        takeWhile(() => this.alive)
       )
-      .subscribe((post: Post) => {
-        this.store.dispatch(new SetPost(post));
+      .subscribe((params: any) => {
+        this.store.dispatch(new SinglePostActions.GetPost(params.get('id').toString()));
       });
   }
 

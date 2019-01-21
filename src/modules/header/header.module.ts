@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { headerReducers } from './header.reducers';
+import { headerEffects } from './header.effects';
 
 import { HeaderComponent } from './header.component';
 import { LogoComponent } from './components/logo/logo.component';
@@ -20,16 +25,22 @@ export const MODULE_IMPORTS = [
   CommonModule
 ];
 
-export const MODULE_PROVIDERS = [
-  MenuService,
-  SwiperService
+const STORE_IMPORTS = [
+  StoreModule.forFeature('header', headerReducers),
+  EffectsModule.forFeature(headerEffects)
 ];
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
-  imports: MODULE_IMPORTS,
+  imports: [
+    ...MODULE_IMPORTS,
+    ...STORE_IMPORTS
+  ],
   exports: [HeaderComponent],
-  providers: MODULE_PROVIDERS
+  providers: [
+    MenuService,
+    SwiperService
+  ]
 })
 export class HeaderModule {
   constructor() { }

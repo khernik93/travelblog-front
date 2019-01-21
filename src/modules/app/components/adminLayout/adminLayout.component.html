@@ -1,0 +1,1 @@
+<admin-component></admin-component>

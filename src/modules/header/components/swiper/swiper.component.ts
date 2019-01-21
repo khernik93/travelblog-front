@@ -4,9 +4,10 @@ import { Observable, combineLatest } from 'rxjs';
 import { takeWhile, filter } from 'rxjs/operators';
 import Swiper from 'swiper';
 
-import { AppState } from '../../../app/app.reducers';
 import * as SwiperActions from './swiper.actions';
-import { SwiperService } from './swiper.service';
+import { HeaderState } from '../../header.reducers';
+import { selectPhotos } from './swiper.selectors';
+import { selectSelectedTab } from '../menu/menu.selectors';
 
 const swiperSettings = {
   wrapper: '.swiper-container',
@@ -41,12 +42,11 @@ export class SwiperComponent implements OnInit, OnDestroy {
   private alive: boolean = true;
 
   constructor(
-    private store: Store<AppState>,
-    private changeDetectorRef: ChangeDetectorRef,
-    private swiperService: SwiperService
+    private store: Store<HeaderState>,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
-    this.selectedTab$ = this.store.select(state => state.menu.selectedTab);
-    this.photos$ = this.store.select(state => state.swiper.photos);
+    this.selectedTab$ = this.store.select(selectSelectedTab);
+    this.photos$ = this.store.select(selectPhotos);
   }
 
   ngOnInit() {
@@ -59,8 +59,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
   }
 
   private getSwiperPhotos(): void {
-    this.swiperService.getPhotos()
-      .subscribe((photos: Map<string, string[]>) => this.store.dispatch(new SwiperActions.SetPhotos(photos)));
+    this.store.dispatch(new SwiperActions.GetPhotos());
   }
 
   private setCurrentPhotosBasedOnSelectedTab(): void {

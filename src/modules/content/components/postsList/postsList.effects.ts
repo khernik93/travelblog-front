@@ -5,7 +5,7 @@ import { switchMap, map } from 'rxjs/operators';
 
 import * as postsListActions from './postsList.actions';
 import { PostsListService } from './postsList.service';
-import { PostResponse, Post } from './postsList.model';
+import { PostsPaginable, Post } from '../../../../shared/clients/api.model';
 
 @Injectable()
 export class PostsListEffects {
@@ -22,7 +22,7 @@ export class PostsListEffects {
       switchMap((action: any) => {
         return this.postsListService.getPosts(action.selectedTab)
           .pipe(
-            map((response: PostResponse) => response.content),
+            map((response: PostsPaginable) => response.content),
             map((posts: Post[]) => new postsListActions.SetPosts(posts))
           );
       })

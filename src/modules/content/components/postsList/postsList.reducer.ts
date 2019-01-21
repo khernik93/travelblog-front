@@ -1,5 +1,5 @@
 import { PostsListActions, PostsListActionTypes } from './postsList.actions';
-import { Post } from './postsList.model';
+import { Post } from '../../../../shared/clients/api.model';
 
 export interface PostsListState {
   posts: Post[]

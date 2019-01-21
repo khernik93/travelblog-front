@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Post } from '../postsList/postsList.model';
+import { Post } from '../../../../shared/clients/api.model';
 
 export enum RecentPostsActionTypes {
   GetRecentPosts = '[RecentPosts] Get recent posts',

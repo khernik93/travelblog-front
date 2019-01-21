@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { Post } from '../postsList/postsList.model';
 import { GetRecentPosts } from './recentPosts.actions';
 import { selectRecentPosts } from './recentPosts.selectors';
 import { ContentState } from '../../content.reducers';
+import { Post } from '../../../../shared/clients/api.model';
 
 @Component({
   selector: 'recentPosts-component',

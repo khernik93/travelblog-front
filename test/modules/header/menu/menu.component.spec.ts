@@ -10,6 +10,7 @@ import { HeaderState } from '../../../../src/modules/header/header.reducers';
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import menuState from './helpers/menu.state';
+import { SelectTab } from '../../../../src/modules/header/components/menu/menu.actions';
 
 describe('MenuComponent', () => {
 
@@ -37,6 +38,7 @@ describe('MenuComponent', () => {
     component = fixture.componentInstance;
     store.setState(menuState);
     spyOn(store, 'dispatch').and.callThrough();
+    fixture.detectChanges();
   });
 
   it('should check if the component is defined', () => {
@@ -47,7 +49,6 @@ describe('MenuComponent', () => {
     WHEN the component is loaded
     THEN all tabs are visible
   `, () => {
-    fixture.detectChanges();
     const tabs = fixture.debugElement.queryAll(By.css('.menu li'));
     expect(tabs.length).toBe(TabsResponse.length);
   });
@@ -56,9 +57,18 @@ describe('MenuComponent', () => {
     WHEN the component is loaded
     THEN the first tab is selected
   `, () => {
-    fixture.detectChanges();
     const firstTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(1)');
     expect(CssHelper.getClass(firstTab)).toEqual('selected');
+  });
+
+  it(`
+    WHEN the tab is clicked
+    THEN the SelectTab action is dispatched with the proper tab name
+  `, () => {
+    const secondTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(2)');
+    secondTab.click();
+    fixture.detectChanges();
+    expect(store.dispatch).toHaveBeenCalledWith(new SelectTab(menuState.header.menu.tabs[1]));
   });
 
   it(`
@@ -66,16 +76,22 @@ describe('MenuComponent', () => {
     THEN the tabs should be displayed as hamburger menu
     AND initialy it should be opened
   `, () => {
-    fixture.detectChanges();
-    let hamburgerMenuOpened = true;
+    let opened = true;
     const hamburgerMenuIcon: HTMLElement = fixture.nativeElement.querySelector('.hamburger-menu');
-    expect(fixture.componentInstance.hamburgerMenuOpened).toBe(hamburgerMenuOpened);
+    Helper.assertHamburgerMenuIs(opened);
     hamburgerMenuIcon.click();
-    fixture.detectChanges();
-    expect(fixture.componentInstance.hamburgerMenuOpened).toBe(!hamburgerMenuOpened);
+    Helper.assertHamburgerMenuIs(!opened);
     hamburgerMenuIcon.click();
-    fixture.detectChanges();
-    expect(fixture.componentInstance.hamburgerMenuOpened).toBe(hamburgerMenuOpened);
+    Helper.assertHamburgerMenuIs(opened);
   });
+
+  class Helper {
+
+    static assertHamburgerMenuIs(state: boolean): void {
+      fixture.detectChanges();
+      expect(fixture.componentInstance.hamburgerMenuOpened).toBe(state);
+    }
+
+  }
 
 });

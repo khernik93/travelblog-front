@@ -3,12 +3,12 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeWhile, filter } from 'rxjs/operators';
 
-import { Post } from './postsList.model';
 import * as PostsListActions from './postsList.actions';
 import { ContentState } from '../../content.reducers';
 import { selectSelectedTab } from '../../../header/components/menu/menu.selectors';
 import { HeaderState } from '../../../header/header.reducers';
 import { selectPosts } from './postsList.selectors';
+import { Post, Tab } from '../../../../shared/clients/api.model';
 
 @Component({
   selector: 'postsList-component',
@@ -19,7 +19,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   posts$: Observable<Post[]>;
 
-  selectedTab$: Observable<string>;
+  selectedTab$: Observable<Tab>;
   private alive = true;
 
   constructor(
@@ -41,9 +41,9 @@ export class PostsListComponent implements OnInit, OnDestroy {
     this.selectedTab$
       .pipe(
         takeWhile(() => this.alive),
-        filter((selectedTab: string) => selectedTab !== null)
+        filter((selectedTab: Tab) => selectedTab !== null)
       )
-      .subscribe((selectedTab: string) => {
+      .subscribe((selectedTab: Tab) => {
         this.store.dispatch(new PostsListActions.GetPosts(selectedTab));
       });
   }

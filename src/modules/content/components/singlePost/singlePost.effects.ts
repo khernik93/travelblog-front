@@ -5,7 +5,7 @@ import { switchMap, map } from 'rxjs/operators';
 
 import * as singlePostActions from './singlePost.actions';
 import { SinglePostService } from './singlePost.service';
-import { Post } from '../postsList/postsList.model';
+import { Post } from '../../../../shared/clients/api.model';
 
 @Injectable()
 export class SinglePostEffects {

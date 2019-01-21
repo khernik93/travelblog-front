@@ -1,6 +1,6 @@
-import { PostResponse } from '../../../src/modules/content/components/postsList/postsList.model';
+import { PostsPaginable } from '../../../src/shared/clients/api.model';
 
-const postsListResponse: PostResponse = {
+const postsListResponse: PostsPaginable = {
   "meta": {
     "total": 2, 
     "start": 0, 

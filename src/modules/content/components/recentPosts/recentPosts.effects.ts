@@ -5,7 +5,7 @@ import { switchMap, map } from 'rxjs/operators';
 
 import * as recentPostsActions from './recentPosts.actions';
 import { RecentPostsService } from './recentPosts.service';
-import { Post } from '../postsList/postsList.model';
+import { Post } from '../../../../shared/clients/api.model';
 
 @Injectable()
 export class RecentPostsEffects {

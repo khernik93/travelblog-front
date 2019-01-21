@@ -1,0 +1,19 @@
+@import "../../../../variables";
+
+.box {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: $lightgrey;
+}
+
+.box-inner {
+  margin: 0 auto;
+  background-color: $grey;
+  color: $lightgrey;
+  padding: 20px;
+  border: 1px solid $black;
+  border-radius: 5px;
+  box-shadow: 5px 10px $black;
+}

@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/content/content.module';
 import { RecentPostsComponent } from '../../../../src/modules/content/components/recentPosts/recentPosts.component';
@@ -22,7 +23,10 @@ describe('RecentPostsComponent', () => {
     store = SharedStubs.getMockStoreStub<ContentState>();
 
     TestBed.configureTestingModule({
-      imports: MODULE_IMPORTS,
+      imports: [
+        ...MODULE_IMPORTS,
+        RouterTestingModule
+      ],
       declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: Store, useValue: store  }

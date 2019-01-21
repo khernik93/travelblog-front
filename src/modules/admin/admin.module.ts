@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 import { AdminComponent } from './admin.component';
+import { AdminRoutingModule } from './routing/adminRouting.module';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent
@@ -10,7 +10,7 @@ export const MODULE_DECLARATIONS = [
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  RouterModule
+  AdminRoutingModule
 ];
 
 @NgModule({

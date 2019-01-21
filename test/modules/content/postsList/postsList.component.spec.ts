@@ -14,10 +14,6 @@ import { GetPosts } from '../../../../src/modules/content/components/postsList/p
 import postsListResponse from '../../../utils/responses/postsList.response';
 import { MockStore } from '../../../utils/mocks/mockStore';
 
-const TEST_ROUTES = [
-  { path: 'posts/:id', component: SinglePostComponent }
-];
-
 describe('PostsListComponent', () => {
 
   let store: MockStore<HeaderState | ContentState>;
@@ -32,7 +28,7 @@ describe('PostsListComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
-        RouterTestingModule.withRoutes(TEST_ROUTES)
+        RouterTestingModule
       ],
       declarations: MODULE_DECLARATIONS,
       providers: [

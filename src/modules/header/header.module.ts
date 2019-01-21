@@ -25,12 +25,16 @@ export const MODULE_IMPORTS = [
   CommonModule
 ];
 
+const STORE_IMPORTS = [
+  StoreModule.forFeature('header', headerReducers),
+  EffectsModule.forFeature(headerEffects)
+];
+
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
     ...MODULE_IMPORTS,
-    StoreModule.forFeature('header', headerReducers),
-    EffectsModule.forFeature(headerEffects)
+    ...STORE_IMPORTS
   ],
   exports: [HeaderComponent],
   providers: [

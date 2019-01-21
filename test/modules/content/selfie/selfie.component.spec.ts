@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/content/content.module';
 import { SelfieComponent } from '../../../../src/modules/content/components/selfie/selfie.component';
@@ -11,7 +12,10 @@ describe('SelfieComponent', () => {
   beforeEach(() => {
 
     TestBed.configureTestingModule({
-      imports: MODULE_IMPORTS,
+      imports: [
+        ...MODULE_IMPORTS,
+        RouterTestingModule
+      ],
       declarations: MODULE_DECLARATIONS
     }).compileComponents();
     

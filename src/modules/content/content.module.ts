@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { contentReducers } from './content.reducers';
 import { contentEffects } from './content.effects';
+
+import { ContentRoutingModule } from './routing/contentRouting.module';
 
 import { ContentComponent } from './content.component';
 import { PostsListComponent } from './components/postsList/postsList.component';
@@ -26,16 +27,24 @@ export const MODULE_DECLARATIONS = [
 ];
 
 export const MODULE_IMPORTS = [
-  CommonModule,
-  RouterModule
+  CommonModule
+];
+
+const ROUTING_MODULE_IMPORTS = [
+  ContentRoutingModule
+];
+
+const STORE_IMPORTS = [
+  StoreModule.forFeature('content', contentReducers),
+  EffectsModule.forFeature(contentEffects)
 ];
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
     ...MODULE_IMPORTS,
-    StoreModule.forFeature('content', contentReducers),
-    EffectsModule.forFeature(contentEffects)
+    ...ROUTING_MODULE_IMPORTS,
+    ...STORE_IMPORTS
   ],
   exports: [ContentComponent],
   providers: [

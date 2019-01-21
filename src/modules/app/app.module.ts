@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
-import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-
-import { appRouting } from './app.routing';
 
 import { syncReducers } from './app.reducers';
 import { AppComponent } from './app.component';
@@ -18,6 +15,8 @@ import { HeaderModule } from '../header/header.module';
 import { ContentModule } from '../content/content.module';
 import { FooterModule } from '../footer/footer.module';
 import { AdminModule } from '../admin/admin.module';
+import { AppRoutingModule } from './routing/appRouting.module';
+import { ContentRoutingModule } from '../content/routing/contentRouting.module';
 
 import { TransferHttpService } from '../../shared/services/transferHttp.service';
 import { ApiClient } from '../../shared/clients/api.client';
@@ -27,27 +26,44 @@ export const MODULE_DECLARATIONS = [
   NotificationComponent
 ];
 
+const LAYOUT_MODULE_DECLARATIONS = [
+  AppComponent,
+  LayoutComponent,
+  AdminLayoutComponent
+];
+
 export const MODULE_IMPORTS = [
   BrowserModule,
   HttpClientModule
 ];
 
+const ROOT_MODULE_IMPORTS = [
+  HeaderModule,
+  ContentModule,
+  FooterModule,
+  AdminModule
+];
+
+const ROUTING_MODULE_IMPORTS = [
+  AppRoutingModule,
+  ContentRoutingModule
+];
+
+const STORE_IMPORTS = [
+  StoreModule.forRoot(syncReducers),
+  EffectsModule.forRoot([])
+];
+
 @NgModule({
   declarations: [
     ...MODULE_DECLARATIONS,
-    AppComponent,
-    LayoutComponent,
-    AdminLayoutComponent
+    ...LAYOUT_MODULE_DECLARATIONS
   ],
   imports: [
     ...MODULE_IMPORTS,
-    HeaderModule,
-    ContentModule,
-    FooterModule,
-    AdminModule,
-    StoreModule.forRoot(syncReducers),
-    EffectsModule.forRoot([]),
-    RouterModule.forRoot(appRouting, {useHash: false})
+    ...ROOT_MODULE_IMPORTS,
+    ...ROUTING_MODULE_IMPORTS,
+    ...STORE_IMPORTS
   ],
   providers: [
     TransferHttpService,

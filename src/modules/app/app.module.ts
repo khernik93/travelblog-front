@@ -17,6 +17,8 @@ import { FooterModule } from '../footer/footer.module';
 import { AdminModule } from '../admin/admin.module';
 import { AppRoutingModule } from './routing/appRouting.module';
 import { ContentRoutingModule } from '../content/routing/contentRouting.module';
+import { AuthModule } from '../auth/auth.module';
+import { AuthRoutingModule } from '../auth/routing/authRouting.module';
 
 import { TransferHttpService } from '../../shared/services/transferHttp.service';
 import { ApiClient } from '../../shared/clients/api.client';
@@ -41,12 +43,14 @@ const ROOT_MODULE_IMPORTS = [
   HeaderModule,
   ContentModule,
   FooterModule,
-  AdminModule
+  AdminModule,
+  AuthModule
 ];
 
 const ROUTING_MODULE_IMPORTS = [
   AppRoutingModule,
-  ContentRoutingModule
+  ContentRoutingModule,
+  AuthRoutingModule
 ];
 
 const STORE_IMPORTS = [

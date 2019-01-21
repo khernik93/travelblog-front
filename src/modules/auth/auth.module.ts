@@ -1,25 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AdminComponent } from './admin.component';
+import { AuthComponent } from './auth.component';
+import { SignInComponent } from './components/signin/signin.component';
 
-import { AdminRoutingModule } from './routing/adminRouting.module';
+import { AuthRoutingModule } from './routing/authRouting.module';
 
 export const MODULE_DECLARATIONS = [
-  AdminComponent
+  AuthComponent,
+  SignInComponent
 ];
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  AdminRoutingModule
+  AuthRoutingModule
 ];
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: MODULE_IMPORTS,
-  exports: [AdminComponent],
+  exports: [AuthComponent],
   providers: []
 })
-export class AdminModule {
+export class AuthModule {
   constructor() { }
 }

@@ -7,9 +7,9 @@ import { environment } from '../../environments/environment';
 import { 
   PostsPaginable, 
   Tab, 
-  Photos, 
-  AuthToken,
-  Post
+  Photos,
+  Post,
+  ApiResponse
 } from './api.model';
 
 const ROUTES: any = {
@@ -28,33 +28,36 @@ export class ApiClient {
     private transferHttpService: TransferHttpService
   ) { }
 
-  getRecentPosts(): Observable<{error: string, data: Post[]}> {
+  getRecentPosts(): Observable<ApiResponse<Post[]>> {
     const url = this.prepareUrl(ROUTES.recentPosts);
     return this.transferHttpService.get(url);
   }
 
-  getPosts(tab: string): Observable<{error: string, data: PostsPaginable}> {
+  getPosts(tab: string): Observable<ApiResponse<PostsPaginable>> {
     const url = this.prepareUrl(ROUTES.posts);
     return this.transferHttpService.get(url, {params: {tab}});
   }
 
-  getPost(id: string): Observable<{error: string, data: Post}> {
+  getPost(id: string): Observable<ApiResponse<Post>> {
     const url = this.prepareUrl(ROUTES.post);
     return this.transferHttpService.get(`${url}/${id}`);
   }
 
-  getTabs(): Observable<{error: string, data: Tab[]}> {
+  getTabs(): Observable<ApiResponse<Tab[]>> {
     const url = this.prepareUrl(ROUTES.tabs);
     return this.transferHttpService.get(url);
   }
 
-  getPhotos(): Observable<{error: string, data: Photos}> {
+  getPhotos(): Observable<ApiResponse<Photos>> {
     const url = this.prepareUrl(ROUTES.photos);
     return this.transferHttpService.get(url);
   }
 
-  signIn(credentials: AuthCredentials): Observable<{error: string, data: AuthToken}> {
-    return this.transferHttpService.post(ROUTES.signIn, {credentials});
+  signIn(credentials: AuthCredentials): Observable<ApiResponse<void>> {
+    const url = this.prepareUrl(ROUTES.signIn);
+    return this.transferHttpService.post(url, {credentials}, {
+      withCredentials: true
+    });
   }
 
   /**

@@ -1,18 +1,18 @@
+// Global
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { headerReducers } from './header.reducers';
-import { headerEffects } from './header.effects';
+// Store
+import { headerReducers } from './store/header.reducers';
+import { headerEffects } from './store/header.effects';
 
+// Components
 import { HeaderComponent } from './header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SwiperComponent } from './components/swiper/swiper.component';
-
-import { MenuService } from './components/menu/menu.service';
-import { SwiperService } from './components/swiper/swiper.service';
 
 export const MODULE_DECLARATIONS = [
   HeaderComponent,
@@ -37,10 +37,7 @@ const STORE_IMPORTS = [
     ...STORE_IMPORTS
   ],
   exports: [HeaderComponent],
-  providers: [
-    MenuService,
-    SwiperService
-  ]
+  providers: []
 })
 export class HeaderModule {
   constructor() { }

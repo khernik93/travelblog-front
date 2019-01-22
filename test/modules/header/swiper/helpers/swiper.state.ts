@@ -1,16 +1,14 @@
-import photosResponse from '../../../../utils/responses/photos.response';
-import tabsResponse from '../../../../utils/responses/tabs.response';
+import { PhotosResponse } from '../../../../utils/responses/photos.response';
+import { TabsResponse } from '../../../../utils/responses/tabs.response';
 
-const swiperState: any = {
+export const SwiperState: any = {
   header: {
     menu: {
-      tabs: tabsResponse,
-      selectedTab: Object.keys(photosResponse)[0]
+      tabs: TabsResponse,
+      selectedTab: Object.keys(PhotosResponse)[0]
     },
     swiper: {
-      photos: photosResponse
+      photos: PhotosResponse
     }
   }
 };
-
-export default swiperState;

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { GetRecentPosts } from './recentPosts.actions';
-import { selectRecentPosts } from './recentPosts.selectors';
-import { ContentState } from '../../content.reducers';
+import { GetRecentPosts } from './store/recentPosts.actions';
+import { selectRecentPosts } from './store/recentPosts.selectors';
+import { ContentState } from '../../store/content.reducers';
 import { Post } from '../../../../shared/clients/api.model';
 
 @Component({

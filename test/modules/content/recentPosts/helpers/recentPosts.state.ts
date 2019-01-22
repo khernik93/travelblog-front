@@ -1,11 +1,9 @@
-import recentPostsResponse from '../../../../utils/responses/recentPosts.response';
+import { RecentPostsResponse } from '../../../../utils/responses/recentPosts.response';
 
-const recentPostsState: any = {
+export const RecentPostsState: any = {
   content: {
     recentPosts: {
-      recentPosts: recentPostsResponse
+      recentPosts: RecentPostsResponse
     }
   }
 };
-
-export default recentPostsState;

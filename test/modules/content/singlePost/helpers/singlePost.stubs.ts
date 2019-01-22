@@ -1,18 +1,12 @@
 import { of } from "rxjs";
-import singlePostResponse from '../../../../utils/responses/singlePost.response';
+import { SinglePostResponse } from '../../../../utils/responses/singlePost.response';
 
 export class SinglePostStubs {
 
   static getActivatedRoute() {
     return {
-      paramMap: of({get: () => singlePostResponse.id})
+      paramMap: of({get: () => SinglePostResponse.id})
     };
-  }
-
-  static getSinglePostService() {
-    return jasmine.createSpyObj('SinglePostService', {
-      getPost: of(singlePostResponse)
-    });
   }
 
 };

@@ -1,36 +1,40 @@
 import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
+import * as _ from 'lodash';
 
-import { MenuEffects } from '../../../../src/modules/header/components/menu/menu.effects';
-import { GetTabs, SetTabs } from '../../../../src/modules/header/components/menu/menu.actions';
-import tabsResponse from '../../../utils/responses/tabs.response';
+import { MenuEffects } from '../../../../src/modules/header/components/menu/store/menu.effects';
+import { GetTabs, SetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
+import { TabsResponse } from '../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
-import { MenuService } from '../../../../src/modules/header/components/menu/menu.service';
-import { MenuStubs } from './helpers/menu.stubs';
+import { ApiClient } from '../../../../src/shared/clients/api.client';
+import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 
 describe('MenuEffects', () => {
 
-  let menuService: jasmine.SpyObj<MenuService>;
+  let apiClient: jasmine.SpyObj<ApiClient>;
 
   let actions: TestActions;
   let effects: MenuEffects;
+  let ClonedTabsResponse: typeof TabsResponse;
 
   beforeEach(() => {
-
-    menuService = MenuStubs.getMenuService();
+    apiClient = SharedStubs.getApiClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         MenuEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: MenuService, useValue: menuService }
+        { provide: ApiClient, useValue: apiClient }
       ]
     });
 
     actions = TestBed.get(Actions);
     effects = TestBed.get(MenuEffects);
+  });
 
+  beforeEach(() => {
+    ClonedTabsResponse = _.cloneDeep(TabsResponse);
   });
 
   it('should be created', () => {
@@ -43,11 +47,11 @@ describe('MenuEffects', () => {
     AND SetTabs action should be dispatched with fetched tabs 
   `, () => {
     const action = new GetTabs();
-    const outcome = new SetTabs(tabsResponse);
+    const outcome = new SetTabs(ClonedTabsResponse);
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: tabsResponse });
+    const response = cold('-a|', { a: { data: ClonedTabsResponse } });
     const expected = cold('--b', { b: outcome });
-    menuService.getTabs.and.returnValue(response);
+    apiClient.getTabs.and.returnValue(response);
     expect(effects.getTabs$).toBeObservable(expected);
   });
 

@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
-import { Post } from '../postsList/postsList.model';
 import { ActivatedRoute } from '@angular/router';
-import { selectPost } from './singlePost.selectors';
-import { ContentState } from '../../content.reducers';
-import * as SinglePostActions from './singlePost.actions';
+import { selectPost } from './store/singlePost.selectors';
+import { ContentState } from '../../store/content.reducers';
+import * as SinglePostActions from './store/singlePost.actions';
+import { Post } from '../../../../shared/clients/api.model';
 
 @Component({
   selector: 'singlePost-component',

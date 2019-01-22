@@ -10,7 +10,6 @@ describe('SelfieComponent', () => {
   let fixture: ComponentFixture<SelfieComponent>;
   
   beforeEach(() => {
-
     TestBed.configureTestingModule({
       imports: [
         ...MODULE_IMPORTS,
@@ -18,7 +17,6 @@ describe('SelfieComponent', () => {
       ],
       declarations: MODULE_DECLARATIONS
     }).compileComponents();
-    
   });
 
   beforeEach(() => {

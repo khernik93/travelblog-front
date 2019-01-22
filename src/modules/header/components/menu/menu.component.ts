@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import * as MenuActions from './menu.actions';
-import { HeaderState } from '../../header.reducers';
-import { selectTabs, selectSelectedTab } from './menu.selectors';
+import * as MenuActions from './store/menu.actions';
+import { HeaderState } from '../../store/header.reducers';
+import { selectTabs, selectSelectedTab } from './store/menu.selectors';
 
 @Component({
   selector: 'menu-component',

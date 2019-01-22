@@ -1,72 +1,71 @@
 import { Injectable } from "@angular/core";
-import { catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 import { TransferHttpService } from '../services/transferHttp.service';
-import { AppState } from '../../modules/app/app.reducers';
-import { SetError } from '../../modules/app/components/notification/notification.actions';
+import { AuthCredentials } from '../../modules/auth/auth.model';
+import { environment } from '../../environments/environment';
+import { 
+  PostsPaginable, 
+  Tab, 
+  Photos,
+  Post,
+  ApiResponse
+} from './api.model';
 
-const urls = {
+const ROUTES: any = {
   posts: '/posts',
   recentPosts: '/recentPosts',
   post: '/post',
   tabs: '/countries',
-  swiperPhotos: '/swiperphotos'
+  photos: '/swiperphotos',
+  signIn: '/signin'
 };
 
 @Injectable()
 export class ApiClient {
 
   constructor(
-    private transferHttpService: TransferHttpService,
-    private store: Store<AppState>
+    private transferHttpService: TransferHttpService
   ) { }
 
-  getRecentPosts() {
-    return this.transferHttpService.get(urls.recentPosts);
+  getRecentPosts(): Observable<ApiResponse<Post[]>> {
+    const url = this.prepareUrl(ROUTES.recentPosts);
+    return this.transferHttpService.get(url);
   }
 
-  getPosts(tab: string) {
-    return this.transferHttpService.get(urls.posts, {
-      params: {tab}
-    })
-      .pipe(
-        catchError((response: any) => {
-          this.store.dispatch(new SetError({message: 'Couldnt load posts'}));
-          return of(response);
-        })
-      );
+  getPosts(tab: string): Observable<ApiResponse<PostsPaginable>> {
+    const url = this.prepareUrl(ROUTES.posts);
+    return this.transferHttpService.get(url, {params: {tab}});
   }
 
-  getPost(id: string) {
-    return this.transferHttpService.get(`${urls.post}/${id}`)
-      .pipe(
-        catchError((response: any) => {
-          this.store.dispatch(new SetError({message: 'Couldnt load the post'}));
-          return of(response);
-        })
-      );
+  getPost(id: string): Observable<ApiResponse<Post>> {
+    const url = this.prepareUrl(ROUTES.post);
+    return this.transferHttpService.get(`${url}/${id}`);
   }
 
-  getTabs() {
-    return this.transferHttpService.get(urls.tabs)
-      .pipe(
-        catchError((response: any) => {
-          this.store.dispatch(new SetError({message: 'Couldnt load tabs'}));
-          return of(response);
-        })
-      );
+  getTabs(): Observable<ApiResponse<Tab[]>> {
+    const url = this.prepareUrl(ROUTES.tabs);
+    return this.transferHttpService.get(url);
   }
 
-  getPhotos() {
-    return this.transferHttpService.get(urls.swiperPhotos)
-      .pipe(
-        catchError((response: any) => {
-          this.store.dispatch(new SetError({message: 'Couldnt load photos'}));
-          return of(response);
-        })
-      );
+  getPhotos(): Observable<ApiResponse<Photos>> {
+    const url = this.prepareUrl(ROUTES.photos);
+    return this.transferHttpService.get(url);
+  }
+
+  signIn(credentials: AuthCredentials): Observable<ApiResponse<void>> {
+    const url = this.prepareUrl(ROUTES.signIn);
+    return this.transferHttpService.post(url, {credentials}, {
+      withCredentials: true
+    });
+  }
+
+  /**
+   * Build absolute URL based on a path
+   * @param uri 
+   */
+  private prepareUrl(uri: string) {
+    return environment.baseUrl + uri;
   }
 
 }

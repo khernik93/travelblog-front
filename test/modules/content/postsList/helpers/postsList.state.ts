@@ -1,9 +1,9 @@
-import tabsResponse from '../../../../utils/responses/tabs.response';
-import postsListResponse from '../../../../utils/responses/postsList.response';
+import { TabsResponse } from '../../../../utils/responses/tabs.response';
+import { PostsListResponse } from '../../../../utils/responses/postsList.response';
 
-export const INITIALLY_SELECTED_TAB = tabsResponse[0];
+export const INITIALLY_SELECTED_TAB = TabsResponse[0];
 
-const postsListState: any = {
+export const PostsListState: any = {
   header: {
     menu: {
       selectedTab: INITIALLY_SELECTED_TAB
@@ -11,9 +11,7 @@ const postsListState: any = {
   },
   content: {
     postsList: {
-      posts: postsListResponse.content
+      posts: PostsListResponse.content
     }
   }
 };
-
-export default postsListState;

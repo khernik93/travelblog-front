@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
+import * as _ from 'lodash';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/app/app.module';
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
-import { AppState } from '../../../../src/modules/app/app.reducers';
+import { AppState } from '../../../../src/modules/app/store/app.reducers';
 import { NotificationComponent } from '../../../../src/modules/app/components/notification/notification.component';
-import notificationState from './helpers/notification.state';
-import * as notificationActions from '../../../../src/modules/app/components/notification/notification.actions';
+import { NotificationState } from './helpers/notification.state';
+import * as notificationActions from '../../../../src/modules/app/components/notification/store/notification.actions';
 
 describe('NotificationComponent', () => {
 
@@ -18,7 +19,6 @@ describe('NotificationComponent', () => {
   let fixture: ComponentFixture<NotificationComponent>;
 
   beforeEach(() => {
-
     store = SharedStubs.getMockStoreStub<AppState>();
 
     TestBed.configureTestingModule({
@@ -28,13 +28,12 @@ describe('NotificationComponent', () => {
         { provide: Store, useValue: store }
       ]
     }).compileComponents();
-
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationComponent);
     component = fixture.componentInstance;
-    store.setState(notificationState);
+    store.setState(_.cloneDeep(NotificationState));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });

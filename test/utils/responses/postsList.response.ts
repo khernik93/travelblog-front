@@ -1,6 +1,6 @@
-import { PostResponse } from '../../../src/modules/content/components/postsList/postsList.model';
+import { PostsPaginable } from '../../../src/shared/clients/api.model';
 
-const postsListResponse: PostResponse = {
+export const PostsListResponse: PostsPaginable = {
   "meta": {
     "total": 2, 
     "start": 0, 
@@ -14,5 +14,3 @@ const postsListResponse: PostResponse = {
     {"id": 2, "createdAt": "1234", "title": "test_title_2", "tags": ["tag2", "tag3"], "content": "test", "commentsCount": 3}
   ]
 };
-
-export default postsListResponse;

@@ -6,8 +6,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import * as authActions from './auth.actions';
-import { AuthService } from '../auth.service';
 import { AuthCredentials } from '../auth.model';
+import { ApiClient } from '../../../shared/clients/api.client';
 
 @Injectable()
 export class AuthEffects {
@@ -16,7 +16,7 @@ export class AuthEffects {
     private actions$: Actions,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private apiClient: ApiClient
   ) { }
 
   @Effect()
@@ -24,7 +24,7 @@ export class AuthEffects {
     .pipe(
       ofType(authActions.AuthActionTypes.TryToSignIn),
       switchMap((action: {credentials: AuthCredentials}) => {
-        return this.authService.signIn(action.credentials)
+        return this.apiClient.signIn(action.credentials)
           .pipe(
             catchError((httpErrorResponse: HttpErrorResponse) => {
               return this.handleSignInError(httpErrorResponse);

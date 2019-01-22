@@ -1,18 +1,20 @@
+// Global
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
-import { authReducer } from './auth.reducer';
+// Store
+import { authReducer } from './store/auth.reducer';
 import { AuthEffects } from './store/auth.effects';
 
+// Components
 import { AuthComponent } from './auth.component';
 import { SignInComponent } from './components/signIn/signIn.component';
 
+// Modules
 import { AuthRoutingModule } from './routing/authRouting.module';
-
-import { AuthService } from './auth.service';
 
 export const MODULE_DECLARATIONS = [
   AuthComponent,
@@ -37,9 +39,7 @@ const STORE_IMPORTS = [
     ...STORE_IMPORTS
   ],
   exports: [AuthComponent],
-  providers: [
-    AuthService
-  ]
+  providers: []
 })
 export class AuthModule {
   constructor() { }

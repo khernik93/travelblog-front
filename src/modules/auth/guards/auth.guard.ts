@@ -6,9 +6,11 @@ import {
   RouterStateSnapshot 
 } from '@angular/router';
 
-import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AuthState } from '../store/auth.reducer';
+import { selectIsAuthenticated } from '../store/auth.selectors';
 
 const FALLBACK_URI = '/auth';
 
@@ -17,11 +19,11 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private store: Store<AuthState>
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.authService.isAuthenticated()
+    return this.isAuthenticated()
       .pipe(
         map((isAuthenticated: boolean) => {
           if (isAuthenticated) {
@@ -34,4 +36,8 @@ export class AuthGuard implements CanActivate {
       );
   }
 
+  private isAuthenticated() {
+    return this.store.select(selectIsAuthenticated);
+  }
+  
 }

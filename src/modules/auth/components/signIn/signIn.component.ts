@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AuthState } from '../../auth.reducer';
+
 import { TryToSignIn } from '../../store/auth.actions';
 import { AuthCredentials } from '../../auth.model';
+import { AuthState } from '../../store/auth.reducer';
 
 @Component({
   selector: 'signIn-component',

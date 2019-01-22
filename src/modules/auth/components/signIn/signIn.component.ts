@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { AuthState } from '../../auth.reducer';
+import { TryToSignIn } from '../../store/auth.actions';
+import { AuthCredentials } from '../../auth.model';
 
 @Component({
   selector: 'signIn-component',
@@ -13,12 +17,14 @@ export class SignInComponent {
     password: new FormControl('')
   });
 
-  constructor() { }
+  constructor(
+    private store: Store<AuthState>
+  ) { }
 
   signIn() {
     const signInForm = this.signInForm.value;
-    const email = signInForm.email;
-    const password = signInForm.password;
+    const credentials: AuthCredentials = signInForm;
+    this.store.dispatch(new TryToSignIn(credentials));
   }
 
 }

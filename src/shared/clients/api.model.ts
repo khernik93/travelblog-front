@@ -1,3 +1,8 @@
+export type ApiResponse<T> = {
+  error: string;
+  data: T;
+};
+
 export type Meta = {
   total: number,
   start: number,
@@ -21,5 +26,3 @@ export type PostsPaginable = {
 export type Tab = string;
 
 export type Photos = Map<Tab, string[]>;
-
-export type AuthToken = string;

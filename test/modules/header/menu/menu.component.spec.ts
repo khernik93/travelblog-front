@@ -1,16 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
+import * as _ from 'lodash';
 
 import { MenuComponent } from '../../../../src/modules/header/components/menu/menu.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/header/header.module';
-import TabsResponse from '../../../utils/responses/tabs.response';
+import { TabsResponse } from '../../../utils/responses/tabs.response';
 import { CssHelper } from '../../../utils/helpers/css';
-import { HeaderState } from '../../../../src/modules/header/header.reducers';
+import { HeaderState } from '../../../../src/modules/header/store/header.reducers';
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
-import menuState from './helpers/menu.state';
-import { SelectTab } from '../../../../src/modules/header/components/menu/menu.actions';
+import { MenuState } from './helpers/menu.state';
+import { SelectTab } from '../../../../src/modules/header/components/menu/store/menu.actions';
 
 describe('MenuComponent', () => {
 
@@ -20,7 +21,6 @@ describe('MenuComponent', () => {
   let fixture: ComponentFixture<MenuComponent>;
 
   beforeEach(() => {
-
     store = SharedStubs.getMockStoreStub<HeaderState>();
 
     TestBed.configureTestingModule({
@@ -30,13 +30,12 @@ describe('MenuComponent', () => {
         { provide: Store, useValue: store }
       ]
     }).compileComponents();
-
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
-    store.setState(menuState);
+    store.setState(_.cloneDeep(MenuState));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
@@ -68,7 +67,7 @@ describe('MenuComponent', () => {
     const secondTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(2)');
     secondTab.click();
     fixture.detectChanges();
-    expect(store.dispatch).toHaveBeenCalledWith(new SelectTab(menuState.header.menu.tabs[1]));
+    expect(store.dispatch).toHaveBeenCalledWith(new SelectTab(MenuState.header.menu.tabs[1]));
   });
 
   it(`

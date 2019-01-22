@@ -1,22 +1,22 @@
+// Global
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { contentReducers } from './content.reducers';
-import { contentEffects } from './content.effects';
+// Store
+import { contentReducers } from './store/content.reducers';
+import { contentEffects } from './store/content.effects';
 
+//Routing
 import { ContentRoutingModule } from './routing/contentRouting.module';
 
+// Components
 import { ContentComponent } from './content.component';
 import { PostsListComponent } from './components/postsList/postsList.component';
 import { RecentPostsComponent } from './components/recentPosts/recentPosts.component';
 import { SelfieComponent } from './components/selfie/selfie.component';
 import { SinglePostComponent } from './components/singlePost/singlePost.component';
-
-import { PostsListService } from './components/postsList/postsList.service';
-import { RecentPostsService } from './components/recentPosts/recentPosts.service';
-import { SinglePostService } from './components/singlePost/singlePost.service';
 
 export const MODULE_DECLARATIONS = [
   ContentComponent,
@@ -47,11 +47,7 @@ const STORE_IMPORTS = [
     ...STORE_IMPORTS
   ],
   exports: [ContentComponent],
-  providers: [
-    PostsListService,
-    RecentPostsService,
-    SinglePostService
-  ]
+  providers: []
 })
 export class ContentModule {
   constructor() { }

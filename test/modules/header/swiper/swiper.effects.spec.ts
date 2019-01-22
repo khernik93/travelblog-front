@@ -1,36 +1,40 @@
 import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
+import * as _ from 'lodash';
 
-import { SwiperEffects } from '../../../../src/modules/header/components/swiper/swiper.effects';
-import { GetPhotos, SetPhotos } from '../../../../src/modules/header/components/swiper/swiper.actions';
+import { SwiperEffects } from '../../../../src/modules/header/components/swiper/store/swiper.effects';
+import { GetPhotos, SetPhotos } from '../../../../src/modules/header/components/swiper/store/swiper.actions';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
-import { SwiperService } from '../../../../src/modules/header/components/swiper/swiper.service';
-import { SwiperStubs } from './helpers/swiper.stubs';
-import photosResponse from '../../../utils/responses/photos.response';
+import { PhotosResponse } from '../../../utils/responses/photos.response';
+import { SharedStubs } from '../../../utils/stubs/sharedStubs';
+import { ApiClient } from '../../../../src/shared/clients/api.client';
 
 describe('SwiperEffects', () => {
 
-  let swiperService: jasmine.SpyObj<SwiperService>;
+  let apiClient: jasmine.SpyObj<ApiClient>;
 
   let actions: TestActions;
   let effects: SwiperEffects;
+  let ClonedPhotosResponse: typeof PhotosResponse;
 
   beforeEach(() => {
-
-    swiperService = SwiperStubs.getSwiperService();
+    apiClient = SharedStubs.getApiClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         SwiperEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: SwiperService, useValue: swiperService }
+        { provide: ApiClient, useValue: apiClient }
       ]
     });
 
     actions = TestBed.get(Actions);
     effects = TestBed.get(SwiperEffects);
+  });
 
+  beforeEach(() => {
+    ClonedPhotosResponse = _.cloneDeep(PhotosResponse);
   });
 
   it('should be created', () => {
@@ -43,11 +47,11 @@ describe('SwiperEffects', () => {
     AND SetPhotos action should be dispatched with fetched photos
   `, () => {
     const action = new GetPhotos();
-    const outcome = new SetPhotos(photosResponse);
+    const outcome = new SetPhotos(ClonedPhotosResponse);
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: photosResponse });
+    const response = cold('-a|', { a: { data: ClonedPhotosResponse } });
     const expected = cold('--b', { b: outcome });
-    swiperService.getPhotos.and.returnValue(response);
+    apiClient.getPhotos.and.returnValue(response);
     expect(effects.getPhotos$).toBeObservable(expected);
   });
 

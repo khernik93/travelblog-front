@@ -1,16 +1,21 @@
+// Global
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
-import { syncReducers } from './app.reducers';
+// Store
+import { syncReducers } from './store/app.reducers';
+
+// Components
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { AdminLayoutComponent } from './components/adminLayout/adminLayout.component';
 import { NotFoundComponent } from './components/notFound/notFound.component';
 import { NotificationComponent } from './components/notification/notification.component';
 
+// Modules
 import { HeaderModule } from '../header/header.module';
 import { ContentModule } from '../content/content.module';
 import { FooterModule } from '../footer/footer.module';
@@ -20,8 +25,10 @@ import { ContentRoutingModule } from '../content/routing/contentRouting.module';
 import { AuthModule } from '../auth/auth.module';
 import { AuthRoutingModule } from '../auth/routing/authRouting.module';
 
+// Providers
 import { TransferHttpService } from '../../shared/services/transferHttp.service';
 import { ApiClient } from '../../shared/clients/api.client';
+import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 export const MODULE_DECLARATIONS = [
   NotFoundComponent,
@@ -71,7 +78,8 @@ const STORE_IMPORTS = [
   ],
   providers: [
     TransferHttpService,
-    ApiClient
+    ApiClient,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   exports: [AppComponent]

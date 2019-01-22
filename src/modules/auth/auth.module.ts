@@ -5,12 +5,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { authReducer } from './auth.reducer';
-//import { authEffects } from './auth.effects';
+import { AuthEffects } from './store/auth.effects';
 
 import { AuthComponent } from './auth.component';
 import { SignInComponent } from './components/signIn/signIn.component';
 
 import { AuthRoutingModule } from './routing/authRouting.module';
+
+import { AuthService } from './auth.service';
 
 export const MODULE_DECLARATIONS = [
   AuthComponent,
@@ -25,7 +27,7 @@ export const MODULE_IMPORTS = [
 
 const STORE_IMPORTS = [
   StoreModule.forFeature('auth', authReducer),
-  //EffectsModule.forFeature([authEffects])
+  EffectsModule.forFeature([AuthEffects])
 ];
 
 @NgModule({
@@ -35,7 +37,9 @@ const STORE_IMPORTS = [
     ...STORE_IMPORTS
   ],
   exports: [AuthComponent],
-  providers: []
+  providers: [
+    AuthService
+  ]
 })
 export class AuthModule {
   constructor() { }

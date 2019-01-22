@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { AppState } from '../../app.reducers';
+import { AppState } from '../../store/app.reducers';
 import { Notification } from './notification.model';
-import { selectNotifications } from './notification.selectors';
-import { CloseNotification } from './notification.actions';
+import { selectNotifications } from './store/notification.selectors';
+import { CloseNotification } from './store/notification.actions';
 import { fadeToggle } from '../../../../shared/animations';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'notification-component',
@@ -26,6 +27,15 @@ export class NotificationComponent {
 
   closeNotification(index: number): void {
     this.store.dispatch(new CloseNotification(index));
+  }
+
+  areNotificationsActive(): Observable<boolean> {
+    return this.notifications$
+      .pipe(
+        map((notifications: Notification[]) => {
+          return !!(notifications && notifications.length);
+        })
+      );
   }
 
 }

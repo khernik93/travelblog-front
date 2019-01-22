@@ -1,36 +1,40 @@
 import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
+import * as _ from 'lodash';
 
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
-import { RecentPostsStubs } from './helpers/recentPosts.stubs';
-import recentPostsResponse from '../../../utils/responses/recentPosts.response';
-import { SetRecentPosts, GetRecentPosts } from '../../../../src/modules/content/components/recentPosts/recentPosts.actions';
-import { RecentPostsService } from '../../../../src/modules/content/components/recentPosts/recentPosts.service';
-import { RecentPostsEffects } from '../../../../src/modules/content/components/recentPosts/recentPosts.effects';
+import { RecentPostsResponse } from '../../../utils/responses/recentPosts.response';
+import { SetRecentPosts, GetRecentPosts } from '../../../../src/modules/content/components/recentPosts/store/recentPosts.actions';
+import { RecentPostsEffects } from '../../../../src/modules/content/components/recentPosts/store/recentPosts.effects';
+import { ApiClient } from '../../../../src/shared/clients/api.client';
+import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 
 describe('RecentPostsEffects', () => {
 
-  let recentPostsService: jasmine.SpyObj<RecentPostsService>;
+  let apiClient: jasmine.SpyObj<ApiClient>;
 
   let actions: TestActions;
   let effects: RecentPostsEffects;
+  let ClonedRecentPostsResponse: typeof RecentPostsResponse;
 
   beforeEach(() => {
-
-    recentPostsService = RecentPostsStubs.getRecentPostsService();
+    apiClient = SharedStubs.getApiClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         RecentPostsEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: RecentPostsService, useValue: recentPostsService }
+        { provide: ApiClient, useValue: apiClient }
       ]
     });
 
     actions = TestBed.get(Actions);
     effects = TestBed.get(RecentPostsEffects);
+  });
 
+  beforeEach(() => {
+    ClonedRecentPostsResponse = _.cloneDeep(RecentPostsResponse);
   });
 
   it('should be created', () => {
@@ -43,11 +47,11 @@ describe('RecentPostsEffects', () => {
     AND SetRecentPosts action should be dispatched with fetched recent posts
   `, () => {
     const action = new GetRecentPosts();
-    const outcome = new SetRecentPosts(recentPostsResponse);
+    const outcome = new SetRecentPosts(ClonedRecentPostsResponse);
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: recentPostsResponse });
+    const response = cold('-a|', { a: { data: ClonedRecentPostsResponse }});
     const expected = cold('--b', { b: outcome });
-    recentPostsService.getRecentPosts.and.returnValue(response);
+    apiClient.getRecentPosts.and.returnValue(response);
     expect(effects.getRecentPosts$).toBeObservable(expected);
   });
 

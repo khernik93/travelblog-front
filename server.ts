@@ -1,33 +1,35 @@
 "use strict";
 const express = require('express'),
-  path = require('path');
+  path = require('path'),
+  cors = require('cors');
 
 const app = express();
 
 app.all('/*', function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Origin", "http://127.0.0.1:3000");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type,Set-Cookie");
   res.header("Content-Type", "application/json");
   next();
 });
 
 app.get('/countries', (request, response) => {
-  response.send(
+  response.send({error: "", data:
     [
       'China',
       'Vietnam',
       'Cambodia',
       'Thailand',
       'Myanmar'
-    ]
+    ]}
   )
 });
 
 app.get('/swiperphotos', (request, response) => {
-  response.send({
+  response.send({error: "", data: {
     'China': ['http://localhost:3000/images/rot1.jpg', 'http://localhost:3000/images/rot2.jpg'],
     'Vietnam': ['http://localhost:3000/images/rot3.jpg'],
-  });
+  }});
 });
 
 app.get('/posts', (request, response) => {
@@ -68,7 +70,7 @@ app.get('/posts', (request, response) => {
       ]
     };
   };
-  response.send(output);
+  response.send({error: "", data: output});
 });
 
 app.get('/recentPosts', (request, response) => {
@@ -90,7 +92,7 @@ app.get('/recentPosts', (request, response) => {
       commentsCount: 3
     }
   ];
-  response.send(output);
+  response.send({error: "", data: output});
 });
 
 app.get('/post/:id', (request, response) => {
@@ -104,7 +106,16 @@ app.get('/post/:id', (request, response) => {
       commentsCount: 3
     }
   ;
-  response.send(output);
+  response.send({error: "", data: output});
+});
+
+app.post('/signIn', (request, response) => {
+  const options = {
+    maxAge: 1000 * 60 * 60,
+    httpOnly: false
+  }
+  //response.cookie('SESSIONID', 'some-strange-random-cookie-here', options);
+  response.status(200).send({error: "Credentials invalid", data: "aaa"});
 });
 
 app.listen(3001, () => {

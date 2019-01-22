@@ -1,6 +1,6 @@
 import { NotificationType } from '../../../../../src/modules/app/components/notification/notification.model';
 
-const notificationState: any = {
+export const NotificationState: any = {
   notification: {
     notifications: [
       {
@@ -18,5 +18,3 @@ const notificationState: any = {
     ]
   }
 };
-
-export default notificationState;

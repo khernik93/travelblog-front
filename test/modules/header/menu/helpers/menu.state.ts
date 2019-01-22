@@ -1,12 +1,10 @@
-import tabsResponse from '../../../../utils/responses/tabs.response';
+import { TabsResponse } from '../../../../utils/responses/tabs.response';
 
-const menuState: any = {
+export const MenuState: any = {
   header: {
     menu: {
-      selectedTab: tabsResponse[0],
-      tabs: tabsResponse
+      selectedTab: TabsResponse[0],
+      tabs: TabsResponse
     }
   }
 };
-
-export default menuState;

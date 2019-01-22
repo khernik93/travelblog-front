@@ -3,16 +3,17 @@ import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
+import * as _ from 'lodash';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/content/content.module';
 import { SinglePostComponent } from '../../../../src/modules/content/components/singlePost/singlePost.component';
-import { SinglePostStubs } from './helpers/singlePost.stubs';
-import { ContentState } from '../../../../src/modules/content/content.reducers';
+import { ContentState } from '../../../../src/modules/content/store/content.reducers';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../utils/mocks/mockStore';
-import singlePostState from './helpers/singlePost.state';
-import { GetPost } from '../../../../src/modules/content/components/singlePost/singlePost.actions';
-import singlePostResponse from '../../../utils/responses/singlePost.response';
+import { SinglePostState } from './helpers/singlePost.state';
+import { GetPost } from '../../../../src/modules/content/components/singlePost/store/singlePost.actions';
+import { SinglePostResponse } from '../../../utils/responses/singlePost.response';
+import { SinglePostStubs } from './helpers/singlePost.stubs';
 
 describe('SinglePostComponent', () => {
 
@@ -21,9 +22,9 @@ describe('SinglePostComponent', () => {
 
   let component: SinglePostComponent;
   let fixture: ComponentFixture<SinglePostComponent>;
+  let ClonedSinglePostResponse: typeof SinglePostResponse;
   
   beforeEach(() => {
-
     store = SharedStubs.getMockStoreStub<ContentState>();
     activatedRoute = SinglePostStubs.getActivatedRoute();
 
@@ -38,14 +39,18 @@ describe('SinglePostComponent', () => {
         { provide: ActivatedRoute, useValue: activatedRoute }
       ]
     }).compileComponents();
-
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SinglePostComponent);
     component = fixture.componentInstance;
-    store.setState(singlePostState);
+    store.setState(_.cloneDeep(SinglePostState));
     spyOn(store, 'dispatch').and.callThrough();
+    fixture.detectChanges();
+  });
+
+  beforeEach(() => {
+    ClonedSinglePostResponse = _.cloneDeep(SinglePostResponse);
   });
 
   it('should check if the component is defined', () => {
@@ -56,17 +61,14 @@ describe('SinglePostComponent', () => {
     WHEN the component is loaded
     THEN getPost action should be dispatched with initial route post id
   `, () => {
-    fixture.detectChanges();
     expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(store.dispatch).toHaveBeenCalledWith(new GetPost(singlePostResponse.id.toString()));
+    expect(store.dispatch).toHaveBeenCalledWith(new GetPost(ClonedSinglePostResponse.id.toString()));
   });
 
   it(`
     WHEN the component is loaded
     THEN post should be displayed
   `, () => {
-    fixture.detectChanges();
-    
     // Assure posts count
     const postWraps = fixture.debugElement.queryAll(By.css('.post-wrap'));
     expect(postWraps.length).toEqual(1);

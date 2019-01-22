@@ -3,11 +3,11 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeWhile, filter } from 'rxjs/operators';
 
-import * as PostsListActions from './postsList.actions';
-import { ContentState } from '../../content.reducers';
-import { selectSelectedTab } from '../../../header/components/menu/menu.selectors';
-import { HeaderState } from '../../../header/header.reducers';
-import { selectPosts } from './postsList.selectors';
+import * as PostsListActions from './store/postsList.actions';
+import { ContentState } from '../../store/content.reducers';
+import { selectSelectedTab } from '../../../header/components/menu/store/menu.selectors';
+import { HeaderState } from '../../../header/store/header.reducers';
+import { selectPosts } from './store/postsList.selectors';
 import { Post, Tab } from '../../../../shared/clients/api.model';
 
 @Component({

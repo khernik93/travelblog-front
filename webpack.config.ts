@@ -78,7 +78,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
       disableDotRule: true,
     },
     stats: 'minimal',
-    host: '0.0.0.0',
+    host: '127.0.0.1',
     watchOptions: {
       poll: undefined,
       aggregateTimeout: 300,

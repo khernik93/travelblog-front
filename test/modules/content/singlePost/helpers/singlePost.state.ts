@@ -1,11 +1,9 @@
-import singlePostResponse from '../../../../utils/responses/singlePost.response';
+import { SinglePostResponse } from '../../../../utils/responses/singlePost.response';
 
-const singlePostState: any = {
+export const SinglePostState: any = {
   content: {
     singlePost: {
-      post: singlePostResponse
+      post: SinglePostResponse
     }
   }
 };
-
-export default singlePostState;

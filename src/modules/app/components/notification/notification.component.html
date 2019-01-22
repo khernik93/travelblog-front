@@ -1,4 +1,4 @@
-<div class="notification-container" *ngIf="(notifications$ | async) && (notifications$ | async).length">
+<div class="notification-container" *ngIf="areNotificationsActive() | async">
   <div class="notification"
        *ngFor="let notification of (notifications$ | async); let i = index"
        [style.background-color]="notification.type">

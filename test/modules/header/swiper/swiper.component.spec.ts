@@ -2,13 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core';
+import * as _ from 'lodash';
 
 import { SwiperComponent } from '../../../../src/modules/header/components/swiper/swiper.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/header/header.module';
-import { HeaderState } from '../../../../src/modules/header/header.reducers';
+import { HeaderState } from '../../../../src/modules/header/store/header.reducers';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../utils/mocks/mockStore';
-import swiperState from '../swiper/helpers/swiper.state';
+import { SwiperState } from '../swiper/helpers/swiper.state';
 
 describe('SwiperComponent', () => {
 
@@ -35,8 +36,9 @@ describe('SwiperComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SwiperComponent);
     component = fixture.componentInstance;
-    store.setState(swiperState);
+    store.setState(_.cloneDeep(SwiperState));
     spyOn(store, 'dispatch').and.callThrough();
+    fixture.detectChanges();
   });
 
   it('should check if the component is defined', () => {
@@ -47,7 +49,6 @@ describe('SwiperComponent', () => {
     WHEN a tab is selected
     THEN its photos should be visible
   `, () => {
-    fixture.detectChanges();
     const images = fixture.debugElement.queryAll(By.css('.swiper-wrapper img'));
     expect(images.length).toBe(2);
   });

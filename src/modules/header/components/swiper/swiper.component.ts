@@ -4,10 +4,10 @@ import { Observable, combineLatest } from 'rxjs';
 import { takeWhile, filter } from 'rxjs/operators';
 import Swiper from 'swiper';
 
-import * as SwiperActions from './swiper.actions';
-import { HeaderState } from '../../header.reducers';
-import { selectPhotos } from './swiper.selectors';
-import { selectSelectedTab } from '../menu/menu.selectors';
+import * as SwiperActions from './store/swiper.actions';
+import { HeaderState } from '../../store/header.reducers';
+import { selectPhotos } from './store/swiper.selectors';
+import { selectSelectedTab } from '../menu/store/menu.selectors';
 
 const swiperSettings = {
   wrapper: '.swiper-container',

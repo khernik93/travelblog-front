@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import * as singlePostActions from '../../../../src/modules/content/components/singlePost/store/singlePost.actions';
 import { singlePostReducer, initialState } from '../../../../src/modules/content/components/singlePost/store/singlePost.reducer';
@@ -9,7 +9,7 @@ describe('SinglePostReducer', () => {
   let ClonedSinglePostResponse: typeof SinglePostResponse;
 
   beforeEach(() => {
-    ClonedSinglePostResponse = _.cloneDeep(SinglePostResponse);
+    ClonedSinglePostResponse = cloneDeep(SinglePostResponse);
   });
 
   it(`

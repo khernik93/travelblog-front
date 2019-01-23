@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/content/content.module';
 import { PostsListComponent } from '../../../../src/modules/content/components/postsList/postsList.component';
@@ -40,13 +40,13 @@ describe('PostsListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PostsListComponent);
     component = fixture.componentInstance;
-    store.setState(_.cloneDeep(PostsListState));
+    store.setState(cloneDeep(PostsListState));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
 
   beforeEach(() =>{
-    ClonedPostsListResponse = _.cloneDeep(PostsListResponse);
+    ClonedPostsListResponse = cloneDeep(PostsListResponse);
   })
 
   it('should check if the component is defined', () => {

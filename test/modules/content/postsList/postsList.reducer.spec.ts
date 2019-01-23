@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import * as postsListActions from '../../../../src/modules/content/components/postsList/store/postsList.actions';
 import { postsListReducer, initialState } from '../../../../src/modules/content/components/postsList/store/postsList.reducer';
@@ -9,7 +9,7 @@ describe('PostsListReducer', () => {
   let ClonedPostsListResponse: typeof PostsListResponse;
 
   beforeEach(() => {
-    ClonedPostsListResponse = _.cloneDeep(PostsListResponse);
+    ClonedPostsListResponse = cloneDeep(PostsListResponse);
   });
 
   it(`

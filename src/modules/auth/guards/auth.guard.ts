@@ -12,9 +12,9 @@ import { Store } from '@ngrx/store';
 import { AuthState } from '../store/auth.reducer';
 import { selectIsAuthenticated } from '../store/auth.selectors';
 
-const FALLBACK_URI = '/auth';
+const AUTH_PATH = '/auth';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class AuthGuard implements CanActivate {
 
   constructor(
@@ -23,21 +23,20 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.isAuthenticated()
+    return this.store.select(selectIsAuthenticated)
       .pipe(
         map((isAuthenticated: boolean) => {
           if (isAuthenticated) {
             return true;
           }
-
-          this.router.navigate([FALLBACK_URI], { queryParams: { returnUrl: state.url } });
+          this.navigateToAuthPage(state);
           return false;
         })
       );
   }
 
-  private isAuthenticated() {
-    return this.store.select(selectIsAuthenticated);
+  private navigateToAuthPage(state: RouterStateSnapshot) {
+    this.router.navigate([AUTH_PATH], { queryParams: { returnUrl: state.url } });
   }
   
 }

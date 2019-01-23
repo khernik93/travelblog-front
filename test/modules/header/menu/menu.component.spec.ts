@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { MenuComponent } from '../../../../src/modules/header/components/menu/menu.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/header/header.module';
@@ -35,7 +35,7 @@ describe('MenuComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
-    store.setState(_.cloneDeep(MenuState));
+    store.setState(cloneDeep(MenuState));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });

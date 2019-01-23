@@ -16,6 +16,9 @@ import { SignInComponent } from './components/signIn/signIn.component';
 // Modules
 import { AuthRoutingModule } from './routing/authRouting.module';
 
+// Providers
+import { AuthGuard } from './guards/auth.guard';
+
 export const MODULE_DECLARATIONS = [
   AuthComponent,
   SignInComponent
@@ -39,7 +42,9 @@ const STORE_IMPORTS = [
     ...STORE_IMPORTS
   ],
   exports: [AuthComponent],
-  providers: []
+  providers: [
+    AuthGuard
+  ]
 })
 export class AuthModule {
   constructor() { }

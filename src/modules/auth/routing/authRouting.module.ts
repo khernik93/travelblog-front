@@ -3,13 +3,15 @@ import { NgModule } from '@angular/core';
 
 import { AuthComponent } from '../auth.component';
 import { SignInComponent } from '../components/signIn/signIn.component';
+import { AuthReversedGuard } from '../guards/authReversed.guard';
 
 export const routes: Routes = [
   { 
     path: 'auth',
     component: AuthComponent,
+    canActivate: [AuthReversedGuard],
     children: [
-      { path: '', component: SignInComponent }
+      { path: '', component: SignInComponent,  }
     ]
   }
 ];

@@ -43,7 +43,7 @@ describe('RecentPostsEffects', () => {
 
   it(`
     WHEN GetRecentPosts action is dispatched
-    THEN recentPostsSerivce.getRecentPosts method should be executed
+    THEN apiClient.getRecentPosts method should be executed
     AND SetRecentPosts action should be dispatched with fetched recent posts
   `, () => {
     const action = new GetRecentPosts();

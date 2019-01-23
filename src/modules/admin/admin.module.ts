@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AdminComponent } from './admin.component';
+import { SignOutComponent } from '../auth/components/signOut/signOut.component';
 
 import { AdminRoutingModule } from './routing/adminRouting.module';
 
 export const MODULE_DECLARATIONS = [
-  AdminComponent
+  AdminComponent,
+  SignOutComponent
 ];
 
 export const MODULE_IMPORTS = [

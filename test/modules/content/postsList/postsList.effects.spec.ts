@@ -46,7 +46,7 @@ describe('PostsListEffects', () => {
 
   it(`
     WHEN GetPosts action is dispatched
-    THEN postsListSerivce.getPosts method should be executed
+    THEN apiClient.getPosts method should be executed
     AND SetPosts action should be dispatched with fetched posts
   `, () => {
     const selectedTab = ClonedTabsResponse[0];

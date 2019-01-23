@@ -1,7 +1,7 @@
 import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { RecentPostsResponse } from '../../../utils/responses/recentPosts.response';
@@ -34,7 +34,7 @@ describe('RecentPostsEffects', () => {
   });
 
   beforeEach(() => {
-    ClonedRecentPostsResponse = _.cloneDeep(RecentPostsResponse);
+    ClonedRecentPostsResponse = cloneDeep(RecentPostsResponse);
   });
 
   it('should be created', () => {

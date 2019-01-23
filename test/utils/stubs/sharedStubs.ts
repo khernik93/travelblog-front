@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { of } from 'rxjs';
 
 import { MockStore } from '../mocks/mockStore';

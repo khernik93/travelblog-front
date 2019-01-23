@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import * as menuActions from '../../../../src/modules/header/components/menu/store/menu.actions';
 import { menuReducer, initialState } from '../../../../src/modules/header/components/menu/store/menu.reducer';
@@ -9,7 +9,7 @@ describe('MenuReducer', () => {
   let ClonedTabsResponse: typeof TabsResponse;
 
   beforeEach(() => {
-    ClonedTabsResponse = _.cloneDeep(TabsResponse);
+    ClonedTabsResponse = cloneDeep(TabsResponse);
   });
 
   it(`

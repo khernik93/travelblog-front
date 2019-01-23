@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/app/app.module';
 import { MockStore } from '../../../utils/mocks/mockStore';
@@ -33,7 +33,7 @@ describe('NotificationComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationComponent);
     component = fixture.componentInstance;
-    store.setState(_.cloneDeep(NotificationState));
+    store.setState(cloneDeep(NotificationState));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });

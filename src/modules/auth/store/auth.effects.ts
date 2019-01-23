@@ -1,23 +1,19 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { switchMap, catchError, tap } from 'rxjs/operators';
+import { switchMap, catchError, map, tap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Store } from '@ngrx/store';
 
 import * as authActions from './auth.actions';
 import { AuthCredentials } from '../auth.model';
 import { ApiClient } from '../../../shared/clients/api.client';
+import { AppState } from '../../app/store/app.reducers';
+import { SetError } from '../../app/components/notification/store/notification.actions';
 
 @Injectable()
 export class AuthEffects {
-
-  constructor(
-    private actions$: Actions,
-    private route: ActivatedRoute,
-    private router: Router,
-    private apiClient: ApiClient
-  ) { }
 
   @Effect()
   tryToSignIn$: Observable<any> = this.actions$
@@ -26,32 +22,26 @@ export class AuthEffects {
       switchMap((action: {credentials: AuthCredentials}) => {
         return this.apiClient.signIn(action.credentials)
           .pipe(
-            catchError((httpErrorResponse: HttpErrorResponse) => {
-              return this.handleSignInError(httpErrorResponse);
+            map(() => new authActions.SignIn()),
+            tap(() => {
+              this.router.navigateByUrl(this.route.snapshot.queryParams['returnUrl'] || '/');
             }),
-            tap(() => new authActions.SignIn()),
-            tap(() => this.redirectToReturnUrl())
+            catchError((error: HttpErrorResponse) => {
+              if (error.status === 400) {
+                this.store.dispatch(new SetError("Invalid credentials"));
+              }
+              return of(new authActions.SignOut());
+            })
           )
       })
     );
 
-  /**
-   * Show particular notification and sign the user out
-   * @param httpErrorResponse 
-   */
-  private handleSignInError(httpErrorResponse: HttpErrorResponse): Observable<any> {
-    if (httpErrorResponse.status === 400) {
-      //this.notificationService.setError("Invalid credentials");
-    }
-    return of(new authActions.SignOut());
-  }
-
-  /**
-   * Navigate to the previous URL
-   */
-  private redirectToReturnUrl(): void {
-    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    this.router.navigateByUrl(returnUrl);
-  }
+  constructor(
+    private actions$: Actions,
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiClient: ApiClient,
+    private store: Store<AppState>
+  ) { }
 
 }

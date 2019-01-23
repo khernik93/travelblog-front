@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { ChangeDetectorRef } from '@angular/core';
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { SwiperComponent } from '../../../../src/modules/header/components/swiper/swiper.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/header/header.module';
@@ -36,7 +36,7 @@ describe('SwiperComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SwiperComponent);
     component = fixture.componentInstance;
-    store.setState(_.cloneDeep(SwiperState));
+    store.setState(cloneDeep(SwiperState));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });

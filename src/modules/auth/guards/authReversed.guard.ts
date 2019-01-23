@@ -12,10 +12,12 @@ import { Store } from '@ngrx/store';
 import { AuthState } from '../store/auth.reducer';
 import { selectIsAuthenticated } from '../store/auth.selectors';
 
-const AUTH_PATH = '/auth';
-
+/**
+ * This class is a negation of AuthGuard class - that's because we don't want
+ * authenticated users to access "sign in" page.
+ */
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthReversedGuard implements CanActivate {
 
   constructor(
     private router: Router,
@@ -23,15 +25,15 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
-    return this.isAuthenticated(state);
+    return this.isNotAuthenticated(state);
   }
 
-  private isAuthenticated(state: RouterStateSnapshot): Observable<boolean> {
+  private isNotAuthenticated(state: RouterStateSnapshot): Observable<boolean> {
     return this.store.select(selectIsAuthenticated)
       .pipe(
         map((isAuthenticated: boolean) => {
-          if (isAuthenticated) return true;
-          this.router.navigate([AUTH_PATH], { queryParams: { returnUrl: state.url } });
+          if (!isAuthenticated) return true;
+          this.router.navigate(['/']);
           return false;
         })
       );

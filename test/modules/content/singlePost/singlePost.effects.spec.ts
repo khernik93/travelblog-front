@@ -43,7 +43,7 @@ describe('SinglePostEffects', () => {
 
   it(`
     WHEN GetPost action is dispatched
-    THEN singlePostSerivce.getPost method should be executed
+    THEN apiClient.getPost method should be executed
     AND SetPost action should be dispatched with fetched post
   `, () => {
     const id = ClonedSinglePostResponse.id;

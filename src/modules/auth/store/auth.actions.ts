@@ -3,9 +3,16 @@ import { Action } from '@ngrx/store';
 import { AuthCredentials } from '../auth.model';
 
 export enum AuthActionTypes {
+  SetAuthenticated = '[Auth] Set authenticated',
   TryToSignIn = '[Auth] Try to sign in',
   SignIn = '[Auth] Sign in',
   SignOut = '[Auth] Sign out'
+}
+
+export class SetAuthenticated implements Action {
+  readonly type = AuthActionTypes.SetAuthenticated;
+
+  constructor(public authenticated: boolean) { }
 }
 
 export class TryToSignIn implements Action {
@@ -26,6 +33,7 @@ export class SignOut implements Action {
   constructor() { }
 }
 
-export type AuthActions = TryToSignIn
+export type AuthActions = SetAuthenticated
+  | TryToSignIn
   | SignIn
   | SignOut;

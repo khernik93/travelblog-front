@@ -18,6 +18,8 @@ import { AuthRoutingModule } from './routing/authRouting.module';
 
 // Providers
 import { AuthGuard } from './guards/auth.guard';
+import { AuthReversedGuard } from './guards/authReversed.guard';
+import { CookieService } from '../../shared/services/cookie.service';
 
 export const MODULE_DECLARATIONS = [
   AuthComponent,
@@ -43,7 +45,9 @@ const STORE_IMPORTS = [
   ],
   exports: [AuthComponent],
   providers: [
-    AuthGuard
+    AuthGuard,
+    AuthReversedGuard,
+    CookieService
   ]
 })
 export class AuthModule {

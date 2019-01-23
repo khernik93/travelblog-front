@@ -11,22 +11,17 @@ export const initialState: AuthState = {
 export function authReducer(state = initialState, action: AuthActions): AuthState {
   switch (action.type) {
 
-    case AuthActionTypes.SignIn: {
+    case AuthActionTypes.SetAuthenticated:
       return {
         ...state,
-        authenticated: true
-      }
-    }
+        authenticated: action.authenticated
+      };
 
-    case AuthActionTypes.SignOut: {
-      return {
-        ...state,
-        authenticated: false
-      }
-    }
-
+    case AuthActionTypes.SignIn:
+    case AuthActionTypes.SignOut:
     default: {
       return state;
     }
+    
   }
 }

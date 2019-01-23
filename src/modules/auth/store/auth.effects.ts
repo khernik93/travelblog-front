@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of, defer } from 'rxjs';
-import { switchMap, catchError, map, tap, exhaustMap } from 'rxjs/operators';
+import { catchError, map, tap, exhaustMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
+import get from 'lodash-es';
 
 import * as authActions from './auth.actions';
 import { AuthCredentials } from '../auth.model';
@@ -45,7 +46,7 @@ export class AuthEffects {
     .pipe(
       ofType(authActions.AuthActionTypes.SignIn),
       tap(() => {
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'];
+        const returnUrl = get(this.route, 'snapshot.queryParams.returnUrl');
         this.router.navigateByUrl(returnUrl || '/');
       })
     );

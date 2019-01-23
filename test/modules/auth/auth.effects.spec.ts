@@ -44,7 +44,8 @@ describe('AuthEffects', () => {
         { provide: ApiClient, useValue: apiClient },
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: Store, useValue: store },
-        { provide: CookieService, useValue: cookieService }
+        { provide: CookieService, useValue: cookieService },
+        { provide: Router, useValue: router }
       ]
     });
 
@@ -90,27 +91,25 @@ describe('AuthEffects', () => {
   it(`
     WHEN SignIn action is dispatched
     THEN router navigates to return URL
-  `, () => {
-    /**
-     * @TODO Write a test here
-     */
+  `, (done) => {
+    actions.stream = of(new SignIn());
+    effects.signIn$
+      .subscribe(() => {
+        expect(router.navigateByUrl).toHaveBeenCalledTimes(1);
+        done();
+      });
   });
 
   it(`
     WHEN SignOut action is dispatched
     THEN cookieService.removeCookie observable is returned
-  `, () => {
-    /**
-     * @TODO Figure out whats wrong here
-     */
-    /*
-    const action = new SignOut();
-    const outcome = of(cookieService.removeCookie);
-
-    actions.stream = hot('-a', {a: action});
-    const expected = cold('-b', { b: outcome });
-    expect(effects.signOut$).toBeObservable(expected);
-    */
+  `, (done) => {
+    actions.stream = of(new SignOut());
+    effects.signOut$
+      .subscribe(() => {
+        expect(cookieService.removeCookie).toHaveBeenCalledTimes(1);
+        done();
+      });
   });
 
 });

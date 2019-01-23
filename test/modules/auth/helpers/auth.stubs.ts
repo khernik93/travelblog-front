@@ -7,7 +7,11 @@ export class AuthStubs {
   }
 
   static getActivatedRouteStub() {
-    return jasmine.createSpyObj('ActivatedRoute', ['snapshot']);
+    return jasmine.createSpyObj('ActivatedRoute', {
+      snapshot: {
+        queryParams: {}
+      }
+    });
   }
 
   static getCookieService() {

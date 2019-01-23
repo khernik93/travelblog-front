@@ -40,20 +40,21 @@ export class AuthEffects {
       })
     );
 
-  @Effect()
+  @Effect({dispatch: false})
   signIn$: Observable<any> = this.actions$
     .pipe(
+      ofType(authActions.AuthActionTypes.SignIn),
       tap(() => {
         const returnUrl = this.route.snapshot.queryParams['returnUrl'];
         this.router.navigateByUrl(returnUrl || '/');
       })
     );
 
-  @Effect()
+  @Effect({dispatch: false})
   signOut$: Observable<any> = this.actions$
     .pipe(
       ofType(authActions.AuthActionTypes.SignOut),
-      exhaustMap(() => of(this.cookieService.removeCookie(AUTH_COOKIE)))
+      tap(() => this.cookieService.removeCookie(AUTH_COOKIE))
     );
 
   constructor(

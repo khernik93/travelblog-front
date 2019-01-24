@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { notificationReducer, initialState } from '../../../../src/modules/app/components/notification/store/notification.reducer';
 import * as notificationActions from '../../../../src/modules/app/components/notification/store/notification.actions';
@@ -10,7 +10,7 @@ describe('NotificationReducer', () => {
   let ClonedNotificationState: typeof NotificationState;
 
   beforeEach(() => {
-    ClonedNotificationState = _.cloneDeep(NotificationState);
+    ClonedNotificationState = cloneDeep(NotificationState);
   });
 
   it(`

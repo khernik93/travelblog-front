@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import get from 'lodash-es/get';
 import { MenuActions, MenuActionTypes } from './menu.actions';
 
 export interface MenuState {
@@ -11,7 +11,7 @@ export const initialState: MenuState = {
   tabs: []
 };
 
-export const menuReducer = (state = initialState, action: MenuActions): MenuState => {
+export function menuReducer (state = initialState, action: MenuActions): MenuState {
   
   switch (action.type) {
 
@@ -26,7 +26,7 @@ export const menuReducer = (state = initialState, action: MenuActions): MenuStat
       return {
         ...state,
         tabs: action.tabs,
-        selectedTab: _.get(action, 'tabs[0]') || initialState.selectedTab
+        selectedTab: get(action, 'tabs[0]') || initialState.selectedTab
       }
     }
 

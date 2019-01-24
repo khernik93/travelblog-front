@@ -1,7 +1,7 @@
 import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { MenuEffects } from '../../../../src/modules/header/components/menu/store/menu.effects';
 import { GetTabs, SetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
@@ -34,7 +34,7 @@ describe('MenuEffects', () => {
   });
 
   beforeEach(() => {
-    ClonedTabsResponse = _.cloneDeep(TabsResponse);
+    ClonedTabsResponse = cloneDeep(TabsResponse);
   });
 
   it('should be created', () => {

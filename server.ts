@@ -114,7 +114,7 @@ app.post('/signIn', (request, response) => {
     maxAge: 1000 * 60 * 60,
     httpOnly: false
   }
-  //response.cookie('SESSIONID', 'some-strange-random-cookie-here', options);
+  response.cookie('SESSIONID', 'some-strange-random-cookie-here', options);
   response.status(200).send({error: "Credentials invalid", data: "aaa"});
 });
 

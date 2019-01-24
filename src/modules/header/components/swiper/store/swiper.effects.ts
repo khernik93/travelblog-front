@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { map, exhaustMap } from 'rxjs/operators';
 
 import * as swiperActions from './swiper.actions';
 import { Photos, ApiResponse } from '../../../../../shared/clients/api.model';
@@ -19,13 +19,9 @@ export class SwiperEffects {
   getPhotos$: Observable<any> = this.actions$
     .pipe(
       ofType(swiperActions.SwiperActionTypes.GetPhotos),
-      switchMap(() => {
-        return this.apiClient.getPhotos()
-          .pipe(
-            map((response: ApiResponse<Photos>) => {
-              return new swiperActions.SetPhotos(response.data);
-            })
-          );
+      exhaustMap(() => this.apiClient.getPhotos()),
+      map((response: ApiResponse<Photos>) => {
+        return new swiperActions.SetPhotos(response.data);
       })
     );
 

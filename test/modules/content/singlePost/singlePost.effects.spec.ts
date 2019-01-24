@@ -1,7 +1,7 @@
 import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { SinglePostResponse } from '../../../utils/responses/singlePost.response';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
@@ -34,7 +34,7 @@ describe('SinglePostEffects', () => {
   });
 
   beforeEach(() => {
-    ClonedSinglePostResponse = _.cloneDeep(SinglePostResponse);
+    ClonedSinglePostResponse = cloneDeep(SinglePostResponse);
   });
 
   it('should be created', () => {
@@ -43,7 +43,7 @@ describe('SinglePostEffects', () => {
 
   it(`
     WHEN GetPost action is dispatched
-    THEN singlePostSerivce.getPost method should be executed
+    THEN apiClient.getPost method should be executed
     AND SetPost action should be dispatched with fetched post
   `, () => {
     const id = ClonedSinglePostResponse.id;

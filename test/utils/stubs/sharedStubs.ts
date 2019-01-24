@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { of } from 'rxjs';
 
 import { MockStore } from '../mocks/mockStore';
@@ -17,7 +16,8 @@ export class SharedStubs {
       'getPosts': of({ error: '', data: PostsListResponse }),
       'getPost': of({ error: '', data: SinglePostResponse }),
       'getTabs': of({ error: '', data: TabsResponse }),
-      'getPhotos': of({ error: '', data: PhotosResponse })
+      'getPhotos': of({ error: '', data: PhotosResponse }),
+      'signIn': of({error: '', data: ''})
     });
   }
 

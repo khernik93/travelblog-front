@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import * as swiperActions from '../../../../src/modules/header/components/swiper/store/swiper.actions';
 import { swiperReducer, initialState } from '../../../../src/modules/header/components/swiper/store/swiper.reducer';
@@ -9,7 +9,7 @@ describe('SwiperReducer', () => {
   let ClonedPhotosResponse: typeof PhotosResponse;
 
   beforeEach(() => {
-    ClonedPhotosResponse = _.cloneDeep(PhotosResponse);
+    ClonedPhotosResponse = cloneDeep(PhotosResponse);
   });
 
   it(`

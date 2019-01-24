@@ -23,6 +23,8 @@ exports.PROD_PORT = 8088;
 exports.PROD_DEVTOOL = 'source-map';
 exports.DEV_DEVTOOL = 'eval-source-map';
 
+exports.SHOW_BUNDLE_ANALYZER = false;
+
 /**
  * specifies which @ngrx dev tools will be available when you build and load
  * your app in dev mode. Options are: logger | none
@@ -56,7 +58,7 @@ exports.MY_CLIENT_PLUGINS = [
   new NamedModulesPlugin(),
   new FilterWarningsPlugin({
     exclude: /System\.import/,
-  }),
+  })
 ]
 
 /**

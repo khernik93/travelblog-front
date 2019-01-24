@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/content/content.module';
 import { SinglePostComponent } from '../../../../src/modules/content/components/singlePost/singlePost.component';
@@ -44,13 +44,13 @@ describe('SinglePostComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SinglePostComponent);
     component = fixture.componentInstance;
-    store.setState(_.cloneDeep(SinglePostState));
+    store.setState(cloneDeep(SinglePostState));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
 
   beforeEach(() => {
-    ClonedSinglePostResponse = _.cloneDeep(SinglePostResponse);
+    ClonedSinglePostResponse = cloneDeep(SinglePostResponse);
   });
 
   it('should check if the component is defined', () => {

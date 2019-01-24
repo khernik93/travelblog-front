@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 // Store
 import { syncReducers } from './store/app.reducers';
@@ -62,7 +63,10 @@ const ROUTING_MODULE_IMPORTS = [
 
 const STORE_IMPORTS = [
   StoreModule.forRoot(syncReducers),
-  EffectsModule.forRoot([])
+  EffectsModule.forRoot([]),
+  StoreDevtoolsModule.instrument({
+    maxAge: 10
+  })
 ];
 
 @NgModule({

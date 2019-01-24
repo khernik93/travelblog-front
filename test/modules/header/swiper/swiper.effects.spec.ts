@@ -1,7 +1,7 @@
 import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
-import * as _ from 'lodash';
+import cloneDeep from 'lodash-es/cloneDeep';
 
 import { SwiperEffects } from '../../../../src/modules/header/components/swiper/store/swiper.effects';
 import { GetPhotos, SetPhotos } from '../../../../src/modules/header/components/swiper/store/swiper.actions';
@@ -34,7 +34,7 @@ describe('SwiperEffects', () => {
   });
 
   beforeEach(() => {
-    ClonedPhotosResponse = _.cloneDeep(PhotosResponse);
+    ClonedPhotosResponse = cloneDeep(PhotosResponse);
   });
 
   it('should be created', () => {

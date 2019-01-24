@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { map, exhaustMap } from 'rxjs/operators';
 
 import * as postsListActions from './postsList.actions';
 import { PostsPaginable, ApiResponse } from '../../../../../shared/clients/api.model';
@@ -19,13 +19,9 @@ export class PostsListEffects {
   getPosts$: Observable<any> = this.actions$
     .pipe(
       ofType(postsListActions.PostsListActionTypes.GetPosts),
-      switchMap((action: any) => {
-        return this.apiClient.getPosts(action.selectedTab)
-          .pipe(
-            map((response: ApiResponse<PostsPaginable>) => {
-              return new postsListActions.SetPosts(response.data.content);
-            })
-          );
+      exhaustMap((action: any) => this.apiClient.getPosts(action.selectedTab)),
+      map((response: ApiResponse<PostsPaginable>) => {
+        return new postsListActions.SetPosts(response.data.content);
       })
     );
 

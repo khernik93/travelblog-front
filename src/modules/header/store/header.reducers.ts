@@ -8,7 +8,9 @@ export interface HeaderState {
   swiper: fromSwiper.SwiperState;
 }
 
-export const headerReducers: ActionReducerMap<HeaderState> = {
-  menu: fromMenu.menuReducer,
-  swiper: fromSwiper.swiperReducer
+export function headerReducers(): ActionReducerMap<HeaderState> {
+  return {
+    menu: fromMenu.menuReducer,
+    swiper: fromSwiper.swiperReducer
+  };
 };

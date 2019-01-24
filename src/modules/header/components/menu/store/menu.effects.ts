@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { map, exhaustMap } from 'rxjs/operators';
 
 import * as menuActions from './menu.actions';
 import { ApiClient } from '../../../../../shared/clients/api.client';
@@ -19,13 +19,9 @@ export class MenuEffects {
   getTabs$: Observable<any> = this.actions$
     .pipe(
       ofType(menuActions.MenuActionTypes.GetTabs),
-      switchMap(() => {
-        return this.apiClient.getTabs()
-          .pipe(
-            map((response: ApiResponse<Tab[]>) => {
-              return new menuActions.SetTabs(response.data);
-            })
-          );
+      exhaustMap(() => this.apiClient.getTabs()),
+      map((response: ApiResponse<Tab[]>) => {
+        return new menuActions.SetTabs(response.data);
       })
     );
 

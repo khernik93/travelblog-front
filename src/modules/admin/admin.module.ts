@@ -1,19 +1,26 @@
+// Global
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
+// Components
 import { AdminComponent } from './admin.component';
-import { SignOutComponent } from '../auth/components/signOut/signOut.component';
+import { AddNewPostComponent } from './components/addNewPost/addNewPost.component';
 
+// Modules
 import { AdminRoutingModule } from './routing/adminRouting.module';
+import { AuthModule } from '../auth/auth.module';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent,
-  SignOutComponent
+  AddNewPostComponent
 ];
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  AdminRoutingModule
+  AdminRoutingModule,
+  AuthModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({

@@ -13,7 +13,6 @@ const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
 
 /**
  * Set basic config data
@@ -23,6 +22,8 @@ exports.DEV_PORT = 3000;
 exports.PROD_PORT = 8088;
 exports.PROD_DEVTOOL = 'source-map';
 exports.DEV_DEVTOOL = 'eval-source-map';
+
+exports.SHOW_BUNDLE_ANALYZER = false;
 
 /**
  * specifies which @ngrx dev tools will be available when you build and load
@@ -57,12 +58,6 @@ exports.MY_CLIENT_PLUGINS = [
   new NamedModulesPlugin(),
   new FilterWarningsPlugin({
     exclude: /System\.import/,
-  }),
-  new AngularCompilerPlugin({
-    tsConfigPath: './tsconfig.json',
-    mainPath: './src/main.browser.ts',
-    entryModule: './src/modules/app/app.module#AppModule',
-    sourceMap: true
   })
 ]
 
@@ -101,9 +96,4 @@ exports.MY_CLIENT_DEVSERVER_PLUGINS = [
 /**
  * use this to import your own rules for Client webpack config.
  */
-exports.MY_CLIENT_RULES = [
-  {
-    test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
-    loader: '@ngtools/webpack'
-  }
-]
+exports.MY_CLIENT_RULES = []

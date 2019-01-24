@@ -26,3 +26,7 @@ $ npm run start
 ```
 $ npm run test
 ```
+
+## Measuring performance
+
+* set the *SHOW_BUNDLE_ANALYZER* flag in constants.js to true in order to analyze the bundle

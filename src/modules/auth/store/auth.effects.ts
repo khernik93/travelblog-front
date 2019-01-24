@@ -5,7 +5,7 @@ import { catchError, map, tap, exhaustMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Store } from '@ngrx/store';
-import get from 'lodash-es';
+import get from 'lodash-es/get';
 
 import * as authActions from './auth.actions';
 import { AuthCredentials } from '../auth.model';

@@ -4,6 +4,7 @@ export declare const PROD_PORT: number;
 export declare const DEV_DEVTOOL: string;
 export declare const PROD_DEVTOOL: string;
 export declare const STORE_DEV_TOOLS: string;
+export declare const SHOW_BUNDLE_ANALYZER: boolean;
 export declare const MY_COPY_FOLDERS: any[];
 export declare const MY_CLIENT_PLUGINS: any[];
 export declare const MY_CLIENT_PRODUCTION_PLUGINS: any[];

@@ -5,19 +5,22 @@ import {
   PROD_PORT,
   PROD_DEVTOOL,
   DEV_DEVTOOL,
-  EXCLUDE_SOURCE_MAPS,
   MY_COPY_FOLDERS,
   MY_CLIENT_PLUGINS,
   MY_CLIENT_PRODUCTION_PLUGINS,
   MY_CLIENT_DEVSERVER_PLUGINS,
   MY_CLIENT_RULES,
+  SHOW_BUNDLE_ANALYZER,
+  EXCLUDE_SOURCE_MAPS
 } from './constants';
 import { DefinePlugin } from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { root } from './helpers.js';
 
+const AngularCompilerPlugin = require('@ngtools/webpack').AngularCompilerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const EVENT = process.env.npm_lifecycle_event || '';
-const AOT = EVENT.includes('aot');
 const DEV_SERVER = EVENT.includes('webdev');
 const PROD = EVENT.includes('prod');
 
@@ -25,7 +28,6 @@ const PORT = PROD ? PROD_PORT : DEV_PORT;
 const ENV = PROD ? 'production' : 'development';
 
 console.log('PRODUCTION BUILD: ', PROD);
-console.log('AOT: ', AOT);
 
 /**
  * Logic for copying folders
@@ -54,8 +56,15 @@ const CONSTANTS = {
 /**
  * Config
  */
-const outputConfig = (function webpackConfig(): WebpackConfig {
+const outputConfig = function webpackConfig(env: any = {}) {
+
+  const IS_TEST = !!env.TEST;
+  const IS_AOT = !!env.AOT;
+  console.log('AOT BUILD ', IS_AOT);
+  console.log('TEST BUILD: ', IS_TEST);
+
   let config: WebpackConfig = Object.assign({});
+  const TSCONFIG_PATH = IS_TEST ? './tsconfig.test.json' : './tsconfig.json';
 
   config.mode = ENV;
   config.cache = true;
@@ -72,7 +81,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
   };
 
   config.devServer = {
-    contentBase: AOT ? './compiled' : './src',
+    contentBase: './src',
     port: PORT,
     historyApiFallback: {
       disableDotRule: true,
@@ -91,7 +100,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
   };
 
   config.resolve = {
-    extensions: ['.ts', '.js', '.json'] 
+    extensions: ['.ts', '.js', '.json']
   };
 
   config.module = {
@@ -105,7 +114,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
         test: /\.ts$/,
         loaders: [
           '@angularclass/hmr-loader',
-          'awesome-typescript-loader?{configFileName: "tsconfig.json"}',
+          `awesome-typescript-loader?{configFileName: "${TSCONFIG_PATH}"}`,
           'angular2-template-loader',
           'angular-router-loader?loader=system&genDir=compiled&aot=true',
         ],
@@ -132,11 +141,22 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
     ]
   };
 
+  if (IS_AOT) {
+    config.module.rules.push({
+      test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
+      loader: '@ngtools/webpack'
+    });
+  }
+
   config.plugins = [
     new DefinePlugin(CONSTANTS),
     new CopyWebpackPlugin(COPY_FOLDERS),
     ...MY_CLIENT_PLUGINS
   ];
+
+  if (SHOW_BUNDLE_ANALYZER) {
+    config.plugins.push(new BundleAnalyzerPlugin());
+  }
 
   if (PROD) {
     config.plugins.concat(MY_CLIENT_PRODUCTION_PLUGINS);
@@ -146,7 +166,16 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
     config.plugins.concat(MY_CLIENT_DEVSERVER_PLUGINS);
   }
 
+  if (IS_AOT) {
+    config.plugins.push(new AngularCompilerPlugin({
+      tsConfigPath: TSCONFIG_PATH,
+      mainPath: './src/main.browser.ts',
+      entryModule: './src/modules/app/app.module#AppModule',
+      sourceMap: true
+    }));
+  }
+
   return config;
-})();
+};
 
 module.exports = outputConfig;

@@ -33,4 +33,4 @@ $ npm run test
 
 ## AoT support
 
-All available commands run in the AoT mode except for *npm run test*. To execute webpack in AoT, use *--env.AOT=true* flag
+All available commands run in the AoT mode except for *npm run test* (which uses different webpack config)

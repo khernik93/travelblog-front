@@ -107,7 +107,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
           '@angularclass/hmr-loader',
           'awesome-typescript-loader?{configFileName: "tsconfig.json"}',
           'angular2-template-loader',
-          'angular-router-loader?loader=system&genDir=compiled&aot=' + AOT,
+          'angular-router-loader?loader=system&genDir=compiled&aot=true',
         ],
         exclude: [/\.(e2e|d)\.ts$/],
       },

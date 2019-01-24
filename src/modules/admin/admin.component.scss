@@ -1,0 +1,24 @@
+@import "../../variables";
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  text-align: right;
+  padding: 10px;
+  border-bottom: 1px solid $black;
+}
+
+section {
+  height: 100vh;
+  background: repeating-linear-gradient(
+    45deg,
+    $lightgrey,
+    $lightgrey 20px,
+    $mediumgrey 20px,
+    $mediumgrey 40px
+  );
+  padding: 20px;
+}

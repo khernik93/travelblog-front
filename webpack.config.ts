@@ -28,6 +28,8 @@ const PORT = PROD ? PROD_PORT : DEV_PORT;
 const ENV = PROD ? 'production' : 'development';
 
 console.log('PRODUCTION BUILD: ', PROD);
+console.log('AOT BUILD: ', true);
+console.log('TEST BUILD: ', false);
 
 /**
  * Logic for copying folders
@@ -56,15 +58,8 @@ const CONSTANTS = {
 /**
  * Config
  */
-const outputConfig = function webpackConfig(env: any = {}) {
-
-  const IS_TEST = !!env.TEST;
-  const IS_AOT = !!env.AOT;
-  console.log('AOT BUILD ', IS_AOT);
-  console.log('TEST BUILD: ', IS_TEST);
-
+const outputConfig = (function webpackConfig(): WebpackConfig {
   let config: WebpackConfig = Object.assign({});
-  const TSCONFIG_PATH = IS_TEST ? './tsconfig.test.json' : './tsconfig.json';
 
   config.mode = ENV;
   config.cache = true;
@@ -114,7 +109,7 @@ const outputConfig = function webpackConfig(env: any = {}) {
         test: /\.ts$/,
         loaders: [
           '@angularclass/hmr-loader',
-          `awesome-typescript-loader?{configFileName: "${TSCONFIG_PATH}"}`,
+          `awesome-typescript-loader?{configFileName: "tsconfig.json"}`,
           'angular2-template-loader',
           'angular-router-loader?loader=system&genDir=compiled&aot=true',
         ],
@@ -137,20 +132,23 @@ const outputConfig = function webpackConfig(env: any = {}) {
         test: /\.scss$/,
         loaders: ['to-string-loader', 'css-loader', 'sass-loader'],
       },
+      {
+        test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
+        loader: '@ngtools/webpack'
+      },
       ...MY_CLIENT_RULES
     ]
   };
 
-  if (IS_AOT) {
-    config.module.rules.push({
-      test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
-      loader: '@ngtools/webpack'
-    });
-  }
-
   config.plugins = [
     new DefinePlugin(CONSTANTS),
     new CopyWebpackPlugin(COPY_FOLDERS),
+    new AngularCompilerPlugin({
+      tsConfigPath: './tsconfig.json',
+      mainPath: './src/main.browser.ts',
+      entryModule: './src/modules/app/app.module#AppModule',
+      sourceMap: true
+    }),
     ...MY_CLIENT_PLUGINS
   ];
 
@@ -166,16 +164,7 @@ const outputConfig = function webpackConfig(env: any = {}) {
     config.plugins.concat(MY_CLIENT_DEVSERVER_PLUGINS);
   }
 
-  if (IS_AOT) {
-    config.plugins.push(new AngularCompilerPlugin({
-      tsConfigPath: TSCONFIG_PATH,
-      mainPath: './src/main.browser.ts',
-      entryModule: './src/modules/app/app.module#AppModule',
-      sourceMap: true
-    }));
-  }
-
   return config;
-};
+})();
 
 module.exports = outputConfig;

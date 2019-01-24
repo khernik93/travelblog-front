@@ -1,4 +1,4 @@
-var webpackConfig = require('./webpack.config')({AOT: false, TEST: true});
+var webpackConfig = require('./webpack.test.config');
 
 module.exports = function (config) {
   var _config = {

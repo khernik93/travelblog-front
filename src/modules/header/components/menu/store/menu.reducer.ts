@@ -11,7 +11,7 @@ export const initialState: MenuState = {
   tabs: []
 };
 
-export const menuReducer = (state = initialState, action: MenuActions): MenuState => {
+export function menuReducer (state = initialState, action: MenuActions): MenuState {
   
   switch (action.type) {
 

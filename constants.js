@@ -58,13 +58,12 @@ exports.MY_CLIENT_PLUGINS = [
   new FilterWarningsPlugin({
     exclude: /System\.import/,
   }),
-  /*
   new AngularCompilerPlugin({
     tsConfigPath: './tsconfig.json',
-    entryModule: 'src/main.browser.ts',
+    mainPath: './src/main.browser.ts',
+    entryModule: './src/modules/app/app.module#AppModule',
     sourceMap: true
   })
-  */
 ]
 
 /**
@@ -103,10 +102,8 @@ exports.MY_CLIENT_DEVSERVER_PLUGINS = [
  * use this to import your own rules for Client webpack config.
  */
 exports.MY_CLIENT_RULES = [
-  /*
   {
     test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
     loader: '@ngtools/webpack'
   }
-  */
 ]

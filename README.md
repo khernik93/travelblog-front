@@ -30,3 +30,7 @@ $ npm run test
 ## Measuring performance
 
 * set the *SHOW_BUNDLE_ANALYZER* flag in constants.js to true in order to analyze the bundle
+
+## AoT support
+
+All available commands run in the AoT mode except for *npm run test*. To execute webpack in AoT, use *--env.AOT=true* flag

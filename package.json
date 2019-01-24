@@ -9,10 +9,11 @@
   },
   "scripts": {
     "build": "npm run clean:dist && npm run sass && webpack",
+    "build:prod": "npm run clean:dist && npm run sass && webpack --prod",
     "start": "npm run clean:dist && npm run sass && npm run server",
     "webdev": "webpack-dev-server",
-    "webdev:hmr": "npm run webdev -- --hotOnly --hot --inline",
-    "server": "npm-run-all -p -r webdev sass:watch",
+    "webdev:hmr": "npm run webdev --hotOnly --hot --inline",
+    "server": "npm-run-all -p -r webdev:hmr sass:watch",
     "sass": "node-sass \"src/styles.scss\" \"dist_root/styles.css\" --include-path node_modules --output-style compressed -q",
     "sass:watch": "node-sass -w \"src/styles.scss\" \"dist_root/styles.css\" --include-path node_modules --output-style compressed -q",
     "clean:dist": "rimraf -- dist",

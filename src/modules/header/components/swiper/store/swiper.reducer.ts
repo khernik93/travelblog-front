@@ -8,7 +8,7 @@ export const initialState: SwiperState = {
   photos: null
 };
 
-export const swiperReducer = (state = initialState, action: SwiperActions): SwiperState => {
+export function swiperReducer (state = initialState, action: SwiperActions): SwiperState {
   
   switch (action.type) {
 

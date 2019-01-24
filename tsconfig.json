@@ -18,14 +18,15 @@
   },
   "exclude": [
     "node_modules",
-    "compiled"
+    "compiled",
+    "test"
   ],
   "awesomeTypescriptLoaderOptions": {
     "useWebpackText": true,
     "forkChecker": true,
     "useCache": true
   },
-  "compileOnSave": false,
+  "compileOnSave": true,
   "buildOnSave": false,
   "atom": { "rewriteTsconfig": false }
 }

@@ -9,7 +9,8 @@ import {
   Tab, 
   Photos,
   Post,
-  ApiResponse
+  ApiResponse,
+  NewPost
 } from './api.model';
 
 const ROUTES: any = {
@@ -18,6 +19,7 @@ const ROUTES: any = {
   post: '/post',
   tabs: '/countries',
   photos: '/swiperphotos',
+  addNewPost: '/addNewPost',
   signIn: '/signin'
 };
 
@@ -51,6 +53,11 @@ export class ApiClient {
   getPhotos(): Observable<ApiResponse<Photos>> {
     const url = this.prepareUrl(ROUTES.photos);
     return this.transferHttpService.get(url);
+  }
+
+  addNewPost(newPost: NewPost): Observable<ApiResponse<void>> {
+    const url = this.prepareUrl(ROUTES.addNewPost);
+    return this.transferHttpService.post(url, {newPost});
   }
 
   signIn(credentials: AuthCredentials): Observable<ApiResponse<void>> {

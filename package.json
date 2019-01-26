@@ -19,7 +19,10 @@
     "clean:dist": "rimraf -- dist",
     "test": "karma start"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ngx-bootstrap": "^3.2.0",
+    "ngx-editor": "^4.1.0"
+  },
   "devDependencies": {
     "@angular/animations": "~6.0.3",
     "@angular/cdk": "^6.2.0",

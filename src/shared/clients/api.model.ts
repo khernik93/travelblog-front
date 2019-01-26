@@ -26,3 +26,10 @@ export type PostsPaginable = {
 export type Tab = string;
 
 export type Photos = Map<Tab, string[]>;
+
+export type NewPost = {
+  tab: Tab,
+  title: string,
+  tags: string[],
+  content: string
+};

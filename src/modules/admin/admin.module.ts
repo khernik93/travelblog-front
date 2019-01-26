@@ -1,33 +1,60 @@
 // Global
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { NgxEditorModule } from 'ngx-editor';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
+
+// Store
+import { adminEffects } from './store/admin.effects';
 
 // Components
 import { AdminComponent } from './admin.component';
 import { AddNewPostComponent } from './components/addNewPost/addNewPost.component';
+import { WysiwygComponent } from '../../shared/components/wysiwyg/wysiwyg.component';
 
 // Modules
 import { AdminRoutingModule } from './routing/adminRouting.module';
 import { AuthModule } from '../auth/auth.module';
 
+// Services
+import { AddNewPostService } from './components/addNewPost/addNewPost.service';
+
 export const MODULE_DECLARATIONS = [
   AdminComponent,
-  AddNewPostComponent
+  AddNewPostComponent,
+  WysiwygComponent
 ];
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  AdminRoutingModule,
-  AuthModule,
-  ReactiveFormsModule
+  FormsModule,
+  ReactiveFormsModule,
+  NgxEditorModule,
+  HttpClientModule
+];
+
+const ROUTING_MODULE_IMPORTS = [
+  AdminRoutingModule
+];
+
+const STORE_IMPORTS = [
+  EffectsModule.forFeature(adminEffects)
 ];
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
-  imports: MODULE_IMPORTS,
+  imports: [
+    ...MODULE_IMPORTS,
+    ...ROUTING_MODULE_IMPORTS,
+    ...STORE_IMPORTS,
+    AuthModule
+  ],
   exports: [AdminComponent],
-  providers: []
+  providers: [
+    AddNewPostService
+  ]
 })
 export class AdminModule {
   constructor() { }

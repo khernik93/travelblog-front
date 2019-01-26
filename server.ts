@@ -109,6 +109,10 @@ app.get('/post/:id', (request, response) => {
   response.send({error: "", data: output});
 });
 
+app.post('/addNewPost', (request, response) => {
+  response.status(500).send({error: "Couldnt add a new post", data: "all righty"});
+});
+
 app.post('/signIn', (request, response) => {
   const options = {
     maxAge: 1000 * 60 * 60,

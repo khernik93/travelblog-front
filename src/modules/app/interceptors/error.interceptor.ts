@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import get from 'lodash-es/get';
@@ -31,7 +31,7 @@ export class ErrorInterceptor implements HttpInterceptor {
             const message = get(httpErrorResponse, 'error.error') || DEFAULT_ERROR_MESSAGE;
             this.store.dispatch(new SetError(message));
           }
-          throw httpErrorResponse;
+          return of(httpErrorResponse);
         })
       );
 

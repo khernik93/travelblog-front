@@ -3,11 +3,10 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, exhaustMap, catchError } from 'rxjs/operators';
 
-import { NewPost } from '../../../../../shared/clients/api.model';
+import { Post } from '../../../../../shared/clients/api.model';
 import { ApiClient } from '../../../../../shared/clients/api.client';
 import { AddNewPostActionTypes, AddNewPostSuccess, AddNewPostError } from './addNewPost.actions';
 import { SetSuccess } from '../../../../app/components/notification/store/notification.actions';
-import { NewPostDisplay } from '../addNewPost.model';
 import { AddNewPostService } from '../addNewPost.service';
 
 @Injectable()
@@ -23,8 +22,10 @@ export class AddNewPostEffects {
   addNewPost$: Observable<any> = this.actions$
     .pipe(
       ofType(AddNewPostActionTypes.AddNewPost),
-      map((action: {newPost: NewPostDisplay}) => this.addNewPostService.transformNewPost(action.newPost)),
-      exhaustMap((transformedNewPost: NewPost) => this.apiClient.addNewPost(transformedNewPost)),
+      exhaustMap((action: any) => {
+        const post: Post = this.addNewPostService.transformPostDisplayIntoPost(action.postDisplay);
+        return this.apiClient.addNewPost(post, action.tab);
+      }),
       map(() => new AddNewPostSuccess()),
       catchError((error: any) => of(new AddNewPostError(error)))
     );

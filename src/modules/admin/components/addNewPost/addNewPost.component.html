@@ -3,8 +3,8 @@
   <form [formGroup]="addNewPostForm">
 
     <div class="form-group">
-      <label for="tabs"><b>Tab</b></label>
-      <select formControlName="tabs" class="form-control" id="tabs">
+      <label for="tab"><b>Tab</b></label>
+      <select formControlName="tab" class="form-control" id="tab">
         <option *ngFor="let tab of tabs$ | async">{{ tab }}</option>
       </select>
     </div>

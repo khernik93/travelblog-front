@@ -6,7 +6,6 @@ import cloneDeep from 'lodash-es/cloneDeep';
 import { HeaderState } from '../../../../src/modules/header/store/header.reducers';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../utils/mocks/mockStore';
-import { TabsResponse } from '../../../utils/responses/tabs.response';
 import { AddNewPostComponent } from '../../../../src/modules/admin/components/addNewPost/addNewPost.component';
 import { AddNewPostState } from './helpers/addNewPost.state';
 import { GetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
@@ -20,7 +19,6 @@ describe('AddNewPostComponent', () => {
 
   let component: AddNewPostComponent;
   let fixture: ComponentFixture<AddNewPostComponent>;
-  let ClonedTabsResponse: typeof TabsResponse;
 
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
@@ -46,10 +44,6 @@ describe('AddNewPostComponent', () => {
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
-
-  beforeEach(() =>{
-    ClonedTabsResponse = cloneDeep(TabsResponse);
-  })
 
   it('should check if the component is defined', () => {
     expect(component).toBeDefined();
@@ -90,7 +84,11 @@ describe('AddNewPostComponent', () => {
     const button = fixture.debugElement.query(By.css('.btn'));
     button.triggerEventHandler('click', null);
     fixture.detectChanges();
-    expect(store.dispatch.calls.mostRecent().args).toEqual([new AddNewPost(formValues)]);
+    expect(store.dispatch.calls.mostRecent().args).toEqual([new AddNewPost({
+      title: formValues.title,
+      tags: formValues.tags,
+      content: formValues.content
+    }, formValues.tabs)]);
   });
 
 });

@@ -32,7 +32,7 @@ export class AddNewPostComponent implements OnInit {
 
   ngOnInit() {
     this.addNewPostForm = new FormGroup({
-      tabs: new FormControl(''),
+      tab: new FormControl(''),
       title: new FormControl('', Validators.required),
       tags: new FormControl('', Validators.required)
     });
@@ -43,7 +43,7 @@ export class AddNewPostComponent implements OnInit {
 
   private setFirstTab() {
     this.tabs$.pipe(map((tabs: Tab[]) => tabs[0]))
-    .subscribe((tab: Tab) => this.addNewPostForm.get('tabs').setValue(tab));
+    .subscribe((tab: Tab) => this.addNewPostForm.get('tab').setValue(tab));
   }
 
   synchronizeContent(content: string) {
@@ -51,10 +51,14 @@ export class AddNewPostComponent implements OnInit {
   }
   
   addNewPost() {
-    this.store.dispatch(new AddNewPost({
-      ...this.addNewPostForm.value,
-      content: this.content
-    }));
+    this.store.dispatch(new AddNewPost(
+      {
+        tags: this.addNewPostForm.value.tags,
+        title: this.addNewPostForm.value.title,
+        content: this.content
+      }, 
+      this.addNewPostForm.value.tab
+    ));
   }
 
   isInvalid(control: string): boolean {

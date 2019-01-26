@@ -9,8 +9,7 @@ import {
   Tab, 
   Photos,
   Post,
-  ApiResponse,
-  NewPost
+  ApiResponse
 } from './api.model';
 
 const ROUTES: any = {
@@ -55,9 +54,9 @@ export class ApiClient {
     return this.transferHttpService.get(url);
   }
 
-  addNewPost(newPost: NewPost): Observable<ApiResponse<void>> {
+  addNewPost(post: Post, tab: Tab): Observable<ApiResponse<void>> {
     const url = this.prepareUrl(ROUTES.addNewPost);
-    return this.transferHttpService.post(url, {newPost});
+    return this.transferHttpService.post(url, { ...post, tab });
   }
 
   signIn(credentials: AuthCredentials): Observable<ApiResponse<void>> {

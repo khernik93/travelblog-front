@@ -1,5 +1,6 @@
 import { Action } from '@ngrx/store';
-import { NewPostDisplay } from '../addNewPost.model';
+import { PostDisplay } from '../addNewPost.model';
+import { Tab } from '../../../../../shared/clients/api.model';
 
 export enum AddNewPostActionTypes {
   AddNewPost = '[AddNewPost] Add new post',
@@ -10,7 +11,7 @@ export enum AddNewPostActionTypes {
 export class AddNewPost implements Action {
   readonly type = AddNewPostActionTypes.AddNewPost;
 
-  constructor(public newPost: NewPostDisplay) { }
+  constructor(public postDisplay: PostDisplay, public tab: Tab) { }
 }
 
 export class AddNewPostSuccess implements Action {

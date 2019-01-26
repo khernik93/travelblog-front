@@ -2,14 +2,27 @@ import { TestBed } from '@angular/core/testing';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 import { AddNewPostService } from '../../../../src/modules/admin/components/addNewPost/addNewPost.service';
-import { NewPostDisplayData, NewPostData } from './helpers/addNewPost.data';
+import { PostDisplay } from '../../../../src/modules/admin/components/addNewPost/addNewPost.model';
+import { Post } from '../../../../src/shared/clients/api.model';
+
+const postDisplay: PostDisplay = {
+  tags: 'tag1,tag2,tag3', 
+  title: 'title', 
+  content: 'content'
+};
+
+const post: Post = {
+  tags: ['tag1','tag2','tag3'], 
+  title: 'title', 
+  content: 'content'
+};
 
 describe('AddNewPostService', () => {
 
   let service: AddNewPostService;
 
-  let ClonedNewPostDispayData: typeof NewPostDisplayData;
-  let ClonedNewPostData: typeof NewPostData;
+  let ClonedPostDispay: PostDisplay;
+  let ClonedPost: Post;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -19,8 +32,8 @@ describe('AddNewPostService', () => {
   });
 
   beforeEach(() => {
-    ClonedNewPostDispayData = cloneDeep(NewPostDisplayData);
-    ClonedNewPostData = cloneDeep(NewPostData);
+    ClonedPostDispay = cloneDeep(postDisplay);
+    ClonedPost = cloneDeep(post);
   });
 
   it('should be created', () => {
@@ -31,8 +44,8 @@ describe('AddNewPostService', () => {
     WHEN transformNewPost is called with a display addNewPost object
     THEN API addNewPost object is returned
   `, () => {
-    const transformedNewPost = service.transformNewPost(ClonedNewPostDispayData);
-    expect(transformedNewPost).toEqual(ClonedNewPostData);
+    const transformedNewPost = service.transformPostDisplayIntoPost(ClonedPostDispay);
+    expect(transformedNewPost).toEqual(ClonedPost);
   });
 
   it(`
@@ -40,10 +53,10 @@ describe('AddNewPostService', () => {
     AND tags have a trailing coma
     THEN API addNewPost object is returned properly
   `, () => {
-    const actual = ClonedNewPostDispayData;
+    const actual = ClonedPostDispay;
     actual.tags = actual.tags + ',';
-    const transformedNewPost = service.transformNewPost(actual);
-    expect(transformedNewPost).toEqual(ClonedNewPostData);
+    const transformedNewPost = service.transformPostDisplayIntoPost(actual);
+    expect(transformedNewPost).toEqual(ClonedPost);
   });
 
 });

@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { NewPostDisplay } from './addNewPost.model';
-import { NewPost } from '../../../../shared/clients/api.model';
+import { PostDisplay } from './addNewPost.model';
+import { Post } from '../../../../shared/clients/api.model';
 
 @Injectable()
 export class AddNewPostService {
 
-  transformNewPost(newPost: NewPostDisplay): NewPost {
+  transformPostDisplayIntoPost(postDisplay: PostDisplay): Post {
     return {
-      tab: newPost.tabs,
-      title: newPost.title,
-      tags: this.sanitizeTags(newPost.tags),
-      content: newPost.content
+      title: postDisplay.title,
+      tags: this.sanitizeTags(postDisplay.tags),
+      content: postDisplay.content
     };
   }
 

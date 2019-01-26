@@ -1,5 +1,4 @@
-export type NewPostDisplay = {
-  tabs: string,
+export type PostDisplay = {
   tags: string,
   title: string,
   content: string

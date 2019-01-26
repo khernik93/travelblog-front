@@ -10,12 +10,12 @@ export type Meta = {
 };
 
 export type Post = {
-  id: number,
-  createdAt: string,    
+  id?: number,
+  createdAt?: string,
   title: string,
   tags: string[],
   content: string,
-  commentsCount: number
+  commentsCount?: number
 };
 
 export type PostsPaginable = {
@@ -26,10 +26,3 @@ export type PostsPaginable = {
 export type Tab = string;
 
 export type Photos = Map<Tab, string[]>;
-
-export type NewPost = {
-  tab: Tab,
-  title: string,
-  tags: string[],
-  content: string
-};

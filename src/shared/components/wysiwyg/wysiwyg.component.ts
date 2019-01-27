@@ -1,12 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'wysiwyg-component',
   template: `
     <app-ngx-editor [config]="editorConfig" 
                     [(ngModel)]="content" 
-                    (ngModelChange)="onChange($event)"
+                    (ngModelChange)="onChange()"
                     [placeholder]="placeholder"
     ></app-ngx-editor>
   `

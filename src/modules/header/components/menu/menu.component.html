@@ -9,7 +9,7 @@
     <li *ngFor="let tab of tabs$ | async; index as i" 
         [className]="(selectedTab$ | async) === tab ? 'selected' : ''" 
         (click)="selectTab(tab)">
-      <a href="#"><h3>{{ tab }}</h3></a>
+      <a onclick="return false;"><h3>{{ tab }}</h3></a>
     </li>
   </ul>
   

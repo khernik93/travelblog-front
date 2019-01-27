@@ -70,6 +70,10 @@ nav {
   transition: all 0.35s;
   text-decoration: none;
   text-align: center;
+  cursor: pointer;
+  &:hover {
+    color: $red;
+  }
 }
 
 @media screen and (max-width: $smallPoint) {

@@ -15,7 +15,7 @@ export function postsListReducer(state = initialState, action: PostsListActions)
     case PostsListActionTypes.SetPosts: {
       return {
         ...state,
-        posts: action.posts
+        posts: state.posts.concat(action.posts)
       }
     }
 

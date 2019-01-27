@@ -48,4 +48,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onScroll() {
+    this.store.dispatch(new PostsListActions.GetPosts('China'));
+  }
+
 }

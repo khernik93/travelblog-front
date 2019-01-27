@@ -1,27 +1,29 @@
 <br><br><br>
-<div class="post-wrap" *ngFor="let post of (posts$ | async); let i = index">
-  <div class="content-section posted-date">
-    <h4>{{ post.createdAt }}</h4>
-  </div>
-  <br>
-  <div class="content-section entry-title">
-    <h1>{{ post.title }}</h1>
-  </div>
-  <br><br>
-  <div class="content-section tags-links">
-    <span *ngFor="let tag of post.tags">{{ tag }}</span>
-  </div>
-  <br><br>
-  <div class="content-section entry-content">
-    <p>{{ post.content }}</p>
-  </div>
-  <br>
-  <div class="content-section read-more">
-    <a class="read-more" [routerLink]="'/posts/' + post.id">...read more</a>
-  </div>
-  <br><br><br><br>
-  <div *ngIf="i !== ((posts$ | async).length - 1)">
-    <hr class="breaking-line">
+<div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+  <div class="post-wrap" *ngFor="let post of (posts$ | async); let i = index">
+    <div class="content-section posted-date">
+      <h4>{{ post.createdAt }}</h4>
+    </div>
+    <br>
+    <div class="content-section entry-title">
+      <h1>{{ post.title }}</h1>
+    </div>
+    <br><br>
+    <div class="content-section tags-links">
+      <span *ngFor="let tag of post.tags">{{ tag }}</span>
+    </div>
+    <br><br>
+    <div class="content-section entry-content">
+      <p>{{ post.content }}</p>
+    </div>
+    <br>
+    <div class="content-section read-more">
+      <a class="read-more" [routerLink]="'/posts/' + post.id">...read more</a>
+    </div>
     <br><br><br><br>
+    <div *ngIf="i !== ((posts$ | async).length - 1)">
+      <hr class="breaking-line">
+      <br><br><br><br>
+    </div>
   </div>
 </div>

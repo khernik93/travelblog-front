@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 // Store
 import { contentReducers } from './store/content.reducers';
@@ -27,7 +28,8 @@ export const MODULE_DECLARATIONS = [
 ];
 
 export const MODULE_IMPORTS = [
-  CommonModule
+  CommonModule,
+  InfiniteScrollModule
 ];
 
 const ROUTING_MODULE_IMPORTS = [

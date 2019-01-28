@@ -18,10 +18,37 @@ describe('PostsListReducer', () => {
   `, () => {
     const action = new postsListActions.SetPosts(ClonedPostsListResponse.content);
     const result = postsListReducer(initialState, action);
-    expect(result).toEqual({
-      ...initialState,
-      posts: ClonedPostsListResponse.content
-    });
+    expect(result).toEqual({ ...initialState, posts: ClonedPostsListResponse.content });
   });
+
+  it(`
+    WHEN GetPosts action is dispatched
+    THEN loading should be set to true
+  `, () => {
+    Helper.testLoading(new postsListActions.GetPosts('tab'), true);
+  });
+
+  it(`
+    WHEN GetPostsSuccess action is dispatched
+    THEN loading should be set to false
+  `, () => {
+    Helper.testLoading(new postsListActions.GetPostsSuccess(), false);
+  });
+
+  it(`
+    WHEN GetPostsOnScroll action is dispatched
+    THEN loading should be set to true
+  `, () => {
+    Helper.testLoading(new postsListActions.GetPostsOnScroll('tab'), true);
+  });
+
+  class Helper {
+
+    static testLoading(action: any, loading: boolean): void {
+      const result = postsListReducer(initialState, action);
+      expect(result).toEqual({ ...initialState, loading: loading });
+    }
+
+  }
 
 });

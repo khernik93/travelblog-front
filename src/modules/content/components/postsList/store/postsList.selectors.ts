@@ -7,3 +7,8 @@ export const selectPosts = createSelector(
   selectContent,
   (state: ContentState) => state.postsList.posts
 );
+
+export const selectLoading = createSelector(
+  selectContent,
+  (state: ContentState) => state.postsList.loading
+);

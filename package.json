@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "ngx-bootstrap": "^3.2.0",
-    "ngx-editor": "^4.1.0"
+    "ngx-editor": "^4.1.0",
+    "ngx-infinite-scroll": "^7.0.1"
   },
   "devDependencies": {
     "@angular/animations": "~6.0.3",

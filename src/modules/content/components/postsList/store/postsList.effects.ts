@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
-import { map, exhaustMap } from 'rxjs/operators';
+import { Observable, timer, of } from 'rxjs';
+import { exhaustMap, debounce, catchError, mergeMap, tap, map } from 'rxjs/operators';
 
 import * as postsListActions from './postsList.actions';
 import { PostsPaginable, ApiResponse } from '../../../../../shared/clients/api.model';
@@ -20,9 +20,19 @@ export class PostsListEffects {
     .pipe(
       ofType(postsListActions.PostsListActionTypes.GetPosts),
       exhaustMap((action: any) => this.apiClient.getPosts(action.selectedTab)),
-      map((response: ApiResponse<PostsPaginable>) => {
-        return new postsListActions.SetPosts(response.data.content);
-      })
+      mergeMap((response: ApiResponse<PostsPaginable>) => ([
+        new postsListActions.SetPosts(response.data.content),
+        new postsListActions.GetPostsSuccess()
+      ])),
+      catchError(() => of(new postsListActions.GetPostsError()))
+    );
+
+  @Effect()
+  getPostsOnScroll$: Observable<any> = this.actions$
+    .pipe(
+      ofType(postsListActions.PostsListActionTypes.GetPostsOnScroll),
+      debounce(() => timer(2000)),
+      map((action: any) => new postsListActions.GetPosts(action.selectedTab))
     );
 
 }

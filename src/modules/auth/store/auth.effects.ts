@@ -47,7 +47,7 @@ export class AuthEffects {
       ofType(authActions.AuthActionTypes.SignIn),
       tap(() => {
         const returnUrl = get(this.route, 'snapshot.queryParams.returnUrl');
-        this.router.navigateByUrl(returnUrl || '/');
+        this.router.navigateByUrl(returnUrl || '');
       })
     );
 

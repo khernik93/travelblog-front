@@ -12,13 +12,14 @@ export function authReducer(state = initialState, action: AuthActions): AuthStat
   switch (action.type) {
 
     case AuthActionTypes.SetAuthenticated:
-      return {
-        ...state,
-        authenticated: action.authenticated
-      };
+      return { ...state, authenticated: action.authenticated };
 
     case AuthActionTypes.SignIn:
+      return { ...state, authenticated: true }
+
     case AuthActionTypes.SignOut:
+      return { ...state, authenticated: false }
+      
     default: {
       return state;
     }

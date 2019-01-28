@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Post } from '../../../../../shared/clients/api.model';
+import { Post, Meta } from '../../../../../shared/clients/api.model';
 
 export enum PostsListActionTypes {
   GetPosts = '[Posts] Get posts',
@@ -39,7 +39,7 @@ export class GetPostsOnScroll implements Action {
 export class SetPosts implements Action {
   readonly type = PostsListActionTypes.SetPosts;
 
-  constructor(public posts: Post[]) { }
+  constructor(public posts: Post[], public meta: Meta) { }
 }
 
 export class SetPostsSuccess implements Action {

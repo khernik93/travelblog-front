@@ -7,8 +7,9 @@ import * as PostsListActions from './store/postsList.actions';
 import { ContentState } from '../../store/content.reducers';
 import { selectSelectedTab } from '../../../header/components/menu/store/menu.selectors';
 import { HeaderState } from '../../../header/store/header.reducers';
-import { selectPosts, selectLoading } from './store/postsList.selectors';
+import { selectPosts, selectLoading, selectPostsToScroll } from './store/postsList.selectors';
 import { Post, Tab } from '../../../../shared/clients/api.model';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'postsList-component',
@@ -19,8 +20,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   posts$: Observable<Post[]>;
   loading$: Observable<boolean>;
-
   selectedTab$: Observable<Tab>;
+
   private alive = true;
 
   constructor(
@@ -43,7 +44,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
     this.selectedTab$
       .pipe(
         takeWhile(() => this.alive),
-        filter((selectedTab: Tab) => selectedTab !== null)
+        filter((selectedTab: Tab) => !!selectedTab)
       )
       .subscribe((selectedTab: Tab) => {
         this.store.dispatch(new PostsListActions.GetPosts(selectedTab));
@@ -51,12 +52,12 @@ export class PostsListComponent implements OnInit, OnDestroy {
   }
 
   onScroll() {
-    combineLatest(this.selectedTab$, this.loading$)
+    this.selectedTab$
       .pipe(
         take(1),
-        filter(([_, loading]) => loading === false)
+        filter((selectedTab: Tab) => !!selectedTab)
       )
-      .subscribe(([selectedTab]) => {
+      .subscribe((selectedTab: Tab) => {
         this.store.dispatch(new PostsListActions.GetPostsOnScroll(selectedTab));
       });
   }

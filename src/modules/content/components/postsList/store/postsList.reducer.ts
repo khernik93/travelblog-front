@@ -1,14 +1,16 @@
 import { PostsListActions, PostsListActionTypes } from './postsList.actions';
-import { Post } from '../../../../../shared/clients/api.model';
+import { Post, Meta } from '../../../../../shared/clients/api.model';
 
 export interface PostsListState {
   posts: Post[],
-  loading: boolean
+  loading: boolean,
+  meta: Meta
 }
 
 export const initialState: PostsListState = {
   posts: [],
-  loading: false
+  loading: false,
+  meta: null
 };
 
 export function postsListReducer(state = initialState, action: PostsListActions): PostsListState {
@@ -17,7 +19,8 @@ export function postsListReducer(state = initialState, action: PostsListActions)
     case PostsListActionTypes.SetPosts: {
       return {
         ...state,
-        posts: state.posts.concat(action.posts)
+        posts: state.posts.concat(action.posts),
+        meta: action.meta
       }
     }
 

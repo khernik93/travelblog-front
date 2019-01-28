@@ -12,3 +12,11 @@ export const selectLoading = createSelector(
   selectContent,
   (state: ContentState) => state.postsList.loading
 );
+
+export const selectCanScroll = createSelector(
+  selectContent,
+  (state: ContentState) => {
+    const meta = state.postsList.meta;
+    return meta.total > meta.end + 1;
+  }
+);

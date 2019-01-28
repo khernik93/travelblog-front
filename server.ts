@@ -38,7 +38,7 @@ app.get('/posts', (request, response) => {
   if (tab === 'China') {
     output = {
       meta: {
-        total: 5,
+        total: 4,
         start: 0,
         end: 2
       },

@@ -16,9 +16,11 @@ describe('PostsListReducer', () => {
     WHEN SetPosts action is dispatched
     THEN all posts should be stored in the store properly
   `, () => {
-    const action = new postsListActions.SetPosts(ClonedPostsListResponse.content);
+    const posts = ClonedPostsListResponse.content;
+    const meta = { total: 5, start: 0, end: 1 };
+    const action = new postsListActions.SetPosts(posts, meta);
     const result = postsListReducer(initialState, action);
-    expect(result).toEqual({ ...initialState, posts: ClonedPostsListResponse.content });
+    expect(result).toEqual({ ...initialState, posts: posts, meta: meta });
   });
 
   it(`

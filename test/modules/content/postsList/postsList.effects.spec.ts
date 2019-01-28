@@ -2,19 +2,29 @@ import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
 import cloneDeep from 'lodash-es/cloneDeep';
+import { of } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { TabsResponse } from '../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { PostsListResponse } from '../../../utils/responses/postsList.response';
-import { SetPosts, GetPosts, GetPostsSuccess, GetPostsError, GetPostsOnScroll } from '../../../../src/modules/content/components/postsList/store/postsList.actions';
+import { 
+  SetPosts, 
+  GetPosts, 
+  GetPostsSuccess, 
+  GetPostsError, 
+  GetPostsOnScroll 
+} from '../../../../src/modules/content/components/postsList/store/postsList.actions';
 import { PostsListEffects } from '../../../../src/modules/content/components/postsList/store/postsList.effects';
 import { ApiClient } from '../../../../src/shared/clients/api.client';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
-import { of } from 'rxjs';
+import { ContentState } from '../../../../src/modules/content/store/content.reducers';
+import { PostsListStubs } from './helpers/postsList.stubs';
 
 describe('PostsListEffects', () => {
 
   let apiClient: jasmine.SpyObj<ApiClient>;
+  let store: jasmine.SpyObj<Store<ContentState>>;
 
   let actions: TestActions;
   let effects: PostsListEffects;
@@ -23,12 +33,14 @@ describe('PostsListEffects', () => {
 
   beforeEach(() => {
     apiClient = SharedStubs.getApiClientStub();
+    store = PostsListStubs.getStoreStub();
 
     TestBed.configureTestingModule({
       providers: [
         PostsListEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient }
+        { provide: ApiClient, useValue: apiClient },
+        { provide: Store, useValue: store }
       ]
     });
 
@@ -53,7 +65,7 @@ describe('PostsListEffects', () => {
     const selectedTab = ClonedTabsResponse[0];
     const action = new GetPosts(selectedTab);
     const outcome = [
-      new SetPosts(ClonedPostsListResponse.content),
+      new SetPosts(ClonedPostsListResponse.content, ClonedPostsListResponse.meta),
       new GetPostsSuccess()
     ];
     actions.stream = hot('-a', {a: action});
@@ -79,8 +91,7 @@ describe('PostsListEffects', () => {
 
   it(`
     WHEN GetPostsOnScroll action is dispatched
-    THEN there is 2s debounce
-    AND GetPosts action is dispatched
+    THEN GetPosts action is dispatched
   `, (done) => {
     const tab = 'tab';
     actions.stream = of(new GetPostsOnScroll(tab));

@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { takeWhile, filter } from 'rxjs/operators';
+import { Observable, Subject, combineLatest } from 'rxjs';
+import { takeWhile, filter, take } from 'rxjs/operators';
 
 import * as PostsListActions from './store/postsList.actions';
 import { ContentState } from '../../store/content.reducers';
 import { selectSelectedTab } from '../../../header/components/menu/store/menu.selectors';
 import { HeaderState } from '../../../header/store/header.reducers';
-import { selectPosts } from './store/postsList.selectors';
+import { selectPosts, selectLoading } from './store/postsList.selectors';
 import { Post, Tab } from '../../../../shared/clients/api.model';
 
 @Component({
@@ -18,6 +18,7 @@ import { Post, Tab } from '../../../../shared/clients/api.model';
 export class PostsListComponent implements OnInit, OnDestroy {
 
   posts$: Observable<Post[]>;
+  loading$: Observable<boolean>;
 
   selectedTab$: Observable<Tab>;
   private alive = true;
@@ -27,6 +28,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
   ) {
     this.selectedTab$ = this.store.select(selectSelectedTab);
     this.posts$ = this.store.select(selectPosts);
+    this.loading$ = this.store.select(selectLoading);
   }
 
   ngOnInit() {
@@ -49,7 +51,14 @@ export class PostsListComponent implements OnInit, OnDestroy {
   }
 
   onScroll() {
-    this.store.dispatch(new PostsListActions.GetPosts('China'));
+    combineLatest(this.selectedTab$, this.loading$)
+      .pipe(
+        take(1),
+        filter(([_, loading]) => loading === false)
+      )
+      .subscribe(([selectedTab]) => {
+        this.store.dispatch(new PostsListActions.GetPostsOnScroll(selectedTab));
+      });
   }
 
 }

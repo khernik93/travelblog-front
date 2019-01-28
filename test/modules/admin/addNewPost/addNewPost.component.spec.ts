@@ -61,7 +61,7 @@ describe('AddNewPostComponent', () => {
     WHEN the component is loaded
     THEN all tabs should be loaded and visible
   `, () => {
-    const tabs = fixture.debugElement.queryAll(By.css('#tabs option'));
+    const tabs = fixture.debugElement.queryAll(By.css('#tab option'));
     expect(tabs.length).toEqual(AddNewPostState.header.menu.tabs.length);
   });
 
@@ -70,13 +70,13 @@ describe('AddNewPostComponent', () => {
     THEN addNewPost action with correct values is dispatched
   `, () => {
     const formValues = {
-      tabs: AddNewPostState.header.menu.tabs[1],
+      tab: AddNewPostState.header.menu.tabs[1],
       title: 'title',
       tags: 'tag1',
       content: 'content'
     };
 
-    component.addNewPostForm.controls.tabs.setValue(formValues.tabs);
+    component.addNewPostForm.controls.tab.setValue(formValues.tab);
     component.addNewPostForm.controls.title.setValue(formValues.title);
     component.addNewPostForm.controls.tags.setValue(formValues.tags);
     component.content = formValues.content;
@@ -88,7 +88,7 @@ describe('AddNewPostComponent', () => {
       title: formValues.title,
       tags: formValues.tags,
       content: formValues.content
-    }, formValues.tabs)]);
+    }, formValues.tab)]);
   });
 
 });

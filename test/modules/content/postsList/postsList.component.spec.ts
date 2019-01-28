@@ -74,4 +74,8 @@ describe('PostsListComponent', () => {
     expect(breakingLines.length).toEqual(ClonedPostsListResponse.content.length - 1);
   });
 
+  /**
+   * @TODO Test infinite scrolling
+   */
+
 });

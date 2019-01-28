@@ -1,5 +1,4 @@
-<br><br><br>
-<div infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50" (scrolled)="onScroll()">
+<section infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="0" (scrolled)="onScroll()">
   <div class="post-wrap" *ngFor="let post of (posts$ | async); let i = index">
     <div class="content-section posted-date">
       <h4>{{ post.createdAt }}</h4>
@@ -26,4 +25,5 @@
       <br><br><br><br>
     </div>
   </div>
-</div>
+  <div class="ajax-loader" *ngIf="loading$ | async"></div>
+</section>

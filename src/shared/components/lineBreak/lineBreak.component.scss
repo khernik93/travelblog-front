@@ -1,0 +1,21 @@
+@import "../../../variables";
+
+section {
+  text-align: center;
+}
+
+section * {
+  display: inline-block;
+}
+
+hr {
+  margin: 0;
+  width: 10%;
+  border: 1px solid $black;
+  border-radius: 50%;
+  margin-bottom: 4px;
+}
+
+i {
+  margin: 0 10px;
+}

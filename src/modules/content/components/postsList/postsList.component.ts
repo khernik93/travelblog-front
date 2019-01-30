@@ -1,15 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, combineLatest } from 'rxjs';
-import { takeWhile, filter, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { takeWhile, take, filter } from 'rxjs/operators';
 
 import * as PostsListActions from './store/postsList.actions';
 import { ContentState } from '../../store/content.reducers';
 import { selectSelectedTab } from '../../../header/components/menu/store/menu.selectors';
 import { HeaderState } from '../../../header/store/header.reducers';
-import { selectPosts, selectLoading, selectPostsToScroll } from './store/postsList.selectors';
+import { selectPosts, selectLoading } from './store/postsList.selectors';
 import { Post, Tab } from '../../../../shared/clients/api.model';
-import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'postsList-component',
@@ -33,14 +32,14 @@ export class PostsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getPostsOnSelectedTab();
+    this.onSelectedTab();
   }
 
   ngOnDestroy() {
     this.alive = false;
   }
 
-  private getPostsOnSelectedTab() {
+  private onSelectedTab() {
     this.selectedTab$
       .pipe(
         takeWhile(() => this.alive),
@@ -53,10 +52,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   onScroll() {
     this.selectedTab$
-      .pipe(
-        take(1),
-        filter((selectedTab: Tab) => !!selectedTab)
-      )
+      .pipe(take(1))
       .subscribe((selectedTab: Tab) => {
         this.store.dispatch(new PostsListActions.GetPostsOnScroll(selectedTab));
       });

@@ -32,8 +32,9 @@
   width: 54px;
   height: 54px;
   background: $lightgrey;
-  opacity: 0.6;
-  filter: alpha(opacity=60);
+  opacity: 0.45;
+  filter: alpha(opacity=45);
+  border-radius: 50%;
   transition: all .35s;
   & span {
     width: 100% !important;

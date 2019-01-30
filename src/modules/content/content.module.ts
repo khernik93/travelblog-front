@@ -18,13 +18,15 @@ import { PostsListComponent } from './components/postsList/postsList.component';
 import { RecentPostsComponent } from './components/recentPosts/recentPosts.component';
 import { SelfieComponent } from './components/selfie/selfie.component';
 import { SinglePostComponent } from './components/singlePost/singlePost.component';
+import { LineBreakComponent } from '../../shared/components/lineBreak/lineBreak.component';
 
 export const MODULE_DECLARATIONS = [
   ContentComponent,
   PostsListComponent,
   RecentPostsComponent,
   SelfieComponent,
-  SinglePostComponent
+  SinglePostComponent,
+  LineBreakComponent
 ];
 
 export const MODULE_IMPORTS = [

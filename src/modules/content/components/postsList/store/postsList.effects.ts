@@ -37,7 +37,7 @@ export class PostsListEffects {
           );
       }),
       takeWhile((result: any) => result.canScroll),
-      debounce(() => timer(2000)),
+      debounce(() => timer(1000)),
       map((result: any) => new postsListActions.GetPosts(result.action.selectedTab))
     );
 

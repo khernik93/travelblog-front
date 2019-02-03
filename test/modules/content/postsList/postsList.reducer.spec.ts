@@ -41,8 +41,13 @@ describe('PostsListReducer', () => {
     OR GetPostsOnScroll action is dispatched
     THEN loading should be set to true
   `, () => {
-    Helper.testLoading(new postsListActions.GetPosts(null, 0, 1), true);
-    Helper.testLoading(new postsListActions.GetPostsOnScroll(null), true);
+    let result;
+
+    result = postsListReducer(initialState, new postsListActions.GetPosts(null, null, null));
+    expect(result).toEqual({ ...initialState, loading: true });
+
+    result = postsListReducer(initialState, new postsListActions.GetPostsOnScroll(null));
+    expect(result).toEqual({ ...initialState, loading: true });
   });
 
   it(`
@@ -52,19 +57,19 @@ describe('PostsListReducer', () => {
     OR SetPostsError action is dispatched
     THEN loading should be set to false
   `, () => {
-    Helper.testLoading(new postsListActions.GetPostsSuccess(), false);
-    Helper.testLoading(new postsListActions.GetPostsError(), false);
-    Helper.testLoading(new postsListActions.SetPostsSuccess(), false);
-    Helper.testLoading(new postsListActions.SetPostsError(), false);
+    let result;
+    
+    result = postsListReducer(initialState, new postsListActions.GetPostsSuccess());
+    expect(result).toEqual({ ...initialState, loading: false, initialized: true });
+
+    result = postsListReducer(initialState, new postsListActions.GetPostsError());
+    expect(result).toEqual({ ...initialState, loading: false, initialized: true });
+
+    result = postsListReducer(initialState, new postsListActions.SetPostsSuccess());
+    expect(result).toEqual({ ...initialState, loading: false, initialized: true });
+
+    result = postsListReducer(initialState, new postsListActions.SetPostsError());
+    expect(result).toEqual({ ...initialState, loading: false, initialized: true });
   });
-
-  class Helper {
-
-    static testLoading(action: any, loading: boolean): void {
-      const result = postsListReducer(initialState, action);
-      expect(result).toEqual({ ...initialState, loading: loading });
-    }
-
-  }
 
 });

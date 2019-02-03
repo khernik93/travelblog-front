@@ -77,4 +77,17 @@ describe('PostsListComponent', () => {
     expect(postWraps.length).toEqual(ClonedPostsListResponse.content.length);
   });
 
+  it(`
+    WHEN there are no posts
+    THEN the proper text is displayed
+  `, () => {
+    let ModifiedState = cloneDeep(PostsListState);
+    ModifiedState.content.postsList.posts = [];
+    ModifiedState.content.postsList.initialized = true;
+    store.setState(ModifiedState);
+    fixture.detectChanges();
+    const noContent = fixture.debugElement.queryAll(By.css('.no-content'));
+    expect(noContent.length).toEqual(1);
+  });
+
 });

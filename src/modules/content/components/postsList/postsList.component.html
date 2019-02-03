@@ -5,39 +5,33 @@
     No posts yet
   </div>
 
-  <!-- Posts -->
   <div *ngIf="(posts$ | async).length > 0"
-       infiniteScroll 
-       [infiniteScrollDistance]="0" 
-       [infiniteScrollThrottle]="0" 
-       (scrolled)="onScroll()">
+    infiniteScroll 
+    [infiniteScrollDistance]="0" 
+    [infiniteScrollThrottle]="0" 
+    (scrolled)="onScroll()">
 
+    <!-- Posts -->
     <div class="post-wrap" *ngFor="let post of (posts$ | async); let i = index">
       <div class="content-section posted-date">
-        <h4>{{ post.createdAt }}</h4>
+        <h4>{{ post.createdAt | date:'medium' }}</h4>
       </div>
       <br>
       <div class="content-section entry-title">
-        <h1>{{ post.title }}</h1>
+        <h1 [routerLink]="'/posts/' + post.id">{{ post.title }}</h1>
       </div>
-      <br><br>
       <div class="content-section tags-links">
-        <span *ngFor="let tag of post.tags">{{ tag }}</span>
+        <span *ngFor="let tag of post.tags">#{{ tag }}</span>
       </div>
-      <br><br>
+      <br>
       <div class="content-section entry-content">
         <p>{{ post.content }}</p>
       </div>
-      <br>
-      <div class="content-section read-more">
-        <a class="read-more" [routerLink]="'/posts/' + post.id">...read more</a>
+      <br><br><br><Br>
+      <div class="content-section" *ngIf="i !== (posts$ | async).length - 1">
+        <lineBreak-component></lineBreak-component>
       </div>
       <br><br><br><br>
-      <div class="content-section" *ngIf="i !== ((posts$ | async).length - 1)">
-        <lineBreak-component></lineBreak-component>
-        <br><br><br><br>
-      </div>
-
     </div>
 
     <!-- Infinite scroll loader -->

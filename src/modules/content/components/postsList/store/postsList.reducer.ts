@@ -16,6 +16,11 @@ export const initialState: PostsListState = {
 export function postsListReducer(state = initialState, action: PostsListActions): PostsListState {
   switch (action.type) {
 
+    case PostsListActionTypes.GetPosts:
+    case PostsListActionTypes.GetPostsOnScroll: {
+      return { ...state, loading: true }
+    }
+
     case PostsListActionTypes.SetPosts: {
       return {
         ...state,
@@ -24,16 +29,15 @@ export function postsListReducer(state = initialState, action: PostsListActions)
       }
     }
 
-    case PostsListActionTypes.GetPosts: {
-      return { ...state, loading: true }
+    case PostsListActionTypes.ClearPosts: {
+      return { ...initialState }
     }
 
-    case PostsListActionTypes.GetPostsSuccess: {
+    case PostsListActionTypes.GetPostsSuccess:
+    case PostsListActionTypes.GetPostsError:
+    case PostsListActionTypes.SetPostsSuccess:
+    case PostsListActionTypes.SetPostsError: {
       return { ...state, loading: false }
-    }
-
-    case PostsListActionTypes.GetPostsOnScroll: {
-      return { ...state, loading: true }
     }
 
     default: {

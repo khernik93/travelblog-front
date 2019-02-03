@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import * as MenuActions from './store/menu.actions';
 import { HeaderState } from '../../store/header.reducers';
 import { selectTabs, selectSelectedTab } from './store/menu.selectors';
+import { Tab } from '../../../../shared/clients/api.model';
 
 @Component({
   selector: 'menu-component',
@@ -13,8 +14,8 @@ import { selectTabs, selectSelectedTab } from './store/menu.selectors';
 })
 export class MenuComponent implements OnInit {
 
-  selectedTab$: Observable<string>;
-  tabs$: Observable<string[]>;
+  selectedTab$: Observable<Tab>;
+  tabs$: Observable<Tab[]>;
   hamburgerMenuOpened: boolean = true;
 
   constructor(
@@ -28,7 +29,7 @@ export class MenuComponent implements OnInit {
     this.store.dispatch(new MenuActions.GetTabs());
   }
 
-  selectTab(tab: string): void {
+  selectTab(tab: Tab): void {
     this.store.dispatch(new MenuActions.SelectTab(tab));
   }
 

@@ -26,6 +26,9 @@ section {
 
 .post-wrap .entry-title {
   color: $black;
+  & * {
+    cursor: pointer;
+  }
 }
 
 .post-wrap .tags-links {
@@ -42,9 +45,4 @@ section {
 
 .post-wrap .read-more {
   visibility: visible;
-}
-
-.post-wrap .comments {
-  text-align: right;
-  padding-right: 10%;
 }

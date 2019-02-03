@@ -55,13 +55,8 @@ describe('RecentPostsComponent', () => {
     WHEN the component is loaded
     THEN all recent posts should be displayed properly
   `, () => {
-    // Assure posts count
     const postWraps = fixture.debugElement.queryAll(By.css('.post-wrap'));
     expect(postWraps.length).toEqual(ClonedRecentPostsResponse.length);
-
-    // Assure breaking lines count
-    const breakingLines = fixture.debugElement.queryAll(By.css('.breaking-line'));
-    expect(breakingLines.length).toEqual(ClonedRecentPostsResponse.length - 1);
   });
 
 });

@@ -24,24 +24,38 @@ describe('PostsListReducer', () => {
   });
 
   it(`
+    WHEN ClearPosts action is dispatched
+    THEN initialState should be restored
+  `, () => {
+    let filledState = cloneDeep(initialState);
+    filledState.posts = ClonedPostsListResponse.content;
+    filledState.meta = ClonedPostsListResponse.meta;
+
+    const action = new postsListActions.ClearPosts();
+    const result = postsListReducer(filledState, action);
+    expect(result).toEqual(initialState);
+  });
+
+  it(`
     WHEN GetPosts action is dispatched
+    OR GetPostsOnScroll action is dispatched
     THEN loading should be set to true
   `, () => {
-    Helper.testLoading(new postsListActions.GetPosts('tab'), true);
+    Helper.testLoading(new postsListActions.GetPosts(null, 0, 1), true);
+    Helper.testLoading(new postsListActions.GetPostsOnScroll(null), true);
   });
 
   it(`
     WHEN GetPostsSuccess action is dispatched
+    OR GetPostsError action is dispatched
+    OR SetPostsSuccess action is dispatched
+    OR SetPostsError action is dispatched
     THEN loading should be set to false
   `, () => {
     Helper.testLoading(new postsListActions.GetPostsSuccess(), false);
-  });
-
-  it(`
-    WHEN GetPostsOnScroll action is dispatched
-    THEN loading should be set to true
-  `, () => {
-    Helper.testLoading(new postsListActions.GetPostsOnScroll('tab'), true);
+    Helper.testLoading(new postsListActions.GetPostsError(), false);
+    Helper.testLoading(new postsListActions.SetPostsSuccess(), false);
+    Helper.testLoading(new postsListActions.SetPostsError(), false);
   });
 
   class Helper {

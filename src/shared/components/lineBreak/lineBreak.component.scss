@@ -4,18 +4,21 @@ section {
   text-align: center;
 }
 
-section * {
-  display: inline-block;
+.section-inner {
+  width: 30%;
+  margin: 0 auto;
 }
 
 hr {
   margin: 0;
-  width: 10%;
+  width: calc(50% - 22px);
   border: 1px solid $black;
   border-radius: 50%;
-  margin-bottom: 4px;
+  margin-top: 9px;
 }
 
-i {
-  margin: 0 10px;
+.globe-icon {
+  margin: 0 auto;
+  width: 20px;
+  height: 20px;
 }

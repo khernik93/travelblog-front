@@ -9,6 +9,7 @@ import { selectSelectedTab } from '../../../header/components/menu/store/menu.se
 import { HeaderState } from '../../../header/store/header.reducers';
 import { selectPosts, selectLoading } from './store/postsList.selectors';
 import { Post, Tab } from '../../../../shared/clients/api.model';
+import { PostsListService } from './postsList.service';
 
 @Component({
   selector: 'postsList-component',
@@ -24,7 +25,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
   private alive = true;
 
   constructor(
-    private store: Store<HeaderState | ContentState>
+    private store: Store<HeaderState | ContentState>,
+    private postsListService: PostsListService
   ) {
     this.selectedTab$ = this.store.select(selectSelectedTab);
     this.posts$ = this.store.select(selectPosts);
@@ -46,15 +48,23 @@ export class PostsListComponent implements OnInit, OnDestroy {
         filter((selectedTab: Tab) => !!selectedTab)
       )
       .subscribe((selectedTab: Tab) => {
-        this.store.dispatch(new PostsListActions.GetPosts(selectedTab));
+        this.store.dispatch(new PostsListActions.ClearPosts);
+        this.store.dispatch(new PostsListActions.GetPosts(
+          selectedTab, 
+          this.postsListService.DEFAULT_START, 
+          this.postsListService.DEFAULT_END
+        ));
       });
   }
 
   onScroll() {
     this.selectedTab$
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        filter((selectedTab: Tab) => !!selectedTab)
+      )
       .subscribe((selectedTab: Tab) => {
-        this.store.dispatch(new PostsListActions.GetPostsOnScroll(selectedTab));
+        this.store.dispatch(new PostsListActions.TryToGetPostsOnScroll(selectedTab));
       });
   }
 

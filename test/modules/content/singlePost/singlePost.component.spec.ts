@@ -22,7 +22,6 @@ describe('SinglePostComponent', () => {
 
   let component: SinglePostComponent;
   let fixture: ComponentFixture<SinglePostComponent>;
-  let ClonedSinglePostResponse: typeof SinglePostResponse;
   
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<ContentState>();
@@ -49,10 +48,6 @@ describe('SinglePostComponent', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(() => {
-    ClonedSinglePostResponse = cloneDeep(SinglePostResponse);
-  });
-
   it('should check if the component is defined', () => {
     expect(component).toBeDefined();
   });
@@ -62,14 +57,13 @@ describe('SinglePostComponent', () => {
     THEN getPost action should be dispatched with initial route post id
   `, () => {
     expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(store.dispatch).toHaveBeenCalledWith(new GetPost(ClonedSinglePostResponse.id.toString()));
+    expect(store.dispatch).toHaveBeenCalledWith(new GetPost(SinglePostStubs.postId));
   });
 
   it(`
     WHEN the component is loaded
     THEN post should be displayed
   `, () => {
-    // Assure posts count
     const postWraps = fixture.debugElement.queryAll(By.css('.post-wrap'));
     expect(postWraps.length).toEqual(1);
   });

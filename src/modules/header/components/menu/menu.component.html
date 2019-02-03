@@ -7,9 +7,9 @@
 
   <ul class="menu" *ngIf="hamburgerMenuOpened">
     <li *ngFor="let tab of tabs$ | async; index as i" 
-        [className]="(selectedTab$ | async) === tab ? 'selected' : ''" 
+        [className]="(selectedTab$ | async).id === tab.id ? 'selected' : ''" 
         (click)="selectTab(tab)">
-      <a onclick="return false;"><h3>{{ tab }}</h3></a>
+      <a onclick="return false;"><h3>{{ tab.name }}</h3></a>
     </li>
   </ul>
   

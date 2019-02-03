@@ -5,7 +5,7 @@ export const SwiperState: any = {
   header: {
     menu: {
       tabs: TabsResponse,
-      selectedTab: Object.keys(PhotosResponse)[0]
+      selectedTab: TabsResponse[0]
     },
     swiper: {
       photos: PhotosResponse

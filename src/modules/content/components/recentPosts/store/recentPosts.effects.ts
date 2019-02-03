@@ -20,9 +20,7 @@ export class RecentPostsEffects {
     .pipe(
       ofType(recentPostsActions.RecentPostsActionTypes.GetRecentPosts),
       exhaustMap(() => this.apiClient.getRecentPosts()),
-      map((response: ApiResponse<Post[]>) => {
-        return new recentPostsActions.SetRecentPosts(response.data);
-      })
+      map((response: ApiResponse<Post[]>) => new recentPostsActions.SetRecentPosts(response))
     );
 
 }

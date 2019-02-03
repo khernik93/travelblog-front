@@ -13,11 +13,11 @@ import {
 } from './api.model';
 
 const ROUTES: any = {
-  posts: '/posts',
-  recentPosts: '/recentPosts',
+  posts: '/post/tab',
+  recentPosts: '/recentpost',
   post: '/post',
-  tabs: '/countries',
-  photos: '/swiperphotos',
+  tabs: '/tab',
+  photos: '/swiperphoto',
   addNewPost: '/addNewPost',
   signIn: '/signin'
 };
@@ -34,9 +34,12 @@ export class ApiClient {
     return this.transferHttpService.get(url);
   }
 
-  getPosts(tab: string): Observable<ApiResponse<PostsPaginable>> {
+  getPosts(tabId: number, params: {start: number, end: number}): Observable<ApiResponse<PostsPaginable>> {
     const url = this.prepareUrl(ROUTES.posts);
-    return this.transferHttpService.get(url, {params: {tab}});
+    return this.transferHttpService.get(`${url}/${tabId}`, {params: { 
+      start: params.start.toString(),
+      end: params.end.toString() 
+    }});
   }
 
   getPost(id: string): Observable<ApiResponse<Post>> {

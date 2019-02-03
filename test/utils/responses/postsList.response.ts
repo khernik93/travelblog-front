@@ -1,16 +1,39 @@
 import { PostsPaginable } from '../../../src/shared/clients/api.model';
 
 export const PostsListResponse: PostsPaginable = {
-  "meta": {
-    "total": 2, 
-    "start": 0, 
-    "end": 1
+  "meta":{
+    "start":0,
+    "end":2,
+    "total":7
   },
-  "content": [
-    {"id": 1, "createdAt": "123", "title": "test_title_1", "tags": ["tag1"],"content": "test", "commentsCount": 2},
-    {"id": 2, "createdAt": "1234", "title": "test_title_2", "tags": ["tag2", "tag3"], "content": "test", "commentsCount": 3},
-    {"id": 2, "createdAt": "1234", "title": "test_title_2", "tags": ["tag2", "tag3"], "content": "test", "commentsCount": 3},
-    {"id": 2, "createdAt": "1234", "title": "test_title_2", "tags": ["tag2", "tag3"], "content": "test", "commentsCount": 3},
-    {"id": 2, "createdAt": "1234", "title": "test_title_2", "tags": ["tag2", "tag3"], "content": "test", "commentsCount": 3}
+  "content":[
+    {
+      "tab":{"id":1,"name":"China"},
+      "createdAt":"2019-02-01T22:00:51.000+0000",
+      "title":"This is the first post",
+      "content":"post1",
+      "tags":["tag1","tag2","tag3"]
+    },
+    {
+      "tab":{"id":1,"name":"China"},
+      "createdAt":"2019-02-02T11:28:23.000+0000",
+      "title":"This is the first post",
+      "content":"post2",
+      "tags":[]
+    },
+    {
+      "tab":{"id":1,"name":"China"},
+      "createdAt":"2019-02-01T22:00:51.000+0000",
+      "title":"This is the first post",
+      "content":"post1",
+      "tags":["tag1","tag2","tag3"]
+    },
+    {
+      "tab":{"id":1,"name":"China"},
+      "createdAt":"2019-02-02T11:28:23.000+0000",
+      "title":"This is the first post",
+      "content":"post2",
+      "tags":[]
+    }
   ]
 };

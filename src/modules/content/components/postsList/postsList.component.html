@@ -1,7 +1,7 @@
 <section>
 
   <!-- No content -->
-  <div class="no-content" *ngIf="(posts$ | async).length == 0">
+  <div class="no-content" *ngIf="(posts$ | async).length == 0 && (initialized$ | async)">
     No posts yet
   </div>
 

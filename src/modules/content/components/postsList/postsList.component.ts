@@ -7,7 +7,7 @@ import * as PostsListActions from './store/postsList.actions';
 import { ContentState } from '../../store/content.reducers';
 import { selectSelectedTab } from '../../../header/components/menu/store/menu.selectors';
 import { HeaderState } from '../../../header/store/header.reducers';
-import { selectPosts, selectLoading } from './store/postsList.selectors';
+import { selectPosts, selectLoading, selectInitialized } from './store/postsList.selectors';
 import { Post, Tab } from '../../../../shared/clients/api.model';
 import { PostsListService } from './postsList.service';
 
@@ -21,6 +21,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
   posts$: Observable<Post[]>;
   loading$: Observable<boolean>;
   selectedTab$: Observable<Tab>;
+  initialized$: Observable<boolean>;
 
   private alive = true;
 
@@ -31,6 +32,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
     this.selectedTab$ = this.store.select(selectSelectedTab);
     this.posts$ = this.store.select(selectPosts);
     this.loading$ = this.store.select(selectLoading);
+    this.initialized$ = this.store.select(selectInitialized);
   }
 
   ngOnInit() {

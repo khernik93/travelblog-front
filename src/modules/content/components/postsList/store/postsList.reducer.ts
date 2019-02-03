@@ -3,12 +3,14 @@ import { Post, Meta } from '../../../../../shared/clients/api.model';
 
 export interface PostsListState {
   posts: Post[],
+  initialized: boolean,
   loading: boolean,
   meta: Meta
 }
 
 export const initialState: PostsListState = {
   posts: [],
+  initialized: false,
   loading: false,
   meta: null
 };
@@ -37,7 +39,7 @@ export function postsListReducer(state = initialState, action: PostsListActions)
     case PostsListActionTypes.GetPostsError:
     case PostsListActionTypes.SetPostsSuccess:
     case PostsListActionTypes.SetPostsError: {
-      return { ...state, loading: false }
+      return { ...state, loading: false, initialized: true }
     }
 
     default: {

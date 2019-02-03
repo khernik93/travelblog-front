@@ -19,6 +19,11 @@ export const selectMeta = createSelector(
   (state: ContentState) => state.postsList.meta
 );
 
+export const selectInitialized = createSelector(
+  selectContent,
+  (state: ContentState) => state.postsList.initialized
+);
+
 export const selectCanScroll = createSelector(
   selectPosts,
   selectMeta,

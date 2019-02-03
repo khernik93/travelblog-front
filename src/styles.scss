@@ -70,7 +70,7 @@ h4 {
 }
 
 p {
-  line-height: 2rem;
+  line-height: 1.5rem;
 }
 
 a, a:active, a:link, a:visited {
@@ -95,4 +95,9 @@ hr.breaking-line {
 
 .ngx-wrapper {
   background-color: white;
+}
+
+.no-content {
+  width: 100%;
+  text-align: center;
 }

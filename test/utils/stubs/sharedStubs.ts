@@ -11,15 +11,14 @@ import { ApiClient } from '../../../src/shared/clients/api.client';
 export class SharedStubs {
 
   static getApiClientStub(): jasmine.SpyObj<ApiClient> {
-    const wrapResponse = (data: any): {error: string, data: any} => ({ error: '', data });
     return jasmine.createSpyObj('ApiClient', {
-      'getRecentPosts': of(wrapResponse(RecentPostsResponse)),
-      'getPosts': of(wrapResponse(PostsListResponse)),
-      'getPost': of(wrapResponse(SinglePostResponse)),
-      'getTabs': of(wrapResponse(TabsResponse)),
-      'getPhotos': of(wrapResponse(PhotosResponse)),
-      'addNewPost': of(wrapResponse('')),
-      'signIn': of(wrapResponse(''))
+      'getRecentPosts': of(RecentPostsResponse),
+      'getPosts': of(PostsListResponse),
+      'getPost': of(SinglePostResponse),
+      'getTabs': of(TabsResponse),
+      'getPhotos': of(PhotosResponse),
+      'addNewPost': of(''),
+      'signIn': of('')
     });
   }
 

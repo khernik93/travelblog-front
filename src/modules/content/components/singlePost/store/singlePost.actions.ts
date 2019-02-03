@@ -2,6 +2,10 @@ import { Action } from '@ngrx/store';
 
 import { Post } from '../../../../../shared/clients/api.model';
 
+/**
+ * @TODO Add success/error actions
+ */
+
 export enum SinglePostActionTypes {
   GetPost = '[SinglePost] Get post',
   SetPost = '[SinglePost] Set post'

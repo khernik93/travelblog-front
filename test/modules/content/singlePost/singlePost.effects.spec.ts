@@ -9,6 +9,7 @@ import { SetPost, GetPost } from '../../../../src/modules/content/components/sin
 import { SinglePostEffects } from '../../../../src/modules/content/components/singlePost/store/singlePost.effects';
 import { ApiClient } from '../../../../src/shared/clients/api.client';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
+import { SinglePostStubs } from './helpers/singlePost.stubs';
 
 describe('SinglePostEffects', () => {
 
@@ -46,14 +47,18 @@ describe('SinglePostEffects', () => {
     THEN apiClient.getPost method should be executed
     AND SetPost action should be dispatched with fetched post
   `, () => {
-    const id = ClonedSinglePostResponse.id;
-    const action = new GetPost(id.toString());
+    const id = SinglePostStubs.postId;
+    const action = new GetPost(id);
     const outcome = new SetPost(ClonedSinglePostResponse);
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: { data: ClonedSinglePostResponse }});
+    const response = cold('-a|', { a: ClonedSinglePostResponse });
     const expected = cold('--b', { b: outcome });
     apiClient.getPost.and.returnValue(response);
     expect(effects.getPost$).toBeObservable(expected);
   });
+
+  /**
+   * @TODO Add error case when added new actions
+   */
 
 });

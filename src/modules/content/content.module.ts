@@ -9,7 +9,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { contentReducers } from './store/content.reducers';
 import { contentEffects } from './store/content.effects';
 
-//Routing
+// Routing
 import { ContentRoutingModule } from './routing/contentRouting.module';
 
 // Components
@@ -18,13 +18,18 @@ import { PostsListComponent } from './components/postsList/postsList.component';
 import { RecentPostsComponent } from './components/recentPosts/recentPosts.component';
 import { SelfieComponent } from './components/selfie/selfie.component';
 import { SinglePostComponent } from './components/singlePost/singlePost.component';
+import { LineBreakComponent } from '../../shared/components/lineBreak/lineBreak.component';
+
+// Services
+import { PostsListService } from './components/postsList/postsList.service';
 
 export const MODULE_DECLARATIONS = [
   ContentComponent,
   PostsListComponent,
   RecentPostsComponent,
   SelfieComponent,
-  SinglePostComponent
+  SinglePostComponent,
+  LineBreakComponent
 ];
 
 export const MODULE_IMPORTS = [
@@ -41,6 +46,10 @@ const STORE_IMPORTS = [
   EffectsModule.forFeature(contentEffects)
 ];
 
+const MODULE_PROVIDERS = [
+  PostsListService
+];
+
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
@@ -49,7 +58,7 @@ const STORE_IMPORTS = [
     ...STORE_IMPORTS
   ],
   exports: [ContentComponent],
-  providers: []
+  providers: MODULE_PROVIDERS
 })
 export class ContentModule {
   constructor() { }

@@ -1,15 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subject, combineLatest } from 'rxjs';
-import { takeWhile, filter, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { takeWhile, take, filter } from 'rxjs/operators';
 
 import * as PostsListActions from './store/postsList.actions';
 import { ContentState } from '../../store/content.reducers';
 import { selectSelectedTab } from '../../../header/components/menu/store/menu.selectors';
 import { HeaderState } from '../../../header/store/header.reducers';
-import { selectPosts, selectLoading, selectPostsToScroll } from './store/postsList.selectors';
+import { selectPosts, selectLoading } from './store/postsList.selectors';
 import { Post, Tab } from '../../../../shared/clients/api.model';
-import { Meta } from '@angular/platform-browser';
+import { PostsListService } from './postsList.service';
 
 @Component({
   selector: 'postsList-component',
@@ -25,7 +25,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
   private alive = true;
 
   constructor(
-    private store: Store<HeaderState | ContentState>
+    private store: Store<HeaderState | ContentState>,
+    private postsListService: PostsListService
   ) {
     this.selectedTab$ = this.store.select(selectSelectedTab);
     this.posts$ = this.store.select(selectPosts);
@@ -33,21 +34,26 @@ export class PostsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getPostsOnSelectedTab();
+    this.onSelectedTab();
   }
 
   ngOnDestroy() {
     this.alive = false;
   }
 
-  private getPostsOnSelectedTab() {
+  private onSelectedTab() {
     this.selectedTab$
       .pipe(
         takeWhile(() => this.alive),
         filter((selectedTab: Tab) => !!selectedTab)
       )
       .subscribe((selectedTab: Tab) => {
-        this.store.dispatch(new PostsListActions.GetPosts(selectedTab));
+        this.store.dispatch(new PostsListActions.ClearPosts);
+        this.store.dispatch(new PostsListActions.GetPosts(
+          selectedTab, 
+          this.postsListService.DEFAULT_START, 
+          this.postsListService.DEFAULT_END
+        ));
       });
   }
 
@@ -58,7 +64,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
         filter((selectedTab: Tab) => !!selectedTab)
       )
       .subscribe((selectedTab: Tab) => {
-        this.store.dispatch(new PostsListActions.GetPostsOnScroll(selectedTab));
+        this.store.dispatch(new PostsListActions.TryToGetPostsOnScroll(selectedTab));
       });
   }
 

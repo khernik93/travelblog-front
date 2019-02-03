@@ -20,9 +20,7 @@ export class SinglePostEffects {
     .pipe(
       ofType(singlePostActions.SinglePostActionTypes.GetPost),
       exhaustMap((action: any) => this.apiClient.getPost(action.id)),
-      map((response: ApiResponse<Post>) => {
-        return new singlePostActions.SetPost(response.data);
-      })
+      map((response: ApiResponse<Post>) => new singlePostActions.SetPost(response))
     );
 
 }

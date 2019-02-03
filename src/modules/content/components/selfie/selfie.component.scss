@@ -1,6 +1,6 @@
 @import "../../../../variables";
 
-.selfie {
+section {
   display: flex;
   flex-direction: column;
   padding: 0 6%;
@@ -9,10 +9,18 @@
   text-align: center;
 }
 
-.selfie img {
+.selfie-img {
   height: 200px;
   width: 200px;
-  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 25px;
   border-radius: 50%;
   border: 0;
+  background-image: url("/images/selfie.jpg");
+  background-size: contain;
+  box-shadow: 3px 6px $black;
+}
+
+p {
+  margin-bottom: 7px;
 }

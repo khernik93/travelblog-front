@@ -1,0 +1,24 @@
+@import "../../../variables";
+
+section {
+  text-align: center;
+}
+
+.section-inner {
+  width: 30%;
+  margin: 0 auto;
+}
+
+hr {
+  margin: 0;
+  width: calc(50% - 22px);
+  border: 1px solid $black;
+  border-radius: 50%;
+  margin-top: 9px;
+}
+
+.globe-icon {
+  margin: 0 auto;
+  width: 20px;
+  height: 20px;
+}

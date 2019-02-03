@@ -49,7 +49,7 @@ describe('MenuEffects', () => {
     const action = new GetTabs();
     const outcome = new SetTabs(ClonedTabsResponse);
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: { data: ClonedTabsResponse } });
+    const response = cold('-a|', { a: ClonedTabsResponse });
     const expected = cold('--b', { b: outcome });
     apiClient.getTabs.and.returnValue(response);
     expect(effects.getTabs$).toBeObservable(expected);

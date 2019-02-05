@@ -38,7 +38,7 @@ const COPY_FOLDERS = (() => {
   const folders = MY_COPY_FOLDERS;
 
   if (!DEV_SERVER) {
-    folders.unshift({ from: 'src/index.html' });
+    folders.unshift({ from: root('src/index.html') });
   }
 
   return folders;
@@ -65,9 +65,8 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
   config.cache = true;
   config.target = 'web';
   config.devtool = PROD ? PROD_DEVTOOL : DEV_DEVTOOL;
-
   config.entry = {
-    main: root('./src/main.browser.ts'),
+    main: root('src/main.browser.ts'),
   };
 
   config.output = {
@@ -76,7 +75,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
   };
 
   config.devServer = {
-    contentBase: './src',
+    contentBase: root('src'),
     port: PORT,
     historyApiFallback: {
       disableDotRule: true,
@@ -145,8 +144,8 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
     new CopyWebpackPlugin(COPY_FOLDERS),
     new AngularCompilerPlugin({
       tsConfigPath: './tsconfig.json',
-      mainPath: './src/main.browser.ts',
-      entryModule: './src/modules/app/app.module#AppModule',
+      mainPath: root('src/main.browser.ts'),
+      entryModule: root('src/modules/app/app.module#AppModule'),
       sourceMap: true
     }),
     ...MY_CLIENT_PLUGINS

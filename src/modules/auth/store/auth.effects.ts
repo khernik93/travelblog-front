@@ -14,7 +14,7 @@ import { AppState } from '../../app/store/app.reducers';
 import { SetError } from '../../app/components/notification/store/notification.actions';
 import { CookieService } from '../../../shared/services/cookie.service';
 
-const AUTH_COOKIE = 'SESSIONID';
+const AUTH_COOKIE = 'SESSION_ID';
 
 @Injectable()
 export class AuthEffects {
@@ -34,7 +34,7 @@ export class AuthEffects {
       }),
       map(() => new authActions.SignIn()),
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 400) {
+        if (error.status === 401) {
           this.store.dispatch(new SetError("Invalid credentials"));
         }
         return of(new authActions.SignOut());

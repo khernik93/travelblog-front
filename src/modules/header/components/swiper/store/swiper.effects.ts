@@ -21,7 +21,7 @@ export class SwiperEffects {
       ofType(swiperActions.SwiperActionTypes.GetPhotos),
       exhaustMap(() => this.apiClient.getPhotos()),
       map((response: ApiResponse<Photos>) => {
-        return new swiperActions.SetPhotos(response.data);
+        return new swiperActions.SetPhotos(response);
       })
     );
 

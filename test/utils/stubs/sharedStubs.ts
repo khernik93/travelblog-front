@@ -12,12 +12,13 @@ export class SharedStubs {
 
   static getApiClientStub(): jasmine.SpyObj<ApiClient> {
     return jasmine.createSpyObj('ApiClient', {
-      'getRecentPosts': of({ error: '', data: RecentPostsResponse }),
-      'getPosts': of({ error: '', data: PostsListResponse }),
-      'getPost': of({ error: '', data: SinglePostResponse }),
-      'getTabs': of({ error: '', data: TabsResponse }),
-      'getPhotos': of({ error: '', data: PhotosResponse }),
-      'signIn': of({error: '', data: ''})
+      'getRecentPosts': of(RecentPostsResponse),
+      'getPosts': of(PostsListResponse),
+      'getPost': of(SinglePostResponse),
+      'getTabs': of(TabsResponse),
+      'getPhotos': of(PhotosResponse),
+      'addNewPost': of(''),
+      'signIn': of('')
     });
   }
 

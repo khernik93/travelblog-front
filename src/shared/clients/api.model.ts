@@ -1,7 +1,4 @@
-export type ApiResponse<T> = {
-  error: string;
-  data: T;
-};
+export type ApiResponse<T> = T;
 
 export type Meta = {
   total: number,
@@ -10,12 +7,12 @@ export type Meta = {
 };
 
 export type Post = {
-  id: number,
-  createdAt: string,    
+  id?: number,
+  tab?: Tab,
+  createdAt?: string,
   title: string,
   tags: string[],
   content: string,
-  commentsCount: number
 };
 
 export type PostsPaginable = {
@@ -23,6 +20,9 @@ export type PostsPaginable = {
   content: Post[]
 };
 
-export type Tab = string;
+export type Tab = {
+  id: number,
+  name: string
+};
 
-export type Photos = Map<Tab, string[]>;
+export type Photos = Map<string, string[]>;

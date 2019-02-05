@@ -1,5 +1,11 @@
 @import "../../../../variables";
 
+section {
+  width: 100%;
+  padding-top: 40px;
+  padding-bottom: 100px;
+}
+
 .post-wrap {
   display: flex;
   flex-direction: column;
@@ -20,6 +26,9 @@
 
 .post-wrap .entry-title {
   color: $black;
+  & * {
+    cursor: pointer;
+  }
 }
 
 .post-wrap .tags-links {
@@ -35,11 +44,5 @@
 }
 
 .post-wrap .read-more {
-  //nothing for now
   visibility: visible;
-}
-
-.post-wrap .comments {
-  text-align: right;
-  padding-right: 10%;
 }

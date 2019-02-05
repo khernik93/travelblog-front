@@ -4,6 +4,7 @@
   display: flex;
   margin-top: 20px;
   height: auto;
+  width: 95%;
 }
 
 .swiper-content {
@@ -32,8 +33,9 @@
   width: 54px;
   height: 54px;
   background: $lightgrey;
-  opacity: 0.6;
-  filter: alpha(opacity=60);
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  border-radius: 50%;
   transition: all .35s;
   & span {
     width: 100% !important;

@@ -5,7 +5,8 @@ import { SignOut } from '../../store/auth.actions';
 
 @Component({
   selector: 'signOut-component',
-  template: '<a href="#" (click)="signOut()">Sign out</a>'
+  styleUrls: ['./signOut.component.scss'],
+  template: '<a href="#" (click)="signOut()">SIGN OUT</a>'
 })
 export class SignOutComponent {
 

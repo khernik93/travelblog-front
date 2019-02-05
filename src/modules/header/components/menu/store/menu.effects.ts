@@ -21,7 +21,7 @@ export class MenuEffects {
       ofType(menuActions.MenuActionTypes.GetTabs),
       exhaustMap(() => this.apiClient.getTabs()),
       map((response: ApiResponse<Tab[]>) => {
-        return new menuActions.SetTabs(response.data);
+        return new menuActions.SetTabs(response);
       })
     );
 

@@ -13,15 +13,16 @@ import { ApiClient } from '../../../shared/clients/api.client';
 import { AppState } from '../../app/store/app.reducers';
 import { SetError } from '../../app/components/notification/store/notification.actions';
 import { CookieService } from '../../../shared/services/cookie.service';
+import constants from '../../../config/constants';
 
-const AUTH_COOKIE = 'SESSIONID';
+const AUTH_COOKIE_KEY = constants.auth.cookieKey;
 
 @Injectable()
 export class AuthEffects {
 
   @Effect()
   init$: Observable<any> = defer(() => {
-    const isAuthenticated = this.cookieService.isCookieSet(AUTH_COOKIE);
+    const isAuthenticated = this.cookieService.isCookieSet(AUTH_COOKIE_KEY);
     return of(new authActions.SetAuthenticated(isAuthenticated));
   });
 
@@ -34,7 +35,7 @@ export class AuthEffects {
       }),
       map(() => new authActions.SignIn()),
       catchError((error: HttpErrorResponse) => {
-        if (error.status === 400) {
+        if (error.status === 401) {
           this.store.dispatch(new SetError("Invalid credentials"));
         }
         return of(new authActions.SignOut());
@@ -47,7 +48,7 @@ export class AuthEffects {
       ofType(authActions.AuthActionTypes.SignIn),
       tap(() => {
         const returnUrl = get(this.route, 'snapshot.queryParams.returnUrl');
-        this.router.navigateByUrl(returnUrl || '/');
+        this.router.navigateByUrl(returnUrl || '');
       })
     );
 
@@ -55,7 +56,7 @@ export class AuthEffects {
   signOut$: Observable<any> = this.actions$
     .pipe(
       ofType(authActions.AuthActionTypes.SignOut),
-      tap(() => this.cookieService.removeCookie(AUTH_COOKIE))
+      tap(() => this.cookieService.removeCookie(AUTH_COOKIE_KEY))
     );
 
   constructor(

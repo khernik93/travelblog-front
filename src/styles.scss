@@ -70,7 +70,7 @@ h4 {
 }
 
 p {
-  line-height: 2rem;
+  line-height: 1.5rem;
 }
 
 a, a:active, a:link, a:visited {
@@ -83,6 +83,7 @@ a, a:active, a:link, a:visited {
 
 .ajax-loader {
   background: transparent url('/images/ajaxLoader.svg') center no-repeat;
+  height: 80px;
 }
 
 hr.breaking-line {
@@ -90,4 +91,13 @@ hr.breaking-line {
   text-align: center;
   border: 1px solid $black;
   border-radius: 50%;
+}
+
+.ngx-wrapper {
+  background-color: white;
+}
+
+.no-content {
+  width: 100%;
+  text-align: center;
 }

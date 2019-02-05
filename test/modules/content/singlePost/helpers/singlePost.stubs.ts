@@ -1,11 +1,12 @@
 import { of } from "rxjs";
-import { SinglePostResponse } from '../../../../utils/responses/singlePost.response';
 
 export class SinglePostStubs {
 
+  static postId: string = "1";
+
   static getActivatedRoute() {
     return {
-      paramMap: of({get: () => SinglePostResponse.id})
+      paramMap: of({get: () => SinglePostStubs.postId})
     };
   }
 

@@ -49,10 +49,14 @@ describe('RecentPostsEffects', () => {
     const action = new GetRecentPosts();
     const outcome = new SetRecentPosts(ClonedRecentPostsResponse);
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: { data: ClonedRecentPostsResponse }});
+    const response = cold('-a|', { a: ClonedRecentPostsResponse });
     const expected = cold('--b', { b: outcome });
     apiClient.getRecentPosts.and.returnValue(response);
     expect(effects.getRecentPosts$).toBeObservable(expected);
   });
+
+  /**
+   * @TODO Handle error case when added new actions
+   */
 
 });

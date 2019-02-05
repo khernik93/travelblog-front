@@ -49,7 +49,7 @@ describe('SwiperEffects', () => {
     const action = new GetPhotos();
     const outcome = new SetPhotos(ClonedPhotosResponse);
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: { data: ClonedPhotosResponse } });
+    const response = cold('-a|', { a: ClonedPhotosResponse });
     const expected = cold('--b', { b: outcome });
     apiClient.getPhotos.and.returnValue(response);
     expect(effects.getPhotos$).toBeObservable(expected);

@@ -7,7 +7,7 @@ import {
 } from '@angular/router';
 
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../store/auth.reducer';
 import { selectIsAuthenticated } from '../store/auth.selectors';
@@ -29,6 +29,7 @@ export class AuthGuard implements CanActivate {
   private isAuthenticated(state: RouterStateSnapshot): Observable<boolean> {
     return this.store.select(selectIsAuthenticated)
       .pipe(
+        take(1),
         map((isAuthenticated: boolean) => {
           if (isAuthenticated) return true;
           this.router.navigate([AUTH_PATH], { queryParams: { returnUrl: state.url } });

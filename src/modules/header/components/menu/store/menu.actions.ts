@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { Tab } from '../../../../../shared/clients/api.model';
 
 export enum MenuActionTypes {
   SelectTab = '[Menu] Select tab',
@@ -8,7 +9,7 @@ export enum MenuActionTypes {
 
 export class SelectTab implements Action {
   readonly type = MenuActionTypes.SelectTab;
-  constructor(public selectedTab: string) { }
+  constructor(public selectedTab: Tab) { }
 }
 
 export class GetTabs implements Action {
@@ -18,7 +19,7 @@ export class GetTabs implements Action {
 
 export class SetTabs implements Action {
   readonly type = MenuActionTypes.SetTabs;
-  constructor(public tabs: string[]) { }
+  constructor(public tabs: Tab[]) { }
 }
 
 export type MenuActions =

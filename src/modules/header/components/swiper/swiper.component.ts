@@ -8,6 +8,7 @@ import * as SwiperActions from './store/swiper.actions';
 import { HeaderState } from '../../store/header.reducers';
 import { selectPhotos } from './store/swiper.selectors';
 import { selectSelectedTab } from '../menu/store/menu.selectors';
+import { Tab } from '../../../../shared/clients/api.model';
 
 const swiperSettings = {
   wrapper: '.swiper-container',
@@ -15,7 +16,7 @@ const swiperSettings = {
     slidesPerView: 1,
     spaceBetween: 0,
     loop: true,
-    speed: 500,
+    speed: 300,
     preloadImages: true,
     pagination: {
         el: '.swiper-pagination'
@@ -36,7 +37,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
 
   currentPhotos: string[];
 
-  private selectedTab$: Observable<string>;
+  private selectedTab$: Observable<Tab>;
   private photos$: Observable<Map<string, string[]>>;
   private swiper: Swiper;
   private alive: boolean = true;
@@ -66,10 +67,10 @@ export class SwiperComponent implements OnInit, OnDestroy {
     combineLatest(this.selectedTab$, this.photos$)
       .pipe(
         takeWhile(() => this.alive),
-        filter(([selectedTab, photos]) => photos !== null)
+        filter(([selectedTab, photos]) => !!selectedTab && !!photos)
       )
       .subscribe(([selectedTab, photos]) => {
-        this.currentPhotos = photos[selectedTab];
+        this.currentPhotos = photos[selectedTab.name];
         this.updateSwiper();
       });
   }

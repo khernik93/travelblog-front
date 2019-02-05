@@ -1,5 +1,6 @@
 export const PhotosResponse: any = {
-  "tab1": ["photo1", "photo2"],
-  "tab2": ["photo3"],
-  "tab3": ["photo1", "photo4", "photo5"]
+  "China": [
+    "http://localhost:3000/images/china-1.png",
+    "http://localhost:3000/images/china-2.png"
+  ]
 };

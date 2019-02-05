@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import { TransferHttpService } from '../services/transferHttp.service';
 import { AuthCredentials } from '../../modules/auth/auth.model';
-import { environment } from '../../environments/environment';
+import constants from '../../config/constants';
 import { 
   PostsPaginable, 
   Tab, 
@@ -116,7 +116,7 @@ export class ApiClient {
    * @param uri 
    */
   private prepareUrl(uri: string) {
-    return environment.baseUrl + uri;
+    return constants.apiUrl + uri;
   }
 
 }

@@ -23,7 +23,7 @@ export class TransferHttpService {
   /**
    * Performs a request with `get` http method.
    */
-  get(url: string, options?: Options): Observable<any> {
+  get(url: string, options?: Options): Observable<any> {    
     return this.httpClient.get(url, options);
   }
 

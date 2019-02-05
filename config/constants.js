@@ -46,7 +46,7 @@ exports.EXCLUDE_SOURCE_MAPS = [
  * format is { from: 'folder_name', to: 'folder_name' }
  */
 exports.MY_COPY_FOLDERS = [
-  { from: 'dist_root' }
+  { from: root('dist_root') }
 ]
 
 /**
@@ -88,7 +88,7 @@ exports.MY_CLIENT_PRODUCTION_PLUGINS = [
  */
 exports.MY_CLIENT_DEVSERVER_PLUGINS = [
   new HtmlWebpackPlugin({
-    template: 'src/index.html',
+    template: root('src/index.html'),
     inject: false,
   })
 ]

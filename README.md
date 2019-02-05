@@ -17,7 +17,6 @@ $ npm install
 ## Running in development mode
 
 ```
-$ node server.ts
 $ npm run start
 ```
 

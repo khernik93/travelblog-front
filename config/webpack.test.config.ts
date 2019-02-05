@@ -37,7 +37,7 @@ const testConfig = (function webpackConfig(): WebpackConfig {
   config.devtool = DEV_DEVTOOL;
 
   config.entry = {
-    main: root('./src/main.browser.ts'),
+    main: root('src/main.browser.ts'),
   };
 
   config.output = {

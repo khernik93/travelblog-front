@@ -70,7 +70,7 @@ export class SwiperComponent implements OnInit, OnDestroy {
         filter(([selectedTab, photos]) => !!selectedTab && !!photos)
       )
       .subscribe(([selectedTab, photos]) => {
-        this.currentPhotos = photos[selectedTab.name];
+        this.currentPhotos = photos[selectedTab.id];
         this.updateSwiper();
       });
   }

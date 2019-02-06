@@ -83,7 +83,10 @@ export class ApiClient {
     const url = this.prepareUrl(ROUTES.photos);
     return this.transferHttpService.get(url, {
       headers: this.headers
-    });
+    })
+      .pipe(
+        map((response: any) => response.tabPhotos)
+      );
   }
 
   addNewPost(post: Post, tab: Tab): Observable<void> {

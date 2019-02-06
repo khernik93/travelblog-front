@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { FooterComponent } from './footer.component';
 
@@ -13,7 +14,10 @@ export const MODULE_IMPORTS = [
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
-  imports: MODULE_IMPORTS,
+  imports: [
+    ...MODULE_IMPORTS,
+    RouterModule
+  ],
   exports: [FooterComponent],
   providers: []
 })

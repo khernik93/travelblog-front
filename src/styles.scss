@@ -33,24 +33,14 @@ img {
 }
 
 a {
-  color: royalblue;
+  display: block;
+  transition: all 0.35s;
+  text-decoration: none;
+  text-align: center;
 }
 
-a:visited {
-  color: purple;
-}
-
-a:hover, a:focus, a:active {
-  color: midnightblue;
-}
-
-a:focus {
-  outline: thin dotted;
-}
-
-a:hover, a:active {
-  outline: 0;
-  list-style: none;
+a:hover {
+  color: red;
 }
 
 h1 {

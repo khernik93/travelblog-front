@@ -13,6 +13,7 @@ import { HeaderComponent } from './header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SwiperComponent } from './components/swiper/swiper.component';
+import { RouterModule } from '@angular/router';
 
 export const MODULE_DECLARATIONS = [
   HeaderComponent,
@@ -34,7 +35,8 @@ const STORE_IMPORTS = [
   declarations: MODULE_DECLARATIONS,
   imports: [
     ...MODULE_IMPORTS,
-    ...STORE_IMPORTS
+    ...STORE_IMPORTS,
+    RouterModule
   ],
   exports: [HeaderComponent],
   providers: []

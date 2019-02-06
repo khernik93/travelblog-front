@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { GetRecentPosts } from './store/recentPosts.actions';
 import { selectRecentPosts } from './store/recentPosts.selectors';
 import { ContentState } from '../../store/content.reducers';
-import { Post } from '../../../../shared/clients/api.model';
+import { Post } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'recentPosts-component',

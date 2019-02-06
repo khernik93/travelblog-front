@@ -7,7 +7,7 @@ import { MenuEffects } from '../../../../src/modules/header/components/menu/stor
 import { GetTabs, SetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
 import { TabsResponse } from '../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
-import { ApiClient } from '../../../../src/shared/clients/api.client';
+import { ApiClient } from '../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 
 describe('MenuEffects', () => {

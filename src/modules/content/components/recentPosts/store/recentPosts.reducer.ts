@@ -1,5 +1,5 @@
 import { RecentPostsActions, RecentPostsActionTypes } from './recentPosts.actions';
-import { Post } from '../../../../../shared/clients/api.model';
+import { Post } from '../../../../../shared/clients/api/api.model';
 
 export interface RecentPostsState {
   recentPosts: Post[]

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Meta } from '../../../../shared/clients/api.model';
+import { Meta } from '../../../../shared/clients/api/api.model';
 
 @Injectable()
 export class PostsListService {

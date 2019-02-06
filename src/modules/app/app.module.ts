@@ -28,7 +28,7 @@ import { AuthRoutingModule } from '../auth/routing/authRouting.module';
 
 // Providers
 import { TransferHttpService } from '../../shared/services/transferHttp.service';
-import { ApiClient } from '../../shared/clients/api.client';
+import { ApiClient } from '../../shared/clients/api/api.client';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 
 export const MODULE_DECLARATIONS = [

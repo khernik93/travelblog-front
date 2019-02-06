@@ -1,6 +1,6 @@
 import get from 'lodash-es/get';
 import { MenuActions, MenuActionTypes } from './menu.actions';
-import { Tab } from '../../../../../shared/clients/api.model';
+import { Tab } from '../../../../../shared/clients/api/api.model';
 
 export interface MenuState {
   selectedTab: Tab;

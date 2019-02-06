@@ -8,7 +8,7 @@ import { GetPhotos, SetPhotos } from '../../../../src/modules/header/components/
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { PhotosResponse } from '../../../utils/responses/photos.response';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
-import { ApiClient } from '../../../../src/shared/clients/api.client';
+import { ApiClient } from '../../../../src/shared/clients/api/api.client';
 
 describe('SwiperEffects', () => {
 

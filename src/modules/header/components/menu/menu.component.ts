@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import * as MenuActions from './store/menu.actions';
 import { HeaderState } from '../../store/header.reducers';
 import { selectTabs, selectSelectedTab } from './store/menu.selectors';
-import { Tab } from '../../../../shared/clients/api.model';
+import { Tab } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'menu-component',

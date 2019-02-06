@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PostDisplay } from './addNewPost.model';
-import { Post } from '../../../../shared/clients/api.model';
+import { Post } from '../../../../shared/clients/api/api.model';
 
 @Injectable()
 export class AddNewPostService {

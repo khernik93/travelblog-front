@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { PostDisplay } from '../addNewPost.model';
-import { Tab } from '../../../../../shared/clients/api.model';
+import { Tab } from '../../../../../shared/clients/api/api.model';
 
 export enum AddNewPostActionTypes {
   AddNewPost = '[AddNewPost] Add new post',

@@ -1,12 +1,19 @@
 import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
-import { hot, cold } from 'jasmine-marbles';
+import { hot, cold, getTestScheduler } from 'jasmine-marbles';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { Store } from '@ngrx/store';
-
 import { TabsResponse } from '../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { PostsListResponse } from '../../../utils/responses/postsList.response';
+import { PostsListEffects } from '../../../../src/modules/content/components/postsList/store/postsList.effects';
+import { ApiClient } from '../../../../src/shared/clients/api/api.client';
+import { SharedStubs } from '../../../utils/stubs/sharedStubs';
+import { ContentState } from '../../../../src/modules/content/store/content.reducers';
+import { PostsListStubs } from './helpers/postsList.stubs';
+import { PostsListService } from '../../../../src/modules/content/components/postsList/postsList.service';
+import { MockStore } from '../../../utils/mocks/mockStore';
+
 import { 
   SetPosts, 
   GetPosts, 
@@ -15,13 +22,6 @@ import {
   GetPostsOnScroll, 
   TryToGetPostsOnScroll
 } from '../../../../src/modules/content/components/postsList/store/postsList.actions';
-import { PostsListEffects } from '../../../../src/modules/content/components/postsList/store/postsList.effects';
-import { ApiClient } from '../../../../src/shared/clients/api.client';
-import { SharedStubs } from '../../../utils/stubs/sharedStubs';
-import { ContentState } from '../../../../src/modules/content/store/content.reducers';
-import { PostsListStubs } from './helpers/postsList.stubs';
-import { PostsListService } from '../../../../src/modules/content/components/postsList/postsList.service';
-import { MockStore } from '../../../utils/mocks/mockStore';
 
 describe('PostsListEffects', () => {
 
@@ -97,9 +97,9 @@ describe('PostsListEffects', () => {
     );
     const outcome = new GetPostsError();
     actions.stream = hot('-a', {a: action});
-    const clientErrorResponse = cold('-#|', {}, 'error');
-    const expected = cold('--(b|)', { b: outcome });
-    apiClient.getPosts.and.returnValue(clientErrorResponse);
+    const errorResponse = cold('-#|', {}, 'error');
+    const expected = cold('--b', { b: outcome });
+    apiClient.getPosts.and.returnValue(errorResponse);
     expect(effects.getPosts$).toBeObservable(expected);
   });
 
@@ -134,25 +134,5 @@ describe('PostsListEffects', () => {
     store.select.and.returnValue(response);
     expect(effects.tryToGetPostsOnScroll$).toBeObservable(expected);
   });
-
-  it(`
-    WHEN TryToGetPostsOnScroll action is dispatched
-    AND somehow it returns error
-    THEN GetPostsError action is dispatched
-  `, () => {
-    const selectedTab = ClonedTabsResponse[0];
-    const action = new TryToGetPostsOnScroll(selectedTab);
-    const outcome = new GetPostsError();
-    actions.stream = hot('-a', {a: action});
-    const errorResponse = cold('-#|', {}, 'error');
-    const expected = cold('--(b|)', { b: outcome });
-    spyOn(store, 'select').and.callThrough();
-    store.select.and.returnValue(errorResponse);
-    expect(effects.tryToGetPostsOnScroll$).toBeObservable(expected);
-  });
-
-  /**
-   * @TODO Write test for GetPostsOnScroll - add test scheduler for mocking debounce
-   */
 
 });

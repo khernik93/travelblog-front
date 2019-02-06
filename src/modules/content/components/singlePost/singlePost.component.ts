@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { selectPost } from './store/singlePost.selectors';
 import { ContentState } from '../../store/content.reducers';
 import * as SinglePostActions from './store/singlePost.actions';
-import { Post } from '../../../../shared/clients/api.model';
+import { Post } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'singlePost-component',

@@ -7,7 +7,7 @@ import { SinglePostResponse } from '../../../utils/responses/singlePost.response
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { SetPost, GetPost } from '../../../../src/modules/content/components/singlePost/store/singlePost.actions';
 import { SinglePostEffects } from '../../../../src/modules/content/components/singlePost/store/singlePost.effects';
-import { ApiClient } from '../../../../src/shared/clients/api.client';
+import { ApiClient } from '../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { SinglePostStubs } from './helpers/singlePost.stubs';
 
@@ -56,9 +56,5 @@ describe('SinglePostEffects', () => {
     apiClient.getPost.and.returnValue(response);
     expect(effects.getPost$).toBeObservable(expected);
   });
-
-  /**
-   * @TODO Add error case when added new actions
-   */
 
 });

@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 
-import { TransferHttpService } from '../services/transferHttp.service';
-import { AuthCredentials } from '../../modules/auth/auth.model';
-import constants from '../../config/constants';
+import { TransferHttpService } from '../../services/transferHttp.service';
+import { AuthCredentials } from '../../../modules/auth/auth.model';
+import constants from '../../../config/constants';
 import { 
   PostsPaginable, 
   Tab, 
@@ -12,7 +12,7 @@ import {
   ApiResponse
 } from './api.model';
 import { HttpHeaders } from '@angular/common/http';
-import { CookieService } from '../services/cookie.service';
+import { CookieService } from '../../services/cookie.service';
 import { map } from 'rxjs/operators';
 
 const ROUTES: any = {
@@ -24,10 +24,6 @@ const ROUTES: any = {
   addNewPost: '/post',
   signIn: '/auth/signIn'
 };
-
-/**
- * @TODO Move to env file
- */
 
 @Injectable()
 export class ApiClient {

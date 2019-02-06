@@ -1,5 +1,3 @@
-export type ApiResponse<T> = T;
-
 export type Meta = {
   total: number,
   start: number,

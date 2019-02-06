@@ -8,8 +8,7 @@ import {
   PostsPaginable, 
   Tab, 
   Photos,
-  Post,
-  ApiResponse
+  Post
 } from './api.model';
 import { HttpHeaders } from '@angular/common/http';
 import { CookieService } from '../../services/cookie.service';
@@ -42,7 +41,7 @@ export class ApiClient {
       .set('X-Api-Key', 'aaa');
   }
 
-  getRecentPosts(): Observable<ApiResponse<Post[]>> {
+  getRecentPosts(): Observable<Post[]> {
     const url = this.prepareUrl(ROUTES.recentPosts);
     return this.transferHttpService.get(url, {
       headers: this.headers
@@ -52,7 +51,7 @@ export class ApiClient {
     );
   }
 
-  getPosts(tabId: number, params: {start: number, end: number}): Observable<ApiResponse<PostsPaginable>> {
+  getPosts(tabId: number, params: {start: number, end: number}): Observable<PostsPaginable> {
     const url = this.prepareUrl(ROUTES.posts);
     return this.transferHttpService.get(`${url}/${tabId}`, {
       params: { 
@@ -63,14 +62,14 @@ export class ApiClient {
     });
   }
 
-  getPost(id: string): Observable<ApiResponse<Post>> {
+  getPost(id: string): Observable<Post> {
     const url = this.prepareUrl(ROUTES.post);
     return this.transferHttpService.get(`${url}/${id}`, {
       headers: this.headers
     });
   }
 
-  getTabs(): Observable<ApiResponse<Tab[]>> {
+  getTabs(): Observable<Tab[]> {
     const url = this.prepareUrl(ROUTES.tabs);
     return this.transferHttpService.get(url, {
       headers: this.headers
@@ -80,14 +79,14 @@ export class ApiClient {
       );
   }
 
-  getPhotos(): Observable<ApiResponse<Photos>> {
+  getPhotos(): Observable<Photos> {
     const url = this.prepareUrl(ROUTES.photos);
     return this.transferHttpService.get(url, {
       headers: this.headers
     });
   }
 
-  addNewPost(post: Post, tab: Tab): Observable<ApiResponse<void>> {
+  addNewPost(post: Post, tab: Tab): Observable<void> {
     const url = this.prepareUrl(ROUTES.addNewPost);
     const headers = this.headers
       .append('Authorization', this.cookieService.getCookie('SESSION_ID'));
@@ -99,7 +98,7 @@ export class ApiClient {
     });
   }
 
-  signIn(credentials: AuthCredentials): Observable<ApiResponse<void>> {
+  signIn(credentials: AuthCredentials): Observable<void> {
     const url = this.prepareUrl(ROUTES.signIn);
     return this.transferHttpService.post(url, credentials, {
       withCredentials: true,

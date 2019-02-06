@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of, Scheduler } from 'rxjs';
 import { exhaustMap, catchError, map, take, concatMap, debounceTime } from 'rxjs/operators';
-import { PostsPaginable, ApiResponse, Meta } from '../../../../../shared/clients/api/api.model';
+import { PostsPaginable, Meta } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
 import { Store } from '@ngrx/store';
 import { ContentState } from '../../../store/content.reducers';
@@ -17,7 +17,6 @@ import {
   GetPostsSuccess,
   GetPostsOnScroll
 } from './postsList.actions';
-import { async } from 'rxjs/internal/scheduler/async';
 
 @Injectable()
 export class PostsListEffects {
@@ -32,7 +31,7 @@ export class PostsListEffects {
           end: action.end 
         })
           .pipe(
-            concatMap((response: ApiResponse<PostsPaginable>) => ([
+            concatMap((response: PostsPaginable) => ([
               new GetPostsSuccess(),
               new SetPosts(response.content, response.meta)
             ])),

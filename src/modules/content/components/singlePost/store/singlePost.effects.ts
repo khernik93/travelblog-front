@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, exhaustMap } from 'rxjs/operators';
 
 import { SinglePostActionTypes, SetPost } from './singlePost.actions';
-import { Post, ApiResponse } from '../../../../../shared/clients/api/api.model';
+import { Post } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class SinglePostEffects {
       exhaustMap((action: any) => (
         this.apiClient.getPost(action.id)
           .pipe(
-            map((response: ApiResponse<Post>) => new SetPost(response))
+            map((post: Post) => new SetPost(post))
           )
       ))
     );

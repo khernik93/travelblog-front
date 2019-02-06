@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, exhaustMap } from 'rxjs/operators';
 import { SwiperActionTypes, SetPhotos } from './swiper.actions';
-import { Photos, ApiResponse } from '../../../../../shared/clients/api/api.model';
+import { Photos } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class SwiperEffects {
       exhaustMap(() => (
         this.apiClient.getPhotos()
           .pipe(
-            map((response: ApiResponse<Photos>) => new SetPhotos(response))
+            map((photos: Photos) => new SetPhotos(photos))
           )
       ))
     );

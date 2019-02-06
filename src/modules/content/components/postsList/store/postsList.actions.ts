@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Post, Meta, Tab } from '../../../../../shared/clients/api.model';
+import { Post, Meta, Tab } from '../../../../../shared/clients/api/api.model';
 
 export enum PostsListActionTypes {
 

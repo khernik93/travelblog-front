@@ -6,7 +6,7 @@ import { TabsResponse } from '../responses/tabs.response';
 import { SinglePostResponse } from '../responses/singlePost.response';
 import { PostsListResponse } from '../responses/postsList.response';
 import { RecentPostsResponse } from '../responses/recentPosts.response';
-import { ApiClient } from '../../../src/shared/clients/api.client';
+import { ApiClient } from '../../../src/shared/clients/api/api.client';
 
 export class SharedStubs {
 

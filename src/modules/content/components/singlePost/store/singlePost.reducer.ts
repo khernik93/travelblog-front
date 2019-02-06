@@ -1,5 +1,5 @@
 import { SinglePostActions, SinglePostActionTypes } from './singlePost.actions';
-import { Post } from '../../../../../shared/clients/api.model';
+import { Post } from '../../../../../shared/clients/api/api.model';
 
 export interface SinglePostState {
   post: Post

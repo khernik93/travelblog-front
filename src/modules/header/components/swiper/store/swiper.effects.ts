@@ -2,27 +2,28 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, exhaustMap } from 'rxjs/operators';
-
-import * as swiperActions from './swiper.actions';
-import { Photos, ApiResponse } from '../../../../../shared/clients/api.model';
-import { ApiClient } from '../../../../../shared/clients/api.client';
+import { SwiperActionTypes, SetPhotos } from './swiper.actions';
+import { Photos, ApiResponse } from '../../../../../shared/clients/api/api.model';
+import { ApiClient } from '../../../../../shared/clients/api/api.client';
 
 @Injectable()
 export class SwiperEffects {
+
+  @Effect()
+  getPhotos$: Observable<any> = this.actions$
+    .pipe(
+      ofType(SwiperActionTypes.GetPhotos),
+      exhaustMap(() => (
+        this.apiClient.getPhotos()
+          .pipe(
+            map((response: ApiResponse<Photos>) => new SetPhotos(response))
+          )
+      ))
+    );
 
   constructor(
     private actions$: Actions,
     private apiClient: ApiClient
   ) { }
-
-  @Effect()
-  getPhotos$: Observable<any> = this.actions$
-    .pipe(
-      ofType(swiperActions.SwiperActionTypes.GetPhotos),
-      exhaustMap(() => this.apiClient.getPhotos()),
-      map((response: ApiResponse<Photos>) => {
-        return new swiperActions.SetPhotos(response);
-      })
-    );
 
 }

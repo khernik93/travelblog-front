@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 import { HeaderState } from '../../../header/store/header.reducers';
 import { selectTabs } from '../../../header/components/menu/store/menu.selectors';
 import { GetTabs } from '../../../header/components/menu/store/menu.actions';
-import { Tab } from '../../../../shared/clients/api.model';
+import { Tab } from '../../../../shared/clients/api/api.model';
 import { AddNewPost } from './store/addNewPost.actions';
 
 @Component({

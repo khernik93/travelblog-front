@@ -7,7 +7,7 @@ import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { RecentPostsResponse } from '../../../utils/responses/recentPosts.response';
 import { SetRecentPosts, GetRecentPosts } from '../../../../src/modules/content/components/recentPosts/store/recentPosts.actions';
 import { RecentPostsEffects } from '../../../../src/modules/content/components/recentPosts/store/recentPosts.effects';
-import { ApiClient } from '../../../../src/shared/clients/api.client';
+import { ApiClient } from '../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 
 describe('RecentPostsEffects', () => {
@@ -54,9 +54,5 @@ describe('RecentPostsEffects', () => {
     apiClient.getRecentPosts.and.returnValue(response);
     expect(effects.getRecentPosts$).toBeObservable(expected);
   });
-
-  /**
-   * @TODO Handle error case when added new actions
-   */
 
 });

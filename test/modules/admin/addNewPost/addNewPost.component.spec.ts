@@ -24,9 +24,7 @@ describe('AddNewPostComponent', () => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
 
     TestBed.configureTestingModule({
-      imports: [
-        ...MODULE_IMPORTS
-      ],
+      imports: MODULE_IMPORTS,
       declarations: [
         ...MODULE_DECLARATIONS,
         SignOutComponent

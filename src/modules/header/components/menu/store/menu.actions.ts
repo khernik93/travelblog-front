@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Tab } from '../../../../../shared/clients/api.model';
+import { Tab } from '../../../../../shared/clients/api/api.model';
 
 export enum MenuActionTypes {
   SelectTab = '[Menu] Select tab',

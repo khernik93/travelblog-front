@@ -8,7 +8,7 @@ import * as SwiperActions from './store/swiper.actions';
 import { HeaderState } from '../../store/header.reducers';
 import { selectPhotos } from './store/swiper.selectors';
 import { selectSelectedTab } from '../menu/store/menu.selectors';
-import { Tab } from '../../../../shared/clients/api.model';
+import { Tab } from '../../../../shared/clients/api/api.model';
 
 const swiperSettings = {
   wrapper: '.swiper-container',

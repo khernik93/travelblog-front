@@ -8,7 +8,7 @@ import { ContentState } from '../../store/content.reducers';
 import { selectSelectedTab } from '../../../header/components/menu/store/menu.selectors';
 import { HeaderState } from '../../../header/store/header.reducers';
 import { selectPosts, selectLoading, selectInitialized } from './store/postsList.selectors';
-import { Post, Tab } from '../../../../shared/clients/api.model';
+import { Post, Tab } from '../../../../shared/clients/api/api.model';
 import { PostsListService } from './postsList.service';
 
 @Component({

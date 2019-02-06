@@ -4,7 +4,7 @@ import { hot, cold } from 'jasmine-marbles';
 
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { AddNewPostEffects } from '../../../../src/modules/admin/components/addNewPost/store/addNewPost.effects';
-import { ApiClient } from '../../../../src/shared/clients/api.client';
+import { ApiClient } from '../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { AddNewPostService } from '../../../../src/modules/admin/components/addNewPost/addNewPost.service';
 import { AddNewPostStubs } from './helpers/addNewPost.stubs';
@@ -43,10 +43,10 @@ describe('AddNewPostEffects', () => {
     WHEN AddNewPost action is dispatched
     THEN AddNewPostSuccess action is dispatched
   `, () => {
-    const action = new AddNewPost(null, 'tab');
+    const action = new AddNewPost(null, null);
     const outcome = new AddNewPostSuccess();
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: { data: '' }});
+    const response = cold('-a|', { a: null});
     const expected = cold('--b', { b: outcome });
     apiClient.addNewPost.and.returnValue(response);
     expect(effects.addNewPost$).toBeObservable(expected);
@@ -56,12 +56,12 @@ describe('AddNewPostEffects', () => {
     WHEN AddNewPost action is dispatched
     THEN AddNewPostError action is dispatched
   `, () => {
-    const action = new AddNewPost(null, 'tab');
+    const action = new AddNewPost(null, null);
     const outcome = new AddNewPostError('error');
     actions.stream = hot('-a', {a: action});
-    const clientErrorResponse = cold('-#|', {}, 'error');
-    const expected = cold('--(b|)', { b: outcome });
-    apiClient.addNewPost.and.returnValue(clientErrorResponse);
+    const errorResponse = cold('-#|', {}, 'error');
+    const expected = cold('--b', { b: outcome });
+    apiClient.addNewPost.and.returnValue(errorResponse);
     expect(effects.addNewPost$).toBeObservable(expected);
   });
 

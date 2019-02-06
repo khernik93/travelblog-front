@@ -1,10 +1,5 @@
 import { Action } from '@ngrx/store';
-
-import { Post } from '../../../../../shared/clients/api.model';
-
-/**
- * @TODO Add success/error actions here
- */
+import { Post } from '../../../../../shared/clients/api/api.model';
 
 export enum RecentPostsActionTypes {
   GetRecentPosts = '[RecentPosts] Get recent posts',

@@ -2,19 +2,9 @@ import { NotificationType } from '../../../../../src/modules/app/components/noti
 
 export const NotificationState: any = {
   notification: {
-    notifications: [
-      {
-        message: 'first notification',
-        type: NotificationType.error
-      },
-      {
-        message: 'second notification',
-        type: NotificationType.error
-      },
-      {
-        message: 'third notification',
-        type: NotificationType.success
-      }
-    ]
+    notification: {
+      message: 'first notification',
+      type: NotificationType.error
+    }
   }
 };

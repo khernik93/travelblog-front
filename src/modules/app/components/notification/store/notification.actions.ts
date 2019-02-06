@@ -2,8 +2,7 @@ import { Action } from '@ngrx/store';
 
 export enum NotificationActionTypes {
   SetError = '[Notification] Set error',
-  SetSuccess = '[Notification] Set success',
-  CloseNotification = '[Notification] Close notification'
+  SetSuccess = '[Notification] Set success'
 }
 
 export class SetError implements Action {
@@ -18,12 +17,5 @@ export class SetSuccess implements Action {
   constructor(public message: string) { }
 }
 
-export class CloseNotification implements Action {
-  readonly type = NotificationActionTypes.CloseNotification;
-
-  constructor(public index: number) { }
-}
-
 export type NotificationActions = SetError
-  | SetSuccess
-  | CloseNotification;
+  | SetSuccess;

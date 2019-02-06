@@ -1,12 +1,5 @@
-<div class="notification-container" *ngIf="areNotificationsActive() | async">
-  <div class="notification"
-       *ngFor="let notification of (notifications$ | async); let i = index"
-       [style.background-color]="notification.type">
-      <div class="notification-cross" (click)="closeNotification(i)">
-        <h2>
-          <i class="fa fa-close"></i>
-        </h2>
-      </div>
-      {{ notification.message }}
-  </div>
+<div [class]="'notify bar-top type-error do-show type-' + (notification$ | async).type" 
+     *ngIf="notification$ | async"
+     #notification>
+  {{ (notification$ | async).message }}
 </div>

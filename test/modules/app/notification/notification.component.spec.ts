@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
-import { By } from '@angular/platform-browser';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/app/app.module';
@@ -9,7 +8,6 @@ import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { AppState } from '../../../../src/modules/app/store/app.reducers';
 import { NotificationComponent } from '../../../../src/modules/app/components/notification/notification.component';
 import { NotificationState } from './helpers/notification.state';
-import * as notificationActions from '../../../../src/modules/app/components/notification/store/notification.actions';
 
 describe('NotificationComponent', () => {
 
@@ -40,25 +38,6 @@ describe('NotificationComponent', () => {
 
   it('should check if the component is defined', () => {
     expect(component).toBeDefined();
-  });
-
-  it(`
-    WHEN the component is loaded
-    THEN all notifications should be shown
-  `, () => {
-    const notifications = fixture.debugElement.queryAll(By.css('.notification'));
-    expect(notifications.length).toBe(3);
-  });
-
-  it(`
-    WHEN the component is loaded
-    THEN all notifications should be shown
-  `, () => {
-    const secondCross = fixture.nativeElement.querySelector('.notification:nth-child(2) .notification-cross');
-    secondCross.click();
-    fixture.detectChanges();
-    expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(store.dispatch).toHaveBeenCalledWith(new notificationActions.CloseNotification(1));
   });
 
 });

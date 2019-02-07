@@ -4,7 +4,7 @@ import { hot, cold } from 'jasmine-marbles';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 import { MenuEffects } from '../../../../src/modules/header/components/menu/store/menu.effects';
-import { GetTabs, SetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
+import { GetTabs, SetTabs, SelectTab } from '../../../../src/modules/header/components/menu/store/menu.actions';
 import { TabsResponse } from '../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { ApiClient } from '../../../../src/shared/clients/api/api.client';
@@ -47,10 +47,13 @@ describe('MenuEffects', () => {
     AND SetTabs action should be dispatched with fetched tabs 
   `, () => {
     const action = new GetTabs();
-    const outcome = new SetTabs(ClonedTabsResponse);
+    const outcome = [
+      new SetTabs(ClonedTabsResponse),
+      new SelectTab(ClonedTabsResponse[0])
+    ];
     actions.stream = hot('-a', {a: action});
     const response = cold('-a|', { a: ClonedTabsResponse });
-    const expected = cold('--b', { b: outcome });
+    const expected = cold('--(bc)', { b: outcome[0], c: outcome[1] });
     apiClient.getTabs.and.returnValue(response);
     expect(effects.getTabs$).toBeObservable(expected);
   });

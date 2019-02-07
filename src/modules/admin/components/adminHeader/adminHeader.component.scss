@@ -14,9 +14,12 @@ header {
     height: 100%;
     padding: 10px;
   }
+  & a:hover {
+    color: $red;
+  }
   & .tab {
     float: right;
-    margin: 0 10px;
+    padding: 0 10px;
     border: 1px solid $lightgrey;
     height: 100%;
     min-width: 10%;

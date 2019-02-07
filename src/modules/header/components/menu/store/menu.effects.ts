@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { map, exhaustMap } from 'rxjs/operators';
-import { MenuActionTypes, SetTabs } from './menu.actions';
+import { exhaustMap, concatMap } from 'rxjs/operators';
+import { MenuActionTypes, SetTabs, SelectTab } from './menu.actions';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
 import { TabDTO } from '../../../../../shared/clients/api/api.model';
 
@@ -16,7 +16,10 @@ export class MenuEffects {
       exhaustMap(() => (
         this.apiClient.getTabs()
           .pipe(
-            map((tabs: TabDTO[]) => new SetTabs(tabs))
+            concatMap((tabs: TabDTO[]) => ([
+              new SetTabs(tabs),
+              new SelectTab(tabs[0])
+            ]))
           )
       ))
     );

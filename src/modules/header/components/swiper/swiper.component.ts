@@ -1,8 +1,9 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
-import { takeWhile, filter } from 'rxjs/operators';
+import { takeWhile, filter, distinctUntilChanged } from 'rxjs/operators';
 import Swiper from 'swiper';
+import isEqual from 'lodash-es/isEqual';
 
 import * as SwiperActions from './store/swiper.actions';
 import { HeaderState } from '../../store/header.reducers';
@@ -67,7 +68,8 @@ export class SwiperComponent implements OnInit, OnDestroy {
     combineLatest(this.selectedTab$, this.photos$)
       .pipe(
         takeWhile(() => this.alive),
-        filter(([selectedTab, photos]) => !!selectedTab && !!photos)
+        filter(([selectedTab, photos]) => !!selectedTab && !!photos),
+        distinctUntilChanged((x: any, y: any) => isEqual(x.photos, y.photos))
       )
       .subscribe(([selectedTab, photos]) => {
         this.currentPhotos = photos[selectedTab.id];

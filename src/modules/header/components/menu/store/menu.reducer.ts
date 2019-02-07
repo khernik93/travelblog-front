@@ -23,8 +23,7 @@ export function menuReducer (state = initialState, action: MenuActions): MenuSta
     case MenuActionTypes.SetTabs: {
       return {
         ...state,
-        tabs: action.tabs,
-        selectedTab: get(action, 'tabs[0]') || initialState.selectedTab
+        tabs: action.tabs
       }
     }
 

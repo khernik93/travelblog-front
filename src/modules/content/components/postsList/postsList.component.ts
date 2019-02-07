@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { takeWhile, take, filter } from 'rxjs/operators';
+import { takeWhile, take, filter, distinctUntilChanged } from 'rxjs/operators';
 
 import * as PostsListActions from './store/postsList.actions';
 import { ContentState } from '../../store/content.reducers';
@@ -48,7 +48,8 @@ export class PostsListComponent implements OnInit, OnDestroy {
     this.selectedTab$
       .pipe(
         takeWhile(() => this.alive),
-        filter((selectedTab: TabDTO) => !!selectedTab)
+        filter((selectedTab: TabDTO) => !!selectedTab),
+        distinctUntilChanged((x: TabDTO, y: TabDTO) => x.id === y.id),
       )
       .subscribe((selectedTab: TabDTO) => {
         this.store.dispatch(new PostsListActions.ClearPosts);

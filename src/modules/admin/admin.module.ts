@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxEditorModule } from 'ngx-editor';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 // Store
 import { adminEffects } from './store/admin.effects';
@@ -34,7 +35,8 @@ export const MODULE_IMPORTS = [
   FormsModule,
   ReactiveFormsModule,
   NgxEditorModule,
-  HttpClientModule
+  HttpClientModule,
+  RouterModule
 ];
 
 const ROUTING_MODULE_IMPORTS = [

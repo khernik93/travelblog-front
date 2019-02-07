@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { takeWhile, take, filter } from 'rxjs/operators';
@@ -14,7 +14,8 @@ import { PostsListService } from './postsList.service';
 @Component({
   selector: 'postsList-component',
   styleUrls: ['./postsList.component.scss'],
-  templateUrl: './postsList.component.html'
+  templateUrl: './postsList.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class PostsListComponent implements OnInit, OnDestroy {
 

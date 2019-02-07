@@ -10,39 +10,41 @@ section {
   display: flex;
   flex-direction: column;
   width: 100%;
-  color: $grey;
   padding: 0 3%;
 }
 
 .post-wrap .content-section {
   width: 100%;
-  text-align: center;
 }
 
 .post-wrap .posted-date {
   letter-spacing: $smallLetterSpacing;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .post-wrap .entry-title {
   color: $black;
+  text-align: center;
   & * {
     cursor: pointer;
   }
 }
 
-.post-wrap .tags-links {
-  & span {
-    margin-right: 15px;
+.post-wrap .entry-content {
+  & a {
+    display: inline !important;
   }
 }
 
-.post-wrap .entry-content {
-  & p {
-    text-align: left;
+.post-wrap .tags-links {
+  text-align: center;
+  & span {
+    margin: 0 8px;
   }
 }
 
 .post-wrap .read-more {
+  text-align: center;
   visibility: visible;
 }

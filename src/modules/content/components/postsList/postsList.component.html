@@ -24,8 +24,8 @@
         <span *ngFor="let tag of post.tags">#{{ tag }}</span>
       </div>
       <br>
-      <div class="content-section entry-content">
-        <p>{{ post.content }}</p>
+      <div class="content-section entry-content" [innerHTML]="post.content | safeHtml">
+        <!-- post content HTML -->
       </div>
       <br><br><br><Br>
       <div class="content-section" *ngIf="i !== (posts$ | async).length - 1">

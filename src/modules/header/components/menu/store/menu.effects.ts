@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map, exhaustMap } from 'rxjs/operators';
 import { MenuActionTypes, SetTabs } from './menu.actions';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
-import { Tab } from '../../../../../shared/clients/api/api.model';
+import { TabDTO } from '../../../../../shared/clients/api/api.model';
 
 @Injectable()
 export class MenuEffects {
@@ -16,7 +16,7 @@ export class MenuEffects {
       exhaustMap(() => (
         this.apiClient.getTabs()
           .pipe(
-            map((tabs: Tab[]) => new SetTabs(tabs))
+            map((tabs: TabDTO[]) => new SetTabs(tabs))
           )
       ))
     );

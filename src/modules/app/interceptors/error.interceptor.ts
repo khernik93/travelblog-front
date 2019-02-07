@@ -25,7 +25,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request)
       .pipe(
         catchError((httpErrorResponse: any) => {
-          if (this.isCriticalError(httpErrorResponse.status)) {
+          if (this.isErrorStatus(httpErrorResponse.status)) {
             this.store.dispatch(new SetError(this.errorMessage));
           }
           throw httpErrorResponse;
@@ -33,8 +33,8 @@ export class ErrorInterceptor implements HttpInterceptor {
       );
   }
 
-  private isCriticalError(status: number) {
-    return status === 0 || status >= 500;
+  private isErrorStatus(status: number) {
+    return status === 0 || status >= 400;
   }
 
 }

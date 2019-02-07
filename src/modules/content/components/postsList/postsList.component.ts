@@ -8,7 +8,7 @@ import { ContentState } from '../../store/content.reducers';
 import { selectSelectedTab } from '../../../header/components/menu/store/menu.selectors';
 import { HeaderState } from '../../../header/store/header.reducers';
 import { selectPosts, selectLoading, selectInitialized } from './store/postsList.selectors';
-import { Post, Tab } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO, TabDTO } from '../../../../shared/clients/api/api.model';
 import { PostsListService } from './postsList.service';
 
 @Component({
@@ -18,9 +18,9 @@ import { PostsListService } from './postsList.service';
 })
 export class PostsListComponent implements OnInit, OnDestroy {
 
-  posts$: Observable<Post[]>;
+  posts$: Observable<PostContentDTO[]>;
   loading$: Observable<boolean>;
-  selectedTab$: Observable<Tab>;
+  selectedTab$: Observable<TabDTO>;
   initialized$: Observable<boolean>;
 
   private alive = true;
@@ -47,9 +47,9 @@ export class PostsListComponent implements OnInit, OnDestroy {
     this.selectedTab$
       .pipe(
         takeWhile(() => this.alive),
-        filter((selectedTab: Tab) => !!selectedTab)
+        filter((selectedTab: TabDTO) => !!selectedTab)
       )
-      .subscribe((selectedTab: Tab) => {
+      .subscribe((selectedTab: TabDTO) => {
         this.store.dispatch(new PostsListActions.ClearPosts);
         this.store.dispatch(new PostsListActions.GetPosts(
           selectedTab, 
@@ -63,9 +63,9 @@ export class PostsListComponent implements OnInit, OnDestroy {
     this.selectedTab$
       .pipe(
         take(1),
-        filter((selectedTab: Tab) => !!selectedTab)
+        filter((selectedTab: TabDTO) => !!selectedTab)
       )
-      .subscribe((selectedTab: Tab) => {
+      .subscribe((selectedTab: TabDTO) => {
         this.store.dispatch(new PostsListActions.TryToGetPostsOnScroll(selectedTab));
       });
   }

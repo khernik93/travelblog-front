@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Post, Meta, Tab } from '../../../../../shared/clients/api/api.model';
+import { TabDTO, PostContentDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
 
 export enum PostsListActionTypes {
 
@@ -20,17 +20,17 @@ export enum PostsListActionTypes {
 
 export class GetPosts implements Action {
   readonly type = PostsListActionTypes.GetPosts;
-  constructor(public selectedTab: Tab, public start: number, public end: number) { }
+  constructor(public selectedTab: TabDTO, public start: number, public end: number) { }
 }
 
 export class TryToGetPostsOnScroll implements Action {
   readonly type = PostsListActionTypes.TryToGetPostsOnScroll;
-  constructor(public selectedTab: Tab) { }
+  constructor(public selectedTab: TabDTO) { }
 }
 
 export class GetPostsOnScroll implements Action {
   readonly type = PostsListActionTypes.GetPostsOnScroll;
-  constructor(public selectedTab: Tab) { }
+  constructor(public selectedTab: TabDTO) { }
 }
 
 export class GetPostsSuccess implements Action {
@@ -45,7 +45,7 @@ export class GetPostsError implements Action {
 
 export class SetPosts implements Action {
   readonly type = PostsListActionTypes.SetPosts;
-  constructor(public posts: Post[], public meta: Meta) { }
+  constructor(public posts: PostContentDTO[], public meta: MetaDTO) { }
 }
 
 export class SetPostsSuccess implements Action {

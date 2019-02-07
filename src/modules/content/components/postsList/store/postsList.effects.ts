@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of, Scheduler } from 'rxjs';
 import { exhaustMap, catchError, map, take, concatMap, debounceTime } from 'rxjs/operators';
-import { PostsPaginable, Meta } from '../../../../../shared/clients/api/api.model';
+import { PostsDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
 import { Store } from '@ngrx/store';
 import { ContentState } from '../../../store/content.reducers';
@@ -31,7 +31,7 @@ export class PostsListEffects {
           end: action.end 
         })
           .pipe(
-            concatMap((response: PostsPaginable) => ([
+            concatMap((response: PostsDTO) => ([
               new GetPostsSuccess(),
               new SetPosts(response.content, response.meta)
             ])),
@@ -66,7 +66,7 @@ export class PostsListEffects {
         this.store.select(selectMeta)
           .pipe(
             take(1),
-            map((meta: Meta) => new GetPosts(
+            map((meta: MetaDTO) => new GetPosts(
               action.selectedTab, 
               this.postsListService.getNextStart(meta),
               this.postsListService.getNextEnd(meta)

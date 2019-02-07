@@ -1,26 +1,25 @@
-export type Meta = {
+export type MetaDTO = {
   total: number,
   start: number,
   end: number
 };
 
-export type Post = {
-  id?: number,
-  tab?: Tab,
+export type PostsDTO = {
+  meta: MetaDTO,
+  content: PostContentDTO[]
+};
+
+export type PostContentDTO = {
+  tab: TabDTO,
   createdAt?: string,
   title: string,
-  tags: string[],
   content: string,
+  tags: string[],
 };
 
-export type PostsPaginable = {
-  meta: Meta,
-  content: Post[]
-};
-
-export type Tab = {
+export type TabDTO = {
   id: number,
   name: string
 };
 
-export type Photos = Map<string, string[]>;
+export type SwiperDTO = Map<number, string[]>;

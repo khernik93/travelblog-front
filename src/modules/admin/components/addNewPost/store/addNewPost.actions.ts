@@ -1,31 +1,20 @@
 import { Action } from '@ngrx/store';
-import { PostDisplay } from '../addNewPost.model';
-import { Tab } from '../../../../../shared/clients/api/api.model';
+import { Post } from '../addNewPost.model';
 
 export enum AddNewPostActionTypes {
   AddNewPost = '[AddNewPost] Add new post',
-  AddNewPostSuccess = '[AddNewPost] Add new post success',
-  AddNewPostError = '[AddNewPost] Add new post error'
+  AddNewPostSuccess = '[AddNewPost] Add new post success'
 }
 
 export class AddNewPost implements Action {
   readonly type = AddNewPostActionTypes.AddNewPost;
-
-  constructor(public postDisplay: PostDisplay, public tab: Tab) { }
+  constructor(public post: Post) { }
 }
 
 export class AddNewPostSuccess implements Action {
-  readonly type = AddNewPostActionTypes.AddNewPost;
-
+  readonly type = AddNewPostActionTypes.AddNewPostSuccess;
   constructor() { }
 }
 
-export class AddNewPostError implements Action {
-  readonly type = AddNewPostActionTypes.AddNewPost;
-
-  constructor(public error: any) { }
-}
-
 export type AddNewPostActions = AddNewPost
-  | AddNewPostSuccess
-  | AddNewPostError;
+  | AddNewPostSuccess;

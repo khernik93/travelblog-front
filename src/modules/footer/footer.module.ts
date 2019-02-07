@@ -9,15 +9,13 @@ export const MODULE_DECLARATIONS = [
 ];
 
 export const MODULE_IMPORTS = [
-  CommonModule
+  CommonModule,
+  RouterModule
 ];
 
 @NgModule({
   declarations: MODULE_DECLARATIONS,
-  imports: [
-    ...MODULE_IMPORTS,
-    RouterModule
-  ],
+  imports: MODULE_IMPORTS,
   exports: [FooterComponent],
   providers: []
 })

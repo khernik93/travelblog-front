@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { selectPost } from './store/singlePost.selectors';
 import { ContentState } from '../../store/content.reducers';
 import * as SinglePostActions from './store/singlePost.actions';
-import { Post } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'singlePost-component',
@@ -16,7 +16,7 @@ import { Post } from '../../../../shared/clients/api/api.model';
 })
 export class SinglePostComponent implements OnInit, OnDestroy {
 
-  post$: Observable<Post>;
+  post$: Observable<PostContentDTO>;
 
   private alive = true;
 

@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
-import { PostDisplay } from './addNewPost.model';
-import { Post } from '../../../../shared/clients/api/api.model';
+import { Post } from './addNewPost.model';
+import { PostContentDTO, TabDTO } from '../../../../shared/clients/api/api.model';
 
 @Injectable()
 export class AddNewPostService {
 
-  transformPostDisplayIntoPost(postDisplay: PostDisplay): Post {
+  transformIntoPostContentDTO(post: Post, tabs: TabDTO[]): PostContentDTO {
     return {
-      title: postDisplay.title,
-      tags: this.sanitizeTags(postDisplay.tags),
-      content: postDisplay.content
+      title: post.title,
+      content: post.content,
+      tab: this.findTabById(post.tabId, tabs),
+      tags: this.convertTagsStringIntoArray(post.tags)
     };
   }
 
-  private sanitizeTags(tags: string): string[] {
-    const splitTags = tags.split(",") || [];
+  private findTabById(tabId: number, tabs: TabDTO[]): TabDTO {
+    return tabs
+      .filter((tab: TabDTO) => tab.id === tabId)[0];
+  }
+
+  private convertTagsStringIntoArray(tags: string): string[] {
+    const trimmedTags = tags.replace(/\s/g, '');
+    const splitTags = trimmedTags.split(',') || [];
     return splitTags.filter(tag => tag);
   }
 

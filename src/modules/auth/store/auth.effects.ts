@@ -36,12 +36,7 @@ export class AuthEffects {
         this.apiClient.signIn(action.credentials)
           .pipe(
             map(() => new SignIn()),
-            catchError((response: HttpErrorResponse) => {
-              if (response.status >= 400) {
-                this.store.dispatch(new SetError(response.error));
-              }
-              return of(new SignOut());
-            })
+            catchError((response: HttpErrorResponse) => of(new SignOut()))
           )
       ))
     );

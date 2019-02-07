@@ -23,7 +23,8 @@ export const MODULE_DECLARATIONS = [
 ];
 
 export const MODULE_IMPORTS = [
-  CommonModule
+  CommonModule,
+  RouterModule
 ];
 
 const STORE_IMPORTS = [
@@ -35,8 +36,7 @@ const STORE_IMPORTS = [
   declarations: MODULE_DECLARATIONS,
   imports: [
     ...MODULE_IMPORTS,
-    ...STORE_IMPORTS,
-    RouterModule
+    ...STORE_IMPORTS
   ],
   exports: [HeaderComponent],
   providers: []

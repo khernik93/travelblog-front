@@ -8,7 +8,7 @@ import * as SwiperActions from './store/swiper.actions';
 import { HeaderState } from '../../store/header.reducers';
 import { selectPhotos } from './store/swiper.selectors';
 import { selectSelectedTab } from '../menu/store/menu.selectors';
-import { Tab } from '../../../../shared/clients/api/api.model';
+import { TabDTO, SwiperDTO } from '../../../../shared/clients/api/api.model';
 
 const swiperSettings = {
   wrapper: '.swiper-container',
@@ -37,8 +37,8 @@ export class SwiperComponent implements OnInit, OnDestroy {
 
   currentPhotos: string[];
 
-  private selectedTab$: Observable<Tab>;
-  private photos$: Observable<Map<string, string[]>>;
+  private selectedTab$: Observable<TabDTO>;
+  private photos$: Observable<SwiperDTO>;
   private swiper: Swiper;
   private alive: boolean = true;
 

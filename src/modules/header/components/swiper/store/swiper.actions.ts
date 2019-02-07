@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { SwiperDTO } from '../../../../../shared/clients/api/api.model';
 
 export enum SwiperActionTypes {
   GetPhotos = '[Swiper] Get photos',
@@ -14,7 +15,7 @@ export class GetPhotos implements Action {
 export class SetPhotos implements Action {
   readonly type = SwiperActionTypes.SetPhotos;
 
-  constructor(public photos: Map<string, string[]>) { }
+  constructor(public photos: SwiperDTO) { }
 }
 
 export type SwiperActions = GetPhotos

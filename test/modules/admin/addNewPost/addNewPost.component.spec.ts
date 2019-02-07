@@ -59,7 +59,7 @@ describe('AddNewPostComponent', () => {
     WHEN the component is loaded
     THEN all tabs should be loaded and visible
   `, () => {
-    const tabs = fixture.debugElement.queryAll(By.css('#tab option'));
+    const tabs = fixture.debugElement.queryAll(By.css('#tabId option'));
     expect(tabs.length).toEqual(AddNewPostState.header.menu.tabs.length);
   });
 
@@ -68,13 +68,13 @@ describe('AddNewPostComponent', () => {
     THEN addNewPost action with correct values is dispatched
   `, () => {
     const formValues = {
-      tab: AddNewPostState.header.menu.tabs[1],
+      tabId: AddNewPostState.header.menu.tabs[1].id,
       title: 'title',
       tags: 'tag1',
       content: 'content'
     };
 
-    component.addNewPostForm.controls.tab.setValue(formValues.tab);
+    component.addNewPostForm.controls.tabId.setValue(formValues.tabId);
     component.addNewPostForm.controls.title.setValue(formValues.title);
     component.addNewPostForm.controls.tags.setValue(formValues.tags);
     component.content = formValues.content;
@@ -83,10 +83,9 @@ describe('AddNewPostComponent', () => {
     button.triggerEventHandler('click', null);
     fixture.detectChanges();
     expect(store.dispatch.calls.mostRecent().args).toEqual([new AddNewPost({
-      title: formValues.title,
-      tags: formValues.tags,
-      content: formValues.content
-    }, formValues.tab)]);
+      ...formValues,
+      tabId: +formValues.tabId,
+    })]);
   });
 
 });

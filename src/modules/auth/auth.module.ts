@@ -12,7 +12,6 @@ import { AuthEffects } from './store/auth.effects';
 // Components
 import { AuthComponent } from './auth.component';
 import { SignInComponent } from './components/signIn/signIn.component';
-import { SignOutComponent } from './components/signOut/signOut.component';
 
 // Modules
 import { AuthRoutingModule } from './routing/authRouting.module';
@@ -24,8 +23,7 @@ import { CookieService } from '../../shared/services/cookie.service';
 
 export const MODULE_DECLARATIONS = [
   AuthComponent,
-  SignInComponent,
-  SignOutComponent
+  SignInComponent
 ];
 
 export const MODULE_IMPORTS = [
@@ -44,9 +42,6 @@ const STORE_IMPORTS = [
   imports: [
     ...MODULE_IMPORTS,
     ...STORE_IMPORTS
-  ],
-  exports: [
-    SignOutComponent
   ],
   providers: [
     AuthGuard,

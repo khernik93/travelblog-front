@@ -10,7 +10,6 @@ import { AddNewPostComponent } from '../../../../src/modules/admin/components/ad
 import { AddNewPostState } from './helpers/addNewPost.state';
 import { GetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
 import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../src/modules/admin/admin.module';
-import { SignOutComponent } from '../../../../src/modules/auth/components/signOut/signOut.component';
 import { AddNewPost } from '../../../../src/modules/admin/components/addNewPost/store/addNewPost.actions';
 
 describe('AddNewPostComponent', () => {
@@ -25,10 +24,7 @@ describe('AddNewPostComponent', () => {
 
     TestBed.configureTestingModule({
       imports: MODULE_IMPORTS,
-      declarations: [
-        ...MODULE_DECLARATIONS,
-        SignOutComponent
-      ],
+      declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: Store, useValue: store }
       ]

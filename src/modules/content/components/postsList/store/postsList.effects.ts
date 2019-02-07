@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, of, Scheduler } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { exhaustMap, catchError, map, take, concatMap, debounceTime } from 'rxjs/operators';
 import { PostsDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
@@ -48,7 +48,7 @@ export class PostsListEffects {
         this.store.select(selectCanScroll)
           .pipe(
             take(1),
-            map((canScroll: boolean) => (
+            map((canScroll: boolean) => ( // dispatched here for easier access to action
               (canScroll) ? 
                 new GetPostsOnScroll(action.selectedTab) :
                 new GetPostsSuccess() // no need to scroll more
@@ -66,7 +66,7 @@ export class PostsListEffects {
         this.store.select(selectMeta)
           .pipe(
             take(1),
-            map((meta: MetaDTO) => new GetPosts(
+            map((meta: MetaDTO) => new GetPosts( // dispatched here for easier access to action
               action.selectedTab, 
               this.postsListService.getNextStart(meta),
               this.postsListService.getNextEnd(meta)

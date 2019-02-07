@@ -40,11 +40,10 @@ const EDITOR_CONFIG = {
   "showToolbar": true,
   "imageEndPoint": "",
   "toolbar": [
-      ["bold", "italic", "underline", "strikeThrough", "superscript", "subscript"],
+      ["bold", "italic", "underline", "strikeThrough"],
       ["fontName", "fontSize", "color"],
-      ["justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "indent", "outdent"],
-      ["cut", "copy", "delete", "removeFormat", "undo", "redo"],
+      ["justifyLeft", "justifyCenter", "justifyRight"],
       ["paragraph", "blockquote", "removeBlockquote", "horizontalLine", "orderedList", "unorderedList"],
-      ["link", "unlink", "image", "video"]
+      ["link", "unlink", "image"]
   ]
 };

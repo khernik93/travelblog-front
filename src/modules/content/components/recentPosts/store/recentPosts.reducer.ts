@@ -1,8 +1,8 @@
 import { RecentPostsActions, RecentPostsActionTypes } from './recentPosts.actions';
-import { Post } from '../../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
 
 export interface RecentPostsState {
-  recentPosts: Post[]
+  recentPosts: PostContentDTO[]
 }
 
 export const initialState: RecentPostsState = {

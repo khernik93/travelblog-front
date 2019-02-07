@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
 import { HeaderState } from '../../../header/store/header.reducers';
 import { selectTabs } from '../../../header/components/menu/store/menu.selectors';
 import { GetTabs } from '../../../header/components/menu/store/menu.actions';
-import { Tab } from '../../../../shared/clients/api/api.model';
+import { TabDTO } from '../../../../shared/clients/api/api.model';
 import { AddNewPost } from './store/addNewPost.actions';
 
 @Component({
@@ -17,11 +16,8 @@ import { AddNewPost } from './store/addNewPost.actions';
 })
 export class AddNewPostComponent implements OnInit {
 
-  // Tabs options
-  tabs$: Observable<Tab[]>;
-  // Content taken from wysiwyg
-  content: string = '';
-  // Basic form controls
+  tabs$: Observable<TabDTO[]>;
+  content: string = ''; // wysiwyg
   addNewPostForm: FormGroup;
 
   constructor(
@@ -31,19 +27,28 @@ export class AddNewPostComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.addNewPostForm = new FormGroup({
-      tab: new FormControl(''),
-      title: new FormControl('', Validators.required),
-      tags: new FormControl('', Validators.required)
-    });
-
-    this.setFirstTab();
+    this.addNewPostForm = this.buildAddNewPostForm();
+    this.selectFirstTab();
     this.store.dispatch(new GetTabs());
   }
 
-  private setFirstTab() {
-    this.tabs$.pipe(map((tabs: Tab[]) => tabs[0]))
-    .subscribe((tab: Tab) => this.addNewPostForm.get('tab').setValue(tab));
+  private buildAddNewPostForm(): FormGroup {
+    return new FormGroup({
+      tabId: new FormControl(''),
+      title: new FormControl('', Validators.required),
+      tags: new FormControl('', Validators.required)
+    });
+  }
+
+  private selectFirstTab() {
+    this.tabs$
+      .pipe(
+        filter((tabs: TabDTO[]) => tabs.length > 0),
+        map((tabs: TabDTO[]) => tabs[0].id)
+      )
+      .subscribe((firstTabId: number) => (
+        this.addNewPostForm.get('tabId').setValue(firstTabId)
+      ));
   }
 
   synchronizeContent(content: string) {
@@ -52,17 +57,18 @@ export class AddNewPostComponent implements OnInit {
   
   addNewPost() {
     this.store.dispatch(new AddNewPost(
-      {
-        tags: this.addNewPostForm.value.tags,
-        title: this.addNewPostForm.value.title,
-        content: this.content
-      }, 
-      this.addNewPostForm.value.tab
+      { 
+        ...this.addNewPostForm.value,
+        tabId: +this.addNewPostForm.value.tabId,
+        content: this.content 
+      }
     ));
   }
 
   isInvalid(control: string): boolean {
-    return !!(!this.addNewPostForm.get(control).valid && this.addNewPostForm.get(control).touched);
+    const isValid = this.addNewPostForm.get(control).valid;
+    const isTouched = this.addNewPostForm.get(control).touched;
+    return !isValid && isTouched;
   }
 
 }

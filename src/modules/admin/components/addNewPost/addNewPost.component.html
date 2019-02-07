@@ -3,9 +3,9 @@
   <form [formGroup]="addNewPostForm">
 
     <div class="form-group">
-      <label for="tab"><b>Tab</b></label>
-      <select formControlName="tab" class="form-control" id="tab">
-        <option *ngFor="let tab of tabs$ | async">{{ tab }}</option>
+      <label for="tabId"><b>Tab</b></label>
+      <select formControlName="tabId" class="form-control" id="tabId">
+        <option *ngFor="let tab of tabs$ | async" [value]="tab.id">{{ tab.name }}</option>
       </select>
     </div>
 
@@ -22,9 +22,7 @@
     </div>
 
     <div class="form-group">
-      <wysiwyg-component (onContentChanged)="synchronizeContent($event)"
-                         [placeholder]="'Post content...'"
-      ></wysiwyg-component>
+      <wysiwyg-component (onContentChanged)="synchronizeContent($event)"></wysiwyg-component>
     </div>
 
     <div class="form-group">

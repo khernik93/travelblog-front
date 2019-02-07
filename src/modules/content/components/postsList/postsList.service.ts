@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Meta } from '../../../../shared/clients/api/api.model';
+import { MetaDTO } from '../../../../shared/clients/api/api.model';
 
 @Injectable()
 export class PostsListService {
@@ -23,7 +23,7 @@ export class PostsListService {
      * Calculate next start index for scrolling more posts
      * @param meta 
      */
-    public getNextStart(meta: Meta): number {
+    public getNextStart(meta: MetaDTO): number {
         return meta.end + 1;
     }
 
@@ -31,7 +31,7 @@ export class PostsListService {
      * Calculate next end index for scrolling more posts
      * @param meta 
      */
-    public getNextEnd(meta: Meta): number {
+    public getNextEnd(meta: MetaDTO): number {
         return meta.end + (meta.end - meta.start) + 1;
     }
 

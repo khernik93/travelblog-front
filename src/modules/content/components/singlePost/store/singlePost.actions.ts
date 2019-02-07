@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Post } from '../../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
 
 export enum SinglePostActionTypes {
   GetPost = '[SinglePost] Get post',
@@ -15,7 +15,7 @@ export class GetPost implements Action {
 export class SetPost implements Action {
   readonly type = SinglePostActionTypes.SetPost;
 
-  constructor(public post: Post) { }
+  constructor(public post: PostContentDTO) { }
 }
 
 export type SinglePostActions = GetPost

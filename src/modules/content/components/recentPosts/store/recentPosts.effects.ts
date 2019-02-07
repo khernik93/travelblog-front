@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, exhaustMap } from 'rxjs/operators';
 import { RecentPostsActionTypes, SetRecentPosts } from './recentPosts.actions';
-import { Post } from '../../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class RecentPostsEffects {
       exhaustMap(() => (
         this.apiClient.getRecentPosts()
           .pipe(
-            map((posts: Post[]) => new SetRecentPosts(posts))
+            map((posts: PostContentDTO[]) => new SetRecentPosts(posts))
           )
       ))
     );

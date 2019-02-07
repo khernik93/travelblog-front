@@ -4,11 +4,8 @@ import { Observable } from 'rxjs';
 import { TransferHttpService } from '../../services/transferHttp.service';
 import { AuthCredentials } from '../../../modules/auth/auth.model';
 import constants from '../../../config/constants';
-import { 
-  PostsPaginable, 
-  Tab, 
-  Photos,
-  Post
+import {
+  PostContentDTO, PostsDTO, SwiperDTO, TabDTO
 } from './api.model';
 import { HttpHeaders } from '@angular/common/http';
 import { CookieService } from '../../services/cookie.service';
@@ -41,7 +38,7 @@ export class ApiClient {
       .set('X-Api-Key', 'aaa');
   }
 
-  getRecentPosts(): Observable<Post[]> {
+  getRecentPosts(): Observable<PostContentDTO[]> {
     const url = this.prepareUrl(ROUTES.recentPosts);
     return this.transferHttpService.get(url, {
       headers: this.headers
@@ -51,7 +48,7 @@ export class ApiClient {
     );
   }
 
-  getPosts(tabId: number, params: {start: number, end: number}): Observable<PostsPaginable> {
+  getPosts(tabId: number, params: {start: number, end: number}): Observable<PostsDTO> {
     const url = this.prepareUrl(ROUTES.posts);
     return this.transferHttpService.get(`${url}/${tabId}`, {
       params: { 
@@ -62,14 +59,14 @@ export class ApiClient {
     });
   }
 
-  getPost(id: string): Observable<Post> {
+  getPost(id: string): Observable<PostContentDTO> {
     const url = this.prepareUrl(ROUTES.post);
     return this.transferHttpService.get(`${url}/${id}`, {
       headers: this.headers
     });
   }
 
-  getTabs(): Observable<Tab[]> {
+  getTabs(): Observable<TabDTO[]> {
     const url = this.prepareUrl(ROUTES.tabs);
     return this.transferHttpService.get(url, {
       headers: this.headers
@@ -79,7 +76,7 @@ export class ApiClient {
       );
   }
 
-  getPhotos(): Observable<Photos> {
+  getPhotos(): Observable<SwiperDTO> {
     const url = this.prepareUrl(ROUTES.photos);
     return this.transferHttpService.get(url, {
       headers: this.headers
@@ -89,14 +86,11 @@ export class ApiClient {
       );
   }
 
-  addNewPost(post: Post, tab: Tab): Observable<void> {
+  addNewPost(post: PostContentDTO): Observable<void> {
     const url = this.prepareUrl(ROUTES.addNewPost);
     const headers = this.headers
       .append('Authorization', this.cookieService.getCookie('SESSION_ID'));
-    return this.transferHttpService.post(url, { 
-      ...post, 
-      tab 
-    }, {
+    return this.transferHttpService.post(url, post, {
       headers: headers
     });
   }

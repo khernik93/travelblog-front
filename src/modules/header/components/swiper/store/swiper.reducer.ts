@@ -1,7 +1,8 @@
 import { SwiperActions, SwiperActionTypes } from './swiper.actions';
+import { SwiperDTO } from '../../../../../shared/clients/api/api.model';
 
 export interface SwiperState {
-  photos: Map<string, string[]>
+  photos: SwiperDTO
 };
 
 export const initialState: SwiperState = {

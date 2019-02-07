@@ -1,4 +1,4 @@
-<div [class]="'notify bar-top type-error do-show type-' + (notification$ | async).type" 
+<div [class]="'notify bar-top do-show type-' + (notification$ | async).type" 
      *ngIf="notification$ | async"
      #notification>
   {{ (notification$ | async).message }}

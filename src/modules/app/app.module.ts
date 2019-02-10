@@ -30,6 +30,7 @@ import { AuthRoutingModule } from '../auth/routing/authRouting.module';
 import { TransferHttpService } from '../../shared/services/transferHttp.service';
 import { ApiClient } from '../../shared/clients/api/api.client';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
+import { PreviousRouteService } from '../../shared/services/previousRoute.service';
 
 export const MODULE_DECLARATIONS = [
   NotFoundComponent,
@@ -83,6 +84,7 @@ const STORE_IMPORTS = [
   providers: [
     TransferHttpService,
     ApiClient,
+    PreviousRouteService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

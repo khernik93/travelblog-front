@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthState } from '../../../auth/store/auth.reducer';
 import { SignOut } from '../../../auth/store/auth.actions';
+import { PreviousRouteService } from '../../../../shared/services/previousRoute.service';
 
 @Component({
   selector: 'adminHeader-component',
@@ -11,7 +12,7 @@ import { SignOut } from '../../../auth/store/auth.actions';
         <a href="#" (click)="signOut()">SIGN OUT</a>
       </div>
       <div class="tab">
-        <a [routerLink]="'/'">BACK TO BLOG</a>
+        <a (click)="goBack()">BACK TO BLOG</a>
       </div>
     </header>
   `,
@@ -20,8 +21,14 @@ import { SignOut } from '../../../auth/store/auth.actions';
 export class AdminHeaderComponent {
 
   constructor(
-    private store: Store<AuthState>
-  ) { }
+    private store: Store<AuthState>,
+    private previousRouteService: PreviousRouteService
+  ) { 
+  }
+
+  goBack() {
+    this.previousRouteService.goBack();
+  }
 
   signOut() {
     this.store.dispatch(new SignOut());

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import cloneDeep from 'lodash-es/cloneDeep';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MenuComponent } from '../../../../src/modules/header/components/menu/menu.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/header/header.module';
@@ -24,7 +25,7 @@ describe('MenuComponent', () => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
 
     TestBed.configureTestingModule({
-      imports: MODULE_IMPORTS,
+      imports: [...MODULE_IMPORTS, RouterTestingModule],
       declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: Store, useValue: store }

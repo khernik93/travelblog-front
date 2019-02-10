@@ -26,7 +26,7 @@ export class PostsListEffects {
     .pipe(
       ofType(PostsListActionTypes.GetPosts),
       exhaustMap((action: any) => (
-        this.apiClient.getPosts(action.selectedTab.id, { 
+        this.apiClient.getPosts(action.selectedTab.id, {
           start: action.start, 
           end: action.end 
         })

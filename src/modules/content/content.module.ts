@@ -23,6 +23,7 @@ import { SafeHtmlPipe } from '../app/pipes/safeHtml.pipe';
 
 // Services
 import { PostsListService } from './components/postsList/postsList.service';
+import { SwiperService } from '../header/components/swiper/swiper.service';
 
 export const MODULE_DECLARATIONS = [
   ContentComponent,
@@ -49,7 +50,8 @@ const STORE_IMPORTS = [
 ];
 
 const MODULE_PROVIDERS = [
-  PostsListService
+  PostsListService,
+  SwiperService
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { ActivatedRoute } from '@angular/router';
 import { selectPost } from './store/singlePost.selectors';
@@ -18,7 +18,7 @@ export class SinglePostComponent implements OnInit, OnDestroy {
 
   post$: Observable<PostContentDTO>;
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private store: Store<ContentState>,
@@ -31,16 +31,17 @@ export class SinglePostComponent implements OnInit, OnDestroy {
     this.getPostOnNewRequest();
   }
 
-  ngOnDestroy() {
-    this.alive = false;
-  }
-
   private getPostOnNewRequest() {
     this.route.paramMap
-      .pipe(takeWhile(() => this.alive))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((params: any) => {
         this.store.dispatch(new SinglePostActions.GetPost(params.get('id').toString()));
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

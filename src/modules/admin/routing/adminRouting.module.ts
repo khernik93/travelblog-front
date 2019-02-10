@@ -12,7 +12,7 @@ export const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', component: AdminComponent }
+      { path: '', component: AdminComponent, pathMatch: 'full' }
     ]
   }
 ];

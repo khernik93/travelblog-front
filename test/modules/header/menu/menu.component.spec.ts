@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { By } from '@angular/platform-browser';
 import cloneDeep from 'lodash-es/cloneDeep';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MenuComponent } from '../../../../src/modules/header/components/menu/menu.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/header/header.module';
@@ -11,7 +12,7 @@ import { HeaderState } from '../../../../src/modules/header/store/header.reducer
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { MenuState } from './helpers/menu.state';
-import { SelectTab } from '../../../../src/modules/header/components/menu/store/menu.actions';
+import { GetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
 
 describe('MenuComponent', () => {
 
@@ -24,7 +25,7 @@ describe('MenuComponent', () => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
 
     TestBed.configureTestingModule({
-      imports: MODULE_IMPORTS,
+      imports: [...MODULE_IMPORTS, RouterTestingModule],
       declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: Store, useValue: store }
@@ -61,13 +62,10 @@ describe('MenuComponent', () => {
   });
 
   it(`
-    WHEN the tab is clicked
-    THEN the SelectTab action is dispatched with the proper tab name
+    WHEN the component is loaded
+    THEN GetTabs is dispatched
   `, () => {
-    const secondTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(2)');
-    secondTab.click();
-    fixture.detectChanges();
-    expect(store.dispatch).toHaveBeenCalledWith(new SelectTab(MenuState.header.menu.tabs[1]));
+    expect(store.dispatch).toHaveBeenCalledWith(new GetTabs());
   });
 
   it(`

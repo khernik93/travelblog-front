@@ -5,6 +5,7 @@ import { TabDTO, PostContentDTO, MetaDTO } from '../../../../../shared/clients/a
 export enum PostsListActionTypes {
 
   GetPosts = '[Posts] Get posts',
+  GetPostsOnRouteChange = '[Posts] Get posts on route change',
   TryToGetPostsOnScroll = '[Posts] Try to get posts on scroll',
   GetPostsOnScroll = '[Posts] Get posts on scroll',
   GetPostsSuccess = '[Posts] Get posts success',
@@ -21,6 +22,11 @@ export enum PostsListActionTypes {
 export class GetPosts implements Action {
   readonly type = PostsListActionTypes.GetPosts;
   constructor(public selectedTab: TabDTO, public start: number, public end: number) { }
+}
+
+export class GetPostsOnRouteChange implements Action {
+  readonly type = PostsListActionTypes.GetPostsOnRouteChange;
+  constructor(public tabId: number) { }
 }
 
 export class TryToGetPostsOnScroll implements Action {
@@ -67,6 +73,7 @@ export type PostsListActions = SetPosts
   | SetPostsSuccess
   | SetPostsError
   | GetPosts
+  | GetPostsOnRouteChange
   | GetPostsOnScroll
   | TryToGetPostsOnScroll
   | GetPostsSuccess

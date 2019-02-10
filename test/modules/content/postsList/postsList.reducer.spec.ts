@@ -38,16 +38,18 @@ describe('PostsListReducer', () => {
 
   it(`
     WHEN GetPosts action is dispatched
+    OR GetPostsOnRouteChange action is dispatched
     OR GetPostsOnScroll action is dispatched
     THEN loading should be set to true
   `, () => {
-    let result;
-
-    result = postsListReducer(initialState, new postsListActions.GetPosts(null, null, null));
-    expect(result).toEqual({ ...initialState, loading: true });
-
-    result = postsListReducer(initialState, new postsListActions.GetPostsOnScroll(null));
-    expect(result).toEqual({ ...initialState, loading: true });
+    const results = [
+      postsListReducer(initialState, new postsListActions.GetPosts(null, null, null)),
+      postsListReducer(initialState, new postsListActions.GetPostsOnRouteChange(null)),
+      postsListReducer(initialState, new postsListActions.GetPostsOnScroll(null))
+    ];
+    for (let i = 0; i < results.length; i++) {
+      expect(results[i]).toEqual({ ...initialState, loading: true });
+    }
   });
 
   it(`
@@ -57,19 +59,15 @@ describe('PostsListReducer', () => {
     OR SetPostsError action is dispatched
     THEN loading should be set to false
   `, () => {
-    let result;
-    
-    result = postsListReducer(initialState, new postsListActions.GetPostsSuccess());
-    expect(result).toEqual({ ...initialState, loading: false, initialized: true });
-
-    result = postsListReducer(initialState, new postsListActions.GetPostsError());
-    expect(result).toEqual({ ...initialState, loading: false, initialized: true });
-
-    result = postsListReducer(initialState, new postsListActions.SetPostsSuccess());
-    expect(result).toEqual({ ...initialState, loading: false, initialized: true });
-
-    result = postsListReducer(initialState, new postsListActions.SetPostsError());
-    expect(result).toEqual({ ...initialState, loading: false, initialized: true });
+    const results = [
+      postsListReducer(initialState, new postsListActions.GetPostsSuccess()),
+      postsListReducer(initialState, new postsListActions.GetPostsError()),
+      postsListReducer(initialState, new postsListActions.SetPostsSuccess()),
+      postsListReducer(initialState, new postsListActions.SetPostsError())
+    ];
+    for (let i = 0; i < results.length; i++) {
+      expect(results[i]).toEqual({ ...initialState, loading: false, initialized: true });
+    }
   });
 
 });

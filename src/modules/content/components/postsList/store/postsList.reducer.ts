@@ -19,6 +19,7 @@ export function postsListReducer(state = initialState, action: PostsListActions)
   switch (action.type) {
 
     case PostsListActionTypes.GetPosts:
+    case PostsListActionTypes.GetPostsOnRouteChange:
     case PostsListActionTypes.GetPostsOnScroll: {
       return { ...state, loading: true }
     }

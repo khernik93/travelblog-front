@@ -1,6 +1,6 @@
 import { Actions } from '@ngrx/effects';
 import { TestBed } from '@angular/core/testing';
-import { hot, cold, getTestScheduler } from 'jasmine-marbles';
+import { hot, cold } from 'jasmine-marbles';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { Store } from '@ngrx/store';
 import { TabsResponse } from '../../../utils/responses/tabs.response';
@@ -20,8 +20,11 @@ import {
   GetPostsSuccess, 
   GetPostsError, 
   GetPostsOnScroll, 
-  TryToGetPostsOnScroll
+  TryToGetPostsOnScroll,
+  GetPostsOnRouteChange,
+  ClearPosts
 } from '../../../../src/modules/content/components/postsList/store/postsList.actions';
+import { SelectTab } from '../../../../src/modules/header/components/menu/store/menu.actions';
 
 describe('PostsListEffects', () => {
 
@@ -63,6 +66,58 @@ describe('PostsListEffects', () => {
   });
 
   it(`
+    WHEN GetPostsOnRouteChange action is dispatched
+    THEN SelectTab, ClearPosts, and GetPosts are dispatched
+  `, () => {
+    const selectedTab = ClonedTabsResponse[2];
+    const action = new GetPostsOnRouteChange(selectedTab.id);
+    const outcome = [
+      new SelectTab(selectedTab),
+      new ClearPosts(),
+      new GetPosts(selectedTab, postsListService.DEFAULT_START, postsListService.DEFAULT_END)
+    ];
+    actions.stream = hot('-a', {a: action});
+    const response = cold('-a-|', { a: ClonedTabsResponse });
+    const expected = cold('--(bcd)', { b: outcome[0], c: outcome[1], d: outcome[2] });
+    spyOn(store, 'select').and.callThrough();
+    store.select.and.returnValue(response);
+    apiClient.getPosts.and.returnValue(response);
+    expect(effects.getPostsOnRouteChange$).toBeObservable(expected);
+  });
+
+  it(`
+    WHEN TryToGetPostsOnScroll action is dispatched
+    AND selectCanScroll returns true
+    THEN GetPostsOnScroll action is dispatched
+  `, () => {
+    const selectedTab = ClonedTabsResponse[0];
+    const action = new TryToGetPostsOnScroll(selectedTab);
+    const outcome = new GetPostsOnScroll(selectedTab);
+    actions.stream = hot('-a', {a: action});
+    const response = cold('-a|', { a: true });
+    const expected = cold('--b', { b: outcome });
+    spyOn(store, 'select').and.callThrough();
+    store.select.and.returnValue(response);
+    expect(effects.tryToGetPostsOnScroll$).toBeObservable(expected);
+  });
+
+  it(`
+    WHEN TryToGetPostsOnScroll action is dispatched
+    AND selectCanScroll returns false
+    THEN GetPostsOnScroll action is dispatched
+  `, () => {
+    const selectedTab = ClonedTabsResponse[0];
+    const action = new TryToGetPostsOnScroll(selectedTab);
+    const outcome = new GetPostsSuccess();
+    actions.stream = hot('-a', {a: action});
+    const response = cold('-a|', { a: false });
+    const expected = cold('--b', { b: outcome });
+    spyOn(store, 'select').and.callThrough();
+    store.select.and.returnValue(response);
+    expect(effects.tryToGetPostsOnScroll$).toBeObservable(expected);
+  });
+
+  it(`
     WHEN GetPosts action is dispatched
     THEN apiClient.getPosts method should be executed
     AND SetPosts action and success action are both dispatched
@@ -101,38 +156,6 @@ describe('PostsListEffects', () => {
     const expected = cold('--b', { b: outcome });
     apiClient.getPosts.and.returnValue(errorResponse);
     expect(effects.getPosts$).toBeObservable(expected);
-  });
-
-  it(`
-    WHEN TryToGetPostsOnScroll action is dispatched
-    AND selectCanScroll returns true
-    THEN GetPostsOnScroll action is dispatched
-  `, () => {
-    const selectedTab = ClonedTabsResponse[0];
-    const action = new TryToGetPostsOnScroll(selectedTab);
-    const outcome = new GetPostsOnScroll(selectedTab);
-    actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: true });
-    const expected = cold('--b', { b: outcome });
-    spyOn(store, 'select').and.callThrough();
-    store.select.and.returnValue(response);
-    expect(effects.tryToGetPostsOnScroll$).toBeObservable(expected);
-  });
-
-  it(`
-    WHEN TryToGetPostsOnScroll action is dispatched
-    AND selectCanScroll returns false
-    THEN GetPostsOnScroll action is dispatched
-  `, () => {
-    const selectedTab = ClonedTabsResponse[0];
-    const action = new TryToGetPostsOnScroll(selectedTab);
-    const outcome = new GetPostsSuccess();
-    actions.stream = hot('-a', {a: action});
-    const response = cold('-a|', { a: false });
-    const expected = cold('--b', { b: outcome });
-    spyOn(store, 'select').and.callThrough();
-    store.select.and.returnValue(response);
-    expect(effects.tryToGetPostsOnScroll$).toBeObservable(expected);
   });
 
 });

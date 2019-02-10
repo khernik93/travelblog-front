@@ -1,18 +1,16 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { take, filter, distinctUntilChanged, map, takeUntil, mergeMap } from 'rxjs/operators';
+import { take, filter, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import isEqual from 'lodash-es/isEqual';
 
-import { ClearPosts, GetPosts, TryToGetPostsOnScroll } from './store/postsList.actions';
+import { TryToGetPostsOnScroll, GetPostsOnRouteChange } from './store/postsList.actions';
 import { ContentState } from '../../store/content.reducers';
 import { selectSelectedTab, selectTabs } from '../../../header/components/menu/store/menu.selectors';
 import { HeaderState } from '../../../header/store/header.reducers';
 import { selectPosts, selectLoading, selectInitialized } from './store/postsList.selectors';
 import { PostContentDTO, TabDTO } from '../../../../shared/clients/api/api.model';
-import { PostsListService } from './postsList.service';
 import { ActivatedRoute } from '@angular/router';
-import { SelectTab } from '../../../header/components/menu/store/menu.actions';
 
 @Component({
   selector: 'postsList-component',
@@ -32,8 +30,7 @@ export class PostsListComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<HeaderState | ContentState>,
-    private route: ActivatedRoute,
-    private postsListService: PostsListService
+    private route: ActivatedRoute
   ) {
     this.selectedTab$ = this.store.select(selectSelectedTab);
     this.tabs$ = this.store.select(selectTabs);
@@ -51,34 +48,11 @@ export class PostsListComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         distinctUntilChanged((x: any, y: any) => isEqual(x, y)),
-        map((params: any) => params.get('tabId')),
-        mergeMap((tabId: number) => this.getSelectedTab(tabId)),
-        map((result: {tabId: number, tabs: TabDTO[]}) => this.filterTabsById(result.tabs, result.tabId))
+        map((params: any) => params.get('tabId'))
       )
-      .subscribe((tab: TabDTO) => {
-        this.store.dispatch(new SelectTab(tab));
-        this.getPosts(tab);
+      .subscribe((tabId: number) => {
+        this.store.dispatch(new GetPostsOnRouteChange(tabId));
       });
-  }
-
-  private getSelectedTab(tabId: number): Observable<{tabId: number, tabs: TabDTO[]}> {
-    return this.tabs$
-      .pipe(
-        takeUntil(this.destroy$),
-        filter((tabs: TabDTO[]) => tabs.length > 0),
-        map((tabs: TabDTO[]) => ({ tabId, tabs }))
-      )
-  }
-
-  private filterTabsById(tabs: TabDTO[], tabId: number): TabDTO {
-    return tabs.filter(tab => tab.id == tabId)[0] || tabs[0];
-  }
-
-  private getPosts(selectedTab: TabDTO) {
-    const start = this.postsListService.DEFAULT_START;
-    const end = this.postsListService.DEFAULT_END;
-    this.store.dispatch(new ClearPosts);
-    this.store.dispatch(new GetPosts(selectedTab, start, end));
   }
 
   onScroll() {

@@ -12,7 +12,7 @@ import { HeaderState } from '../../../../src/modules/header/store/header.reducer
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { MenuState } from './helpers/menu.state';
-import { SelectTab } from '../../../../src/modules/header/components/menu/store/menu.actions';
+import { GetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
 
 describe('MenuComponent', () => {
 
@@ -62,13 +62,10 @@ describe('MenuComponent', () => {
   });
 
   it(`
-    WHEN the tab is clicked
-    THEN the SelectTab action is dispatched with the proper tab name
+    WHEN the component is loaded
+    THEN GetTabs is dispatched
   `, () => {
-    const secondTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(2)');
-    secondTab.click();
-    fixture.detectChanges();
-    expect(store.dispatch).toHaveBeenCalledWith(new SelectTab(MenuState.header.menu.tabs[1]));
+    expect(store.dispatch).toHaveBeenCalledWith(new GetTabs());
   });
 
   it(`

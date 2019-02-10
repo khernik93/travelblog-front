@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { filter, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { GetTabs } from './store/menu.actions';
 import { HeaderState } from '../../store/header.reducers';
@@ -25,27 +25,18 @@ export class MenuComponent implements OnInit {
     private store: Store<HeaderState>
   ) {
     this.tabs$ = this.store.select(selectTabs);
-    this.listenToSelectedTab();
-    this.store.select(state => {
-      console.log('state', state);
-    });
-  }
-
-  /**
-   * Listens to selectedTab store changes - made this way to avoid
-   * using async pipe because of errors it causes here
-   */
-  private listenToSelectedTab() {
-    this.store.select(selectSelectedTab)
-      .pipe(
-        takeUntil(this.destroy$),
-        filter((selectedTab: TabDTO) => !!selectedTab)
-      )
-      .subscribe((selectedTab: TabDTO) => this.selectedTab = selectedTab);
   }
 
   ngOnInit(): void {
+    this.listenToSelectedTab();
     this.store.dispatch(new GetTabs());
+  }
+
+  // It's here because async pipe (| async) causes runtime errors
+  private listenToSelectedTab() {
+    this.store.select(selectSelectedTab)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((selectedTab: TabDTO) => this.selectedTab = selectedTab);
   }
 
   toggleHamburgerMenu(): void {

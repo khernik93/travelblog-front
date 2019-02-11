@@ -11,8 +11,14 @@ export const routes: Routes = [
     component: LayoutComponent, 
     children: [
       { path: '', component: PostsListComponent, pathMatch: 'full' },
-      { path: ':tabId', component: PostsListComponent, pathMatch: 'full' },
-      { path: ':tabId/:postId', component: SinglePostComponent, pathMatch: 'full' }
+      { path: ':tabId', component: PostsListComponent, pathMatch: 'full' }
+    ]
+  },
+  { 
+    path: 'post',
+    component: LayoutComponent, 
+    children: [
+      { path: ':postId', component: SinglePostComponent, pathMatch: 'full' }
     ]
   }
 ];

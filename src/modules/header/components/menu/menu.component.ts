@@ -36,7 +36,7 @@ export class MenuComponent implements OnInit {
   private listenToSelectedTab() {
     this.store.select(selectSelectedTab)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((selectedTab: TabDTO) => this.selectedTab = selectedTab);
+      .subscribe((selectedTab: TabDTO) => setTimeout(() => this.selectedTab = selectedTab, 0));
   }
 
   toggleHamburgerMenu(): void {

@@ -18,7 +18,7 @@
       </div>
       <br>
       <div class="content-section entry-title">
-        <h1 [routerLink]="'/posts/' + post.id">{{ post.title }}</h1>
+        <h1 [routerLink]="'/post/' + post.id">{{ post.title }}</h1>
       </div>
       <div class="content-section tags-links">
         <span *ngFor="let tag of post.tags">#{{ tag }}</span>

@@ -35,7 +35,7 @@ export class SinglePostComponent implements OnInit, OnDestroy {
     this.route.paramMap
       .pipe(takeUntil(this.destroy$))
       .subscribe((params: any) => {
-        this.store.dispatch(new SinglePostActions.GetPost(params.get('id').toString()));
+        this.store.dispatch(new SinglePostActions.GetPost(params.get('postId')));
       });
   }
 

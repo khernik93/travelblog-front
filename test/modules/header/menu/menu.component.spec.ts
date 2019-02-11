@@ -48,17 +48,25 @@ describe('MenuComponent', () => {
   it(`
     WHEN the component is loaded
     THEN all tabs are visible
-  `, () => {
-    const tabs = fixture.debugElement.queryAll(By.css('.menu li'));
-    expect(tabs.length).toBe(TabsResponse.length);
+  `, (done) => {
+    setTimeout(() => {
+      fixture.detectChanges();
+      const tabs = fixture.debugElement.queryAll(By.css('.menu li'));
+      expect(tabs.length).toBe(TabsResponse.length);
+      done();
+    }, 0);
   });
 
   it(`
     WHEN the component is loaded
     THEN the first tab is selected
-  `, () => {
-    const firstTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(1)');
-    expect(CssHelper.getClass(firstTab)).toEqual('selected');
+  `, (done) => {
+    setTimeout(() => {
+      fixture.detectChanges();
+      const firstTab: HTMLElement = fixture.nativeElement.querySelector('.menu li:nth-child(1)');
+      expect(CssHelper.getClass(firstTab)).toEqual('selected');
+      done();
+    }, 0);
   });
 
   it(`

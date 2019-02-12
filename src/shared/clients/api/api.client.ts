@@ -1,33 +1,26 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
 
-import { TransferHttpService } from '../services/transferHttp.service';
-import { AuthCredentials } from '../../modules/auth/auth.model';
-import constants from '../../config/constants';
-import { 
-  PostsPaginable, 
-  Tab, 
-  Photos,
-  Post,
-  ApiResponse
+import { TransferHttpService } from '../../services/transferHttp.service';
+import { AuthCredentials } from '../../../modules/auth/auth.model';
+import constants from '../../../config/constants';
+import {
+  PostContentDTO, PostsDTO, SwiperDTO, TabDTO, CommentDTO
 } from './api.model';
 import { HttpHeaders } from '@angular/common/http';
-import { CookieService } from '../services/cookie.service';
+import { CookieService } from '../../services/cookie.service';
 import { map } from 'rxjs/operators';
 
 const ROUTES: any = {
   posts: '/post/tab',
   recentPosts: '/post/recent',
   post: '/post',
+  comments: '/comment',
   tabs: '/tab',
   photos: '/swiper',
   addNewPost: '/post',
   signIn: '/auth/signIn'
 };
-
-/**
- * @TODO Move to env file
- */
 
 @Injectable()
 export class ApiClient {
@@ -46,7 +39,7 @@ export class ApiClient {
       .set('X-Api-Key', 'aaa');
   }
 
-  getRecentPosts(): Observable<ApiResponse<Post[]>> {
+  getRecentPosts(): Observable<PostContentDTO[]> {
     const url = this.prepareUrl(ROUTES.recentPosts);
     return this.transferHttpService.get(url, {
       headers: this.headers
@@ -56,7 +49,7 @@ export class ApiClient {
     );
   }
 
-  getPosts(tabId: number, params: {start: number, end: number}): Observable<ApiResponse<PostsPaginable>> {
+  getPosts(tabId: number, params: {start: number, end: number}): Observable<PostsDTO> {
     const url = this.prepareUrl(ROUTES.posts);
     return this.transferHttpService.get(`${url}/${tabId}`, {
       params: { 
@@ -67,14 +60,21 @@ export class ApiClient {
     });
   }
 
-  getPost(id: string): Observable<ApiResponse<Post>> {
+  getPost(id: string): Observable<PostContentDTO> {
     const url = this.prepareUrl(ROUTES.post);
     return this.transferHttpService.get(`${url}/${id}`, {
       headers: this.headers
     });
   }
 
-  getTabs(): Observable<ApiResponse<Tab[]>> {
+  getComments(postId: string): Observable<CommentDTO[]> {
+    const url = this.prepareUrl(ROUTES.post);
+    return this.transferHttpService.get(`${url}/${postId}`, {
+      headers: this.headers
+    });
+  }
+
+  getTabs(): Observable<TabDTO[]> {
     const url = this.prepareUrl(ROUTES.tabs);
     return this.transferHttpService.get(url, {
       headers: this.headers
@@ -84,26 +84,26 @@ export class ApiClient {
       );
   }
 
-  getPhotos(): Observable<ApiResponse<Photos>> {
+  getPhotos(): Observable<SwiperDTO> {
     const url = this.prepareUrl(ROUTES.photos);
     return this.transferHttpService.get(url, {
       headers: this.headers
-    });
+    })
+      .pipe(
+        map((response: any) => response.tabPhotos)
+      );
   }
 
-  addNewPost(post: Post, tab: Tab): Observable<ApiResponse<void>> {
+  addNewPost(post: PostContentDTO): Observable<void> {
     const url = this.prepareUrl(ROUTES.addNewPost);
     const headers = this.headers
       .append('Authorization', this.cookieService.getCookie('SESSION_ID'));
-    return this.transferHttpService.post(url, { 
-      ...post, 
-      tab 
-    }, {
+    return this.transferHttpService.post(url, post, {
       headers: headers
     });
   }
 
-  signIn(credentials: AuthCredentials): Observable<ApiResponse<void>> {
+  signIn(credentials: AuthCredentials): Observable<void> {
     const url = this.prepareUrl(ROUTES.signIn);
     return this.transferHttpService.post(url, credentials, {
       withCredentials: true,

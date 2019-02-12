@@ -3,11 +3,11 @@ import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
 import { of } from 'rxjs';
 
-import { ApiClient } from '../../../src/shared/clients/api.client';
+import { ApiClient } from '../../../src/shared/clients/api/api.client';
 import { TestActions, getActions } from '../../utils/mocks/testActions';
 import { AuthEffects } from '../../../src/modules/auth/store/auth.effects';
 import { SharedStubs } from '../../utils/stubs/sharedStubs';
-import { TryToSignIn, SignIn, SignOut } from '../../../src/modules/auth/store/auth.actions';
+import { TryToSignIn, SignIn, SignOut, SignInError } from '../../../src/modules/auth/store/auth.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthStubs } from './helpers/auth.stubs';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -63,28 +63,28 @@ describe('AuthEffects', () => {
     AND SignIn action should be dispatched
     AND route should redirect to the return url
   `, () => {
-    const action = new TryToSignIn({email: 'aaa', password: 'aaa'});
+    const action = new TryToSignIn({email: null, password: null});
     const outcome = new SignIn();
 
     actions.stream = hot('-a', {a: action});
-    const clientResponse = cold('-a|', { a: { data: '' } });
+    const response = cold('-a|', { a: null });
     const expected = cold('--b', { b: outcome });
-    apiClient.signIn.and.returnValue(clientResponse);
+    apiClient.signIn.and.returnValue(response);
     expect(effects.tryToSignIn$).toBeObservable(expected);
   });
 
   it(`
     WHEN TryToSignIn action is dispatched
     AND apiClient.signIn returns an error
-    THEN SignOut action should be dispatched
+    THEN SignInError action should be dispatched
   `, () => {
-    const action = new TryToSignIn({email: 'aaa', password: 'aaa'});
-    const outcome = new SignOut();
+    const action = new TryToSignIn({email: null, password: null});
+    const outcome = new SignInError();
 
     actions.stream = hot('-a', {a: action});
-    const clientErrorResponse = cold('-#|', {}, new Error());
-    const expected = cold('--(b|)', { b: outcome });
-    apiClient.signIn.and.returnValue(clientErrorResponse);
+    const errorResponse = cold('-#|', {}, new Error());
+    const expected = cold('--b', { b: outcome });
+    apiClient.signIn.and.returnValue(errorResponse);
     expect(effects.tryToSignIn$).toBeObservable(expected);
   });
 

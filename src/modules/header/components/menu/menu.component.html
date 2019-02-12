@@ -4,12 +4,10 @@
        (click)="toggleHamburgerMenu()">
     <i class="fa fa-bars"></i>
   </div>
-
-  <ul class="menu" *ngIf="hamburgerMenuOpened">
-    <li *ngFor="let tab of tabs$ | async; index as i" 
-        [className]="(selectedTab$ | async).id === tab.id ? 'selected' : ''" 
-        (click)="selectTab(tab)">
-      <a onclick="return false;"><h3>{{ tab.name }}</h3></a>
+  <ul class="menu" *ngIf="hamburgerMenuOpened && selectedTab">
+    <li *ngFor="let tab of tabs$ | async; index as i"
+        [className]="selectedTab.id === tab.id ? 'selected' : ''">
+      <h3><a [routerLink]="'/posts/' + tab.id">{{ tab.name }}</a></h3>
     </li>
   </ul>
   

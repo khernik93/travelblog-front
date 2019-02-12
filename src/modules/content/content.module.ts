@@ -18,10 +18,13 @@ import { PostsListComponent } from './components/postsList/postsList.component';
 import { RecentPostsComponent } from './components/recentPosts/recentPosts.component';
 import { SelfieComponent } from './components/selfie/selfie.component';
 import { SinglePostComponent } from './components/singlePost/singlePost.component';
+import { CommentsComponent } from './components/comments/comments.component';
 import { LineBreakComponent } from '../../shared/components/lineBreak/lineBreak.component';
+import { SafeHtmlPipe } from '../app/pipes/safeHtml.pipe';
 
 // Services
 import { PostsListService } from './components/postsList/postsList.service';
+import { SwiperService } from '../header/components/swiper/swiper.service';
 
 export const MODULE_DECLARATIONS = [
   ContentComponent,
@@ -29,7 +32,9 @@ export const MODULE_DECLARATIONS = [
   RecentPostsComponent,
   SelfieComponent,
   SinglePostComponent,
-  LineBreakComponent
+  CommentsComponent,
+  LineBreakComponent,
+  SafeHtmlPipe
 ];
 
 export const MODULE_IMPORTS = [
@@ -47,7 +52,8 @@ const STORE_IMPORTS = [
 ];
 
 const MODULE_PROVIDERS = [
-  PostsListService
+  PostsListService,
+  SwiperService
 ];
 
 @NgModule({

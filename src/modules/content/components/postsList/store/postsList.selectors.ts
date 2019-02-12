@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import { ContentState } from '../../../store/content.reducers';
 import { selectContent } from '../../../store/content.selectors';
-import { Meta, Post } from '../../../../../shared/clients/api.model';
+import { MetaDTO, PostContentDTO } from '../../../../../shared/clients/api/api.model';
 
 export const selectPosts = createSelector(
   selectContent,
@@ -27,5 +27,5 @@ export const selectInitialized = createSelector(
 export const selectCanScroll = createSelector(
   selectPosts,
   selectMeta,
-  (posts: Post[], meta: Meta) => meta.total > posts.length
+  (posts: PostContentDTO[], meta: MetaDTO) => meta.total > posts.length
 );

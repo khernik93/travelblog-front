@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxEditorModule } from 'ngx-editor';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 // Store
 import { adminEffects } from './store/admin.effects';
@@ -13,6 +14,7 @@ import { adminEffects } from './store/admin.effects';
 import { AdminComponent } from './admin.component';
 import { AddNewPostComponent } from './components/addNewPost/addNewPost.component';
 import { WysiwygComponent } from '../../shared/components/wysiwyg/wysiwyg.component';
+import { AdminHeaderComponent } from './components/adminHeader/adminHeader.component';
 
 // Modules
 import { AdminRoutingModule } from './routing/adminRouting.module';
@@ -24,7 +26,8 @@ import { AddNewPostService } from './components/addNewPost/addNewPost.service';
 export const MODULE_DECLARATIONS = [
   AdminComponent,
   AddNewPostComponent,
-  WysiwygComponent
+  WysiwygComponent,
+  AdminHeaderComponent
 ];
 
 export const MODULE_IMPORTS = [
@@ -32,7 +35,8 @@ export const MODULE_IMPORTS = [
   FormsModule,
   ReactiveFormsModule,
   NgxEditorModule,
-  HttpClientModule
+  HttpClientModule,
+  RouterModule
 ];
 
 const ROUTING_MODULE_IMPORTS = [

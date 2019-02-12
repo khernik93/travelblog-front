@@ -5,8 +5,20 @@ footer {
   bottom: 0;
   text-align: left;
   width: 100%;
+  height: $footerHeight;
   padding: 22px;
   background: $black;
   color: $lightgrey;
   z-index: $footer;
+}
+
+.to-right {
+  float: right;
+  margin-right: 5px;
+  & a {
+    color: $white;
+  }
+  & a:hover {
+    color: $red;
+  }
 }

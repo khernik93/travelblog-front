@@ -1,10 +1,10 @@
 import get from 'lodash-es/get';
 import { MenuActions, MenuActionTypes } from './menu.actions';
-import { Tab } from '../../../../../shared/clients/api.model';
+import { TabDTO } from '../../../../../shared/clients/api/api.model';
 
 export interface MenuState {
-  selectedTab: Tab;
-  tabs: Tab[];
+  selectedTab: TabDTO;
+  tabs: TabDTO[];
 };
 
 export const initialState: MenuState = {
@@ -23,8 +23,7 @@ export function menuReducer (state = initialState, action: MenuActions): MenuSta
     case MenuActionTypes.SetTabs: {
       return {
         ...state,
-        tabs: action.tabs,
-        selectedTab: get(action, 'tabs[0]') || initialState.selectedTab
+        tabs: action.tabs
       }
     }
 

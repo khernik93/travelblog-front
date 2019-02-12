@@ -10,7 +10,6 @@ import { AddNewPostComponent } from '../../../../src/modules/admin/components/ad
 import { AddNewPostState } from './helpers/addNewPost.state';
 import { GetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
 import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../src/modules/admin/admin.module';
-import { SignOutComponent } from '../../../../src/modules/auth/components/signOut/signOut.component';
 import { AddNewPost } from '../../../../src/modules/admin/components/addNewPost/store/addNewPost.actions';
 
 describe('AddNewPostComponent', () => {
@@ -24,13 +23,8 @@ describe('AddNewPostComponent', () => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
 
     TestBed.configureTestingModule({
-      imports: [
-        ...MODULE_IMPORTS
-      ],
-      declarations: [
-        ...MODULE_DECLARATIONS,
-        SignOutComponent
-      ],
+      imports: MODULE_IMPORTS,
+      declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: Store, useValue: store }
       ]
@@ -61,7 +55,7 @@ describe('AddNewPostComponent', () => {
     WHEN the component is loaded
     THEN all tabs should be loaded and visible
   `, () => {
-    const tabs = fixture.debugElement.queryAll(By.css('#tab option'));
+    const tabs = fixture.debugElement.queryAll(By.css('#tabId option'));
     expect(tabs.length).toEqual(AddNewPostState.header.menu.tabs.length);
   });
 
@@ -70,13 +64,13 @@ describe('AddNewPostComponent', () => {
     THEN addNewPost action with correct values is dispatched
   `, () => {
     const formValues = {
-      tab: AddNewPostState.header.menu.tabs[1],
+      tabId: AddNewPostState.header.menu.tabs[1].id,
       title: 'title',
       tags: 'tag1',
       content: 'content'
     };
 
-    component.addNewPostForm.controls.tab.setValue(formValues.tab);
+    component.addNewPostForm.controls.tabId.setValue(formValues.tabId);
     component.addNewPostForm.controls.title.setValue(formValues.title);
     component.addNewPostForm.controls.tags.setValue(formValues.tags);
     component.content = formValues.content;
@@ -85,10 +79,9 @@ describe('AddNewPostComponent', () => {
     button.triggerEventHandler('click', null);
     fixture.detectChanges();
     expect(store.dispatch.calls.mostRecent().args).toEqual([new AddNewPost({
-      title: formValues.title,
-      tags: formValues.tags,
-      content: formValues.content
-    }, formValues.tab)]);
+      ...formValues,
+      tabId: +formValues.tabId,
+    })]);
   });
 
 });

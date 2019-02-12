@@ -13,6 +13,7 @@ import { HeaderComponent } from './header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SwiperComponent } from './components/swiper/swiper.component';
+import { RouterModule } from '@angular/router';
 
 export const MODULE_DECLARATIONS = [
   HeaderComponent,
@@ -22,7 +23,8 @@ export const MODULE_DECLARATIONS = [
 ];
 
 export const MODULE_IMPORTS = [
-  CommonModule
+  CommonModule,
+  RouterModule
 ];
 
 const STORE_IMPORTS = [

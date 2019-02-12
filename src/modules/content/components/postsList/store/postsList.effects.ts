@@ -1,63 +1,93 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { Observable, timer, of } from 'rxjs';
-import { exhaustMap, debounce, catchError, mergeMap, map, takeWhile, take, tap, concatMap } from 'rxjs/operators';
-
-import * as postsListActions from './postsList.actions';
-import { PostsPaginable, ApiResponse, Meta } from '../../../../../shared/clients/api.model';
-import { ApiClient } from '../../../../../shared/clients/api.client';
+import { Observable, of } from 'rxjs';
+import { exhaustMap, catchError, map, take, concatMap, debounceTime } from 'rxjs/operators';
+import { PostsDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
+import { ApiClient } from '../../../../../shared/clients/api/api.client';
 import { Store } from '@ngrx/store';
 import { ContentState } from '../../../store/content.reducers';
 import { selectCanScroll, selectMeta } from './postsList.selectors';
 import { PostsListService } from '../postsList.service';
 
+import { 
+  PostsListActionTypes, 
+  GetPosts,
+  SetPosts,
+  GetPostsError,
+  GetPostsSuccess,
+  GetPostsOnScroll,
+  ClearPosts
+} from './postsList.actions';
+
 @Injectable()
 export class PostsListEffects {
 
   @Effect()
-  getPosts$: Observable<any> = this.actions$
+  getPostsInitial$: Observable<any> = this.actions$
     .pipe(
-      ofType(postsListActions.PostsListActionTypes.GetPosts),
-      exhaustMap((action: any) => this.apiClient.getPosts(action.selectedTab.id, { 
-        start: action.start, 
-        end: action.end 
-      })),
-      concatMap((response: ApiResponse<PostsPaginable>) => ([
-        new postsListActions.GetPostsSuccess(),
-        new postsListActions.SetPosts(response.content, response.meta)
-      ])),
-      catchError(() => of(new postsListActions.GetPostsError()))
+      ofType(PostsListActionTypes.GetPostsInitial),
+      concatMap((action: any) => ([
+        new ClearPosts(),
+        new GetPosts(
+          action.selectedTab,
+          this.postsListService.DEFAULT_START,
+          this.postsListService.DEFAULT_END
+        )
+      ]))
     );
 
   @Effect()
   tryToGetPostsOnScroll$: Observable<any> = this.actions$
     .pipe(
-      ofType(postsListActions.PostsListActionTypes.TryToGetPostsOnScroll),
-      exhaustMap((action: any) => this.store.select(selectCanScroll)
-        .pipe(take(1), map((canScroll: boolean) => ({ canScroll, action })))
-      ),
-      map((result: any) => (
-        (result.canScroll) ? 
-          new postsListActions.GetPostsOnScroll(result.action.selectedTab) :
-          new postsListActions.GetPostsSuccess() // no need to scroll more
-      )),
-      catchError(() => of(new postsListActions.GetPostsError()))
+      ofType(PostsListActionTypes.TryToGetPostsOnScroll),
+      exhaustMap((action: any) => (
+        this.store.select(selectCanScroll)
+          .pipe(
+            take(1),
+            map((canScroll: boolean) => ( // dispatched here for easier access to action
+              (canScroll) ? 
+                new GetPostsOnScroll(action.selectedTab) :
+                new GetPostsSuccess() // no need to scroll more
+            ))
+          )
+      ))
     );
 
   @Effect()
   getPostsOnScroll$: Observable<any> = this.actions$
     .pipe(
-      ofType(postsListActions.PostsListActionTypes.GetPostsOnScroll),
-      exhaustMap((action: any) => this.store.select(selectMeta)
-        .pipe(take(1), map((meta: Meta) => ({ action, meta })))
-      ),
-      debounce(() => timer(this.postsListService.SCROLL_DEBOUNCE)),
-      map((result: any) => new postsListActions.GetPosts(
-        result.action.selectedTab, 
-        this.postsListService.getNextStart(result.meta),
-        this.postsListService.getNextEnd(result.meta)
-      )),
-      catchError(() => of(new postsListActions.GetPostsError()))
+      ofType(PostsListActionTypes.GetPostsOnScroll),
+      debounceTime(this.postsListService.SCROLL_DEBOUNCE),
+      exhaustMap((action: any) => (
+        this.store.select(selectMeta)
+          .pipe(
+            take(1),
+            map((meta: MetaDTO) => new GetPosts( // dispatched here for easier access to action
+              action.selectedTab, 
+              this.postsListService.getNextStart(meta),
+              this.postsListService.getNextEnd(meta)
+            ))
+          )
+      ))
+    );
+
+  @Effect()
+  getPosts$: Observable<any> = this.actions$
+    .pipe(
+      ofType(PostsListActionTypes.GetPosts),
+      exhaustMap((action: any) => (
+        this.apiClient.getPosts(action.selectedTab.id, {
+          start: action.start, 
+          end: action.end 
+        })
+          .pipe(
+            concatMap((response: PostsDTO) => ([
+              new GetPostsSuccess(),
+              new SetPosts(response.content, response.meta)
+            ])),
+            catchError(() => of(new GetPostsError()))
+          )
+      ))
     );
 
   constructor(

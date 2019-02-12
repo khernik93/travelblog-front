@@ -4,6 +4,6 @@ export type Notification = {
 };
 
 export enum NotificationType {
-  error = 'red',
-  success = 'green'
+  error = 'error',
+  success = 'success'
 };

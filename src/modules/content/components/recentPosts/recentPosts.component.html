@@ -1,5 +1,5 @@
-<section>
-  <div class="recent-posts-title" *ngIf="recentPosts$ | async">
+<section *ngIf="(recentPosts$ | async).length > 0">
+  <div class="recent-posts-title">
     <h1>RECENTLY</h1>
   </div>
   <br><br>

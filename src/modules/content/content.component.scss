@@ -4,6 +4,7 @@ section {
   display: flex;
   max-width: 1400px;
   margin: 0 auto;
+  padding-top: 0;
 }
 
 .left-section {
@@ -13,10 +14,9 @@ section {
 
 .right-section {
   position: relative;
-  display: flex;
-  flex-direction: column;
   width: 25%;
   z-index: $selfieImage;
+  min-height: 100vh;
   background-image: linear-gradient(to right, $white , $lightgrey);
 }
 

@@ -1,6 +1,6 @@
-import { Tab } from "../../../src/shared/clients/api.model";
+import { TabDTO } from "../../../src/shared/clients/api/api.model";
 
-export const TabsResponse: Tab[] = [
+export const TabsResponse: TabDTO[] = [
     {"id":1,"name":"China"},
     {"id":2,"name":"Vietnam"},
     {"id":3,"name":"Cambodia"},

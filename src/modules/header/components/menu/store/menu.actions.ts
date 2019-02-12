@@ -1,15 +1,21 @@
 import { Action } from '@ngrx/store';
-import { Tab } from '../../../../../shared/clients/api.model';
+import { TabDTO } from '../../../../../shared/clients/api/api.model';
 
 export enum MenuActionTypes {
   SelectTab = '[Menu] Select tab',
+  SelectTabById = '[Menu] Select tab by id',
   GetTabs = '[Menu] Get tabs',
   SetTabs = '[Menu] Set tabs'
 };
 
 export class SelectTab implements Action {
   readonly type = MenuActionTypes.SelectTab;
-  constructor(public selectedTab: Tab) { }
+  constructor(public selectedTab: TabDTO) { }
+}
+
+export class SelectTabById implements Action {
+  readonly type = MenuActionTypes.SelectTabById;
+  constructor(public id: number) { }
 }
 
 export class GetTabs implements Action {
@@ -19,10 +25,11 @@ export class GetTabs implements Action {
 
 export class SetTabs implements Action {
   readonly type = MenuActionTypes.SetTabs;
-  constructor(public tabs: Tab[]) { }
+  constructor(public tabs: TabDTO[]) { }
 }
 
 export type MenuActions =
   | SelectTab
+  | SelectTabById
   | GetTabs
   | SetTabs;

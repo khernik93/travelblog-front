@@ -1,8 +1,8 @@
 import { SinglePostActions, SinglePostActionTypes } from './singlePost.actions';
-import { Post } from '../../../../../shared/clients/api.model';
+import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
 
 export interface SinglePostState {
-  post: Post
+  post: PostContentDTO
 }
 
 export const initialState: SinglePostState = {

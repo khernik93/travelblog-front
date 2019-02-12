@@ -3,25 +3,27 @@ import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { Store } from '@ngrx/store';
-
 import { TabsResponse } from '../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { PostsListResponse } from '../../../utils/responses/postsList.response';
+import { PostsListEffects } from '../../../../src/modules/content/components/postsList/store/postsList.effects';
+import { ApiClient } from '../../../../src/shared/clients/api/api.client';
+import { SharedStubs } from '../../../utils/stubs/sharedStubs';
+import { ContentState } from '../../../../src/modules/content/store/content.reducers';
+import { PostsListStubs } from './helpers/postsList.stubs';
+import { PostsListService } from '../../../../src/modules/content/components/postsList/postsList.service';
+import { MockStore } from '../../../utils/mocks/mockStore';
+
 import { 
   SetPosts, 
   GetPosts, 
   GetPostsSuccess, 
   GetPostsError, 
   GetPostsOnScroll, 
-  TryToGetPostsOnScroll
+  TryToGetPostsOnScroll,
+  ClearPosts,
+  GetPostsInitial
 } from '../../../../src/modules/content/components/postsList/store/postsList.actions';
-import { PostsListEffects } from '../../../../src/modules/content/components/postsList/store/postsList.effects';
-import { ApiClient } from '../../../../src/shared/clients/api.client';
-import { SharedStubs } from '../../../utils/stubs/sharedStubs';
-import { ContentState } from '../../../../src/modules/content/store/content.reducers';
-import { PostsListStubs } from './helpers/postsList.stubs';
-import { PostsListService } from '../../../../src/modules/content/components/postsList/postsList.service';
-import { MockStore } from '../../../utils/mocks/mockStore';
 
 describe('PostsListEffects', () => {
 
@@ -63,44 +65,22 @@ describe('PostsListEffects', () => {
   });
 
   it(`
-    WHEN GetPosts action is dispatched
-    THEN apiClient.getPosts method should be executed
-    AND SetPosts action and success action are both dispatched
+    WHEN GetPostsInitial action is dispatched
+    THEN ClearPosts, and GetPosts are dispatched with initial values
   `, () => {
-    const selectedTab = ClonedTabsResponse[0];
-    const action = new GetPosts(
-      selectedTab, 
-      ClonedPostsListResponse.meta.start,
-      ClonedPostsListResponse.meta.end
-    );
+    const selectedTab = ClonedTabsResponse[2];
+    const action = new GetPostsInitial(selectedTab);
     const outcome = [
-      new GetPostsSuccess(),
-      new SetPosts(ClonedPostsListResponse.content, ClonedPostsListResponse.meta)
+      new ClearPosts(),
+      new GetPosts(selectedTab, postsListService.DEFAULT_START, postsListService.DEFAULT_END)
     ];
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a-|', { a: ClonedPostsListResponse });
-    const expected = cold('--(bc)', { b: outcome[0], c: outcome[1] });
+    const response = cold('-a|', { a: ClonedTabsResponse });
+    const expected = cold('-(bc)', { b: outcome[0], c: outcome[1] });
+    spyOn(store, 'select').and.callThrough();
+    store.select.and.returnValue(response);
     apiClient.getPosts.and.returnValue(response);
-    expect(effects.getPosts$).toBeObservable(expected);
-  });
-
-  it(`
-    WHEN GetPosts action is dispatched
-    AND there is an error
-    THEN error action is dispatched
-  `, () => {
-    const selectedTab = ClonedTabsResponse[0];
-    const action = new GetPosts(
-      selectedTab, 
-      ClonedPostsListResponse.meta.start,
-      ClonedPostsListResponse.meta.end
-    );
-    const outcome = new GetPostsError();
-    actions.stream = hot('-a', {a: action});
-    const clientErrorResponse = cold('-#|', {}, 'error');
-    const expected = cold('--(b|)', { b: outcome });
-    apiClient.getPosts.and.returnValue(clientErrorResponse);
-    expect(effects.getPosts$).toBeObservable(expected);
+    expect(effects.getPostsInitial$).toBeObservable(expected);
   });
 
   it(`
@@ -136,23 +116,44 @@ describe('PostsListEffects', () => {
   });
 
   it(`
-    WHEN TryToGetPostsOnScroll action is dispatched
-    AND somehow it returns error
-    THEN GetPostsError action is dispatched
+    WHEN GetPosts action is dispatched
+    THEN apiClient.getPosts method should be executed
+    AND SetPosts action and success action are both dispatched
   `, () => {
     const selectedTab = ClonedTabsResponse[0];
-    const action = new TryToGetPostsOnScroll(selectedTab);
+    const action = new GetPosts(
+      selectedTab, 
+      ClonedPostsListResponse.meta.start,
+      ClonedPostsListResponse.meta.end
+    );
+    const outcome = [
+      new GetPostsSuccess(),
+      new SetPosts(ClonedPostsListResponse.content, ClonedPostsListResponse.meta)
+    ];
+    actions.stream = hot('-a', {a: action});
+    const response = cold('-a-|', { a: ClonedPostsListResponse });
+    const expected = cold('--(bc)', { b: outcome[0], c: outcome[1] });
+    apiClient.getPosts.and.returnValue(response);
+    expect(effects.getPosts$).toBeObservable(expected);
+  });
+
+  it(`
+    WHEN GetPosts action is dispatched
+    AND there is an error
+    THEN error action is dispatched
+  `, () => {
+    const selectedTab = ClonedTabsResponse[0];
+    const action = new GetPosts(
+      selectedTab, 
+      ClonedPostsListResponse.meta.start,
+      ClonedPostsListResponse.meta.end
+    );
     const outcome = new GetPostsError();
     actions.stream = hot('-a', {a: action});
     const errorResponse = cold('-#|', {}, 'error');
-    const expected = cold('--(b|)', { b: outcome });
-    spyOn(store, 'select').and.callThrough();
-    store.select.and.returnValue(errorResponse);
-    expect(effects.tryToGetPostsOnScroll$).toBeObservable(expected);
+    const expected = cold('--b', { b: outcome });
+    apiClient.getPosts.and.returnValue(errorResponse);
+    expect(effects.getPosts$).toBeObservable(expected);
   });
-
-  /**
-   * @TODO Write test for GetPostsOnScroll - add test scheduler for mocking debounce
-   */
 
 });

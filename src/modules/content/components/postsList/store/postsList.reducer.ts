@@ -1,11 +1,11 @@
 import { PostsListActions, PostsListActionTypes } from './postsList.actions';
-import { Post, Meta } from '../../../../../shared/clients/api.model';
+import { PostContentDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
 
 export interface PostsListState {
-  posts: Post[],
+  posts: PostContentDTO[],
   initialized: boolean,
   loading: boolean,
-  meta: Meta
+  meta: MetaDTO
 }
 
 export const initialState: PostsListState = {
@@ -19,6 +19,7 @@ export function postsListReducer(state = initialState, action: PostsListActions)
   switch (action.type) {
 
     case PostsListActionTypes.GetPosts:
+    case PostsListActionTypes.GetPostsInitial:
     case PostsListActionTypes.GetPostsOnScroll: {
       return { ...state, loading: true }
     }

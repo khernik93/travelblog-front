@@ -8,10 +8,18 @@ import { SinglePostComponent } from '../components/singlePost/singlePost.compone
 export const routes: Routes = [
   { 
     path: 'posts',
+    component: LayoutComponent,
+    pathMatch: 'full',
+    children: [
+      { path: '', component: PostsListComponent, pathMatch: 'full' }
+    ]
+  },
+  { 
+    path: 'posts/:tabId',
     component: LayoutComponent, 
     children: [
-      { path: '', component: PostsListComponent },
-      { path: ':id', component: SinglePostComponent }
+      { path: '', component: PostsListComponent, pathMatch: 'full' },
+      { path: ':postId', component: SinglePostComponent, pathMatch: 'full' }
     ]
   }
 ];

@@ -16,7 +16,7 @@ describe('MenuReducer', () => {
     WHEN SelectTab action is dispatched
     THEN the selected tab is stored in the store
   `, () => {
-    const tab = 'sample tab';
+    const tab = {id: 1, name: 'name'};
     const action = new menuActions.SelectTab(tab);
     const newInitialState = { ...initialState, tabs: ClonedTabsResponse };
     const result = menuReducer(newInitialState, action);
@@ -35,8 +35,7 @@ describe('MenuReducer', () => {
     const result = menuReducer(initialState, action);
     expect(result).toEqual({
       ...initialState,
-      tabs: ClonedTabsResponse,
-      selectedTab: ClonedTabsResponse[0]
+      tabs: ClonedTabsResponse
     });
   });
 
@@ -49,8 +48,7 @@ describe('MenuReducer', () => {
     const result = menuReducer(initialState, action);
     expect(result).toEqual({
       ...initialState,
-      tabs: [],
-      selectedTab: initialState.selectedTab
+      tabs: []
     });
   });
 

@@ -1,73 +1,70 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { takeWhile, take, filter } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { take, filter, map, takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import isEqual from 'lodash-es/isEqual';
 
-import * as PostsListActions from './store/postsList.actions';
+import { TryToGetPostsOnScroll, GetPostsInitial } from './store/postsList.actions';
 import { ContentState } from '../../store/content.reducers';
-import { selectSelectedTab } from '../../../header/components/menu/store/menu.selectors';
-import { HeaderState } from '../../../header/store/header.reducers';
+import { selectSelectedTab, selectTabs } from '../../../header/components/menu/store/menu.selectors';
 import { selectPosts, selectLoading, selectInitialized } from './store/postsList.selectors';
-import { Post, Tab } from '../../../../shared/clients/api.model';
-import { PostsListService } from './postsList.service';
+import { PostContentDTO, TabDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'postsList-component',
   styleUrls: ['./postsList.component.scss'],
-  templateUrl: './postsList.component.html'
+  templateUrl: './postsList.component.html',
+  encapsulation: ViewEncapsulation.None
 })
-export class PostsListComponent implements OnInit, OnDestroy {
+export class PostsListComponent implements OnDestroy {
 
-  posts$: Observable<Post[]>;
+  posts$: Observable<PostContentDTO[]>;
   loading$: Observable<boolean>;
-  selectedTab$: Observable<Tab>;
+  selectedTab$: Observable<TabDTO>;
+  tabs$: Observable<TabDTO[]>;
   initialized$: Observable<boolean>;
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(
-    private store: Store<HeaderState | ContentState>,
-    private postsListService: PostsListService
+    private store: Store<ContentState>
   ) {
     this.selectedTab$ = this.store.select(selectSelectedTab);
+    this.tabs$ = this.store.select(selectTabs);
     this.posts$ = this.store.select(selectPosts);
     this.loading$ = this.store.select(selectLoading);
     this.initialized$ = this.store.select(selectInitialized);
   }
 
   ngOnInit() {
-    this.onSelectedTab();
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
-  }
-
-  private onSelectedTab() {
     this.selectedTab$
       .pipe(
-        takeWhile(() => this.alive),
-        filter((selectedTab: Tab) => !!selectedTab)
+        takeUntil(this.destroy$),
+        distinctUntilChanged((x, y) => isEqual(x, y)),
+        filter((selectedTab: TabDTO) => !!selectedTab)
       )
-      .subscribe((selectedTab: Tab) => {
-        this.store.dispatch(new PostsListActions.ClearPosts);
-        this.store.dispatch(new PostsListActions.GetPosts(
-          selectedTab, 
-          this.postsListService.DEFAULT_START, 
-          this.postsListService.DEFAULT_END
-        ));
+      .subscribe((selectedTab: TabDTO) => {
+        this.store.dispatch(new GetPostsInitial(selectedTab));
       });
+  }
+
+  singlePostRoute(postId): Observable<String> {
+    return this.selectedTab$
+      .pipe(
+        takeUntil(this.destroy$),
+        map((selectedTab: TabDTO) => '/posts/' + selectedTab.id + '/' + postId)
+      );
   }
 
   onScroll() {
     this.selectedTab$
-      .pipe(
-        take(1),
-        filter((selectedTab: Tab) => !!selectedTab)
-      )
-      .subscribe((selectedTab: Tab) => {
-        this.store.dispatch(new PostsListActions.TryToGetPostsOnScroll(selectedTab));
-      });
+      .pipe(take(1), filter((selectedTab: TabDTO) => !!selectedTab))
+      .subscribe((selectedTab: TabDTO) => this.store.dispatch(new TryToGetPostsOnScroll(selectedTab)));
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

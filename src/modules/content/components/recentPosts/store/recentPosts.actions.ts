@@ -1,10 +1,5 @@
 import { Action } from '@ngrx/store';
-
-import { Post } from '../../../../../shared/clients/api.model';
-
-/**
- * @TODO Add success/error actions here
- */
+import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
 
 export enum RecentPostsActionTypes {
   GetRecentPosts = '[RecentPosts] Get recent posts',
@@ -20,7 +15,7 @@ export class GetRecentPosts implements Action {
 export class SetRecentPosts implements Action {
   readonly type = RecentPostsActionTypes.SetRecentPosts;
 
-  constructor(public recentPosts: Post[]) { }
+  constructor(public recentPosts: PostContentDTO[]) { }
 }
 
 export type RecentPostsActions = GetRecentPosts

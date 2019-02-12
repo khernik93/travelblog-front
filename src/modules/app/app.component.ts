@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PreviousRouteService } from '../../shared/services/previousRoute.service';
 
 @Component({
   selector: 'app',
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() { }
+  constructor(
+    private previousRouteService: PreviousRouteService
+  ) { }
 
 }

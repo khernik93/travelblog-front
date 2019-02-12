@@ -1,13 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil, filter, map } from 'rxjs/operators';
 
 import { ActivatedRoute } from '@angular/router';
 import { selectPost } from './store/singlePost.selectors';
 import { ContentState } from '../../store/content.reducers';
 import * as SinglePostActions from './store/singlePost.actions';
-import { Post } from '../../../../shared/clients/api.model';
+import { PostContentDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'singlePost-component',
@@ -16,9 +16,9 @@ import { Post } from '../../../../shared/clients/api.model';
 })
 export class SinglePostComponent implements OnInit, OnDestroy {
 
-  post$: Observable<Post>;
+  post$: Observable<PostContentDTO>;
 
-  private alive = true;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private store: Store<ContentState>,
@@ -31,16 +31,21 @@ export class SinglePostComponent implements OnInit, OnDestroy {
     this.getPostOnNewRequest();
   }
 
-  ngOnDestroy() {
-    this.alive = false;
-  }
-
   private getPostOnNewRequest() {
     this.route.paramMap
-      .pipe(takeWhile(() => this.alive))
-      .subscribe((params: any) => {
-        this.store.dispatch(new SinglePostActions.GetPost(params.get('id').toString()));
+      .pipe(
+        takeUntil(this.destroy$),
+        map((params: any) => params.get('postId')),
+        filter((postId: string) => !!postId)
+      )
+      .subscribe((postId: string) => {
+        this.store.dispatch(new SinglePostActions.GetPost(postId));
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

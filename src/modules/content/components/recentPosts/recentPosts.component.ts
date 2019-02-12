@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { GetRecentPosts } from './store/recentPosts.actions';
 import { selectRecentPosts } from './store/recentPosts.selectors';
 import { ContentState } from '../../store/content.reducers';
-import { Post } from '../../../../shared/clients/api.model';
+import { PostContentDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'recentPosts-component',
@@ -14,7 +14,7 @@ import { Post } from '../../../../shared/clients/api.model';
 })
 export class RecentPostsComponent implements OnInit {
 
-  recentPosts$: Observable<Post[]>;
+  recentPosts$: Observable<PostContentDTO[]>;
 
   constructor(
     private store: Store<ContentState>

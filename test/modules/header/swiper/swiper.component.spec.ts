@@ -10,10 +10,13 @@ import { HeaderState } from '../../../../src/modules/header/store/header.reducer
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { SwiperState } from '../swiper/helpers/swiper.state';
+import { SwiperService } from '../../../../src/modules/header/components/swiper/swiper.service';
+import { SwiperStubs } from './helpers/swiper.stubs';
 
 describe('SwiperComponent', () => {
 
   let store: MockStore<HeaderState>;
+  let swiperService: jasmine.SpyObj<SwiperService>;
   
   let component: SwiperComponent;
   let fixture: ComponentFixture<SwiperComponent>;
@@ -21,13 +24,15 @@ describe('SwiperComponent', () => {
   beforeEach(() => {
 
     store = SharedStubs.getMockStoreStub<HeaderState>();
+    swiperService = SwiperStubs.getSwiperServiceStub();
 
     TestBed.configureTestingModule({
       imports: MODULE_IMPORTS,
       declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: Store, useValue: store },
-        { provide: ChangeDetectorRef }
+        { provide: ChangeDetectorRef },
+        { provide: SwiperService, useValue: swiperService }
       ]
     }).compileComponents();
 

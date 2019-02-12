@@ -9,7 +9,10 @@ export const routes: Routes = [
   { 
     path: 'posts',
     component: LayoutComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    children: [
+      { path: '', component: PostsListComponent, pathMatch: 'full' }
+    ]
   },
   { 
     path: 'posts/:tabId',

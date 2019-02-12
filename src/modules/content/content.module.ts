@@ -18,6 +18,7 @@ import { PostsListComponent } from './components/postsList/postsList.component';
 import { RecentPostsComponent } from './components/recentPosts/recentPosts.component';
 import { SelfieComponent } from './components/selfie/selfie.component';
 import { SinglePostComponent } from './components/singlePost/singlePost.component';
+import { CommentsComponent } from './components/comments/comments.component';
 import { LineBreakComponent } from '../../shared/components/lineBreak/lineBreak.component';
 import { SafeHtmlPipe } from '../app/pipes/safeHtml.pipe';
 
@@ -31,6 +32,7 @@ export const MODULE_DECLARATIONS = [
   RecentPostsComponent,
   SelfieComponent,
   SinglePostComponent,
+  CommentsComponent,
   LineBreakComponent,
   SafeHtmlPipe
 ];

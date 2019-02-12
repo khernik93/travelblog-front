@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { exhaustMap, catchError, map, take, concatMap, debounceTime, filter, tap, switchMap } from 'rxjs/operators';
-import { PostsDTO, MetaDTO, TabDTO } from '../../../../../shared/clients/api/api.model';
+import { exhaustMap, catchError, map, take, concatMap, debounceTime } from 'rxjs/operators';
+import { PostsDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
 import { Store } from '@ngrx/store';
 import { ContentState } from '../../../store/content.reducers';
@@ -18,31 +18,23 @@ import {
   GetPostsOnScroll,
   ClearPosts
 } from './postsList.actions';
-import { selectTabs } from '../../../../header/components/menu/store/menu.selectors';
-import { SelectTab } from '../../../../header/components/menu/store/menu.actions';
 
 @Injectable()
 export class PostsListEffects {
 
   @Effect()
-  getPostsOnRouteChange$: Observable<any> = this.actions$
+  getPostsInitial$: Observable<any> = this.actions$
     .pipe(
-      ofType(PostsListActionTypes.GetPostsOnRouteChange),
-      switchMap((action: any) => this.getTabByTabId(action.tabId)),
-      exhaustMap((tab: TabDTO) => [
-        new SelectTab(tab),
+      ofType(PostsListActionTypes.GetPostsInitial),
+      concatMap((action: any) => ([
         new ClearPosts(),
-        new GetPosts(tab, this.postsListService.DEFAULT_START, this.postsListService.DEFAULT_END)
-      ])
+        new GetPosts(
+          action.selectedTab,
+          this.postsListService.DEFAULT_START,
+          this.postsListService.DEFAULT_END
+        )
+      ]))
     );
-
-  private getTabByTabId(tabId: number): Observable<TabDTO> {
-    return this.store.select(selectTabs)
-      .pipe(
-        filter((tabs: TabDTO[]) => tabs.length > 0),
-        map((tabs: TabDTO[]) => tabs.filter(tab => tab.id == tabId)[0] || tabs[0])
-      )
-  }
 
   @Effect()
   tryToGetPostsOnScroll$: Observable<any> = this.actions$

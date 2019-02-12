@@ -8,37 +8,28 @@ import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../src/modules/con
 import { PostsListComponent } from '../../../../src/modules/content/components/postsList/postsList.component';
 import { HeaderState } from '../../../../src/modules/header/store/header.reducers';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
-import { PostsListStubs } from './helpers/postsList.stubs';
 import { ContentState } from '../../../../src/modules/content/store/content.reducers';
-import { PostsListState } from './helpers/postsList.state';
-import { GetPostsOnRouteChange } from '../../../../src/modules/content/components/postsList/store/postsList.actions';
+import { PostsListState, INITIALLY_SELECTED_TAB } from './helpers/postsList.state';
+import { GetPostsInitial } from '../../../../src/modules/content/components/postsList/store/postsList.actions';
 import { PostsListResponse } from '../../../utils/responses/postsList.response';
 import { MockStore } from '../../../utils/mocks/mockStore';
-import { PostsListService } from '../../../../src/modules/content/components/postsList/postsList.service';
-import { ActivatedRoute } from '@angular/router';
 
 describe('PostsListComponent', () => {
 
   let store: MockStore<HeaderState | ContentState>;
-  let postsListService: jasmine.SpyObj<PostsListService>;
-  let activatedRoute: jasmine.SpyObj<ActivatedRoute>;
   
   let component: PostsListComponent;
   let fixture: ComponentFixture<PostsListComponent>;
   let ClonedPostsListResponse: typeof PostsListResponse;
 
   beforeEach(() => {
-    store = SharedStubs.getMockStoreStub<HeaderState | ContentState>();
-    postsListService = PostsListStubs.getPostsListServiceStub();
-    activatedRoute = PostsListStubs.getActivatedRouteStub();
+    store = SharedStubs.getMockStoreStub<HeaderState | ContentState>()
 
     TestBed.configureTestingModule({
       imports: [...MODULE_IMPORTS, RouterTestingModule],
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: Store, useValue: store },
-        { provide: PostsListService, useValue: postsListService },
-        { provide: ActivatedRoute, useValue: activatedRoute }
+        { provide: Store, useValue: store }
       ]
     }).compileComponents();
   });
@@ -82,11 +73,10 @@ describe('PostsListComponent', () => {
 
   it(`
     WHEN the component is loaded
-    THEN ClearPosts action should be dispatched
-    AND GetPosts action should be dispatched with initially selected tab and default start/end params
+    THEN GetPostsInitial action is dispatched
   `, () => {
     expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(store.dispatch).toHaveBeenCalledWith(new GetPostsOnRouteChange(PostsListStubs.selectedTab));
+    expect(store.dispatch).toHaveBeenCalledWith(new GetPostsInitial(INITIALLY_SELECTED_TAB));
   });
 
 });

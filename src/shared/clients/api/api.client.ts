@@ -5,7 +5,7 @@ import { TransferHttpService } from '../../services/transferHttp.service';
 import { AuthCredentials } from '../../../modules/auth/auth.model';
 import constants from '../../../config/constants';
 import {
-  PostContentDTO, PostsDTO, SwiperDTO, TabDTO
+  PostContentDTO, PostsDTO, SwiperDTO, TabDTO, CommentDTO
 } from './api.model';
 import { HttpHeaders } from '@angular/common/http';
 import { CookieService } from '../../services/cookie.service';
@@ -15,6 +15,7 @@ const ROUTES: any = {
   posts: '/post/tab',
   recentPosts: '/post/recent',
   post: '/post',
+  comments: '/comment',
   tabs: '/tab',
   photos: '/swiper',
   addNewPost: '/post',
@@ -62,6 +63,13 @@ export class ApiClient {
   getPost(id: string): Observable<PostContentDTO> {
     const url = this.prepareUrl(ROUTES.post);
     return this.transferHttpService.get(`${url}/${id}`, {
+      headers: this.headers
+    });
+  }
+
+  getComments(postId: string): Observable<CommentDTO[]> {
+    const url = this.prepareUrl(ROUTES.post);
+    return this.transferHttpService.get(`${url}/${postId}`, {
       headers: this.headers
     });
   }

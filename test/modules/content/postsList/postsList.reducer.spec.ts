@@ -44,7 +44,7 @@ describe('PostsListReducer', () => {
   `, () => {
     const results = [
       postsListReducer(initialState, new postsListActions.GetPosts(null, null, null)),
-      postsListReducer(initialState, new postsListActions.GetPostsOnRouteChange(null)),
+      postsListReducer(initialState, new postsListActions.GetPostsInitial(null)),
       postsListReducer(initialState, new postsListActions.GetPostsOnScroll(null))
     ];
     for (let i = 0; i < results.length; i++) {

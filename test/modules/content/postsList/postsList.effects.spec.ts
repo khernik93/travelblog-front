@@ -21,10 +21,9 @@ import {
   GetPostsError, 
   GetPostsOnScroll, 
   TryToGetPostsOnScroll,
-  GetPostsOnRouteChange,
-  ClearPosts
+  ClearPosts,
+  GetPostsInitial
 } from '../../../../src/modules/content/components/postsList/store/postsList.actions';
-import { SelectTab } from '../../../../src/modules/header/components/menu/store/menu.actions';
 
 describe('PostsListEffects', () => {
 
@@ -66,23 +65,22 @@ describe('PostsListEffects', () => {
   });
 
   it(`
-    WHEN GetPostsOnRouteChange action is dispatched
-    THEN SelectTab, ClearPosts, and GetPosts are dispatched
+    WHEN GetPostsInitial action is dispatched
+    THEN ClearPosts, and GetPosts are dispatched with initial values
   `, () => {
     const selectedTab = ClonedTabsResponse[2];
-    const action = new GetPostsOnRouteChange(selectedTab.id);
+    const action = new GetPostsInitial(selectedTab);
     const outcome = [
-      new SelectTab(selectedTab),
       new ClearPosts(),
       new GetPosts(selectedTab, postsListService.DEFAULT_START, postsListService.DEFAULT_END)
     ];
     actions.stream = hot('-a', {a: action});
-    const response = cold('-a-|', { a: ClonedTabsResponse });
-    const expected = cold('--(bcd)', { b: outcome[0], c: outcome[1], d: outcome[2] });
+    const response = cold('-a|', { a: ClonedTabsResponse });
+    const expected = cold('-(bc)', { b: outcome[0], c: outcome[1] });
     spyOn(store, 'select').and.callThrough();
     store.select.and.returnValue(response);
     apiClient.getPosts.and.returnValue(response);
-    expect(effects.getPostsOnRouteChange$).toBeObservable(expected);
+    expect(effects.getPostsInitial$).toBeObservable(expected);
   });
 
   it(`

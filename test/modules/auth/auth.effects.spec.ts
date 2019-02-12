@@ -7,7 +7,7 @@ import { ApiClient } from '../../../src/shared/clients/api/api.client';
 import { TestActions, getActions } from '../../utils/mocks/testActions';
 import { AuthEffects } from '../../../src/modules/auth/store/auth.effects';
 import { SharedStubs } from '../../utils/stubs/sharedStubs';
-import { TryToSignIn, SignIn, SignOut } from '../../../src/modules/auth/store/auth.actions';
+import { TryToSignIn, SignIn, SignOut, SignInError } from '../../../src/modules/auth/store/auth.actions';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthStubs } from './helpers/auth.stubs';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -76,10 +76,10 @@ describe('AuthEffects', () => {
   it(`
     WHEN TryToSignIn action is dispatched
     AND apiClient.signIn returns an error
-    THEN SignOut action should be dispatched
+    THEN SignInError action should be dispatched
   `, () => {
     const action = new TryToSignIn({email: null, password: null});
-    const outcome = new SignOut();
+    const outcome = new SignInError();
 
     actions.stream = hot('-a', {a: action});
     const errorResponse = cold('-#|', {}, new Error());

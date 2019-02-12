@@ -10,11 +10,16 @@ export type PostsDTO = {
 };
 
 export type PostContentDTO = {
+  id?: number;
   tab: TabDTO,
   createdAt?: string,
   title: string,
   content: string,
   tags: string[],
+};
+
+export type CommentDTO = {
+  content: string;
 };
 
 export type TabDTO = {

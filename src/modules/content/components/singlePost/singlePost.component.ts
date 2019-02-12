@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, filter, map } from 'rxjs/operators';
 
 import { ActivatedRoute } from '@angular/router';
 import { selectPost } from './store/singlePost.selectors';
@@ -33,9 +33,13 @@ export class SinglePostComponent implements OnInit, OnDestroy {
 
   private getPostOnNewRequest() {
     this.route.paramMap
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((params: any) => {
-        this.store.dispatch(new SinglePostActions.GetPost(params.get('postId')));
+      .pipe(
+        takeUntil(this.destroy$),
+        map((params: any) => params.get('postId')),
+        filter((postId: string) => !!postId)
+      )
+      .subscribe((postId: string) => {
+        this.store.dispatch(new SinglePostActions.GetPost(postId));
       });
   }
 

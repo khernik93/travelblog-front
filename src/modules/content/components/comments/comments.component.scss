@@ -1,0 +1,96 @@
+@import "../../../../variables";
+
+.post-comments, .comment-form {
+  margin-top: 50px;
+}
+
+.comment-list {
+  padding: 0;
+  margin: 50px 0 0;
+  list-style: none;
+}
+
+.comment-list .comment {
+  margin-bottom: 40px;
+}
+
+.comment-list .comment:nth-last-of-type(1) {
+  margin-bottom: 0;
+}
+
+.comment-author-avatar {
+  width: 45px;
+  height: 10px;
+  margin-right: 20px;
+  border-radius: 50%;
+  & img {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.comment-wrap {
+  width: calc(100% - 40px);
+}
+
+.comment-author a {
+  line-height: 1;
+  color: $black;
+}
+.comment-author figure {
+  margin-right: 5px;
+}
+.comment-author .fn a,
+.comment-author .comment-meta a {
+  padding-right: 25px;
+  margin-right: 25px;
+  padding-top: 3px;
+  border-right: 2px solid $black;
+}
+.comment-author .comment-meta a {
+  border: 0;
+}
+
+.comment-wrap p {
+  margin-top: 14px;
+  line-height: 1.85rem;
+  color: $grey;
+}
+
+.comments-form {
+  margin-top: 75px;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form textarea {
+  display: block;
+  width: 100%;
+  padding: 20px 32px;
+  margin-bottom: 8px;
+  border: 0;
+  font-style: italic;
+  line-height: 1;
+  color: $grey;
+  background: $lightgrey;
+  outline: none;
+}
+
+.comment-form input[type="button"] {
+  display: block;
+  width: 200px;
+  padding: 20px 0;
+  margin-top: 30px;
+  border: 0;
+  color: $white;
+  line-height: 1;
+  background: $black;
+  cursor: pointer;
+  &:disabled {
+    background: $lightgrey;
+  }
+}
+
+.comment-author span {
+  float: left;
+}

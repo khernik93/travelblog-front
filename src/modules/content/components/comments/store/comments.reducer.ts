@@ -19,6 +19,13 @@ export function commentsReducer(state = initialState, action: CommentsActions): 
       }
     }
 
+    case CommentsActionTypes.AddCommentSuccess: {
+      return {
+        ...state,
+        comments: [action.commentDTO].concat(state.comments)
+      }
+    }
+
     default: {
       return state;
     }

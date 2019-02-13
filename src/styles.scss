@@ -90,3 +90,10 @@ hr.breaking-line {
   width: 100%;
   text-align: center;
 }
+
+.validation-input-error {
+  display: block;
+  float: left;
+  color: $red;
+  margin-left: 20px;
+}

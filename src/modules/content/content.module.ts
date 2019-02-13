@@ -25,6 +25,8 @@ import { SafeHtmlPipe } from '../app/pipes/safeHtml.pipe';
 // Services
 import { PostsListService } from './components/postsList/postsList.service';
 import { SwiperService } from '../header/components/swiper/swiper.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommentsService } from './components/comments/comments.service';
 
 export const MODULE_DECLARATIONS = [
   ContentComponent,
@@ -39,7 +41,8 @@ export const MODULE_DECLARATIONS = [
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  InfiniteScrollModule
+  InfiniteScrollModule,
+  ReactiveFormsModule
 ];
 
 const ROUTING_MODULE_IMPORTS = [
@@ -53,7 +56,8 @@ const STORE_IMPORTS = [
 
 const MODULE_PROVIDERS = [
   PostsListService,
-  SwiperService
+  SwiperService,
+  CommentsService
 ];
 
 @NgModule({

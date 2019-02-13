@@ -37,6 +37,12 @@ section {
   }
 }
 
+.post-wrap .entry-content.entry-content-restricted {
+  max-height: $maxPostHeight;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .post-wrap .tags-links {
   text-align: center;
   word-wrap: break-word;

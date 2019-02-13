@@ -8,6 +8,7 @@ export class PostsListStubs {
       getNextStart: start,
       getNextEnd: end
     });
+
     spy.DEFAULT_START = start;
     spy.DEFAULT_END = end;
     spy.SCROLL_DEBOUNCE = 200;

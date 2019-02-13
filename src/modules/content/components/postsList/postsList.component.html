@@ -24,7 +24,7 @@
         <span *ngFor="let tag of post.tags">#{{ tag }}</span>
       </div>
       <br>
-      <div class="content-section entry-content" [innerHTML]="post.content | safeHtml">
+      <div class="content-section entry-content entry-content-restricted" [innerHTML]="post.content | safeHtml">
         <!-- post content HTML -->
       </div>
       <br><br>

@@ -1,5 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { HttpHeaders } from '@angular/common/http';
 
 import { TransferHttpService } from '../../services/transferHttp.service';
 import { AuthCredentials } from '../../../modules/auth/auth.model';
@@ -7,9 +9,8 @@ import constants from '../../../config/constants';
 import {
   PostContentDTO, PostsDTO, SwiperDTO, TabDTO, CommentDTO
 } from './api.model';
-import { HttpHeaders } from '@angular/common/http';
 import { CookieService } from '../../services/cookie.service';
-import { map } from 'rxjs/operators';
+import { Comment } from '../../../modules/content/components/comments/comments.model';
 
 const ROUTES: any = {
   posts: '/post/tab',
@@ -68,10 +69,13 @@ export class ApiClient {
   }
 
   getComments(postId: string): Observable<CommentDTO[]> {
-    const url = this.prepareUrl(ROUTES.post);
+    const url = this.prepareUrl(ROUTES.comments);
     return this.transferHttpService.get(`${url}/${postId}`, {
       headers: this.headers
-    });
+    })
+      .pipe(
+        map((response: any) => response.comments)
+      );
   }
 
   getTabs(): Observable<TabDTO[]> {
@@ -82,6 +86,13 @@ export class ApiClient {
       .pipe(
         map((response: any) => response.tabs)
       );
+  }
+
+  addComment(comment: Comment, postId: number): Observable<CommentDTO> {
+    const url = this.prepareUrl(ROUTES.comments);
+    return this.transferHttpService.post(`${url}/${postId}`, comment, {
+      headers: this.headers
+    });
   }
 
   getPhotos(): Observable<SwiperDTO> {

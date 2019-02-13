@@ -19,6 +19,10 @@ export type PostContentDTO = {
 };
 
 export type CommentDTO = {
+  id: number;
+  createdAt: string;
+  name: string;
+  email: string;
   content: string;
 };
 

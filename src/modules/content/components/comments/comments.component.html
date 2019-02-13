@@ -1,1 +1,49 @@
-comments
+<div class="post-comments">
+  <h2>Comments</h2>
+  <ol class="comment-list" *ngIf="comments$ | async">
+
+    <li class="comment" *ngFor="let comment of comments$ | async">
+      <div class="comment-body">
+        <div class="comment-wrap">
+          <div class="comment-author">
+
+            <span>
+              <figure class="comment-author-avatar">
+                <img src="images/avatar.png" alt="user">
+              </figure>
+            </span>
+
+            <span class="fn">
+              <a href="#">{{ comment.name }}</a>
+            </span>
+
+            <span class="comment-meta">
+              <a href="#">{{ comment.createdAt | date:'mediumDate' }}</a>
+            </span>
+
+          </div>
+          <br>
+          
+          <p>{{ comment.content }}</p>
+        
+        </div>
+      </div>
+    </li>
+
+  </ol>
+</div>
+
+<div class="comments-form">
+  <div class="comment-respond">
+    <h2 class="comment-reply-title">Leave a reply</h2>
+
+    <form class="comment-form" [formGroup]="addNewCommentForm">
+      <input type="text" placeholder="Name" formControlName="name">
+      <span class="validation-input-error" *ngIf="isInvalid('content')"><h4>Please enter valid content!</h4></span>
+      <textarea rows="18" cols="6" placeholder="Messages" formControlName="content"></textarea>
+      <input type="email" placeholder="Email (optional)" formControlName="email">
+      <input class="btn" type="button" value="Add comment" [disabled]="!addNewCommentForm.valid" (click)="addNewComment()">
+    </form>
+
+  </div>
+</div>

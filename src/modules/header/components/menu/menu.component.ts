@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -22,7 +22,8 @@ export class MenuComponent implements OnInit {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private store: Store<HeaderState>
+    private store: Store<HeaderState>,
+    private ref: ChangeDetectorRef
   ) {
     this.tabs$ = this.store.select(selectTabs);
   }
@@ -36,7 +37,10 @@ export class MenuComponent implements OnInit {
   private listenToSelectedTab() {
     this.store.select(selectSelectedTab)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((selectedTab: TabDTO) => setTimeout(() => this.selectedTab = selectedTab, 0));
+      .subscribe((selectedTab: TabDTO) => setTimeout(() => {
+        this.selectedTab = selectedTab;
+        this.ref.markForCheck();
+      }, 0));
   }
 
   toggleHamburgerMenu(): void {

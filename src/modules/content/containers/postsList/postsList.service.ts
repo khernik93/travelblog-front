@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import cloneDeep from 'lodash-es/cloneDeep';
-import { MetaDTO, PostsDTO } from '../../../../shared/clients/api/api.model';
+import { MetaDTO } from '../../../../shared/clients/api/api.model';
 
 @Injectable()
 export class PostsListService {

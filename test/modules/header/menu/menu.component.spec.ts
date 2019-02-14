@@ -12,7 +12,7 @@ import { HeaderState } from '../../../../src/modules/header/store/header.reducer
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { MenuState } from './helpers/menu.state';
-import { GetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
+import { GetTabs } from '../../../../src/modules/header/containers/menu/store/menu.actions';
 
 describe('MenuComponent', () => {
 

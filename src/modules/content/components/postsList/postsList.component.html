@@ -9,7 +9,7 @@
     infiniteScroll 
     [infiniteScrollDistance]="0" 
     [infiniteScrollThrottle]="0" 
-    (scrolled)="onScroll()">
+    (scrolled)="fetchMoreOnScroll()">
 
     <!-- Posts -->
     <div class="post-wrap" *ngFor="let post of (posts$ | async); let i = index">
@@ -18,7 +18,7 @@
       </div>
       <br>
       <div class="content-section entry-title">
-        <h1 [routerLink]="singlePostRoute(post.id) | async">{{ post.title }}</h1>
+        <h1 [routerLink]="routes.singlePost((selectedTab$ | async).id, post.id)">{{ post.title }}</h1>
       </div>
       <div class="content-section tags-links">
         <span *ngFor="let tag of post.tags">#{{ tag }}</span>
@@ -29,7 +29,7 @@
       </div>
       <br><br>
       <div class="content-section read-more">
-        <a [routerLink]="singlePostRoute(post.id) | async">read more</a>
+        <a [routerLink]="routes.singlePost((selectedTab$ | async).id, post.id)">read more</a>
       </div>
       <br><br><br><Br>
       <div class="content-section" *ngIf="i !== (posts$ | async).length - 1">

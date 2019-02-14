@@ -3,11 +3,13 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'header-component',
   styleUrls: ['./header.component.scss'],
-  templateUrl: './header.component.html',
+  template: `
+    <header>
+      <logo-component></logo-component>
+      <menu-container></menu-container>
+      <swiper-container></swiper-container>
+    </header>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent {
-
-  constructor() { }
-
-}
+export class HeaderComponent { }

@@ -23,17 +23,25 @@ import { LineBreakComponent } from '../../shared/components/lineBreak/lineBreak.
 import { SafeHtmlPipe } from '../app/pipes/safeHtml.pipe';
 
 // Services
-import { PostsListService } from './components/postsList/postsList.service';
-import { SwiperService } from '../header/components/swiper/swiper.service';
+import { PostsListService } from './containers/postsList/postsList.service';
+import { SwiperService } from '../header/containers/swiper/swiper.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CommentsService } from './components/comments/comments.service';
+import { CommentsService } from './containers/comments/comments.service';
+import { PostsListContainer } from './containers/postsList/postsList.component';
+import { RecentPostsContainer } from './containers/recentPosts/recentPosts.component';
+import { SinglePostContainer } from './containers/singlePost/singlePost.component';
+import { CommentsContainer } from './containers/comments/comments.container';
 
 export const MODULE_DECLARATIONS = [
   ContentComponent,
+  PostsListContainer,
   PostsListComponent,
+  RecentPostsContainer,
   RecentPostsComponent,
   SelfieComponent,
+  SinglePostContainer,
   SinglePostComponent,
+  CommentsContainer,
   CommentsComponent,
   LineBreakComponent,
   SafeHtmlPipe

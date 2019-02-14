@@ -7,7 +7,7 @@ export class SwiperService {
    * Configuration object for initializing swiper element
    */
   public configuration = {
-    wrapper: '.swiper-container',
+    wrapper: `.swiper-container`,
     options: {
       slidesPerView: 1,
       spaceBetween: 0,
@@ -15,11 +15,11 @@ export class SwiperService {
       speed: 300,
       preloadImages: true,
       pagination: {
-        el: '.swiper-pagination'
+        el: `.swiper-pagination`
       },
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
+        nextEl: `.swiper-button-next`,
+        prevEl: `.swiper-button-prev`
       }
     }
   };

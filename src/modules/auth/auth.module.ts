@@ -20,9 +20,11 @@ import { AuthRoutingModule } from './routing/authRouting.module';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthReversedGuard } from './guards/authReversed.guard';
 import { CookieService } from '../../shared/services/cookie.service';
+import { SignInContainer } from './containers/signIn/signIn.container';
 
 export const MODULE_DECLARATIONS = [
   AuthComponent,
+  SignInContainer,
   SignInComponent
 ];
 

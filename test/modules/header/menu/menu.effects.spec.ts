@@ -4,8 +4,8 @@ import { hot, cold } from 'jasmine-marbles';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { Store } from '@ngrx/store';
 
-import { MenuEffects } from '../../../../src/modules/header/components/menu/store/menu.effects';
-import { GetTabs, SetTabs, SelectTabById, SelectTab } from '../../../../src/modules/header/components/menu/store/menu.actions';
+import { MenuEffects } from '../../../../src/modules/header/containers/menu/store/menu.effects';
+import { GetTabs, SetTabs, SelectTabById, SelectTab } from '../../../../src/modules/header/containers/menu/store/menu.actions';
 import { TabsResponse } from '../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { ApiClient } from '../../../../src/shared/clients/api/api.client';

@@ -2,8 +2,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { AuthComponent } from '../auth.component';
-import { SignInComponent } from '../components/signIn/signIn.component';
 import { AuthReversedGuard } from '../guards/authReversed.guard';
+import { SignInContainer } from '../containers/signIn/signIn.container';
 
 export const routes: Routes = [
   { 
@@ -11,7 +11,7 @@ export const routes: Routes = [
     component: AuthComponent,
     canActivate: [AuthReversedGuard],
     children: [
-      { path: '', component: SignInComponent,  }
+      { path: '', component: SignInContainer,  }
     ]
   }
 ];

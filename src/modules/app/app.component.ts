@@ -4,7 +4,10 @@ import { PreviousRouteService } from '../../shared/services/previousRoute.servic
 @Component({
   selector: 'app',
   styleUrls: [],
-  templateUrl: './app.component.html',
+  template: `
+    <router-outlet></router-outlet>
+    <notification-container></notification-container>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {

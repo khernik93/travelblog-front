@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash-es/cloneDeep';
 
-import * as menuActions from '../../../../src/modules/header/components/menu/store/menu.actions';
-import { menuReducer, initialState } from '../../../../src/modules/header/components/menu/store/menu.reducer';
+import * as menuActions from '../../../../src/modules/header/containers/menu/store/menu.actions';
+import { menuReducer, initialState } from '../../../../src/modules/header/containers/menu/store/menu.reducer';
 import { TabsResponse } from '../../../utils/responses/tabs.response';
 
 describe('MenuReducer', () => {

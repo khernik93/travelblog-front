@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AppState } from '../../../../src/modules/app/store/app.reducers';
 import { LayoutStubs } from './helpers/layout.stubs';
 import { LayoutComponent } from '../../../../src/modules/app/components/layout/layout.component';
-import { SelectTabById } from '../../../../src/modules/header/components/menu/store/menu.actions';
+import { SelectTabById } from '../../../../src/modules/header/containers/menu/store/menu.actions';
 
 describe('LayoutComponent', () => {
 

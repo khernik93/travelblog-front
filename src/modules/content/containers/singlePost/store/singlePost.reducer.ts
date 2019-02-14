@@ -6,7 +6,7 @@ export interface SinglePostState {
 }
 
 export const initialState: SinglePostState = {
-  post: null
+  post: Object.assign({})
 };
 
 export function singlePostReducer(state = initialState, action: SinglePostActions): SinglePostState {

@@ -1,7 +1,7 @@
 <div class="swiper-container">
 
   <div class="swiper-wrapper">
-    <div class="swiper-slide" *ngFor="let photo of currentPhotos">
+    <div class="swiper-slide" *ngFor="let photo of photosForSelectedTab">
       <div class="swiper-content ajax-loader">
         <img [src]="photo" alt="">
       </div>

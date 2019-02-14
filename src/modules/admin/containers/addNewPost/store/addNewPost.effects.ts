@@ -4,11 +4,11 @@ import { Observable, of } from 'rxjs';
 import { map, exhaustMap, take, catchError } from 'rxjs/operators';
 import { PostContentDTO, TabDTO } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
-import { SetSuccess } from '../../../../app/components/notification/store/notification.actions';
+import { SetSuccess } from '../../../../app/containers/notification/store/notification.actions';
 import { AddNewPostService } from '../addNewPost.service';
 import { AddNewPostActionTypes, AddNewPostSuccess, AddNewPostError } from './addNewPost.actions';
 import { Store } from '@ngrx/store';
-import { selectTabs } from '../../../../header/components/menu/store/menu.selectors';
+import { selectTabs } from '../../../../header/containers/menu/store/menu.selectors';
 import { HeaderState } from '../../../../header/store/header.reducers';
 
 @Injectable()

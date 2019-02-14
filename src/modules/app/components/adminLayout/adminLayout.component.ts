@@ -2,6 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'adminLayout-component',
-  templateUrl: './adminLayout.component.html'
+  template: '<admin-component></admin-component>'
 })
 export class AdminLayoutComponent { }

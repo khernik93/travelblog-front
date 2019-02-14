@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { ContentState } from '../../../store/content.reducers';
 import { selectPost } from '../../singlePost/store/singlePost.selectors';
 import { Comment } from '../comments.model';
-import { SetSuccess } from '../../../../app/components/notification/store/notification.actions';
+import { SetSuccess } from '../../../../app/containers/notification/store/notification.actions';
 
 @Injectable()
 export class CommentsEffects {

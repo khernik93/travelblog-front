@@ -8,7 +8,7 @@ import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { AddNewPostComponent } from '../../../../src/modules/admin/components/addNewPost/addNewPost.component';
 import { AddNewPostState } from './helpers/addNewPost.state';
-import { GetTabs } from '../../../../src/modules/header/components/menu/store/menu.actions';
+import { GetTabs } from '../../../../src/modules/header/containers/menu/store/menu.actions';
 import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../src/modules/admin/admin.module';
 import { AddNewPost } from '../../../../src/modules/admin/components/addNewPost/store/addNewPost.actions';
 

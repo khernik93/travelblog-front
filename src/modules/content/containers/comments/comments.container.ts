@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { take, skip } from 'rxjs/operators';
+import { Observable, pipe } from 'rxjs';
+import { take, skip, tap } from 'rxjs/operators';
 
 import { ContentState } from '../../store/content.reducers';
 import { PostContentDTO, CommentDTO } from '../../../../shared/clients/api/api.model';
@@ -39,10 +39,7 @@ export class CommentsContainer implements OnInit {
 
   private getComments() {
     this.post$
-      .pipe(
-        skip(1), 
-        take(1)
-      )
+      .pipe(take(1))
       .subscribe((post: PostContentDTO) => this.store.dispatch(new GetComments(post.id)));
   }
 

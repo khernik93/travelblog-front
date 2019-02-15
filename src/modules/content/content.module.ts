@@ -27,9 +27,9 @@ import { PostsListService } from './containers/postsList/postsList.service';
 import { SwiperService } from '../header/containers/swiper/swiper.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommentsService } from './containers/comments/comments.service';
-import { PostsListContainer } from './containers/postsList/postsList.component';
-import { RecentPostsContainer } from './containers/recentPosts/recentPosts.component';
-import { SinglePostContainer } from './containers/singlePost/singlePost.component';
+import { PostsListContainer } from './containers/postsList/postsList.container';
+import { RecentPostsContainer } from './containers/recentPosts/recentPosts.container';
+import { SinglePostContainer } from './containers/singlePost/singlePost.container';
 import { CommentsContainer } from './containers/comments/comments.container';
 
 export const MODULE_DECLARATIONS = [
@@ -41,10 +41,10 @@ export const MODULE_DECLARATIONS = [
   SelfieComponent,
   SinglePostContainer,
   SinglePostComponent,
-  CommentsContainer,
-  CommentsComponent,
   LineBreakComponent,
-  SafeHtmlPipe
+  SafeHtmlPipe,
+  CommentsContainer,
+  CommentsComponent
 ];
 
 export const MODULE_IMPORTS = [

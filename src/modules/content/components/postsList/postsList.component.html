@@ -1,44 +1,43 @@
-<section>
+<section *ngIf="(posts$ | async) as posts">
 
   <!-- No content -->
-  <div class="no-content" *ngIf="(posts$ | async).length == 0 && (initialized$ | async)">
+  <div class="no-content" *ngIf="!posts.length && (initialized$ | async)">
     No posts yet
   </div>
 
-  <div *ngIf="(posts$ | async).length > 0"
-    infiniteScroll 
-    [infiniteScrollDistance]="0" 
-    [infiniteScrollThrottle]="0" 
-    (scrolled)="fetchMoreOnScroll()">
+  <!-- Posts -->
+  <div infiniteScroll 
+       [infiniteScrollDistance]="0" 
+       [infiniteScrollThrottle]="0" 
+       (scrolled)="fetchMoreOnScroll()">
 
-    <!-- Posts -->
-    <div class="post-wrap" *ngFor="let post of (posts$ | async); let i = index">
+    <div class="post-wrap" *ngFor="let post of posts; let i = index">
       <div class="content-section posted-date">
         <h4>{{ post.createdAt | date:'medium' }}</h4>
       </div>
       <br>
-      <div class="content-section entry-title">
-        <h1 [routerLink]="routes.singlePost((selectedTab$ | async).id, post.id)">{{ post.title }}</h1>
+      <div class="content-section entry-title" *ngIf="(selectedTab$ | async) as selectedTab">
+        <h1 [routerLink]="routes.singlePost(selectedTab.id, post.id)">{{ post.title }}</h1>
       </div>
       <div class="content-section tags-links">
         <span *ngFor="let tag of post.tags">#{{ tag }}</span>
       </div>
       <br>
       <div class="content-section entry-content entry-content-restricted" [innerHTML]="post.content | safeHtml">
-        <!-- post content HTML -->
+        <!-- Post content HTML -->
       </div>
       <br><br>
-      <div class="content-section read-more">
-        <a [routerLink]="routes.singlePost((selectedTab$ | async).id, post.id)">read more</a>
+      <div class="content-section read-more" *ngIf="(selectedTab$ | async) as selectedTab">
+        <a [routerLink]="routes.singlePost(selectedTab$.id, post.id)">read more</a>
       </div>
       <br><br><br><Br>
-      <div class="content-section" *ngIf="i !== (posts$ | async).length - 1">
+      <div class="content-section" *ngIf="i !== posts.length - 1">
         <lineBreak-component></lineBreak-component>
       </div>
       <br><br><br>
     </div>
 
-    <!-- Infinite scroll loader -->
+    <!-- Infinite scroll loader icon -->
     <div class="ajax-loader" *ngIf="loading$ | async"></div>
 
   </div>

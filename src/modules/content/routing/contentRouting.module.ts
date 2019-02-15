@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { PostsListContainer } from '../containers/postsList/postsList.component';
-import { SinglePostContainer } from '../containers/singlePost/singlePost.component';
+import { PostsListContainer } from '../containers/postsList/postsList.container';
+import { SinglePostContainer } from '../containers/singlePost/singlePost.container';
 import { LayoutContainer } from '../../app/containers/layout/layout.container';
 
 export const routes: Routes = [

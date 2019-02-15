@@ -6,11 +6,18 @@ export interface SinglePostState {
 }
 
 export const initialState: SinglePostState = {
-  post: Object.assign({})
+  post: null
 };
 
 export function singlePostReducer(state = initialState, action: SinglePostActions): SinglePostState {
   switch (action.type) {
+
+    case SinglePostActionTypes.GetPost: {
+      return {
+        ...state,
+        post: initialState.post
+      }
+    }
 
     case SinglePostActionTypes.SetPost: {
       return {

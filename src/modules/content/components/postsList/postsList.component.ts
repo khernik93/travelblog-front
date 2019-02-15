@@ -12,7 +12,6 @@ export class PostsListComponent {
   @Input() posts$: Observable<PostContentDTO[]>;
   @Input() loading$: Observable<boolean>;
   @Input() selectedTab$: Observable<TabDTO>;
-  @Input() tabs$: Observable<TabDTO[]>;
   @Input() initialized$: Observable<boolean>;
 
   @Output('onScroll') fetchMoreOnScrollEmitter = new EventEmitter<boolean>();

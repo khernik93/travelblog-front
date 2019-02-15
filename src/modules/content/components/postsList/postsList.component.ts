@@ -1,11 +1,12 @@
-import { Component, OnDestroy, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PostContentDTO, TabDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'postsList-component',
   styleUrls: ['./postsList.component.scss'],
-  templateUrl: './postsList.component.html'
+  templateUrl: './postsList.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class PostsListComponent {
 

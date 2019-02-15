@@ -1,4 +1,4 @@
-<section>
+<section id="posts-list">
   <div class="post-wrap" *ngIf="post$ | async">
     <div class="content-section posted-date">
       <h4>{{ (post$ | async).createdAt | date:'medium' }}</h4>

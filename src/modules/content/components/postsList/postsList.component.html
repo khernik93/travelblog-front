@@ -1,4 +1,4 @@
-<section *ngIf="(posts$ | async) as posts">
+<section id="posts-list" *ngIf="(posts$ | async) as posts">
 
   <!-- No content -->
   <div class="no-content" *ngIf="!posts.length && (initialized$ | async)">

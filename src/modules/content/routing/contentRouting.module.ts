@@ -1,25 +1,25 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { LayoutComponent } from '../../app/components/layout/layout.component';
-import { PostsListComponent } from '../components/postsList/postsList.component';
-import { SinglePostComponent } from '../components/singlePost/singlePost.component';
+import { PostsListContainer } from '../containers/postsList/postsList.container';
+import { SinglePostContainer } from '../containers/singlePost/singlePost.container';
+import { LayoutContainer } from '../../app/containers/layout/layout.container';
 
 export const routes: Routes = [
   { 
     path: 'posts',
-    component: LayoutComponent,
+    component: LayoutContainer,
     pathMatch: 'full',
     children: [
-      { path: '', component: PostsListComponent, pathMatch: 'full' }
+      { path: '', component: PostsListContainer, pathMatch: 'full' }
     ]
   },
   { 
     path: 'posts/:tabId',
-    component: LayoutComponent, 
+    component: LayoutContainer, 
     children: [
-      { path: '', component: PostsListComponent, pathMatch: 'full' },
-      { path: ':postId', component: SinglePostComponent, pathMatch: 'full' }
+      { path: '', component: PostsListContainer, pathMatch: 'full' },
+      { path: ':postId', component: SinglePostContainer, pathMatch: 'full' }
     ]
   }
 ];

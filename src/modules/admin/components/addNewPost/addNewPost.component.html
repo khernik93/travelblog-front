@@ -5,6 +5,7 @@
     <div class="form-group">
       <label for="tabId"><b>Tab</b></label>
       <select formControlName="tabId" class="form-control" id="tabId">
+        <option value="0" selected disabled>-- choose tab --</option>
         <option *ngFor="let tab of tabs$ | async" [value]="tab.id">{{ tab.name }}</option>
       </select>
     </div>

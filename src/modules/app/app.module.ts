@@ -31,14 +31,18 @@ import { TransferHttpService } from '../../shared/services/transferHttp.service'
 import { ApiClient } from '../../shared/clients/api/api.client';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { PreviousRouteService } from '../../shared/services/previousRoute.service';
+import { NotificationContainer } from './containers/notification/notification.container';
+import { LayoutContainer } from './containers/layout/layout.container';
 
 export const MODULE_DECLARATIONS = [
   NotFoundComponent,
+  NotificationContainer,
   NotificationComponent
 ];
 
 const LAYOUT_MODULE_DECLARATIONS = [
   AppComponent,
+  LayoutContainer,
   LayoutComponent,
   AdminLayoutComponent
 ];

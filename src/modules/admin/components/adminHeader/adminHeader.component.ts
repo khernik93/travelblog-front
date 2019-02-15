@@ -1,8 +1,4 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { AuthState } from '../../../auth/store/auth.reducer';
-import { SignOut } from '../../../auth/store/auth.actions';
-import { PreviousRouteService } from '../../../../shared/services/previousRoute.service';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'adminHeader-component',
@@ -20,18 +16,15 @@ import { PreviousRouteService } from '../../../../shared/services/previousRoute.
 })
 export class AdminHeaderComponent {
 
-  constructor(
-    private store: Store<AuthState>,
-    private previousRouteService: PreviousRouteService
-  ) { 
-  }
+  @Output('onGoBack') goBackEmitter = new EventEmitter<void>();
+  @Output('onSignOut') signOutEmitter = new EventEmitter<void>();
 
   goBack() {
-    this.previousRouteService.goBack();
+    this.goBackEmitter.emit();
   }
 
   signOut() {
-    this.store.dispatch(new SignOut());
+    this.signOutEmitter.emit();
   }
 
 }

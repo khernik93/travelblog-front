@@ -21,12 +21,16 @@ import { AdminRoutingModule } from './routing/adminRouting.module';
 import { AuthModule } from '../auth/auth.module';
 
 // Services
-import { AddNewPostService } from './components/addNewPost/addNewPost.service';
+import { AddNewPostService } from './containers/addNewPost/addNewPost.service';
+import { AddNewPostContainer } from './containers/addNewPost/addNewPost.container';
+import { AdminHeaderContainer } from './containers/adminHeader/adminHeader.component';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent,
+  AddNewPostContainer,
   AddNewPostComponent,
   WysiwygComponent,
+  AdminHeaderContainer,
   AdminHeaderComponent
 ];
 

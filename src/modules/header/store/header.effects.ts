@@ -1,5 +1,5 @@
-import { MenuEffects } from '../components/menu/store/menu.effects';
-import { SwiperEffects } from '../components/swiper/store/swiper.effects';
+import { MenuEffects } from '../containers/menu/store/menu.effects';
+import { SwiperEffects } from '../containers/swiper/store/swiper.effects';
 
 export const headerEffects = [
   MenuEffects,

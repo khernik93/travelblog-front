@@ -10,7 +10,7 @@ import {
   PostContentDTO, PostsDTO, SwiperDTO, TabDTO, CommentDTO
 } from './api.model';
 import { CookieService } from '../../services/cookie.service';
-import { Comment } from '../../../modules/content/components/comments/comments.model';
+import { Comment } from '../../../modules/content/containers/comments/comments.model';
 
 const ROUTES: any = {
   posts: '/post/tab',

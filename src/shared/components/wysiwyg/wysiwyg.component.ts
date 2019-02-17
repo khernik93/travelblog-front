@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'wysiwyg-component',
@@ -16,12 +17,16 @@ export class WysiwygComponent implements OnInit {
   content: string;
   @Output() onContentChanged = new EventEmitter<string>();
   @Input() placeholder: string = '';
+  @Input() contentInitial$: Observable<string>;
 
   constructor() {
     //nothing here :-(
   }
 
   ngOnInit() {
+    if (this.contentInitial$) {
+      this.contentInitial$.subscribe(content => this.content = content);
+    }
     this.editorConfig = EDITOR_CONFIG;
   }
 

@@ -12,7 +12,6 @@ import { syncReducers } from './store/app.reducers';
 // Components
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { AdminLayoutComponent } from './components/adminLayout/adminLayout.component';
 import { NotFoundComponent } from './components/notFound/notFound.component';
 import { NotificationComponent } from './components/notification/notification.component';
 
@@ -43,8 +42,7 @@ export const MODULE_DECLARATIONS = [
 const LAYOUT_MODULE_DECLARATIONS = [
   AppComponent,
   LayoutContainer,
-  LayoutComponent,
-  AdminLayoutComponent
+  LayoutComponent
 ];
 
 export const MODULE_IMPORTS = [

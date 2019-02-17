@@ -31,4 +31,11 @@ export type TabDTO = {
   name: string
 };
 
+export type Post = {
+  tabId: number,
+  tags: string,
+  title: string,
+  content: string
+};
+
 export type SwiperDTO = Map<number, string[]>;

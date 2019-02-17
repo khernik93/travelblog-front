@@ -1,6 +1,6 @@
-import { Post } from '../../../src/shared/clients/api.model';
+import { PostContentDTO } from '../../../src/shared/clients/api/api.model';
 
-export const RecentPostsResponse: Post[] = [
+export const RecentPostsResponse: PostContentDTO[] = [
   {
     "tab":{"id":1,"name":"China"},
     "createdAt":"2019-02-01T22:00:51.000+0000",

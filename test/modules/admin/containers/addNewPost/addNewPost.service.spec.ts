@@ -2,8 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 import { AddNewPostService } from '../../../../../src/modules/admin/containers/addNewPost/addNewPost.service';
-import { Post } from '../../../../../src/modules/admin/containers/addNewPost/addNewPost.model';
-import { PostContentDTO, TabDTO } from '../../../../../src/shared/clients/api/api.model';
+import { PostContentDTO, TabDTO, Post } from '../../../../../src/shared/clients/api/api.model';
 import { TabsResponse } from '../../../../utils/responses/tabs.response';
 
 const post: Post = {

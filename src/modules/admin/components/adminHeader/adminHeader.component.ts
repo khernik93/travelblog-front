@@ -2,17 +2,8 @@ import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'adminHeader-component',
-  template: `
-    <header>
-      <div class="tab">
-        <a href="#" (click)="signOut()">SIGN OUT</a>
-      </div>
-      <div class="tab">
-        <a (click)="goBack()">BACK TO BLOG</a>
-      </div>
-    </header>
-  `,
-  styleUrls: ['./adminHeader.component.scss']
+  templateUrl: 'adminHeader.component.html',
+  styleUrls: ['../../admin.component.scss']
 })
 export class AdminHeaderComponent {
 
@@ -23,7 +14,7 @@ export class AdminHeaderComponent {
     this.goBackEmitter.emit();
   }
 
-  signOut() {
+  logout() {
     this.signOutEmitter.emit();
   }
 

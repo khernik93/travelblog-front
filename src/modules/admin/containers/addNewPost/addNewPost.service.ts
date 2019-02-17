@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Post } from './addNewPost.model';
-import { PostContentDTO, TabDTO } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO, TabDTO, Post } from '../../../../shared/clients/api/api.model';
 
 @Injectable()
 export class AddNewPostService {

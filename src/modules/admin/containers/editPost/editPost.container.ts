@@ -6,10 +6,11 @@ import { selectTabs } from '../../../header/containers/menu/store/menu.selectors
 import { GetTabs } from '../../../header/containers/menu/store/menu.actions';
 import { TabDTO, Post, PostContentDTO } from '../../../../shared/clients/api/api.model';
 import { AdminState } from '../../store/admin.reducers';
-import { selectAdminPosts } from '../managePosts/store/managePosts.selectors';
 import { ActivatedRoute } from '@angular/router';
 import { map, exhaustMap, filter, take, takeUntil } from 'rxjs/operators';
-import { GetPosts } from '../managePosts/store/managePosts.actions';
+import { EditPost } from './store/editPost.actions';
+import { selectAdminPosts } from '../adminPostsList/store/adminPostsList.selectors';
+import { GetAdminPosts } from '../adminPostsList/store/adminPostsList.actions';
 
 @Component({
   selector: 'editPost-container',
@@ -26,7 +27,7 @@ export class EditPostContainer implements OnInit, OnDestroy {
 
   tabs$: Observable<TabDTO[]>;
   posts$: Observable<PostContentDTO[]>;
-  post$ = new Subject();
+  post$ = new Subject<PostContentDTO>();
 
   private destroy$ = new Subject();
 
@@ -54,7 +55,7 @@ export class EditPostContainer implements OnInit, OnDestroy {
         take(1),
         map((params: any) => params.get('tabId'))
       )
-      .subscribe((tabId: number) => this.store.dispatch(new GetPosts(tabId)));
+      .subscribe((tabId: number) => this.store.dispatch(new GetAdminPosts(tabId)));
   }
 
   private fetchPostByParamPostId() {
@@ -65,7 +66,7 @@ export class EditPostContainer implements OnInit, OnDestroy {
         exhaustMap((postId: number) => this.getPostByPostId(postId))
       )
       .subscribe((post: PostContentDTO) => {
-        this.store.dispatch(new GetPosts(post.tab.id));
+        this.store.dispatch(new GetAdminPosts(post.tab.id));
         this.post$.next(post);
       });
   }
@@ -79,8 +80,8 @@ export class EditPostContainer implements OnInit, OnDestroy {
       )
   }
 
-  editPost(editedPost: Post) {
-    //this.store.dispatch(new AddNewPost(newPost));
+  editPost(post: Post) {
+    this.store.dispatch(new EditPost(post));
   }
 
   ngOnDestroy() {

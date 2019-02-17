@@ -32,6 +32,7 @@ export type TabDTO = {
 };
 
 export type Post = {
+  id?: number;
   tabId: number,
   tags: string,
   title: string,

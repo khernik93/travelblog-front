@@ -20,6 +20,7 @@ const ROUTES: any = {
   tabs: '/tab',
   photos: '/swiper',
   addNewPost: '/post',
+  updatePost: '/post',
   signIn: '/auth/signIn'
 };
 
@@ -110,6 +111,15 @@ export class ApiClient {
     const headers = this.headers
       .append('Authorization', this.cookieService.getCookie('SESSION_ID'));
     return this.transferHttpService.post(url, post, {
+      headers: headers
+    });
+  }
+
+  updatePost(post: PostContentDTO): Observable<void> {
+    const url = this.prepareUrl(ROUTES.updatePost);
+    const headers = this.headers
+      .append('Authorization', this.cookieService.getCookie('SESSION_ID'));
+    return this.transferHttpService.put(url, post, {
       headers: headers
     });
   }

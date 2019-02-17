@@ -17,19 +17,20 @@ import { AdminComponent } from './admin.component';
 import { WysiwygComponent } from '../../shared/components/wysiwyg/wysiwyg.component';
 import { AdminHeaderComponent } from './components/adminHeader/adminHeader.component';
 import { AddNewPostContainer } from './containers/addNewPost/addNewPost.container';
-import { AdminHeaderContainer } from './containers/adminHeader/adminHeader.component';
+import { AdminHeaderContainer } from './containers/adminHeader/adminHeader.container';
 import { AdminMenuComponent } from './components/adminMenu/adminMenu.component';
-import { ManagePostsContainer } from './containers/managePosts/managePosts.container';
 import { PostsTableComponent } from './components/postsTable/postsTable.component';
 import { PostFormComponent } from './components/postForm/postForm.component';
 import { EditPostContainer } from './containers/editPost/editPost.container';
+import { AdminPostsListContainer } from './containers/adminPostsList/adminPostsList.container';
 
 // Modules
 import { AdminRoutingModule } from './routing/adminRouting.module';
 import { AuthModule } from '../auth/auth.module';
 
 // Services
-import { AddNewPostService } from './containers/addNewPost/addNewPost.service';
+import { PostsService } from './services/posts.service';
+import { AdminPostsListService } from './containers/adminPostsList/adminPostsList.service';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent,
@@ -38,7 +39,7 @@ export const MODULE_DECLARATIONS = [
   AdminHeaderContainer,
   AdminHeaderComponent,
   AdminMenuComponent,
-  ManagePostsContainer,
+  AdminPostsListContainer,
   PostsTableComponent,
   PostFormComponent,
   EditPostContainer
@@ -72,7 +73,8 @@ const STORE_IMPORTS = [
   ],
   exports: [AdminComponent],
   providers: [
-    AddNewPostService
+    PostsService,
+    AdminPostsListService
   ]
 })
 export class AdminModule {

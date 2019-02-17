@@ -1,6 +1,7 @@
-import { Component, ViewChild, ElementRef, Input, OnChanges } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, ViewChild, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { Notification } from '../../containers/notification/notification.model';
+import { takeUntil, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'notification-component',
@@ -13,17 +14,31 @@ import { Notification } from '../../containers/notification/notification.model';
     </div>
   `
 })
-export class NotificationComponent implements OnChanges {
+export class NotificationComponent implements OnInit, OnDestroy {
 
   @ViewChild('notification') el: ElementRef;
   @Input() notification$: Observable<Notification>;
 
-  ngOnChanges() {
-    if (this.el) {
-      this.el.nativeElement.style.animation = 'none';
-      this.el.nativeElement.offsetHeight;
-      this.el.nativeElement.style.animation = null;
-    }
+  private destroy$ = new Subject();
+
+  ngOnInit() {
+    this.notification$
+      .pipe(
+        takeUntil(this.destroy$),
+        filter(() => !!this.el)
+      )
+      .subscribe(() => this.restartAnimation());
+  }
+
+  private restartAnimation() {
+    this.el.nativeElement.style.animation = 'none';
+    this.el.nativeElement.offsetHeight;
+    this.el.nativeElement.style.animation = null;
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

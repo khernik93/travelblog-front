@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import cloneDeep from 'lodash-es/cloneDeep';
 
-import { AddNewPostService } from '../../../../../src/modules/admin/containers/addNewPost/addNewPost.service';
+import { ManagePostsService } from '../../../../../src/modules/admin/containers/managePosts/managePosts.service';
 import { PostContentDTO, TabDTO, Post } from '../../../../../src/shared/clients/api/api.model';
 import { TabsResponse } from '../../../../utils/responses/tabs.response';
 
@@ -23,7 +23,7 @@ const tabsResponse = TabsResponse;
 
 describe('AddNewPostService', () => {
 
-  let service: AddNewPostService;
+  let service: ManagePostsService;
 
   let ClonedPost: Post;
   let ClonedPostContentDTO: PostContentDTO;
@@ -31,9 +31,9 @@ describe('AddNewPostService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [AddNewPostService]
+      providers: [ManagePostsService]
     });
-    service = TestBed.get(AddNewPostService);
+    service = TestBed.get(ManagePostsService);
   });
 
   beforeEach(() => {
@@ -50,7 +50,7 @@ describe('AddNewPostService', () => {
     WHEN transformNewPost is called with a display addNewPost object
     THEN API addNewPost object is returned
   `, () => {
-    const transformedNewPost = service.transformIntoPostContentDTO(ClonedPost, ClonedTabsResponse);
+    const transformedNewPost = service.transformPostIntoPostContentDTO(ClonedPost, ClonedTabsResponse);
     expect(transformedNewPost).toEqual(ClonedPostContentDTO);
   });
 

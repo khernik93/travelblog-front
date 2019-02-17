@@ -5,8 +5,8 @@ import { AdminComponent } from '../admin.component';
 
 import { AuthGuard } from '../../auth/guards/auth.guard';
 import { AddNewPostContainer } from '../containers/addNewPost/addNewPost.container';
-import { ManagePostsContainer } from '../containers/managePosts/managePosts.container';
 import { EditPostContainer } from '../containers/editPost/editPost.container';
+import { AdminPostsListContainer } from '../containers/adminPostsList/adminPostsList.container';
 
 export const routes: Routes = [
   { 
@@ -14,10 +14,10 @@ export const routes: Routes = [
     component: AdminComponent,
     canActivate: [AuthGuard],
     children: [
-      { path: '', redirectTo: 'managePosts', pathMatch: 'full' },
+      { path: '', redirectTo: 'postsList', pathMatch: 'full' },
+      { path: 'postsList', component: AdminPostsListContainer, pathMatch: 'full' },
       { path: 'addNewPost', component: AddNewPostContainer, pathMatch: 'full' },
-      { path: 'managePosts', component: ManagePostsContainer, pathMatch: 'full' },
-      { path: 'editPost/:tabId/:postId', component: EditPostContainer, pathMatch: 'full' }
+      { path: 'editPost/tabId/:tabId/postId/:postId', component: EditPostContainer, pathMatch: 'full' }
     ]
   }
 ];

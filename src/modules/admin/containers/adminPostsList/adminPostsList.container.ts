@@ -5,28 +5,29 @@ import { HeaderState } from '../../../header/store/header.reducers';
 import { selectTabs } from '../../../header/containers/menu/store/menu.selectors';
 import { GetTabs } from '../../../header/containers/menu/store/menu.actions';
 import { TabDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
-import { ContentState } from '../../../content/store/content.reducers';
-import { GetPosts } from './store/managePosts.actions';
-import { selectAdminPosts, selectAdminSelectedTabId } from './store/managePosts.selectors';
+import { take, filter } from 'rxjs/operators';
+import { selectAdminSelectedTabId, selectAdminPosts } from './store/adminPostsList.selectors';
+import { GetAdminPosts } from './store/adminPostsList.actions';
+import { AdminState } from '../../store/admin.reducers';
 
 @Component({
-  selector: 'managePosts-container',
+  selector: 'adminPostsList-container',
   template: `
     <postsTable-component [tabs$]="tabs$"
-                          [selectedTabId$]="adminSelectedTabId$"
-                          [posts$]="adminPosts$"
+                          [adminSelectedTabId$]="adminSelectedTabId$"
+                          [adminPosts$]="adminPosts$"
                           (onTabChanges)="onTabChanges($event)">
     </postsTable-component>
   `
 })
-export class ManagePostsContainer implements OnInit {
+export class AdminPostsListContainer implements OnInit {
 
   tabs$: Observable<TabDTO[]>;
   adminSelectedTabId$: Observable<number>;
   adminPosts$: Observable<PostContentDTO[]>;
 
   constructor(
-    private store: Store<HeaderState | ContentState>
+    private store: Store<HeaderState | AdminState>
   ) {
     this.tabs$ = this.store.select(selectTabs);
     this.adminSelectedTabId$ = this.store.select(selectAdminSelectedTabId);
@@ -35,14 +36,28 @@ export class ManagePostsContainer implements OnInit {
 
   ngOnInit() {
     this.getTabs();
+    this.getPostsBasedOnSelectedTab();
   }
 
   private getTabs() {
     this.store.dispatch(new GetTabs());
   }
 
+  private getPostsBasedOnSelectedTab() {
+    this.adminSelectedTabId$
+      .pipe(
+        take(1),
+        filter((selectedTabId: number) => selectedTabId > 0)
+      )
+      .subscribe((selectedTabId: number) => this.getPostsByTabId(selectedTabId));
+  }
+
   onTabChanges(values: any) {
-    this.store.dispatch(new GetPosts(values.tabId));
+    this.getPostsByTabId(values.tabId);
+  }
+
+  private getPostsByTabId(tabId: number) {
+    this.store.dispatch(new GetAdminPosts(tabId));
   }
 
 }

@@ -23,6 +23,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
   @Output('onFormSubmit') formSubmitEmitter = new EventEmitter<Post>();
 
+  private postId: number;
   private destroy$ = new Subject();
 
   constructor(
@@ -50,9 +51,11 @@ export class PostFormComponent implements OnInit, OnDestroy {
         filter((post: PostContentDTO) => !!post)
       )
       .subscribe((post: PostContentDTO) => {
+        this.postId = post.id;
         this.postForm.controls['tabId'].patchValue(post.tab.id);
         this.postForm.controls['title'].patchValue(post.title);
         this.postForm.controls['tags'].patchValue(post.tags.join(','));
+        this.content = post.content;
         this.contentInitial$.next(post.content);
         this.ref.markForCheck();
       });
@@ -64,6 +67,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
   
   submit() {
     this.formSubmitEmitter.emit({ 
+      id: this.postId,
       ...this.postForm.value,
       tabId: +this.postForm.value.tabId,
       content: this.content 

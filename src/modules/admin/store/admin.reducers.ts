@@ -1,11 +1,11 @@
 import { ActionReducerMap } from '@ngrx/store';
 
-import * as fromManagePosts from '../containers/managePosts/store/managePosts.reducer';
+import * as fromAdminPostsList from '../containers/adminPostsList/store/adminPostsList.reducer';
 
 export interface AdminState {
-  managePosts: fromManagePosts.ManagePostsState;
+  adminPostsList: fromAdminPostsList.AdminPostsListState;
 }
 
 export const adminReducers: ActionReducerMap<AdminState> = {
-  managePosts: fromManagePosts.managePostsReducer
+  adminPostsList: fromAdminPostsList.adminPostsListReducer
 };

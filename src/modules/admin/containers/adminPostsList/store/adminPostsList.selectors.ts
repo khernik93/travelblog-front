@@ -5,10 +5,10 @@ import { selectAdmin } from '../../../store/admin.selectors';
 
 export const selectAdminSelectedTabId = createSelector(
   selectAdmin,
-  (state: AdminState) => state.managePosts.selectedTabId
+  (state: AdminState) => state.adminPostsList.selectedTabId
 );
 
 export const selectAdminPosts = createSelector(
   selectAdmin,
-  (state: AdminState) => state.managePosts.posts
+  (state: AdminState) => state.adminPostsList.posts
 );

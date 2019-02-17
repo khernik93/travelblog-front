@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AdminMenuComponent { 
 
   routes: any = {
-    managePosts: '/admin/managePosts',
+    managePosts: '/admin/postsList',
     addNewPost: '/admin/addNewPost'
   };
 

@@ -3,7 +3,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'admin-component',
   template: `
-    <adminHeader-component></adminHeader-component>
+    <adminHeader-container></adminHeader-container>
     <div class="d-flex">
       <adminMenu-component></adminMenu-component>
       <div class="content p-4">

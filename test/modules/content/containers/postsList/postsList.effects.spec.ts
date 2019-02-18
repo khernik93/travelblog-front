@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { hot, cold } from 'jasmine-marbles';
 import cloneDeep from 'lodash-es/cloneDeep';
 import { Store } from '@ngrx/store';
+
 import { TabsResponse } from '../../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { PostsListResponse } from '../../../../utils/responses/postsList.response';
@@ -10,9 +11,9 @@ import { PostsListEffects } from '../../../../../src/modules/content/containers/
 import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ContentState } from '../../../../../src/modules/content/store/content.reducers';
-import { PostsListStubs } from './helpers/postsList.stubs';
 import { PostsListService } from '../../../../../src/modules/content/containers/postsList/postsList.service';
 import { MockStore } from '../../../../utils/mocks/mockStore';
+import { ContentStubs } from '../../../../utils/stubs/content.stubs';
 
 import { 
   SetPosts, 
@@ -39,7 +40,7 @@ describe('PostsListEffects', () => {
   beforeEach(() => {
     apiClient = SharedStubs.getApiClientStub();
     store = SharedStubs.getMockStoreStub<ContentState>();
-    postsListService = PostsListStubs.getPostsListServiceStub();
+    postsListService = ContentStubs.postsListService();
 
     TestBed.configureTestingModule({
       providers: [
@@ -77,8 +78,7 @@ describe('PostsListEffects', () => {
     actions.stream = hot('-a', {a: action});
     const response = cold('-a|', { a: ClonedTabsResponse });
     const expected = cold('-(bc)', { b: outcome[0], c: outcome[1] });
-    spyOn(store, 'select').and.callThrough();
-    store.select.and.returnValue(response);
+    spyOn(store, 'select').and.returnValue(response);
     apiClient.getPosts.and.returnValue(response);
     expect(effects.getPostsInitial$).toBeObservable(expected);
   });
@@ -94,8 +94,7 @@ describe('PostsListEffects', () => {
     actions.stream = hot('-a', {a: action});
     const response = cold('-a|', { a: true });
     const expected = cold('--b', { b: outcome });
-    spyOn(store, 'select').and.callThrough();
-    store.select.and.returnValue(response);
+    spyOn(store, 'select').and.returnValue(response);
     expect(effects.tryToGetPostsOnScroll$).toBeObservable(expected);
   });
 
@@ -110,8 +109,7 @@ describe('PostsListEffects', () => {
     actions.stream = hot('-a', {a: action});
     const response = cold('-a|', { a: false });
     const expected = cold('--b', { b: outcome });
-    spyOn(store, 'select').and.callThrough();
-    store.select.and.returnValue(response);
+    spyOn(store, 'select').and.returnValue(response);
     expect(effects.tryToGetPostsOnScroll$).toBeObservable(expected);
   });
 

@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 
 import { MenuComponent } from '../../../../../src/modules/header/components/menu/menu.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
 import { TabsResponse } from '../../../../utils/responses/tabs.response';
-import { MenuState } from '../../containers/menu/helpers/menu.state';
 import { CssHelper } from '../../../../utils/helpers/css';
-import { of } from 'rxjs';
+import { State } from '../../../../utils/state/state';
 
 describe('MenuComponent', () => {
 
@@ -24,8 +24,8 @@ describe('MenuComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuComponent);
     component = fixture.componentInstance;
-    component.tabs$ = of(MenuState.header.menu.tabs);
-    component.selectedTab$ = of(MenuState.header.menu.selectedTab);
+    component.tabs$ = of(State.header.menu.tabs);
+    component.selectedTab$ = of(State.header.menu.selectedTab);
     fixture.detectChanges();
   });
 

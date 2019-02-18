@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { ChangeDetectorRef } from '@angular/core';
 
 import { SwiperComponent } from '../../../../../src/modules/header/components/swiper/swiper.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
 import { SwiperService } from '../../../../../src/modules/header/containers/swiper/swiper.service';
-import { ChangeDetectorRef } from '@angular/core';
-import { SwiperStubs } from '../../containers/swiper/helpers/swiper.stubs';
-import { SwiperState } from '../../containers/swiper/helpers/swiper.state';
+import { HeaderStubs } from '../../../../utils/stubs/header.stubs';
+import { State } from '../../../../utils/state/state';
 
 describe('SwiperComponent', () => {
   
@@ -16,8 +16,7 @@ describe('SwiperComponent', () => {
   let fixture: ComponentFixture<SwiperComponent>;
 
   beforeEach(() => {
-
-    swiperService = SwiperStubs.getSwiperServiceStub();
+    swiperService = HeaderStubs.swiperService();
 
     TestBed.configureTestingModule({
       imports: MODULE_IMPORTS,
@@ -27,7 +26,6 @@ describe('SwiperComponent', () => {
         { provide: SwiperService, useValue: swiperService }
       ]
     }).compileComponents();
-
   });
 
   beforeEach(() => {
@@ -43,7 +41,7 @@ describe('SwiperComponent', () => {
     WHEN a tab is selected
     THEN its photos should be visible
   `, () => {
-    const photos = SwiperState.header.swiper.photos[1];
+    const photos = State.header.swiper.photos[1];
     component.photosForSelectedTab = photos;
     fixture.detectChanges();
     const images = fixture.debugElement.queryAll(By.css('.swiper-wrapper img'));

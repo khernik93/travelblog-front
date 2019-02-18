@@ -52,7 +52,9 @@ export class PostsTableComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$),
         distinctUntilChanged((x, y) => isEqual(x, y))
       )
-      .subscribe(val => this.onTabChangesEmitter.emit(val));
+      .subscribe(val => {
+        this.onTabChangesEmitter.emit(val);
+      });
   }
 
   ngOnDestroy() {

@@ -1,6 +1,6 @@
-import { PostsPaginable } from '../../../src/shared/clients/api.model';
+import { PostsDTO } from '../../../src/shared/clients/api/api.model';
 
-export const PostsListResponse: PostsPaginable = {
+export const PostsListResponse: PostsDTO = {
   "meta":{
     "start":0,
     "end":2,

@@ -3,15 +3,14 @@ import { Store } from '@ngrx/store';
 import { ChangeDetectorRef } from '@angular/core';
 import cloneDeep from 'lodash-es/cloneDeep';
 
-import { SwiperComponent } from '../../../../../src/modules/header/components/swiper/swiper.component';
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
 import { HeaderState } from '../../../../../src/modules/header/store/header.reducers';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
-import { SwiperState } from './helpers/swiper.state';
 import { SwiperService } from '../../../../../src/modules/header/containers/swiper/swiper.service';
-import { SwiperStubs } from './helpers/swiper.stubs';
 import { SwiperContainer } from '../../../../../src/modules/header/containers/swiper/swiper.container';
+import { State } from '../../../../utils/state/state';
+import { HeaderStubs } from '../../../../utils/stubs/header.stubs';
 
 describe('SwiperContainer', () => {
 
@@ -24,7 +23,7 @@ describe('SwiperContainer', () => {
   beforeEach(() => {
 
     store = SharedStubs.getMockStoreStub<HeaderState>();
-    swiperService = SwiperStubs.getSwiperServiceStub();
+    swiperService = HeaderStubs.swiperService();
 
     TestBed.configureTestingModule({
       imports: MODULE_IMPORTS,
@@ -41,7 +40,7 @@ describe('SwiperContainer', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SwiperContainer);
     component = fixture.componentInstance;
-    store.setState(cloneDeep(SwiperState));
+    store.setState(cloneDeep(State));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });

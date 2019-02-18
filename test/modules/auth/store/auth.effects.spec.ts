@@ -11,7 +11,7 @@ import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { AuthEffects } from '../../../../src/modules/auth/store/auth.effects';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { TryToSignIn, SignIn, SignOut, SignInError } from '../../../../src/modules/auth/store/auth.actions';
-import { AuthStubs } from './helpers/auth.stubs';
+import { AuthStubs } from '../../../utils/stubs/auth.stubs';
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { CookieService } from '../../../../src/shared/services/cookie.service';
 import { AppState } from '../../../../src/modules/app/store/app.reducers';
@@ -29,10 +29,10 @@ describe('AuthEffects', () => {
 
   beforeEach(() => {
     apiClient = SharedStubs.getApiClientStub();
-    activatedRoute = AuthStubs.getActivatedRouteStub();
-    router = AuthStubs.getRouterStub();
+    activatedRoute = AuthStubs.activatedRoute();
+    router = AuthStubs.router();
     store = SharedStubs.getMockStoreStub<AppState>();
-    cookieService = AuthStubs.getCookieService();
+    cookieService = AuthStubs.cookieService();
 
     TestBed.configureTestingModule({
       imports: [

@@ -4,14 +4,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
-import { CommentsState } from './helpers/comments.state';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ContentState } from '../../../../../src/modules/content/store/content.reducers';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { GetComments } from '../../../../../src/modules/content/containers/comments/store/comments.actions';
 import { CommentsService } from '../../../../../src/modules/content/containers/comments/comments.service';
-import { CommentsStubs } from './helpers/comments.stubs';
 import { CommentsContainer } from '../../../../../src/modules/content/containers/comments/comments.container';
+import { ContentStubs } from '../../../../utils/stubs/content.stubs';
+import { State } from '../../../../utils/state/state';
 
 describe('CommentsContainer', () => {
 
@@ -23,7 +23,7 @@ describe('CommentsContainer', () => {
 
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<ContentState>()
-    commentsService = CommentsStubs.getCommentsServiceStub();
+    commentsService = ContentStubs.commentsService();
 
     TestBed.configureTestingModule({
       imports: [...MODULE_IMPORTS, RouterTestingModule],
@@ -38,7 +38,7 @@ describe('CommentsContainer', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CommentsContainer);
     component = fixture.componentInstance;
-    store.setState(cloneDeep(CommentsState));
+    store.setState(cloneDeep(State));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
@@ -52,7 +52,7 @@ describe('CommentsContainer', () => {
     THEN GetComments is disptached with current post ID
   `, () => {
     expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(store.dispatch).toHaveBeenCalledWith(new GetComments(CommentsState.content.singlePost.post.id));
+    expect(store.dispatch).toHaveBeenCalledWith(new GetComments(State.content.singlePost.post.id));
   });
 
 });

@@ -9,7 +9,7 @@ import { SetPost, GetPost } from '../../../../../src/modules/content/containers/
 import { SinglePostEffects } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.effects';
 import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
-import { SinglePostStubs } from './helpers/singlePost.stubs';
+import { ContentStubs } from '../../../../utils/stubs/content.stubs';
 
 describe('SinglePostEffects', () => {
 
@@ -47,7 +47,7 @@ describe('SinglePostEffects', () => {
     THEN apiClient.getPost method should be executed
     AND SetPost action should be dispatched with fetched post
   `, () => {
-    const id = SinglePostStubs.postId;
+    const id = ContentStubs.postId;
     const action = new GetPost(id);
     const outcome = new SetPost(ClonedSinglePostResponse);
     actions.stream = hot('-a', {a: action});

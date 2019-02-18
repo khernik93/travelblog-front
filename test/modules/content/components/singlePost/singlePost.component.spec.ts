@@ -6,8 +6,8 @@ import { of } from 'rxjs';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { SinglePostComponent } from '../../../../../src/modules/content/components/singlePost/singlePost.component';
-import { SinglePostState } from './../../containers/singlePost/helpers/singlePost.state';
 import { CommentsContainer } from '../../../../../src/modules/content/containers/comments/comments.container';
+import { State } from '../../../../utils/state/state';
 
 describe('SinglePostComponent', () => {
 
@@ -25,7 +25,7 @@ describe('SinglePostComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SinglePostComponent);
     component = fixture.componentInstance;
-    component.post$ = of(SinglePostState.content.singlePost.post);
+    component.post$ = of(State.content.singlePost.post);
     fixture.detectChanges();
   });
 

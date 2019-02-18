@@ -61,6 +61,13 @@ const testConfig = (function webpackConfig(): WebpackConfig {
         exclude: [EXCLUDE_SOURCE_MAPS],
       },
       {
+        enforce: 'post',
+        test: /\.ts$/,
+        loader: 'istanbul-instrumenter-loader',
+        include: root('src/modules'),
+        exclude: /(node_modules|app\\spec)/,
+      },
+      {
         test: /\.ts$/,
         loaders: [
           '@angularclass/hmr-loader',

@@ -1,12 +1,10 @@
-import { of } from "rxjs";
-
 export class AuthStubs {
 
-  static getRouterStub() {
+  static router() {
     return jasmine.createSpyObj('Router', ['navigateByUrl']);
   }
 
-  static getActivatedRouteStub() {
+  static activatedRoute() {
     return jasmine.createSpyObj('ActivatedRoute', {
       snapshot: {
         queryParams: {}
@@ -14,7 +12,7 @@ export class AuthStubs {
     });
   }
 
-  static getCookieService() {
+  static cookieService() {
     return jasmine.createSpyObj('CookieService', [
       'isCookieSet',
       'removeCookie'

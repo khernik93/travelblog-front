@@ -4,7 +4,7 @@ import { PostsService } from "../../../src/modules/admin/services/posts.service"
 
 export class AdminStubs {
 
-  static postId = State.content.singlePost.post.id;
+  static postId = State.content.singlePost.post.id.toString();
 
   static postsService(): jasmine.SpyObj<PostsService> {
     return jasmine.createSpyObj('PostsService', {

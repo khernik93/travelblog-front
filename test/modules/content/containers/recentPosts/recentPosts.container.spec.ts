@@ -8,9 +8,9 @@ import { RecentPostsComponent } from '../../../../../src/modules/content/compone
 import { ContentState } from '../../../../../src/modules/content/store/content.reducers';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
-import { RecentPostsState } from './helpers/recentPosts.state';
 import { RecentPostsContainer } from '../../../../../src/modules/content/containers/recentPosts/recentPosts.container';
 import { GetRecentPosts } from '../../../../../src/modules/content/containers/recentPosts/store/recentPosts.actions';
+import { State } from '../../../../utils/state/state';
 
 describe('RecentPostsContainer', () => {
 
@@ -37,7 +37,7 @@ describe('RecentPostsContainer', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RecentPostsContainer);
     component = fixture.componentInstance;
-    store.setState(cloneDeep(RecentPostsState));
+    store.setState(cloneDeep(State));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });

@@ -19,6 +19,7 @@ export class MenuEffects {
       switchMap((action: any) => (
         this.store.select(selectTabs)
           .pipe(
+            take(1),
             map((tabs: TabDTO[]) => ({ tabId: action.id, tabs }))
           )
       )),

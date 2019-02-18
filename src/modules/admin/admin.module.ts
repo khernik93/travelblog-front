@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 // Global
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,7 +8,6 @@ import { NgxEditorModule } from 'ngx-editor';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
 
 // Store
 import { adminEffects } from './store/admin.effects';

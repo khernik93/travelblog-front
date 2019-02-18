@@ -57,8 +57,7 @@ describe('MenuEffects', () => {
     actions.stream = hot('-a', {a: action});
     const response = hot('-a|', { a: ClonedTabsResponse });
     const expected = hot('-(b)', { b: outcome });
-    spyOn(store, 'select').and.callThrough();
-    store.select.and.returnValue(response);
+    spyOn(store, 'select').and.returnValue(response);
     expect(effects.selectTabById$).toBeObservable(expected);
   });
 

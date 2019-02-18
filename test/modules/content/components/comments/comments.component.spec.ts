@@ -1,12 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
-import cloneDeep from 'lodash-es/cloneDeep';
+import { of } from 'rxjs';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
-import { CommentsState } from '../../containers/comments/helpers/comments.state';
 import { CommentsComponent } from '../../../../../src/modules/content/components/comments/comments.component';
-import { of } from 'rxjs';
+import { State } from '../../../../utils/state/state';
 
 describe('CommentsComponent', () => {
   
@@ -23,11 +22,8 @@ describe('CommentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CommentsComponent);
     component = fixture.componentInstance;
-  });
-
-  beforeEach(() => {
     spyOn(component.addNewCommentEmitter, 'emit');
-    component.comments$ = of(cloneDeep(CommentsState).content.comments.comments);
+    component.comments$ = of(State.content.comments.comments);
     fixture.detectChanges();
   });
 
@@ -40,7 +36,7 @@ describe('CommentsComponent', () => {
     THEN all comments are visible
   `, () => {
     const comments = fixture.debugElement.queryAll(By.css('.comment'));
-    expect(comments.length).toEqual(CommentsState.content.comments.comments.length);
+    expect(comments.length).toEqual(State.content.comments.comments.length);
   });
 
   it(`

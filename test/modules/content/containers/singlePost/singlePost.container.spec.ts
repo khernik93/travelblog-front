@@ -11,11 +11,11 @@ import { SinglePostComponent } from '../../../../../src/modules/content/componen
 import { ContentState } from '../../../../../src/modules/content/store/content.reducers';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
-import { SinglePostState } from './helpers/singlePost.state';
-import { SinglePostStubs } from './helpers/singlePost.stubs';
 import { GetPost } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.actions';
 import { SinglePostContainer } from '../../../../../src/modules/content/containers/singlePost/singlePost.container';
 import { CommentsContainer } from '../../../../../src/modules/content/containers/comments/comments.container';
+import { ContentStubs } from '../../../../utils/stubs/content.stubs';
+import { State } from '../../../../utils/state/state';
 
 describe('SinglePostContainer', () => {
 
@@ -27,7 +27,7 @@ describe('SinglePostContainer', () => {
   
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<ContentState>();
-    activatedRoute = SinglePostStubs.getActivatedRoute();
+    activatedRoute = ContentStubs.activatedRoute();
 
     TestBed.configureTestingModule({
       imports: [
@@ -46,7 +46,7 @@ describe('SinglePostContainer', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SinglePostContainer);
     component = fixture.componentInstance;
-    store.setState(cloneDeep(SinglePostState));
+    store.setState(cloneDeep(State));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });
@@ -60,7 +60,7 @@ describe('SinglePostContainer', () => {
     THEN GetPost action should be dispatched with initial route post id
   `, () => {
     expect(store.dispatch).toHaveBeenCalledTimes(1);
-    expect(store.dispatch).toHaveBeenCalledWith(new GetPost(SinglePostStubs.postId));
+    expect(store.dispatch).toHaveBeenCalledWith(new GetPost(ContentStubs.postId));
   });
 
   it(`

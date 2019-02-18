@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 
 import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/content/content.module';
 import { RecentPostsComponent } from '../../../../../src/modules/content/components/recentPosts/recentPosts.component';
-import { RecentPostsState } from './../../containers/recentPosts/helpers/recentPosts.state';
-import { of } from 'rxjs';
+import { State } from '../../../../utils/state/state';
 
 describe('RecentPostsComponent', () => {
   
@@ -22,12 +22,9 @@ describe('RecentPostsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RecentPostsComponent);
     component = fixture.componentInstance;
-  });
-
-  beforeEach(() => {
-    component.recentPosts$ = of(RecentPostsState.content.recentPosts.recentPosts);
+    component.recentPosts$ = of(State.content.recentPosts.recentPosts);
     fixture.detectChanges();
-  })
+  });
 
   it('should check if the component is defined', () => {
     expect(component).toBeDefined();
@@ -38,7 +35,7 @@ describe('RecentPostsComponent', () => {
     THEN all recent posts should be displayed properly
   `, () => {
     const postWraps = fixture.debugElement.queryAll(By.css('.post-wrap'));
-    expect(postWraps.length).toEqual(RecentPostsState.content.recentPosts.recentPosts.length);
+    expect(postWraps.length).toEqual(State.content.recentPosts.recentPosts.length);
   });
 
 });

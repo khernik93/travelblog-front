@@ -7,7 +7,7 @@ import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/
 import { HeaderState } from '../../../../../src/modules/header/store/header.reducers';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
-import { MenuState } from './helpers/menu.state';
+import { State } from '../../../../utils/state/state';
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { MenuContainer } from '../../../../../src/modules/header/containers/menu/menu.container';
 
@@ -33,7 +33,7 @@ describe('MenuContainer', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MenuContainer);
     component = fixture.componentInstance;
-    store.setState(cloneDeep(MenuState));
+    store.setState(cloneDeep(State));
     spyOn(store, 'dispatch').and.callThrough();
     fixture.detectChanges();
   });

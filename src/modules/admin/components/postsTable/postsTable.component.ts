@@ -1,8 +1,9 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { takeUntil, filter, distinctUntilChanged } from 'rxjs/operators';
+import isEqual from 'lodash-es/isEqual';
 import { TabDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'postsTable-component',
@@ -12,13 +13,12 @@ import { takeUntil } from 'rxjs/operators';
 export class PostsTableComponent implements OnInit, OnDestroy { 
 
   @Input() tabs$: Observable<TabDTO[]>;
-  @Input() adminSelectedTabId$: Observable<number>;
-  @Input() adminPosts$: Observable<PostContentDTO[]>;
-
+  @Input() selectedTab$: Observable<TabDTO>;
+  @Input() posts$: Observable<PostContentDTO[]>;
+  @Input() loading$: Observable<boolean>;
   @Output('onTabChanges') onTabChangesEmitter = new EventEmitter<string>();
 
   tabsForm: FormGroup;
-
   routes: any = {
     edit: (tabId, postId) => `/admin/editPost/tabId/${tabId}/postId/${postId}`
   };
@@ -27,7 +27,6 @@ export class PostsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.buildTabsForm();
-    this.selectDefaultTabOnAdminSelectedTabIdChanges();
     this.onTabsFormChanges();
   }
 
@@ -35,17 +34,24 @@ export class PostsTableComponent implements OnInit, OnDestroy {
     this.tabsForm = new FormGroup({
       tabId: new FormControl(0, Validators.min(1))
     });
+    this.selectOptionBasedOnSelectedTab();
   }
 
-  private selectDefaultTabOnAdminSelectedTabIdChanges() {
-    this.adminSelectedTabId$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((selectedTabId: number) => this.tabsForm.controls['tabId'].patchValue(selectedTabId));
+  private selectOptionBasedOnSelectedTab() {
+    this.selectedTab$
+      .pipe(
+        takeUntil(this.destroy$), 
+        filter((selectedTab: TabDTO) => !!selectedTab)
+      )
+      .subscribe((selectedTab: TabDTO) => this.tabsForm.controls['tabId'].patchValue(selectedTab.id.toString()));
   }
 
   private onTabsFormChanges() {
     this.tabsForm.valueChanges
-      .pipe(takeUntil(this.destroy$))
+      .pipe(
+        takeUntil(this.destroy$),
+        distinctUntilChanged((x, y) => isEqual(x, y))
+      )
       .subscribe(val => this.onTabChangesEmitter.emit(val));
   }
 

@@ -7,12 +7,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class AdminHeaderComponent {
 
-  @Output('onGoBack') goBackEmitter = new EventEmitter<void>();
   @Output('onSignOut') signOutEmitter = new EventEmitter<void>();
 
-  goBack() {
-    this.goBackEmitter.emit();
-  }
+  routes: any = {
+    home: '/'
+  };
 
   logout() {
     this.signOutEmitter.emit();

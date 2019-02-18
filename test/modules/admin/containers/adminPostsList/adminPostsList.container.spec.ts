@@ -1,40 +1,38 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
+import { RouterTestingModule } from '@angular/router/testing';
 import cloneDeep from 'lodash-es/cloneDeep';
 
 import { HeaderState } from '../../../../../src/modules/header/store/header.reducers';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../../src/modules/admin/admin.module';
-import { AddNewPostContainer } from '../../../../../src/modules/admin/containers/addNewPost/addNewPost.container';
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
-import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
 import { State } from '../../../../utils/state/state';
+import { AdminPostsListContainer } from '../../../../../src/modules/admin/containers/adminPostsList/adminPostsList.container';
+import { ClearPosts, GetPosts } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
 
-describe('AddNewPostContainer', () => {
+describe('AdminPostsListContainer', () => {
 
   let store: MockStore<HeaderState>;
-  let wysiwygService: jasmine.SpyObj<WysiwygService>;
 
-  let component: AddNewPostContainer;
-  let fixture: ComponentFixture<AddNewPostContainer>;
+  let component: AdminPostsListContainer;
+  let fixture: ComponentFixture<AdminPostsListContainer>;
 
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
-    wysiwygService = SharedStubs.getWysiwygServiceStub();
 
     TestBed.configureTestingModule({
-      imports: MODULE_IMPORTS,
+      imports: [...MODULE_IMPORTS, RouterTestingModule],
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: Store, useValue: store },
-        { provide: WysiwygService, useValue: wysiwygService }
+        { provide: Store, useValue: store }
       ]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddNewPostContainer);
+    fixture = TestBed.createComponent(AdminPostsListContainer);
     component = fixture.componentInstance;
     store.setState(cloneDeep(State));
     spyOn(store, 'dispatch').and.callThrough();
@@ -50,6 +48,14 @@ describe('AddNewPostContainer', () => {
     THEN GetTabs action is dispatched
   `, () => {
     expect(store.dispatch).toHaveBeenCalledWith(new GetTabs());
+  });
+
+  it(`
+    WHEN selectedTab changes
+    THEN ClearPosts and GetPosts are dispatched
+  `, () => {
+    expect(store.dispatch).toHaveBeenCalledWith(new ClearPosts());
+    expect(store.dispatch).toHaveBeenCalledWith(new GetPosts(State.header.menu.selectedTab, 0, 9999));
   });
 
 });

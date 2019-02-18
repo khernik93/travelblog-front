@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, delay } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 
 import { TransferHttpService } from '../../services/transferHttp.service';

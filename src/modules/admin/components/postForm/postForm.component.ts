@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { TabDTO, Post, PostContentDTO } from '../../../../shared/clients/api/api.model';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'postForm-component',
@@ -15,15 +15,13 @@ export class PostFormComponent implements OnInit, OnDestroy {
   @Input() post$: Observable<PostContentDTO>;
   @Input() title: string;
   @Input() submitText: string;
+  @Output('onFormSubmit') formSubmitEmitter = new EventEmitter<Post>();
 
   selectedTab: number;
   content: string = ''; // wysiwyg
   postForm: FormGroup;
-  contentInitial$ = new Subject<string>();
+  contentPlaceholder$ = new Subject<string>();
 
-  @Output('onFormSubmit') formSubmitEmitter = new EventEmitter<Post>();
-
-  private postId: number;
   private destroy$ = new Subject();
 
   constructor(
@@ -36,6 +34,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
   private buildPostForm(): void {
     this.postForm = new FormGroup({
+      id: new FormControl(0),
       tabId: new FormControl(0, Validators.min(1)),
       title: new FormControl('', Validators.required),
       tags: new FormControl('', Validators.required)
@@ -48,15 +47,16 @@ export class PostFormComponent implements OnInit, OnDestroy {
   private prefillValues() {
     this.post$
       .pipe(
+        takeUntil(this.destroy$),
         filter((post: PostContentDTO) => !!post)
       )
       .subscribe((post: PostContentDTO) => {
-        this.postId = post.id;
+        this.postForm.controls['id'].patchValue(post.id);
         this.postForm.controls['tabId'].patchValue(post.tab.id);
         this.postForm.controls['title'].patchValue(post.title);
         this.postForm.controls['tags'].patchValue(post.tags.join(','));
-        this.content = post.content;
-        this.contentInitial$.next(post.content);
+        this.synchronizeContent(post.content);
+        this.contentPlaceholder$.next(post.content);
         this.ref.markForCheck();
       });
   }
@@ -66,8 +66,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
   
   submit() {
-    this.formSubmitEmitter.emit({ 
-      id: this.postId,
+    this.formSubmitEmitter.emit({
       ...this.postForm.value,
       tabId: +this.postForm.value.tabId,
       content: this.content 

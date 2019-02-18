@@ -1,63 +1,73 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import isEqual from 'lodash-es/isEqual';
 import { HeaderState } from '../../../header/store/header.reducers';
-import { selectTabs } from '../../../header/containers/menu/store/menu.selectors';
-import { GetTabs } from '../../../header/containers/menu/store/menu.actions';
+import { selectTabs, selectSelectedTab } from '../../../header/containers/menu/store/menu.selectors';
+import { GetTabs, SelectTabById } from '../../../header/containers/menu/store/menu.actions';
 import { TabDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
-import { take, filter } from 'rxjs/operators';
-import { selectAdminSelectedTabId, selectAdminPosts } from './store/adminPostsList.selectors';
-import { GetAdminPosts } from './store/adminPostsList.actions';
-import { AdminState } from '../../store/admin.reducers';
+import { filter, takeUntil, distinctUntilChanged } from 'rxjs/operators';
+import { GetPosts, ClearPosts } from '../../../content/containers/postsList/store/postsList.actions';
+import { selectPosts, selectLoading } from '../../../content/containers/postsList/store/postsList.selectors';
 
 @Component({
   selector: 'adminPostsList-container',
   template: `
     <postsTable-component [tabs$]="tabs$"
-                          [adminSelectedTabId$]="adminSelectedTabId$"
-                          [adminPosts$]="adminPosts$"
+                          [selectedTab$]="selectedTab$"
+                          [posts$]="posts$"
+                          [loading$]="loading$"
                           (onTabChanges)="onTabChanges($event)">
     </postsTable-component>
   `
 })
-export class AdminPostsListContainer implements OnInit {
+export class AdminPostsListContainer implements OnInit, OnDestroy {
 
   tabs$: Observable<TabDTO[]>;
-  adminSelectedTabId$: Observable<number>;
-  adminPosts$: Observable<PostContentDTO[]>;
+  selectedTab$: Observable<TabDTO>;
+  posts$: Observable<PostContentDTO[]>;
+  loading$: Observable<boolean>;
+
+  private destroy$ = new Subject();
 
   constructor(
-    private store: Store<HeaderState | AdminState>
+    private store: Store<HeaderState>
   ) {
     this.tabs$ = this.store.select(selectTabs);
-    this.adminSelectedTabId$ = this.store.select(selectAdminSelectedTabId);
-    this.adminPosts$ = this.store.select(selectAdminPosts);
+    this.selectedTab$ = this.store.select(selectSelectedTab);
+    this.posts$ = this.store.select(selectPosts);
+    this.loading$ = this.store.select(selectLoading);
   }
 
   ngOnInit() {
     this.getTabs();
-    this.getPostsBasedOnSelectedTab();
+    this.watchForSelectedTabChanges();
   }
 
   private getTabs() {
     this.store.dispatch(new GetTabs());
   }
 
-  private getPostsBasedOnSelectedTab() {
-    this.adminSelectedTabId$
+  private watchForSelectedTabChanges() {
+    this.selectedTab$
       .pipe(
-        take(1),
-        filter((selectedTabId: number) => selectedTabId > 0)
+        takeUntil(this.destroy$),
+        filter((selectedTab: TabDTO) => !!selectedTab),
+        distinctUntilChanged((x, y) => isEqual(x, y))
       )
-      .subscribe((selectedTabId: number) => this.getPostsByTabId(selectedTabId));
+      .subscribe((selectedTab: TabDTO) => {
+        this.store.dispatch(new ClearPosts());
+        this.store.dispatch(new GetPosts(selectedTab, 0, 9999));
+      });
   }
 
   onTabChanges(values: any) {
-    this.getPostsByTabId(values.tabId);
+    this.store.dispatch(new SelectTabById(values.tabId));
   }
 
-  private getPostsByTabId(tabId: number) {
-    this.store.dispatch(new GetAdminPosts(tabId));
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

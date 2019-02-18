@@ -20,6 +20,7 @@ export class SharedStubs {
       'getPhotos': of(PhotosResponse),
       'getComments': of(CommentsResponse),
       'addNewPost': of(''),
+      'updatePost': of(''),
       'addComment': of(''),
       'signIn': of('')
     });
@@ -27,6 +28,14 @@ export class SharedStubs {
 
   static getMockStoreStub<T>(): MockStore<T> {
     return new MockStore<T>();
+  }
+
+  static getWysiwygServiceStub() {
+    return jasmine.createSpyObj('WysiwygService', ['config']);
+  }
+
+  static getPreviousRouteServiceStub() {
+    return jasmine.createSpyObj('PreviousRouteService', ['goBack']);
   }
 
 };

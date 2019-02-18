@@ -32,6 +32,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { PreviousRouteService } from '../../shared/services/previousRoute.service';
 import { NotificationContainer } from './containers/notification/notification.container';
 import { LayoutContainer } from './containers/layout/layout.container';
+import { WysiwygService } from '../../shared/components/wysiwyg/wysiwyg.service';
 
 export const MODULE_DECLARATIONS = [
   NotFoundComponent,
@@ -87,6 +88,7 @@ const STORE_IMPORTS = [
     TransferHttpService,
     ApiClient,
     PreviousRouteService,
+    WysiwygService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

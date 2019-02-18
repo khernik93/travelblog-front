@@ -10,7 +10,6 @@ import { StoreModule } from '@ngrx/store';
 
 // Store
 import { adminEffects } from './store/admin.effects';
-import { adminReducers } from './store/admin.reducers';
 
 // Components
 import { AdminComponent } from './admin.component';
@@ -30,7 +29,6 @@ import { AuthModule } from '../auth/auth.module';
 
 // Services
 import { PostsService } from './services/posts.service';
-import { AdminPostsListService } from './containers/adminPostsList/adminPostsList.service';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent,
@@ -59,8 +57,7 @@ const ROUTING_MODULE_IMPORTS = [
 ];
 
 const STORE_IMPORTS = [
-  EffectsModule.forFeature(adminEffects),
-  StoreModule.forFeature('admin', adminReducers)
+  EffectsModule.forFeature(adminEffects)
 ];
 
 @NgModule({
@@ -73,8 +70,7 @@ const STORE_IMPORTS = [
   ],
   exports: [AdminComponent],
   providers: [
-    PostsService,
-    AdminPostsListService
+    PostsService
   ]
 })
 export class AdminModule {

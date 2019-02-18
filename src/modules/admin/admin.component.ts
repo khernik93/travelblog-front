@@ -3,13 +3,12 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 @Component({
   selector: 'admin-component',
   template: `
-    <div class="admin-container">
-      <adminHeader-container></adminHeader-container>
-      <section>
-        <div class="section-inner">
-          <addNewPost-container></addNewPost-container>
-        </div>
-      </section>
+    <adminHeader-container></adminHeader-container>
+    <div class="d-flex">
+      <adminMenu-component></adminMenu-component>
+      <div class="content p-4">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   `,
   styleUrls: ['./admin.component.scss'],

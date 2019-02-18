@@ -6,32 +6,41 @@ import { NgxEditorModule } from 'ngx-editor';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
 
 // Store
 import { adminEffects } from './store/admin.effects';
 
 // Components
 import { AdminComponent } from './admin.component';
-import { AddNewPostComponent } from './components/addNewPost/addNewPost.component';
 import { WysiwygComponent } from '../../shared/components/wysiwyg/wysiwyg.component';
 import { AdminHeaderComponent } from './components/adminHeader/adminHeader.component';
+import { AddNewPostContainer } from './containers/addNewPost/addNewPost.container';
+import { AdminHeaderContainer } from './containers/adminHeader/adminHeader.container';
+import { AdminMenuComponent } from './components/adminMenu/adminMenu.component';
+import { PostsTableComponent } from './components/postsTable/postsTable.component';
+import { PostFormComponent } from './components/postForm/postForm.component';
+import { EditPostContainer } from './containers/editPost/editPost.container';
+import { AdminPostsListContainer } from './containers/adminPostsList/adminPostsList.container';
 
 // Modules
 import { AdminRoutingModule } from './routing/adminRouting.module';
 import { AuthModule } from '../auth/auth.module';
 
 // Services
-import { AddNewPostService } from './containers/addNewPost/addNewPost.service';
-import { AddNewPostContainer } from './containers/addNewPost/addNewPost.container';
-import { AdminHeaderContainer } from './containers/adminHeader/adminHeader.component';
+import { PostsService } from './services/posts.service';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent,
   AddNewPostContainer,
-  AddNewPostComponent,
   WysiwygComponent,
   AdminHeaderContainer,
-  AdminHeaderComponent
+  AdminHeaderComponent,
+  AdminMenuComponent,
+  AdminPostsListContainer,
+  PostsTableComponent,
+  PostFormComponent,
+  EditPostContainer
 ];
 
 export const MODULE_IMPORTS = [
@@ -61,7 +70,7 @@ const STORE_IMPORTS = [
   ],
   exports: [AdminComponent],
   providers: [
-    AddNewPostService
+    PostsService
   ]
 })
 export class AdminModule {

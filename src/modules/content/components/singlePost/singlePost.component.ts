@@ -4,7 +4,7 @@ import { PostContentDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'singlePost-component',
-  styleUrls: ['../postsList/postsList.component.scss', './singlePost.component.scss'],
+  styleUrls: ['../postsList/postsList.component.scss'],
   templateUrl: './singlePost.component.html',
   encapsulation: ViewEncapsulation.None
 })

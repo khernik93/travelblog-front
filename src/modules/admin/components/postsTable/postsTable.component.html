@@ -1,0 +1,49 @@
+<br>
+<h2 class="mb-4">Manage posts</h2>
+<div class="card mb-4">
+  <div class="card-body">
+
+    <div class="row card-header-custom">
+      <form [formGroup]="tabsForm" class="col-md-4">
+        <label for="tabId">Tab</label>
+        <select formControlName="tabId" class="form-control" id="tabId">
+          <option value="0" selected disabled>-- choose tab --</option>
+          <option *ngFor="let tab of tabs$ | async" [value]="tab.id">{{ tab.name }}</option>
+        </select>
+      </form>
+    </div>
+
+    <div class="ajax-loader" *ngIf="loading$ | async"></div>
+    <div *ngIf="!(loading$ | async)">
+      <table id="example" class="table table-hover" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Created at</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="(posts$ | async) as posts">
+          <tr *ngFor="let post of posts" class="post-row">
+            <td>{{ post.title }}</td>
+            <td>{{ post.createdAt | date:'medium' }}</td>
+            <td *ngIf="(selectedTab$ | async) as selectedTab">
+              <a href="#" 
+                [routerLink]="routes.edit(selectedTab.id, post.id)"
+                class="btn btn-icon btn-pill btn-primary" 
+                data-toggle="tooltip" 
+                title="Edit">
+                <i class="fa fa-fw fa-edit"></i></a>
+              <a href="#" 
+                class="btn btn-icon btn-pill btn-danger" 
+                data-toggle="tooltip" 
+                title="Delete">
+                <i class="fa fa-fw fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

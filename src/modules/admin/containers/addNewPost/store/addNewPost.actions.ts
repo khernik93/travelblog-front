@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Post } from '../addNewPost.model';
+import { Post } from '../../../../../shared/clients/api/api.model';
 
 export enum AddNewPostActionTypes {
   AddNewPost = '[AddNewPost] Add new post',

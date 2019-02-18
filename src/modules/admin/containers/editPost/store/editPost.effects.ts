@@ -1,35 +1,40 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { map, exhaustMap, catchError } from 'rxjs/operators';
+import { exhaustMap, catchError, map } from 'rxjs/operators';
 import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
+
+import { 
+  EditPostSuccess,
+  EditPostError,
+  EditPostActionTypes
+} from './editPost.actions';
 import { SetSuccess } from '../../../../app/containers/notification/store/notification.actions';
-import { AddNewPostActionTypes, AddNewPostSuccess, AddNewPostError } from './addNewPost.actions';
 import { PostsService } from '../../../services/posts.service';
 
 @Injectable()
-export class AddNewPostEffects {
+export class EditPostEffects {
 
   @Effect()
-  addNewPost$: Observable<any> = this.actions$
+  editPost$: Observable<any> = this.actions$
     .pipe(
-      ofType(AddNewPostActionTypes.AddNewPost),
+      ofType(EditPostActionTypes.EditPost),
       exhaustMap((action: any) => this.postsService.transformPostIntoPostContentDTO(action.post)),
       exhaustMap((postContentDTO: PostContentDTO) => (
-        this.apiClient.addNewPost(postContentDTO)
+        this.apiClient.updatePost(postContentDTO)
           .pipe(
-            map(() => new AddNewPostSuccess()),
-            catchError(() => of(new AddNewPostError()))
+            map(() => new EditPostSuccess()),
+            catchError(() => of(new EditPostError()))
           )
       ))
     );
 
   @Effect()
-  addNewPostSuccess$: Observable<any> = this.actions$
+  editPostSuccess$: Observable<any> = this.actions$
     .pipe(
-      ofType(AddNewPostActionTypes.AddNewPostSuccess),
-      map(() => new SetSuccess("The post was added successfully!"))
+      ofType(EditPostActionTypes.EditPostSuccess),
+      map(() => new SetSuccess('Post edited successfully!'))
     );
 
   constructor(

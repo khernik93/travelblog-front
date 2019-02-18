@@ -1,4 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { WysiwygService } from './wysiwyg.service';
 
 @Component({
   selector: 'wysiwyg-component',
@@ -10,40 +13,40 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
     ></app-ngx-editor>
   `
 })
-export class WysiwygComponent implements OnInit {
+export class WysiwygComponent implements OnInit, OnDestroy {
 
-  editorConfig: any;
-  content: string;
   @Output() onContentChanged = new EventEmitter<string>();
   @Input() placeholder: string = '';
+  @Input() placeholder$: Observable<string>;
 
-  constructor() {
-    //nothing here :-(
-  }
+  editorConfig = this.wysiwygService.config;
+  content: string;
+
+  private destroy$ = new Subject();
+
+  constructor(
+    private wysiwygService: WysiwygService
+  ) { }
 
   ngOnInit() {
-    this.editorConfig = EDITOR_CONFIG;
+    if (this.placeholder$) {
+      this.loadPlaceholder();
+    }
+  }
+
+  private loadPlaceholder() {
+    this.placeholder$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(content => this.content = content);
   }
 
   onChange() {
     this.onContentChanged.emit(this.content);
   }
 
-}
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
-const EDITOR_CONFIG = {
-  "editable": true,
-  "spellcheck": true,
-  "height": "300px",
-  "minHeight": "0",
-  "enableToolbar": true,
-  "showToolbar": true,
-  "imageEndPoint": "",
-  "toolbar": [
-      ["bold", "italic", "underline", "strikeThrough"],
-      ["fontName", "fontSize", "color"],
-      ["justifyLeft", "justifyCenter", "justifyRight"],
-      ["paragraph", "blockquote", "removeBlockquote", "horizontalLine", "orderedList", "unorderedList"],
-      ["link", "unlink", "image"]
-  ]
-};
+}

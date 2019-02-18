@@ -1,17 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { NgxEditorModule } from 'ngx-editor';
 import { HttpClientModule } from '@angular/common/http'; 
+import { FormsModule } from '@angular/forms';
 
 import { WysiwygComponent } from '../../../src/shared/components/wysiwyg/wysiwyg.component';
-import { FormsModule } from '@angular/forms';
+import { WysiwygService } from '../../../src/shared/components/wysiwyg/wysiwyg.service';
+import { SharedStubs } from '../../utils/stubs/sharedStubs';
 
 describe('WysiwygComponent', () => {
 
   let component: WysiwygComponent;
   let fixture: ComponentFixture<WysiwygComponent>;
+  let wysiwygService: jasmine.SpyObj<WysiwygService>;
 
   beforeEach(() => {
+    wysiwygService = SharedStubs.getWysiwygServiceStub();
     TestBed.configureTestingModule({
       imports: [
         NgxEditorModule, 
@@ -19,7 +22,9 @@ describe('WysiwygComponent', () => {
         HttpClientModule
       ],
       declarations: [WysiwygComponent],
-      providers: []
+      providers: [
+        { provide: WysiwygService, useValue: wysiwygService }
+      ]
     }).compileComponents();
   });
 

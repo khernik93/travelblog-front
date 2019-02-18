@@ -12,7 +12,6 @@ import { syncReducers } from './store/app.reducers';
 // Components
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { AdminLayoutComponent } from './components/adminLayout/adminLayout.component';
 import { NotFoundComponent } from './components/notFound/notFound.component';
 import { NotificationComponent } from './components/notification/notification.component';
 
@@ -33,6 +32,7 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { PreviousRouteService } from '../../shared/services/previousRoute.service';
 import { NotificationContainer } from './containers/notification/notification.container';
 import { LayoutContainer } from './containers/layout/layout.container';
+import { WysiwygService } from '../../shared/components/wysiwyg/wysiwyg.service';
 
 export const MODULE_DECLARATIONS = [
   NotFoundComponent,
@@ -43,8 +43,7 @@ export const MODULE_DECLARATIONS = [
 const LAYOUT_MODULE_DECLARATIONS = [
   AppComponent,
   LayoutContainer,
-  LayoutComponent,
-  AdminLayoutComponent
+  LayoutComponent
 ];
 
 export const MODULE_IMPORTS = [
@@ -89,6 +88,7 @@ const STORE_IMPORTS = [
     TransferHttpService,
     ApiClient,
     PreviousRouteService,
+    WysiwygService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

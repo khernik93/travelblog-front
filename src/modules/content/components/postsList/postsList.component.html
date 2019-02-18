@@ -28,7 +28,7 @@
       </div>
       <br><br>
       <div class="content-section read-more" *ngIf="(selectedTab$ | async) as selectedTab">
-        <a [routerLink]="routes.singlePost(selectedTab$.id, post.id)">read more</a>
+        <a [routerLink]="routes.singlePost(selectedTab.id, post.id)">read more</a>
       </div>
       <br><br><br><Br>
       <div class="content-section" *ngIf="i !== posts.length - 1">

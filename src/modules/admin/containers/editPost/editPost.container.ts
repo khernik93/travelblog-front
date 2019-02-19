@@ -7,9 +7,9 @@ import { GetTabs } from '../../../header/containers/menu/store/menu.actions';
 import { TabDTO, Post, PostContentDTO } from '../../../../shared/clients/api/api.model';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { EditPost } from './store/editPost.actions';
 import { GetPost } from '../../../content/containers/singlePost/store/singlePost.actions';
 import { selectPost } from '../../../content/containers/singlePost/store/singlePost.selectors';
+import { EditPost } from '../../../content/containers/postsList/store/postsList.actions';
 
 @Component({
   selector: 'editPost-container',

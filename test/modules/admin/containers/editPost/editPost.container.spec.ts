@@ -14,6 +14,7 @@ import { AdminStubs } from '../../../../utils/stubs/admin.stubs';
 import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { GetPost } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.actions';
+import { EditPost } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
 
 describe('EditPostContainer', () => {
 
@@ -64,6 +65,15 @@ describe('EditPostContainer', () => {
     THEN GetPost action is dispatched
   `, () => {
     expect(store.dispatch).toHaveBeenCalledWith(new GetPost(AdminStubs.postId));
+  });
+
+  it(`
+    WHEN editPost is called
+    THEN EditPost is dispatched
+  `, () => {
+    component.editPost(null);
+    fixture.detectChanges();
+    expect(store.dispatch).toHaveBeenCalledWith(new EditPost(null));
   });
 
 });

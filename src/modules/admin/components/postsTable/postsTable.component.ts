@@ -17,6 +17,7 @@ export class PostsTableComponent implements OnInit, OnDestroy {
   @Input() posts$: Observable<PostContentDTO[]>;
   @Input() loading$: Observable<boolean>;
   @Output('onTabChanges') onTabChangesEmitter = new EventEmitter<string>();
+  @Output('onDeletePost') onDeletePostEmitter = new EventEmitter<number>();
 
   tabsForm: FormGroup;
   routes: any = {
@@ -43,7 +44,9 @@ export class PostsTableComponent implements OnInit, OnDestroy {
         takeUntil(this.destroy$), 
         filter((selectedTab: TabDTO) => !!selectedTab)
       )
-      .subscribe((selectedTab: TabDTO) => this.tabsForm.controls['tabId'].patchValue(selectedTab.id.toString()));
+      .subscribe((selectedTab: TabDTO) => {
+        this.tabsForm.controls['tabId'].patchValue(selectedTab.id.toString());
+      });
   }
 
   private onTabsFormChanges() {
@@ -55,6 +58,10 @@ export class PostsTableComponent implements OnInit, OnDestroy {
       .subscribe(val => {
         this.onTabChangesEmitter.emit(val);
       });
+  }
+
+  deletePost(postId: number) {
+    this.onDeletePostEmitter.emit(postId);
   }
 
   ngOnDestroy() {

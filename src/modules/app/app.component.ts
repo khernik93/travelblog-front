@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { PreviousRouteService } from '../../shared/services/previousRoute.service';
 

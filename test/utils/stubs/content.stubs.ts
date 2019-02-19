@@ -14,7 +14,8 @@ export class ContentStubs {
     const start = 0, end = 2;
     const spy = jasmine.createSpyObj('PostsListService', {
       getNextStart: start,
-      getNextEnd: end
+      getNextEnd: end,
+      transformPostIntoPostContentDTO: () => ({})
     });
 
     spy.DEFAULT_START = start;

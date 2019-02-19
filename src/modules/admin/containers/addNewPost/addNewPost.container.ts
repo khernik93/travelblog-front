@@ -5,7 +5,7 @@ import { HeaderState } from '../../../header/store/header.reducers';
 import { selectTabs } from '../../../header/containers/menu/store/menu.selectors';
 import { GetTabs } from '../../../header/containers/menu/store/menu.actions';
 import { TabDTO, Post } from '../../../../shared/clients/api/api.model';
-import { AddNewPost } from './store/addNewPost.actions';
+import { AddNewPost } from '../../../content/containers/postsList/store/postsList.actions';
 
 @Component({
   selector: 'addNewPost-container',

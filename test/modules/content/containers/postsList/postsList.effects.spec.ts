@@ -14,6 +14,7 @@ import { ContentState } from '../../../../../src/modules/content/store/content.r
 import { PostsListService } from '../../../../../src/modules/content/containers/postsList/postsList.service';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { ContentStubs } from '../../../../utils/stubs/content.stubs';
+import { tab, post, postContentDTO } from '../../../../utils/data/post';
 
 import { 
   SetPosts, 
@@ -23,8 +24,15 @@ import {
   GetPostsOnScroll, 
   TryToGetPostsOnScroll,
   ClearPosts,
-  GetPostsInitial
+  GetPostsInitial,
+  AddNewPost,
+  AddNewPostSuccess,
+  EditPost,
+  EditPostSuccess,
+  DeletePost,
+  DeletePostSuccess
 } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
+import { Post } from '../../../../../src/shared/clients/api/api.model';
 
 describe('PostsListEffects', () => {
 
@@ -36,6 +44,7 @@ describe('PostsListEffects', () => {
   let effects: PostsListEffects;
   let ClonedTabsResponse: typeof TabsResponse;
   let ClonedPostsListResponse: typeof PostsListResponse;
+  let ClonedPost: Post;
 
   beforeEach(() => {
     apiClient = SharedStubs.getApiClientStub();
@@ -59,6 +68,7 @@ describe('PostsListEffects', () => {
   beforeEach(() => {
     ClonedPostsListResponse = cloneDeep(PostsListResponse);
     ClonedTabsResponse = cloneDeep(TabsResponse);
+    ClonedPost = cloneDeep(post);
   });
 
   it('should be created', () => {
@@ -152,6 +162,49 @@ describe('PostsListEffects', () => {
     const expected = cold('--b', { b: outcome });
     apiClient.getPosts.and.returnValue(errorResponse);
     expect(effects.getPosts$).toBeObservable(expected);
+  });
+
+  it(`
+    WHEN AddNewPost action is dispatched
+    THEN AddNewPostSuccess action is dispatched
+  `, () => {
+    const action = new AddNewPost(ClonedPost);
+    const outcome = new AddNewPostSuccess();
+    actions.stream = hot('-a', {a: action});
+    const selectResponse = hot('-a', { a: ClonedTabsResponse } );
+    const apiResponse = cold('--b|', { b: null });
+    const expected = cold('---c', { c: outcome });
+    spyOn(store, 'select').and.returnValue(selectResponse);
+    apiClient.addNewPost.and.returnValue(apiResponse);
+    expect(effects.addNewPost$).toBeObservable(expected);
+  });
+
+  it(`
+    WHEN EditPost action is dispatched
+    THEN EditPostSuccess action is dispatched
+  `, () => {
+    const action = new EditPost(ClonedPost);
+    const outcome = new EditPostSuccess();
+    actions.stream = hot('-a', {a: action});
+    const selectResponse = hot('-a', { a: ClonedTabsResponse });
+    const apiResponse = cold('--b|', { b: null });
+    const expected = cold('---c', { c: outcome });
+    spyOn(store, 'select').and.returnValue(selectResponse);
+    apiClient.updatePost.and.returnValue(apiResponse);
+    expect(effects.editPost$).toBeObservable(expected);
+  });
+
+  it(`
+    WHEN DeletePost action is dispatched
+    THEN DeletePostSuccess action is dispatched
+  `, () => {
+    const action = new DeletePost(null);
+    const outcome = new DeletePostSuccess();
+    actions.stream = hot('-a', {a: action});
+    const apiResponse = cold('-b|', { b: null });
+    const expected = cold('--c', { c: outcome });
+    apiClient.deletePost.and.returnValue(apiResponse);
+    expect(effects.deletePost$).toBeObservable(expected);
   });
 
 });

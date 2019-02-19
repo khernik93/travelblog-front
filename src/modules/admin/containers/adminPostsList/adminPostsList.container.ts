@@ -7,7 +7,7 @@ import { selectTabs, selectSelectedTab } from '../../../header/containers/menu/s
 import { GetTabs, SelectTabById, SelectTab } from '../../../header/containers/menu/store/menu.actions';
 import { TabDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
 import { filter, takeUntil, distinctUntilChanged } from 'rxjs/operators';
-import { GetPosts, ClearPosts } from '../../../content/containers/postsList/store/postsList.actions';
+import { GetPosts, ClearPosts, DeletePost } from '../../../content/containers/postsList/store/postsList.actions';
 import { selectPosts, selectLoading } from '../../../content/containers/postsList/store/postsList.selectors';
 
 @Component({
@@ -17,7 +17,8 @@ import { selectPosts, selectLoading } from '../../../content/containers/postsLis
                           [selectedTab$]="selectedTab$"
                           [posts$]="posts$"
                           [loading$]="loading$"
-                          (onTabChanges)="onTabChanges($event)">
+                          (onTabChanges)="tabChanges($event)"
+                          (onDeletePost)="deletePost($event)">
     </postsTable-component>
   `
 })
@@ -40,8 +41,14 @@ export class AdminPostsListContainer implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.cleanUp();
     this.getTabs();
     this.watchForSelectedTabChanges();
+  }
+
+  private cleanUp() {
+    this.store.dispatch(new SelectTab(null));
+    this.store.dispatch(new ClearPosts());
   }
 
   private getTabs() {
@@ -61,8 +68,12 @@ export class AdminPostsListContainer implements OnInit, OnDestroy {
       });
   }
 
-  onTabChanges(values: any) {
+  tabChanges(values: any) {
     this.store.dispatch(new SelectTabById(values.tabId));
+  }
+
+  deletePost(postId: number) {
+    this.store.dispatch(new DeletePost(postId));
   }
 
   ngOnDestroy() {

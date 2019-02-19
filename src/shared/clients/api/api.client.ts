@@ -21,6 +21,7 @@ const ROUTES: any = {
   photos: '/swiper',
   addNewPost: '/post',
   updatePost: '/post',
+  deletePost: '/post',
   signIn: '/auth/signIn'
 };
 
@@ -120,6 +121,15 @@ export class ApiClient {
     const headers = this.headers
       .append('Authorization', this.cookieService.getCookie('SESSION_ID'));
     return this.transferHttpService.put(url, post, {
+      headers: headers
+    });
+  }
+
+  deletePost(postId: number): Observable<void> {
+    const url = this.prepareUrl(ROUTES.deletePost);
+    const headers = this.headers
+      .append('Authorization', this.cookieService.getCookie('SESSION_ID'));
+    return this.transferHttpService.delete(`${url}/${postId}`, {
       headers: headers
     });
   }

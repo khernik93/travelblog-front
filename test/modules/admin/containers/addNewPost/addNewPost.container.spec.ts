@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import cloneDeep from 'lodash-es/cloneDeep';
+import { By } from '@angular/platform-browser';
 
 import { HeaderState } from '../../../../../src/modules/header/store/header.reducers';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
@@ -10,6 +11,7 @@ import { AddNewPostContainer } from '../../../../../src/modules/admin/containers
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
 import { State } from '../../../../utils/state/state';
+import { AddNewPost } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
 
 describe('AddNewPostContainer', () => {
 
@@ -50,6 +52,15 @@ describe('AddNewPostContainer', () => {
     THEN GetTabs action is dispatched
   `, () => {
     expect(store.dispatch).toHaveBeenCalledWith(new GetTabs());
+  });
+
+  it(`
+    WHEN addNewPost is called
+    THEN AddNewPost is dispatched
+  `, () => {
+    component.addNewPost(null);
+    fixture.detectChanges();
+    expect(store.dispatch).toHaveBeenCalledWith(new AddNewPost(null));
   });
 
 });

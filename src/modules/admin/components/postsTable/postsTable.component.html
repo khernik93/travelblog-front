@@ -34,9 +34,11 @@
                 data-toggle="tooltip" 
                 title="Edit">
                 <i class="fa fa-fw fa-edit"></i></a>
-              <a href="#" 
-                class="btn btn-icon btn-pill btn-danger" 
+              <a href="#"
+                [routerLink]=""
+                class="btn btn-icon btn-pill btn-danger btn-delete"
                 data-toggle="tooltip" 
+                (click)="deletePost(post.id)"
                 title="Delete">
                 <i class="fa fa-fw fa-trash"></i></a>
             </td>

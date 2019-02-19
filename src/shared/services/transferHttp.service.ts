@@ -41,4 +41,11 @@ export class TransferHttpService {
     return this.httpClient.put(url, body, options);
   }
 
+  /**
+   * Performs a request with `delete` http method.
+   */
+  delete(url: string, options?: Options): Observable<any> {
+    return this.httpClient.delete(url, options);
+  }
+
 }

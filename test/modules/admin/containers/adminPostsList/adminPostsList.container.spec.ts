@@ -7,10 +7,10 @@ import { HeaderState } from '../../../../../src/modules/header/store/header.redu
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../../src/modules/admin/admin.module';
-import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
+import { GetTabs, SelectTabById } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { State } from '../../../../utils/state/state';
 import { AdminPostsListContainer } from '../../../../../src/modules/admin/containers/adminPostsList/adminPostsList.container';
-import { ClearPosts, GetPosts } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
+import { ClearPosts, GetPosts, DeletePost } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
 
 describe('AdminPostsListContainer', () => {
 
@@ -56,6 +56,25 @@ describe('AdminPostsListContainer', () => {
   `, () => {
     expect(store.dispatch).toHaveBeenCalledWith(new ClearPosts());
     expect(store.dispatch).toHaveBeenCalledWith(new GetPosts(State.header.menu.selectedTab, 0, 9999));
+  });
+
+  it(`
+    WHEN tabChanges is called
+    THEN SelectTabById is dispatched
+  `, () => {
+    const values = {tabId: 2};
+    component.tabChanges(values);
+    fixture.detectChanges();
+    expect(store.dispatch).toHaveBeenCalledWith(new SelectTabById(values.tabId));
+  });
+
+  it(`
+    WHEN deletePost is called
+    THEN DeletePost is dispatched
+  `, () => {
+    component.deletePost(null);
+    fixture.detectChanges();
+    expect(store.dispatch).toHaveBeenCalledWith(new DeletePost(null));
   });
 
 });

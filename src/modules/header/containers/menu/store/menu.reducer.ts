@@ -17,7 +17,6 @@ export function menuReducer (state = initialState, action: MenuActions): MenuSta
   switch (action.type) {
 
     case MenuActionTypes.SelectTab: {
-      console.log(action.selectedTab);
       return { ...state, selectedTab: action.selectedTab };
     }
 

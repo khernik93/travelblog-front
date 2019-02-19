@@ -11,7 +11,7 @@ require('zone.js/dist/jasmine-patch');
 require('zone.js/dist/async-test');
 require('zone.js/dist/fake-async-test');
 
-var appContext = require.context('../test', true, /\.ts/);
+var appContext = require.context('../test/modules', true, /.*?(app|admin|auth|content|header).*?\.ts/);
 appContext.keys().forEach(appContext);
 
 var testing = require('@angular/core/testing');

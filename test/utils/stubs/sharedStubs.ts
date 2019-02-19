@@ -21,6 +21,7 @@ export class SharedStubs {
       'getComments': of(CommentsResponse),
       'addNewPost': of(''),
       'updatePost': of(''),
+      'deletePost': of(''),
       'addComment': of(''),
       'signIn': of('')
     });

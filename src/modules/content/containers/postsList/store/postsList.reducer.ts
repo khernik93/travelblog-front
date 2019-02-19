@@ -43,6 +43,10 @@ export function postsListReducer(state = initialState, action: PostsListActions)
       return { ...state, loading: false, initialized: true }
     }
 
+    case PostsListActionTypes.DeletePost: {
+      return { ...state, posts: state.posts.filter(post => post.id !== action.id )}
+    }
+
     default: {
       return state;
     }

@@ -8,6 +8,7 @@ import { PostFormComponent } from '../../../../../src/modules/admin/components/p
 import { State } from '../../../../utils/state/state';
 import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import { ChangeDetectorRef } from '@angular/core';
 
 describe('PostFormComponent', () => {
 
@@ -21,6 +22,7 @@ describe('PostFormComponent', () => {
       imports: [...MODULE_IMPORTS, RouterTestingModule],
       declarations: MODULE_DECLARATIONS,
       providers: [
+        { provide: ChangeDetectorRef },
         { provide: WysiwygService, useValue: wysiwygService }
       ]
     }).compileComponents();
@@ -77,6 +79,36 @@ describe('PostFormComponent', () => {
       title: State.content.singlePost.post.title,
       tags: State.content.singlePost.post.tags.join(','),
       content: component.content
+    });
+  });
+
+  it(`
+    WHEN the form is submitted with null values
+    THEN the event is emitted with correct values
+    AND with no ID
+  `, () => {
+    const formValues = {
+      tabId: '1',
+      title: 'title',
+      tags: 'tag1,tag2',
+      content: 'content'
+    };
+
+    fixture.detectChanges();
+    component.postForm.controls.tabId.setValue(formValues.tabId);
+    component.postForm.controls.title.setValue(formValues.title);
+    component.postForm.controls.tags.setValue(formValues.tags);
+    component.content = formValues.content;
+
+    fixture.detectChanges();
+    const button = fixture.debugElement.query(By.css('#submit'));
+    button.triggerEventHandler('click', null);
+
+    expect(component.formSubmitEmitter.emit).toHaveBeenCalledWith({
+      tabId: +formValues.tabId,
+      title: formValues.title,
+      tags: formValues.tags,
+      content: formValues.content
     });
   });
 

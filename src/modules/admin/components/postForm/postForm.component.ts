@@ -34,7 +34,7 @@ export class PostFormComponent implements OnInit, OnDestroy {
 
   private buildPostForm(): void {
     this.postForm = new FormGroup({
-      id: new FormControl(0),
+      id: new FormControl(null),
       tabId: new FormControl(0, Validators.min(1)),
       title: new FormControl('', Validators.required),
       tags: new FormControl('', Validators.required)
@@ -66,11 +66,21 @@ export class PostFormComponent implements OnInit, OnDestroy {
   }
   
   submit() {
+    this.sanitizePostFormValues();
     this.formSubmitEmitter.emit({
       ...this.postForm.value,
       tabId: +this.postForm.value.tabId,
       content: this.content 
     });
+  }
+
+  private sanitizePostFormValues() {
+    const v = this.postForm.value;
+    for (let k in v) {
+      if (v[k] === null || v[k] === undefined) {
+        delete this.postForm.value[k];
+      }
+    }
   }
 
   isInvalid(control: string): boolean {

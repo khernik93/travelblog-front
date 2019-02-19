@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { routerReducer } from '@ngrx/router-store';
 import * as fromRouter from '@ngrx/router-store';
 import { Params } from '@angular/router';

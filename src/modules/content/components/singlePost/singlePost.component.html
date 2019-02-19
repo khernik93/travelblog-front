@@ -1,4 +1,4 @@
-<section>
+<section id="posts-list">
   <div class="post-wrap" *ngIf="post$ | async">
     <div class="content-section posted-date">
       <h4>{{ (post$ | async).createdAt | date:'medium' }}</h4>
@@ -15,7 +15,7 @@
       <!-- post content HTML -->
     </div>
     <div class="content-section entry-comments">
-      <comments-component></comments-component>
+      <comments-container></comments-container>
     </div>
     <br><br><br><br>
   </div>

@@ -23,23 +23,34 @@ import { LineBreakComponent } from '../../shared/components/lineBreak/lineBreak.
 import { SafeHtmlPipe } from '../app/pipes/safeHtml.pipe';
 
 // Services
-import { PostsListService } from './components/postsList/postsList.service';
-import { SwiperService } from '../header/components/swiper/swiper.service';
+import { PostsListService } from './containers/postsList/postsList.service';
+import { SwiperService } from '../header/containers/swiper/swiper.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommentsService } from './containers/comments/comments.service';
+import { PostsListContainer } from './containers/postsList/postsList.container';
+import { RecentPostsContainer } from './containers/recentPosts/recentPosts.container';
+import { SinglePostContainer } from './containers/singlePost/singlePost.container';
+import { CommentsContainer } from './containers/comments/comments.container';
 
 export const MODULE_DECLARATIONS = [
   ContentComponent,
+  PostsListContainer,
   PostsListComponent,
+  RecentPostsContainer,
   RecentPostsComponent,
   SelfieComponent,
+  SinglePostContainer,
   SinglePostComponent,
-  CommentsComponent,
   LineBreakComponent,
-  SafeHtmlPipe
+  SafeHtmlPipe,
+  CommentsContainer,
+  CommentsComponent
 ];
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  InfiniteScrollModule
+  InfiniteScrollModule,
+  ReactiveFormsModule
 ];
 
 const ROUTING_MODULE_IMPORTS = [
@@ -53,7 +64,8 @@ const STORE_IMPORTS = [
 
 const MODULE_PROVIDERS = [
   PostsListService,
-  SwiperService
+  SwiperService,
+  CommentsService
 ];
 
 @NgModule({

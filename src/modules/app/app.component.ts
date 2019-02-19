@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+/* istanbul ignore file */
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { PreviousRouteService } from '../../shared/services/previousRoute.service';
 
 @Component({
   selector: 'app',
   styleUrls: [],
-  templateUrl: './app.component.html'
+  template: `
+    <router-outlet></router-outlet>
+    <notification-container></notification-container>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent {
 

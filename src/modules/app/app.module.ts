@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 // Global
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +13,6 @@ import { syncReducers } from './store/app.reducers';
 // Components
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './components/layout/layout.component';
-import { AdminLayoutComponent } from './components/adminLayout/adminLayout.component';
 import { NotFoundComponent } from './components/notFound/notFound.component';
 import { NotificationComponent } from './components/notification/notification.component';
 
@@ -31,16 +31,20 @@ import { TransferHttpService } from '../../shared/services/transferHttp.service'
 import { ApiClient } from '../../shared/clients/api/api.client';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { PreviousRouteService } from '../../shared/services/previousRoute.service';
+import { NotificationContainer } from './containers/notification/notification.container';
+import { LayoutContainer } from './containers/layout/layout.container';
+import { WysiwygService } from '../../shared/components/wysiwyg/wysiwyg.service';
 
 export const MODULE_DECLARATIONS = [
   NotFoundComponent,
+  NotificationContainer,
   NotificationComponent
 ];
 
 const LAYOUT_MODULE_DECLARATIONS = [
   AppComponent,
-  LayoutComponent,
-  AdminLayoutComponent
+  LayoutContainer,
+  LayoutComponent
 ];
 
 export const MODULE_IMPORTS = [
@@ -85,6 +89,7 @@ const STORE_IMPORTS = [
     TransferHttpService,
     ApiClient,
     PreviousRouteService,
+    WysiwygService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

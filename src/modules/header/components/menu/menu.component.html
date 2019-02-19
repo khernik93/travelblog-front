@@ -1,14 +1,20 @@
 <nav [className]="hamburgerMenuOpened ? 'show' : ''">
 
+  <!-- Hamburger menu icon -->
   <div class="hamburger-menu"
        (click)="toggleHamburgerMenu()">
     <i class="fa fa-bars"></i>
   </div>
-  <ul class="menu" *ngIf="hamburgerMenuOpened && selectedTab">
-    <li *ngFor="let tab of tabs$ | async; index as i"
-        [className]="selectedTab.id === tab.id ? 'selected' : ''">
-      <h3><a [routerLink]="'/posts/' + tab.id">{{ tab.name }}</a></h3>
+
+  <!-- Menu -->
+  <ul class="menu" 
+      *ngIf="hamburgerMenuOpened && selectedTab$ | async">
+    <li *ngFor="let tab of tabs$ | async"
+        [className]="(selectedTab$ | async).id === tab.id ? 'selected' : ''">
+      <h3>
+        <a [routerLink]="routes.posts(tab.id)">{{ tab.name }}</a>
+      </h3>
     </li>
   </ul>
-  
+
 </nav>

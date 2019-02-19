@@ -1,9 +1,9 @@
 import { ActionReducerMap } from '@ngrx/store';
 
-import * as fromPostsList from '../components/postsList/store/postsList.reducer';
-import * as fromRecentPosts from '../components/recentPosts/store/recentPosts.reducer';
-import * as fromSinglePost from '../components/singlePost/store/singlePost.reducer';
-import * as fromComments from '../components/comments/store/comments.reducer';
+import * as fromPostsList from '../containers/postsList/store/postsList.reducer';
+import * as fromRecentPosts from '../containers/recentPosts/store/recentPosts.reducer';
+import * as fromSinglePost from '../containers/singlePost/store/singlePost.reducer';
+import * as fromComments from '../containers/comments/store/comments.reducer';
 
 export interface ContentState {
   postsList: fromPostsList.PostsListState;

@@ -1,7 +1,7 @@
-import { PostsListEffects } from '../components/postsList/store/postsList.effects';
-import { SinglePostEffects } from '../components/singlePost/store/singlePost.effects';
-import { RecentPostsEffects } from '../components/recentPosts/store/recentPosts.effects';
-import { CommentsEffects } from '../components/comments/store/comments.effects';
+import { PostsListEffects } from '../containers/postsList/store/postsList.effects';
+import { SinglePostEffects } from '../containers/singlePost/store/singlePost.effects';
+import { RecentPostsEffects } from '../containers/recentPosts/store/recentPosts.effects';
+import { CommentsEffects } from '../containers/comments/store/comments.effects';
 
 export const contentEffects = [
   PostsListEffects,

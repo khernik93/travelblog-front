@@ -10,7 +10,7 @@ import { catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import { AppState } from '../store/app.reducers';
-import { SetError } from '../components/notification/store/notification.actions';
+import { SetError } from '../containers/notification/store/notification.actions';
 import { SignOut } from '../../auth/store/auth.actions';
 
 @Injectable()

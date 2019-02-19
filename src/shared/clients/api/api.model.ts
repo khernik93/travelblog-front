@@ -19,12 +19,24 @@ export type PostContentDTO = {
 };
 
 export type CommentDTO = {
+  id: number;
+  createdAt: string;
+  name: string;
+  email: string;
   content: string;
 };
 
 export type TabDTO = {
   id: number,
   name: string
+};
+
+export type Post = {
+  id?: number;
+  tabId: number,
+  tags: string,
+  title: string,
+  content: string
 };
 
 export type SwiperDTO = Map<number, string[]>;

@@ -1,33 +1,42 @@
+/* istanbul ignore file */
 // Global
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxEditorModule } from 'ngx-editor';
-import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
-// Store
-import { adminEffects } from './store/admin.effects';
+import { EffectsModule } from '@ngrx/effects';
 
 // Components
 import { AdminComponent } from './admin.component';
-import { AddNewPostComponent } from './components/addNewPost/addNewPost.component';
 import { WysiwygComponent } from '../../shared/components/wysiwyg/wysiwyg.component';
 import { AdminHeaderComponent } from './components/adminHeader/adminHeader.component';
+import { AddNewPostContainer } from './containers/addNewPost/addNewPost.container';
+import { AdminHeaderContainer } from './containers/adminHeader/adminHeader.container';
+import { AdminMenuComponent } from './components/adminMenu/adminMenu.component';
+import { PostsTableComponent } from './components/postsTable/postsTable.component';
+import { PostFormComponent } from './components/postForm/postForm.component';
+import { EditPostContainer } from './containers/editPost/editPost.container';
+import { AdminPostsListContainer } from './containers/adminPostsList/adminPostsList.container';
 
 // Modules
 import { AdminRoutingModule } from './routing/adminRouting.module';
 import { AuthModule } from '../auth/auth.module';
-
-// Services
-import { AddNewPostService } from './components/addNewPost/addNewPost.service';
+import { adminEffects } from './store/admin.effects';
+import { PostsService } from './services/posts.service';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent,
-  AddNewPostComponent,
+  AddNewPostContainer,
   WysiwygComponent,
-  AdminHeaderComponent
+  AdminHeaderContainer,
+  AdminHeaderComponent,
+  AdminMenuComponent,
+  AdminPostsListContainer,
+  PostsTableComponent,
+  PostFormComponent,
+  EditPostContainer
 ];
 
 export const MODULE_IMPORTS = [
@@ -57,7 +66,7 @@ const STORE_IMPORTS = [
   ],
   exports: [AdminComponent],
   providers: [
-    AddNewPostService
+    PostsService
   ]
 })
 export class AdminModule {

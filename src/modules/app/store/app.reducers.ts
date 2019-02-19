@@ -1,9 +1,10 @@
+/* istanbul ignore file */
 import { routerReducer } from '@ngrx/router-store';
 import * as fromRouter from '@ngrx/router-store';
 import { Params } from '@angular/router';
 import { ActionReducerMap } from '@ngrx/store';
 
-import * as fromNotification from '../components/notification/store/notification.reducer';
+import * as fromNotification from '../containers/notification/store/notification.reducer';
 
 interface RouterStateUrl {
   url: string;

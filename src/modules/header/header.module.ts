@@ -8,17 +8,21 @@ import { EffectsModule } from '@ngrx/effects';
 import { headerReducers } from './store/header.reducers';
 import { headerEffects } from './store/header.effects';
 
-// Components
+// Containers and components
 import { HeaderComponent } from './header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SwiperComponent } from './components/swiper/swiper.component';
 import { RouterModule } from '@angular/router';
+import { MenuContainer } from './containers/menu/menu.container';
+import { SwiperContainer } from './containers/swiper/swiper.container';
 
 export const MODULE_DECLARATIONS = [
   HeaderComponent,
   LogoComponent,
+  MenuContainer,
   MenuComponent,
+  SwiperContainer,
   SwiperComponent
 ];
 

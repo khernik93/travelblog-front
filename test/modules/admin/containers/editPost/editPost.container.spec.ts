@@ -14,7 +14,7 @@ import { AdminStubs } from '../../../../utils/stubs/admin.stubs';
 import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { GetPost } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.actions';
-import { EditPost } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
+import { EditPost } from '../../../../../src/modules/admin/containers/editPost/store/editPost.actions';
 
 describe('EditPostContainer', () => {
 

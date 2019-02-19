@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { exhaustMap, catchError, map, take, concatMap, debounceTime } from 'rxjs/operators';
-import { PostsDTO, MetaDTO, PostContentDTO, TabDTO } from '../../../../../shared/clients/api/api.model';
+import { PostsDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
 import { Store } from '@ngrx/store';
 import { ContentState } from '../../../store/content.reducers';
@@ -16,17 +16,9 @@ import {
   GetPostsError,
   GetPostsSuccess,
   GetPostsOnScroll,
-  ClearPosts,
-  DeletePostSuccess,
-  DeletePostError,
-  EditPostSuccess,
-  EditPostError,
-  AddNewPostError,
-  AddNewPostSuccess
+  ClearPosts
 } from './postsList.actions';
-import { SetSuccess } from '../../../../app/containers/notification/store/notification.actions';
 import { HeaderState } from '../../../../header/store/header.reducers';
-import { selectTabs } from '../../../../header/containers/menu/store/menu.selectors';
 
 @Injectable()
 export class PostsListEffects {
@@ -97,82 +89,6 @@ export class PostsListEffects {
             catchError(() => of(new GetPostsError()))
           )
       ))
-    );
-
-  @Effect()
-  addNewPost$: Observable<any> = this.actions$
-    .pipe(
-      ofType(PostsListActionTypes.AddNewPost),
-      exhaustMap((action: any) => (
-        this.store.select(selectTabs)
-          .pipe(
-            take(1),
-            map((tabs: TabDTO[]) => tabs.filter(tab => tab.id === action.post.tabId)[0]),
-            map((tab: TabDTO) => this.postsListService.transformPostIntoPostContentDTO(action.post, tab))
-          )
-      )),
-      exhaustMap((postContentDTO: PostContentDTO) => (
-        this.apiClient.addNewPost(postContentDTO)
-          .pipe(
-            map(() => new AddNewPostSuccess()),
-            catchError(() => of(new AddNewPostError()))
-          )
-      ))
-    );
-  
-  @Effect()
-  addNewPostSuccess$: Observable<any> = this.actions$
-    .pipe(
-      ofType(PostsListActionTypes.AddNewPostSuccess),
-      map(() => new SetSuccess("The post was added successfully!"))
-    );
-
-  @Effect()
-  editPost$: Observable<any> = this.actions$
-    .pipe(
-      ofType(PostsListActionTypes.EditPost),
-      exhaustMap((action: any) => (
-        this.store.select(selectTabs)
-          .pipe(
-            take(1),
-            map((tabs: TabDTO[]) => tabs.filter(tab => tab.id === action.post.tabId)[0]),
-            map((tab: TabDTO) => this.postsListService.transformPostIntoPostContentDTO(action.post, tab))
-          )
-      )),
-      exhaustMap((postContentDTO: PostContentDTO) => (
-        this.apiClient.updatePost(postContentDTO)
-          .pipe(
-            map(() => new EditPostSuccess()),
-            catchError(() => of(new EditPostError()))
-          )
-      ))
-    );
-  
-  @Effect()
-  editPostSuccess$: Observable<any> = this.actions$
-    .pipe(
-      ofType(PostsListActionTypes.EditPostSuccess),
-      map(() => new SetSuccess('Post edited successfully!'))
-    );
-
-  @Effect()
-  deletePost$: Observable<any> = this.actions$
-    .pipe(
-      ofType(PostsListActionTypes.DeletePost),
-      exhaustMap((action: any) => (
-        this.apiClient.deletePost(action.id)
-          .pipe(
-            map(() => new DeletePostSuccess()),
-            catchError(() => of(new DeletePostError))
-          )
-      ))
-    );
-  
-  @Effect()
-  deletePostSuccess$: Observable<any> = this.actions$
-    .pipe(
-      ofType(PostsListActionTypes.DeletePostSuccess),
-      map(() => new SetSuccess('Post deleted successfully!'))
     );
 
   constructor(

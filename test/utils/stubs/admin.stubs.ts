@@ -1,5 +1,6 @@
 import { of } from "rxjs";
 import { State } from "../state/state";
+import { PostsService } from "../../../src/modules/admin/services/posts.service";
 
 export class AdminStubs {
 
@@ -15,6 +16,12 @@ export class AdminStubs {
         }
       }})
     };
+  }
+
+  static postsService(): jasmine.SpyObj<PostsService> {
+    return jasmine.createSpyObj('PostsListService', {
+      transformPostIntoPostContentDTO: () => ({})
+    });
   }
 
 };

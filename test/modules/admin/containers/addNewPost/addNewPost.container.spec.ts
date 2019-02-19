@@ -11,7 +11,7 @@ import { AddNewPostContainer } from '../../../../../src/modules/admin/containers
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
 import { State } from '../../../../utils/state/state';
-import { AddNewPost } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
+import { AddNewPost } from '../../../../../src/modules/admin/containers/addNewPost/store/addNewPost.actions';
 
 describe('AddNewPostContainer', () => {
 

@@ -1,5 +1,6 @@
 import { PostsListActions, PostsListActionTypes } from './postsList.actions';
 import { PostContentDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
+import { AdminPostsListActions, AdminPostsListActionTypes } from '../../../../admin/containers/adminPostsList/store/adminPostsList.actions';
 
 export interface PostsListState {
   posts: PostContentDTO[],
@@ -15,7 +16,7 @@ export const initialState: PostsListState = {
   meta: null
 };
 
-export function postsListReducer(state = initialState, action: PostsListActions): PostsListState {
+export function postsListReducer(state = initialState, action: PostsListActions | AdminPostsListActions): PostsListState {
   switch (action.type) {
 
     case PostsListActionTypes.GetPosts:
@@ -43,7 +44,7 @@ export function postsListReducer(state = initialState, action: PostsListActions)
       return { ...state, loading: false, initialized: true }
     }
 
-    case PostsListActionTypes.DeletePost: {
+    case AdminPostsListActionTypes.DeletePost: {
       return { ...state, posts: state.posts.filter(post => post.id !== action.id )}
     }
 

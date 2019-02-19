@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxEditorModule } from 'ngx-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 
 // Components
 import { AdminComponent } from './admin.component';
@@ -22,6 +23,8 @@ import { AdminPostsListContainer } from './containers/adminPostsList/adminPostsL
 // Modules
 import { AdminRoutingModule } from './routing/adminRouting.module';
 import { AuthModule } from '../auth/auth.module';
+import { adminEffects } from './store/admin.effects';
+import { PostsService } from './services/posts.service';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent,
@@ -49,15 +52,22 @@ const ROUTING_MODULE_IMPORTS = [
   AdminRoutingModule
 ];
 
+const STORE_IMPORTS = [
+  EffectsModule.forFeature(adminEffects)
+];
+
 @NgModule({
   declarations: MODULE_DECLARATIONS,
   imports: [
     ...MODULE_IMPORTS,
     ...ROUTING_MODULE_IMPORTS,
+    ...STORE_IMPORTS,
     AuthModule
   ],
   exports: [AdminComponent],
-  providers: []
+  providers: [
+    PostsService
+  ]
 })
 export class AdminModule {
   constructor() { }

@@ -7,8 +7,9 @@ import { selectTabs, selectSelectedTab } from '../../../header/containers/menu/s
 import { GetTabs, SelectTabById, SelectTab } from '../../../header/containers/menu/store/menu.actions';
 import { TabDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
 import { filter, takeUntil, distinctUntilChanged } from 'rxjs/operators';
-import { GetPosts, ClearPosts, DeletePost } from '../../../content/containers/postsList/store/postsList.actions';
+import { GetPosts, ClearPosts } from '../../../content/containers/postsList/store/postsList.actions';
 import { selectPosts, selectLoading } from '../../../content/containers/postsList/store/postsList.selectors';
+import { DeletePost } from './store/adminPostsList.actions';
 
 @Component({
   selector: 'adminPostsList-container',

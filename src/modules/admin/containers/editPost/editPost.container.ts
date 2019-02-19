@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { GetPost } from '../../../content/containers/singlePost/store/singlePost.actions';
 import { selectPost } from '../../../content/containers/singlePost/store/singlePost.selectors';
-import { EditPost } from '../../../content/containers/postsList/store/postsList.actions';
+import { EditPost } from './store/editPost.actions';
 
 @Component({
   selector: 'editPost-container',

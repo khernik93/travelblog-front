@@ -10,7 +10,8 @@ import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../../src/modules/
 import { GetTabs, SelectTabById } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { State } from '../../../../utils/state/state';
 import { AdminPostsListContainer } from '../../../../../src/modules/admin/containers/adminPostsList/adminPostsList.container';
-import { ClearPosts, GetPosts, DeletePost } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
+import { ClearPosts, GetPosts } from '../../../../../src/modules/content/containers/postsList/store/postsList.actions';
+import { DeletePost } from '../../../../../src/modules/admin/containers/adminPostsList/store/adminPostsList.actions';
 
 describe('AdminPostsListContainer', () => {
 

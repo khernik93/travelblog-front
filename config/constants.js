@@ -23,6 +23,12 @@ exports.PROD_PORT = 8088;
 exports.PROD_DEVTOOL = 'source-map';
 exports.DEV_DEVTOOL = 'eval-source-map';
 
+/**
+ * Backend URLs
+ */
+exports.PROD_API_URL = 'http://127.0.0.1:3001';
+exports.DEV_API_URL = 'http://127.0.0.1:3001';
+
 exports.SHOW_BUNDLE_ANALYZER = false;
 
 /**

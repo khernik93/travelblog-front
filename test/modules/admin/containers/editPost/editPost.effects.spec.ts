@@ -13,7 +13,6 @@ import { MockStore } from '../../../../utils/mocks/mockStore';
 import { HeaderState } from '../../../../../src/modules/header/store/header.reducers';
 import { PostsService } from '../../../../../src/modules/admin/services/posts.service';
 import { AdminStubs } from '../../../../utils/stubs/admin.stubs';
-import { post } from '../../../../utils/data/post';
 import { TabsResponse } from '../../../../utils/responses/tabs.response';
 import { Post } from '../../../../../src/shared/clients/api/api.model';
 
@@ -26,7 +25,6 @@ describe('EditPostEffects', () => {
   let actions: TestActions;
   let effects: EditPostEffects;
   let ClonedTabsResponse: typeof TabsResponse;
-  let ClonedPost: Post;
 
   beforeEach(() => {
     apiClient = SharedStubs.getApiClientStub();
@@ -49,7 +47,6 @@ describe('EditPostEffects', () => {
 
   beforeEach(() => {
     ClonedTabsResponse = cloneDeep(TabsResponse);
-    ClonedPost = cloneDeep(post);
   });
 
   it('should be created', () => {
@@ -60,7 +57,8 @@ describe('EditPostEffects', () => {
     WHEN EditPost action is dispatched
     THEN EditPostSuccess action is dispatched
   `, () => {
-    const action = new EditPost(ClonedPost);
+    const post: Post = {tabId: 1, tags: '', title: '', content: ''};
+    const action = new EditPost(post);
     const outcome = new EditPostSuccess();
     actions.stream = hot('-a', {a: action});
     const selectResponse = hot('-a', { a: ClonedTabsResponse });

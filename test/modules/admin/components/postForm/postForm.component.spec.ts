@@ -6,24 +6,19 @@ import { of } from 'rxjs';
 import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../../src/modules/admin/admin.module';
 import { PostFormComponent } from '../../../../../src/modules/admin/components/postForm/postForm.component';
 import { State } from '../../../../utils/state/state';
-import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
-import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ChangeDetectorRef } from '@angular/core';
 
 describe('PostFormComponent', () => {
 
   let component: PostFormComponent;
   let fixture: ComponentFixture<PostFormComponent>;
-  let wysiwygService: jasmine.SpyObj<WysiwygService>;
 
   beforeEach(() => {
-    wysiwygService = SharedStubs.getWysiwygServiceStub();
     TestBed.configureTestingModule({
       imports: [...MODULE_IMPORTS, RouterTestingModule],
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: ChangeDetectorRef },
-        { provide: WysiwygService, useValue: wysiwygService }
+        { provide: ChangeDetectorRef }
       ]
     }).compileComponents();
   });

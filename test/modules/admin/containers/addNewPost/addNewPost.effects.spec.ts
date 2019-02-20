@@ -15,7 +15,6 @@ import { PostsService } from '../../../../../src/modules/admin/services/posts.se
 import { AdminStubs } from '../../../../utils/stubs/admin.stubs';
 import { TabsResponse } from '../../../../utils/responses/tabs.response';
 import { Post } from '../../../../../src/shared/clients/api/api.model';
-import { post } from '../../../../utils/data/post';
 
 describe('AddNewPostEffects', () => {
 
@@ -26,7 +25,6 @@ describe('AddNewPostEffects', () => {
   let actions: TestActions;
   let effects: AddNewPostEffects;
   let ClonedTabsResponse: typeof TabsResponse;
-  let ClonedPost: Post;
 
   beforeEach(() => {
     apiClient = SharedStubs.getApiClientStub();
@@ -49,7 +47,6 @@ describe('AddNewPostEffects', () => {
 
   beforeEach(() => {
     ClonedTabsResponse = cloneDeep(TabsResponse);
-    ClonedPost = cloneDeep(post);
   });
 
   it('should be created', () => {
@@ -60,7 +57,8 @@ describe('AddNewPostEffects', () => {
     WHEN AddNewPost action is dispatched
     THEN AddNewPostSuccess action is dispatched
   `, () => {
-    const action = new AddNewPost(ClonedPost);
+    const post: Post = {tabId: 1, title: '', tags: '', content: ''};
+    const action = new AddNewPost(post);
     const outcome = new AddNewPostSuccess();
     actions.stream = hot('-a', {a: action});
     const selectResponse = hot('-a', { a: ClonedTabsResponse } );

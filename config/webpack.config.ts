@@ -5,6 +5,8 @@ import {
   PROD_PORT,
   PROD_DEVTOOL,
   DEV_DEVTOOL,
+  PROD_API_URL,
+  DEV_API_URL,
   MY_COPY_FOLDERS,
   MY_CLIENT_PLUGINS,
   MY_CLIENT_PRODUCTION_PLUGINS,
@@ -30,6 +32,8 @@ const ENV = PROD ? 'production' : 'development';
 console.log('PRODUCTION BUILD: ', PROD);
 console.log('AOT BUILD: ', true);
 console.log('TEST BUILD: ', false);
+
+const API_URL = PROD ? PROD_API_URL : DEV_API_URL;
 
 /**
  * Logic for copying folders
@@ -86,6 +90,17 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
       poll: undefined,
       aggregateTimeout: 300,
       ignored: /node_modules/
+    },
+    proxy: {
+      '/api': {
+        target: API_URL,
+        secure: false
+      },
+      '/resources': {
+        target: API_URL,
+        pathRewrite: {'^/resources': ''},
+        secure: false
+      }
     }
   };
 

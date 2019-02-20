@@ -8,14 +8,29 @@ import { Post, PostContentDTO } from '../../../../src/shared/clients/api/api.mod
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { State } from '../../../utils/state/state';
-import { tab, post, postContentDTO } from '../../../utils/data/post';
+
+const tab = TabsResponse[2];
+
+const post: Post = {
+  id: 1,
+  tabId: tab.id,
+  tags: 'tag1,tag2,tag3, tag4,,,', 
+  title: 'title', 
+  content: 'content'
+};
+
+const postContentDTO: PostContentDTO = {
+  id: 1,
+  tab: tab,
+  tags: ['tag1','tag2','tag3','tag4'],
+  title: post.title,
+  content: post.content
+};
 
 describe('PostsService', () => {
 
   let service: PostsService;
-  let store: MockStore<any>;  
-  let ClonedPost: Post;
-  let ClonedPostContentDTO: PostContentDTO;
+  let store: MockStore<any>;
 
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<any>();
@@ -29,8 +44,6 @@ describe('PostsService', () => {
   });
 
   beforeEach(() => {
-    ClonedPost = cloneDeep(post);
-    ClonedPostContentDTO = cloneDeep(postContentDTO);
     store.setState(cloneDeep(State));
   });
 
@@ -42,8 +55,8 @@ describe('PostsService', () => {
     WHEN transformPostIntoPostContentDTO is called with Post model
     THEN PostContentDTO model is returned
   `, () => {
-    const postContentDTO = service.transformPostIntoPostContentDTO(ClonedPost, tab);
-    expect(postContentDTO).toEqual(ClonedPostContentDTO);
+    const postContentDTOActual = service.transformPostIntoPostContentDTO(post, tab);
+    expect(postContentDTOActual).toEqual(postContentDTO);
   });
 
 });

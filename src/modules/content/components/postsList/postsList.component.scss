@@ -35,6 +35,9 @@
   & a {
     display: inline !important;
   }
+  & img {
+    max-width: 100%;
+  }
 }
 
 .post-wrap .entry-content.entry-content-restricted {

@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { map, delay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 
 import { TransferHttpService } from '../../services/transferHttp.service';
 import { AuthCredentials } from '../../../modules/auth/auth.model';
-import constants from '../../../config/constants';
 import {
   PostContentDTO, PostsDTO, SwiperDTO, TabDTO, CommentDTO
 } from './api.model';
@@ -22,7 +21,8 @@ const ROUTES: any = {
   addNewPost: '/post',
   updatePost: '/post',
   deletePost: '/post',
-  signIn: '/auth/signIn'
+  signIn: '/auth/signIn',
+  uploadPhoto: '/system/uploadPhoto'
 };
 
 @Injectable()
@@ -142,12 +142,24 @@ export class ApiClient {
     });
   }
 
+  uploadFile(file: any): Observable<String> {
+    const url = this.prepareUrl(ROUTES.uploadPhoto);
+    let formData:FormData = new FormData();
+    formData.append('file', file, file.name);
+    this.headers.append('Content-Type', 'multipart/form-data');
+    this.headers.append('Accept', 'application/json');
+    return this.transferHttpService.post(url, formData, {
+      headers: this.headers,
+      responseType: 'text'
+    });
+  }
+
   /**
    * Build absolute URL based on a path
    * @param uri 
    */
   private prepareUrl(uri: string) {
-    return constants.apiUrl + uri;
+    return '/api' + uri;
   }
 
 }

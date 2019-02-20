@@ -10,6 +10,7 @@ import { AddNewPostContainer } from '../../../../../src/modules/admin/containers
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { State } from '../../../../utils/state/state';
 import { AddNewPost } from '../../../../../src/modules/admin/containers/addNewPost/store/addNewPost.actions';
+import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
 
 describe('AddNewPostContainer', () => {
 
@@ -17,15 +18,18 @@ describe('AddNewPostContainer', () => {
 
   let component: AddNewPostContainer;
   let fixture: ComponentFixture<AddNewPostContainer>;
+  let apiClient: jasmine.SpyObj<ApiClient>;
 
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
+    apiClient = SharedStubs.getApiClientStub();
 
     TestBed.configureTestingModule({
       imports: MODULE_IMPORTS,
       declarations: MODULE_DECLARATIONS,
       providers: [
-        { provide: Store, useValue: store }
+        { provide: Store, useValue: store },
+        { provide: ApiClient, use: apiClient }
       ]
     }).compileComponents();
   });

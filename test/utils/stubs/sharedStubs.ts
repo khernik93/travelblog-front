@@ -31,10 +31,6 @@ export class SharedStubs {
     return new MockStore<T>();
   }
 
-  static getWysiwygServiceStub() {
-    return jasmine.createSpyObj('WysiwygService', ['config']);
-  }
-
   static getPreviousRouteServiceStub() {
     return jasmine.createSpyObj('PreviousRouteService', ['goBack']);
   }

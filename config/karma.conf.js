@@ -1,6 +1,8 @@
 var path = require('path');
 var webpackConfig = require('./webpack.test.config');
 
+const TESTS_REPORT_DIR = '../tests-report';
+
 module.exports = function (config) {
   var _config = {
     basePath: '',
@@ -13,7 +15,8 @@ module.exports = function (config) {
       require('karma-mocha-reporter'),
       require('karma-sourcemap-loader'),
       require('karma-webpack'),
-      require('karma-coverage-istanbul-reporter')
+      require('karma-coverage-istanbul-reporter'),
+      require('karma-htmlfile-reporter')
     ],
 
     files: [
@@ -34,7 +37,7 @@ module.exports = function (config) {
       noInfo: false
     },
 
-    reporters: ['mocha', 'coverage-istanbul'],
+    reporters: ['mocha', 'coverage-istanbul', 'html'],
 
     mochaReporter: {
       output: 'noFailures'
@@ -45,7 +48,7 @@ module.exports = function (config) {
       reports: ['html', 'lcovonly', 'text-summary'],
  
       // base output directory. If you include %browser% in the path it will be replaced with the karma browser name
-      dir: path.join(__dirname, 'coverage'),
+      dir: path.join(__dirname, `${TESTS_REPORT_DIR}/coverage`),
  
       // Combines coverage information from multiple browsers into one report rather than outputting a report
       // for each browser.
@@ -87,6 +90,10 @@ module.exports = function (config) {
       },
  
       verbose: true // output config used by istanbul for debugging
+    },
+
+    htmlReporter: {
+      outputFile: `${TESTS_REPORT_DIR}/report.html`
     },
 
     port: 9876,

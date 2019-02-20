@@ -3,7 +3,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgxEditorModule } from 'ngx-editor';
+import { QuillModule } from 'ngx-quill';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
@@ -43,7 +43,7 @@ export const MODULE_IMPORTS = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
-  NgxEditorModule,
+  QuillModule,
   HttpClientModule,
   RouterModule
 ];

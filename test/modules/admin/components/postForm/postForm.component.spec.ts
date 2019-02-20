@@ -6,24 +6,25 @@ import { of } from 'rxjs';
 import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../../src/modules/admin/admin.module';
 import { PostFormComponent } from '../../../../../src/modules/admin/components/postForm/postForm.component';
 import { State } from '../../../../utils/state/state';
-import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
-import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ChangeDetectorRef } from '@angular/core';
+import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 
 describe('PostFormComponent', () => {
 
   let component: PostFormComponent;
   let fixture: ComponentFixture<PostFormComponent>;
-  let wysiwygService: jasmine.SpyObj<WysiwygService>;
+  let apiClient: jasmine.SpyObj<ApiClient>;
 
   beforeEach(() => {
-    wysiwygService = SharedStubs.getWysiwygServiceStub();
+    apiClient = SharedStubs.getApiClientStub();
+
     TestBed.configureTestingModule({
       imports: [...MODULE_IMPORTS, RouterTestingModule],
       declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: ChangeDetectorRef },
-        { provide: WysiwygService, useValue: wysiwygService }
+        { provide: ApiClient, useValue: apiClient }    
       ]
     }).compileComponents();
   });

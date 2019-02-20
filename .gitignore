@@ -6,5 +6,5 @@ dist
 template
 dist_root/styles.css
 dist_root/.DS_Store
-coverage
+tests-report
 TESTS-PhantomJS*

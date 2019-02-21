@@ -13,17 +13,15 @@ export function singlePostReducer(state = initialState, action: SinglePostAction
   switch (action.type) {
 
     case SinglePostActionTypes.GetPost: {
-      return {
-        ...state,
-        post: initialState.post
-      }
+      return { ...state, post: initialState.post }
     }
 
     case SinglePostActionTypes.SetPost: {
-      return {
-        ...state,
-        post: action.post
-      }
+      return { ...state, post: action.post }
+    }
+
+    case SinglePostActionTypes.ClearPost: {
+      return { ...state, post: initialState.post }
     }
 
     default: {

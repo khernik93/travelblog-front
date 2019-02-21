@@ -5,7 +5,7 @@ import { FadeToggleAnimation } from '../../../../shared/animations';
 
 @Component({
   selector: 'singlePost-component',
-  styleUrls: ['../postsList/postsList.component.scss'],
+  styleUrls: ['./singlePost.component.scss', '../postsList/postsList.component.scss'],
   templateUrl: './singlePost.component.html',
   encapsulation: ViewEncapsulation.None,
   animations: [FadeToggleAnimation]

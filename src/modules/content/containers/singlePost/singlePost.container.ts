@@ -6,7 +6,7 @@ import { takeUntil, filter, map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { selectPost } from './store/singlePost.selectors';
 import { ContentState } from '../../store/content.reducers';
-import * as SinglePostActions from './store/singlePost.actions';
+import { ClearPost, GetPost } from './store/singlePost.actions';
 import { PostContentDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({
@@ -40,11 +40,12 @@ export class SinglePostContainer implements OnInit, OnDestroy {
         filter((postId: string) => !!postId)
       )
       .subscribe((postId: string) => {
-        this.store.dispatch(new SinglePostActions.GetPost(postId));
+        this.store.dispatch(new GetPost(postId));
       });
   }
 
   ngOnDestroy() {
+    this.store.dispatch(new ClearPost());
     this.destroy$.next();
     this.destroy$.complete();
   }

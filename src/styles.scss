@@ -98,3 +98,17 @@ hr.breaking-line {
   color: $red;
   margin-left: 20px;
 }
+
+.well {
+  background-color: $lightgrey;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid $grey;
+  & .well-title {
+    text-align: center;
+    margin-top: 15px;
+    & h1 {
+      font-family: 'BeyondTheMountains';
+    }
+  }
+}

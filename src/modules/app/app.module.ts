@@ -19,7 +19,6 @@ import { NotificationComponent } from './components/notification/notification.co
 // Modules
 import { HeaderModule } from '../header/header.module';
 import { ContentModule } from '../content/content.module';
-import { FooterModule } from '../footer/footer.module';
 import { AdminModule } from '../admin/admin.module';
 import { AppRoutingModule } from './routing/appRouting.module';
 import { ContentRoutingModule } from '../content/routing/contentRouting.module';
@@ -54,7 +53,6 @@ export const MODULE_IMPORTS = [
 const ROOT_MODULE_IMPORTS = [
   HeaderModule,
   ContentModule,
-  FooterModule,
   AdminModule,
   AuthModule
 ];

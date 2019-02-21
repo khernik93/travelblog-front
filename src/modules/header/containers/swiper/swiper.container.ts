@@ -8,17 +8,21 @@ import { GetPhotos } from './store/swiper.actions';
 import { HeaderState } from '../../store/header.reducers';
 import { selectPhotos } from './store/swiper.selectors';
 import { selectSelectedTab } from '../menu/store/menu.selectors';
-import { TabDTO, SwiperDTO } from '../../../../shared/clients/api/api.model';
+import { TabDTO, SwiperDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { selectPost } from '../../../content/containers/singlePost/store/singlePost.selectors';
 
 @Component({
   selector: 'swiper-container',
   template: `
-    <swiper-component [photosForSelectedTab]="photosForSelectedTab">
+    <swiper-component [photosForSelectedTab]="photosForSelectedTab"
+                      [post$]="post$"
+    >
     </swiper-component>`
 })
 export class SwiperContainer implements OnInit, OnDestroy {
 
   photosForSelectedTab: string[];
+  post$: Observable<PostContentDTO>;
 
   private selectedTab$: Observable<TabDTO>;
   private photos$: Observable<SwiperDTO>;
@@ -31,6 +35,7 @@ export class SwiperContainer implements OnInit, OnDestroy {
   ) {
     this.selectedTab$ = this.store.select(selectSelectedTab);
     this.photos$ = this.store.select(selectPhotos);
+    this.post$ = this.store.select(selectPost);
   }
 
   ngOnInit() {

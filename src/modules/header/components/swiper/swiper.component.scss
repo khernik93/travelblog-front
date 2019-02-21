@@ -10,6 +10,7 @@
 .swiper-content {
   width: 100%;
   height: 400px;
+  position: relative;
 }
 
 .swiper-content img {
@@ -88,4 +89,22 @@
   .swiper-button-prev {
       visibility: visible;
   }
+}
+
+.post-title-block {
+  color: white;
+  font-size: 3em;
+  z-index: $swiperPostTitle;
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  left: 15%;
+  top: 15%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.post-title-block-inner {
+  margin: 0 auto;
 }

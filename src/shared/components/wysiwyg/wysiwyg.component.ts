@@ -16,6 +16,11 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   @Input() placeholder$: Observable<string>;
 
   content: string = '';
+  quillModules: any = { 
+    imageUploader: { 
+      upload: this.upload 
+    }
+  };
   
   private destroy$ = new Subject();
 
@@ -24,10 +29,14 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    Quill.register("modules/imageUploader", ImageUploader);
+    this.registerQuillModules();
     if (this.placeholder$) {
       this.loadPlaceholder();
     }
+  }
+
+  private registerQuillModules() {
+    Quill.register("modules/imageUploader", ImageUploader);
   }
 
   private loadPlaceholder() {

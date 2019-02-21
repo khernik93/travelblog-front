@@ -12,7 +12,7 @@
     <li *ngFor="let tab of tabs$ | async"
         [className]="(selectedTab$ | async).id === tab.id ? 'selected' : ''">
       <h3>
-        <a [routerLink]="routes.posts(tab.id)">{{ tab.name }}</a>
+        <a [routerLink]="contentRoutes.postsList(tab.id)">{{ tab.name }}</a>
       </h3>
     </li>
   </ul>

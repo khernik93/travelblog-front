@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { takeUntil, filter, distinctUntilChanged } from 'rxjs/operators';
 import isEqual from 'lodash-es/isEqual';
 import { TabDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { AdminRoutes, adminRoutes } from '../../routing/adminRouting.routes';
 
 @Component({
   selector: 'postsTable-component',
@@ -20,9 +21,7 @@ export class PostsTableComponent implements OnInit, OnDestroy {
   @Output('onDeletePost') onDeletePostEmitter = new EventEmitter<number>();
 
   tabsForm: FormGroup;
-  routes: any = {
-    edit: (tabId, postId) => `/admin/editPost/tabId/${tabId}/postId/${postId}`
-  };
+  adminRoutes: AdminRoutes = adminRoutes;
 
   private destroy$ = new Subject();
 

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AdminRoutes, adminRoutes } from '../../routing/adminRouting.routes';
 
 @Component({
   selector: 'adminMenu-component',
@@ -7,9 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AdminMenuComponent { 
 
-  routes: any = {
-    managePosts: '/admin/postsList',
-    addNewPost: '/admin/addNewPost'
-  };
+  adminRoutes: AdminRoutes = adminRoutes;
 
 }

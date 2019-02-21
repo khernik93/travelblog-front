@@ -1,6 +1,6 @@
 <quill-editor [style]="{height: '300px'}" 
               [(ngModel)]="content"
-              [modules]="{ imageUploader: { upload: upload.bind(this) } }"
+              [modules]="quillModules"
               (onContentChanged)="changeContent()">
   <div quill-editor-toolbar>
     <span class="ql-formats">

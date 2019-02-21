@@ -2,24 +2,21 @@ import {
   animate,
   style,
   transition,
-  trigger
+  trigger,
+  keyframes,
+  animation
 } from '@angular/animations';
 
-/**
-* Fade in element on void => ", and fade out on * => void
-*
-* @type {AnimationTriggerMetadata}
-*/
-export const fadeToggle =
+const ANIMATION_TIME = '.3s';
+
+export const FadeToggleAnimation =
   trigger('fadeToggle', [
+    transition(':enter', [
+      style({ opacity: 0 }),
+      animate(ANIMATION_TIME)
+    ]),
 
-      transition(':enter', [
-          style({ opacity: 0 }),
-          animate('.3s')
-      ]),
-
-      transition(':leave', [
-          animate('.3s', style({ opacity: 0 }))
-      ])
-
+    transition(':leave', [
+      animate(ANIMATION_TIME, style({ opacity: 0 }))
+    ])
   ]);

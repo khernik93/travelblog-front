@@ -2,12 +2,14 @@ import { Component, ViewEncapsulation, Input, Output, EventEmitter } from '@angu
 import { Observable } from 'rxjs';
 import { PostContentDTO, TabDTO } from '../../../../shared/clients/api/api.model';
 import { ContentRoutes, contentRoutes } from '../../routing/contentRouting.routes';
+import { FadeToggleAnimation } from '../../../../shared/animations';
 
 @Component({
   selector: 'postsList-component',
   styleUrls: ['./postsList.component.scss'],
   templateUrl: './postsList.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [FadeToggleAnimation]
 })
 export class PostsListComponent {
 

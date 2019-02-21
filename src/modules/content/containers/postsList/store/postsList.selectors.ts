@@ -27,5 +27,5 @@ export const selectInitialized = createSelector(
 export const selectCanScroll = createSelector(
   selectPosts,
   selectMeta,
-  (posts: PostContentDTO[], meta: MetaDTO) => meta.total > posts.length
+  (posts: PostContentDTO[], meta: MetaDTO) => (meta !== null) ? meta.total > posts.length : false
 );

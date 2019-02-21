@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import isEqual from 'lodash-es/isEqual';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { takeUntil, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { takeUntil, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { HeaderState } from '../../../header/store/header.reducers';
 import { SelectTabById } from '../../../header/containers/menu/store/menu.actions';
@@ -39,6 +39,7 @@ export class LayoutContainer implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.destroy$),
         distinctUntilChanged((x: any, y: any) => isEqual(x, y)),
+        tap(params => console.log(params)),
         map((params: any) => params.get('tabId')),
         switchMap((tabId: number) => this.getTabs(tabId))
       )

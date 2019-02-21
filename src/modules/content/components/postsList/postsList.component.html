@@ -17,7 +17,7 @@
       </div>
       <br>
       <div class="content-section entry-title" *ngIf="(selectedTab$ | async) as selectedTab">
-        <h1 [routerLink]="routes.singlePost(selectedTab.id, post.id)">{{ post.title }}</h1>
+        <h1 [routerLink]="contentRoutes.singlePost(selectedTab.id, post.id)">{{ post.title }}</h1>
       </div>
       <div class="content-section tags-links">
         <span *ngFor="let tag of post.tags">#{{ tag }}</span>
@@ -28,7 +28,7 @@
       </div>
       <br><br>
       <div class="content-section read-more" *ngIf="(selectedTab$ | async) as selectedTab">
-        <a [routerLink]="routes.singlePost(selectedTab.id, post.id)">read more</a>
+        <a [routerLink]="contentRoutes.singlePost(selectedTab.id, post.id)">read more</a>
       </div>
       <br><br><br><Br>
       <div class="content-section" *ngIf="i !== posts.length - 1">

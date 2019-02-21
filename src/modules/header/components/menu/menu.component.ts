@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TabDTO } from '../../../../shared/clients/api/api.model';
+import { ContentRoutes, contentRoutes } from '../../../content/routing/contentRouting.routes';
 
 @Component({
   selector: 'menu-component',
@@ -13,9 +14,7 @@ export class MenuComponent {
   @Input() tabs$: Observable<TabDTO[]>;
   @Input() hamburgerMenuOpened: boolean = true;
 
-  routes: any = {
-    posts: (tabId) => `/posts/${tabId}`
-  };
+  contentRoutes: ContentRoutes = contentRoutes;
 
   toggleHamburgerMenu(): void {
     this.hamburgerMenuOpened = !this.hamburgerMenuOpened;

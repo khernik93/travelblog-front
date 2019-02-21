@@ -29,7 +29,7 @@
             <td>{{ post.createdAt | date:'medium' }}</td>
             <td *ngIf="(selectedTab$ | async) as selectedTab">
               <a href="#" 
-                [routerLink]="routes.edit(selectedTab.id, post.id)"
+                [routerLink]="adminRoutes.editPost(selectedTab.id, post.id)"
                 class="btn btn-icon btn-pill btn-primary" 
                 data-toggle="tooltip" 
                 title="Edit">

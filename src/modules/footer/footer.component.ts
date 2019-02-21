@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { AdminRoutes, adminRoutes } from '../admin/routing/adminRouting.routes';
 
 @Component({
   selector: 'footer-component',
@@ -7,7 +8,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
     <footer>
       Copyright &copy; 2019
       <div class="to-right">
-          <a [routerLink]="routes.admin">( admin )</a>
+          <a [routerLink]="adminRoutes.postsList">( admin )</a>
       </div>
     </footer>
   `,
@@ -15,8 +16,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 })
 export class FooterComponent { 
 
-  routes: any = {
-    admin: '/admin'
-  };
+  adminRoutes: AdminRoutes = adminRoutes;
 
 }

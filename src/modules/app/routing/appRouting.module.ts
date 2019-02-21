@@ -1,23 +1,10 @@
 /* istanbul ignore file */
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-
-import { NotFoundComponent } from '../components/notFound/notFound.component';
-
-export const routes: Routes = [
-  { 
-    path: '', 
-    redirectTo: '/posts',
-    pathMatch: 'full'
-  },
-  { 
-    path: '**', 
-    component: NotFoundComponent 
-  }
-];
+import { appRoutesTree } from './appRouting.routes';
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appRoutesTree)],
   exports: [RouterModule],
   providers: []
 })

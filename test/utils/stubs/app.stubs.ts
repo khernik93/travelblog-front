@@ -1,5 +1,5 @@
-import { of } from "rxjs";
-import { State } from "../state/state";
+import { of } from 'rxjs';
+import { State } from '../state/state';
 
 export class AppStubs {
 
@@ -12,4 +12,4 @@ export class AppStubs {
     };
   }
 
-};
+}

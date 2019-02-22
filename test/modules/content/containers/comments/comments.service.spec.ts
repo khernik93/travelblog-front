@@ -26,7 +26,7 @@ describe('CommentsService', () => {
         name: '   ',
         content: 'some content',
         email: ''
-      }
+      };
       const expected = {
         content: comment.content
       };

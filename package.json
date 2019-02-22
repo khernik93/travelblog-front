@@ -18,6 +18,7 @@
     "sass:watch": "node-sass -w \"src/styles.scss\" \"dist_root/styles.css\" --include-path node_modules --output-style compressed -q",
     "clean:dist": "rimraf -- dist",
     "test": "karma start config/karma.conf.js",
+    "lint": "tslint -p tslint.json src/**/*.ts test/**/*.ts",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {},

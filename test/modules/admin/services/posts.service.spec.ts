@@ -22,7 +22,7 @@ const post: Post = {
 const postContentDTO: PostContentDTO = {
   id: 1,
   tab: tab,
-  tags: ['tag1','tag2','tag3','tag4'],
+  tags: ['tag1', 'tag2', 'tag3', 'tag4'],
   title: post.title,
   content: post.content
 };

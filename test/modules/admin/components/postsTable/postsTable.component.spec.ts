@@ -46,8 +46,8 @@ describe('PostsTableComponent', () => {
     WHEN component is loaded
     THEN all posts are visible
   `, () => {
-    const posts = fixture.debugElement.queryAll(By.css('.post-row'))
-    expect(posts.length).toEqual(State.content.postsList.posts.length);
+    const postsEl = fixture.debugElement.queryAll(By.css('.post-row'));
+    expect(postsEl.length).toEqual(State.content.postsList.posts.length);
   });
 
   it(`

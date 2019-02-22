@@ -58,7 +58,7 @@
     "no-string-literal": false,
     "no-switch-case-fall-through": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
+    "no-use-before-declare": false,
     "no-var-keyword": true,
     "radix": true,
     "switch-default": true,
@@ -74,10 +74,10 @@
     ],
     "max-line-length": [
       true,
-      100
+      140
     ],
     "no-require-imports": false,
-    "no-trailing-whitespace": true,
+    "no-trailing-whitespace": false,
     "object-literal-sort-keys": false,
     "trailing-comma": [
       true,
@@ -112,7 +112,6 @@
     "semicolon": [true, "always"],
     "variable-name": [
       true,
-      "check-format",
       "allow-leading-underscore",
       "ban-keywords"
     ],

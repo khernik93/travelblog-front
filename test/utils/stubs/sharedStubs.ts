@@ -35,4 +35,4 @@ export class SharedStubs {
     return jasmine.createSpyObj('PreviousRouteService', ['goBack']);
   }
 
-};
+}

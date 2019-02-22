@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const root = require('./helpers.js').root
 const ip = require('ip');
 

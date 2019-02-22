@@ -123,7 +123,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
         test: /\.ts$/,
         loaders: [
           '@angularclass/hmr-loader',
-          `awesome-typescript-loader?{configFileName: "tsconfig.json"}`,
+          //`awesome-typescript-loader?{configFileName: "tsconfig.json"}`,
           'angular2-template-loader',
           'angular-router-loader?loader=system&genDir=compiled&aot=true',
         ],

@@ -8,9 +8,10 @@
     "url": "https://github.com/khernik93/travelblog-front"
   },
   "scripts": {
-    "build": "npm run clean:dist && npm run sass && webpack",
-    "build:prod": "npm run clean:dist && npm run sass && webpack --prod",
+    "build": "npm run clean:dist && npm run sass && webpack --config config/webpack.config.ts",
+    "build:prod": "npm run clean:dist && npm run sass && webpack --prod --config config/webpack.config.ts",
     "start": "npm run clean:dist && npm run sass && npm run server",
+    "start:prod": "node server/index.ts",
     "webdev": "webpack-dev-server --config config/webpack.config.ts",
     "webdev:hmr": "npm run webdev --hotOnly --hot --inline",
     "server": "npm-run-all -p -r webdev:hmr sass:watch",

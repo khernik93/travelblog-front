@@ -30,6 +30,13 @@ $ npm run test
 
 * set the *SHOW_BUNDLE_ANALYZER* flag in constants.js to true in order to analyze the bundle
 
+## Deployment
+
+```
+$ docker build -t <image-name> .
+$ docker run --name <container-name> -d <image-name> -p 80:3000
+```
+
 ## AoT support
 
 All available commands run in the AoT mode except for *npm run test* (which uses different webpack config)

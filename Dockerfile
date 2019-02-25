@@ -9,4 +9,4 @@ RUN npm install
 COPY --chown=node:node . .
 EXPOSE 3000
 
-CMD nod server/index.ts
+CMD node server/index.ts

@@ -5,4 +5,4 @@ COPY . .
 RUN npm install
 EXPOSE 3000
 RUN npm run build:prod
-RUN npm run start:prod
+CMD ["node", "server/index.ts"]

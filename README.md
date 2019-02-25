@@ -34,7 +34,7 @@ $ npm run test
 
 ```
 $ docker build -t <image-name> .
-$ docker run --name <container-name> -d <image-name> -p 80:3000
+$ docker run -d -it -p 80:3000 <image-name>
 ```
 
 ## AoT support

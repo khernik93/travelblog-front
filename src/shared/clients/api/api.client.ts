@@ -21,8 +21,7 @@ const ROUTES: any = {
   addNewPost: '/post',
   updatePost: '/post',
   deletePost: '/post',
-  signIn: '/auth/signIn',
-  uploadPhoto: '/system/uploadPhoto'
+  signIn: '/auth/signIn'
 };
 
 @Injectable()
@@ -39,7 +38,7 @@ export class ApiClient {
 
   private initializeHeaders() {
     this.headers = new HttpHeaders()
-      .set('X-Api-Key', 'aaa');
+      .set('X-Api-Key', API_KEY);
   }
 
   getRecentPosts(): Observable<PostContentDTO[]> {
@@ -139,18 +138,6 @@ export class ApiClient {
     return this.transferHttpService.post(url, credentials, {
       withCredentials: true,
       headers: this.headers
-    });
-  }
-
-  uploadFile(file: any): Observable<String> {
-    const url = this.prepareUrl(ROUTES.uploadPhoto);
-    let formData:FormData = new FormData();
-    formData.append('file', file, file.name);
-    this.headers.append('Content-Type', 'multipart/form-data');
-    this.headers.append('Accept', 'application/json');
-    return this.transferHttpService.post(url, formData, {
-      headers: this.headers,
-      responseType: 'text'
     });
   }
 

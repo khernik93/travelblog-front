@@ -1,12 +1,17 @@
-FROM node:10-alpine
+FROM node:10
 
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
-WORKDIR /home/node/app
-COPY package*.json ./
+#RUN apk update && apk add bash
+
+WORKDIR /home/node
+COPY . /home/node
+RUN chown -R node:node /home/node
 USER node
+COPY package*.json /tmp/
 
-RUN npm install
+RUN cd /tmp && npm install
+RUN cp -a /tmp/node_modules /home/node/
+
 COPY --chown=node:node . .
-EXPOSE 3000
+EXPOSE 80
 
-CMD node server/index.ts
+CMD ["npm", "run", "start:prod"]

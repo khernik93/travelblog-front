@@ -7,6 +7,10 @@ import {
   DEV_DEVTOOL,
   PROD_API_URL,
   DEV_API_URL,
+  API_KEY,
+  PROD_CONTENT_URL,
+  DEV_CONTENT_URL,
+  CONTENT_KEY,
   MY_COPY_FOLDERS,
   MY_CLIENT_PLUGINS,
   MY_CLIENT_PRODUCTION_PLUGINS,
@@ -34,6 +38,7 @@ console.log('AOT BUILD: ', true);
 console.log('TEST BUILD: ', false);
 
 const API_URL = PROD ? PROD_API_URL : DEV_API_URL;
+const CONTENT_URL = PROD ? PROD_CONTENT_URL : DEV_CONTENT_URL;
 
 /**
  * Logic for copying folders
@@ -56,7 +61,9 @@ const CONSTANTS = {
   ENV: JSON.stringify(ENV),
   HOST: JSON.stringify(HOST),
   PORT: PORT,
-  STORE_DEV_TOOLS: JSON.stringify(STORE_DEV_TOOLS)
+  STORE_DEV_TOOLS: JSON.stringify(STORE_DEV_TOOLS),
+  API_KEY: JSON.stringify(API_KEY),
+  CONTENT_KEY: JSON.stringify(CONTENT_KEY)
 };
 
 /**
@@ -97,7 +104,7 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
         secure: false
       },
       '/resources': {
-        target: API_URL,
+        target: CONTENT_URL,
         pathRewrite: {'^/resources': ''},
         secure: false
       }

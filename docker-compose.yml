@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  # Angular frontend
+  frontend:
+    image: travelblog-frontend
+    container_name: travelblog-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      API_KEY: ${API_KEY}
+      CONTENT_KEY: ${CONTENT_KEY}
+    ports:
+      - "80:3000"
+    logging:
+      driver: json-file
+    networks:
+      - travelblogback_app-network
+
+# Docker Networks
+networks:
+  travelblogback_app-network:
+    external: true

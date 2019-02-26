@@ -13,3 +13,7 @@ export declare const MY_CLIENT_PRODUCTION_PLUGINS: any[];
 export declare const MY_CLIENT_DEVSERVER_PLUGINS: any[];
 export declare const MY_CLIENT_RULES: any[];
 export declare const EXCLUDE_SOURCE_MAPS: any[];
+export declare const API_KEY: string;
+export declare const PROD_CONTENT_URL: string;
+export declare const DEV_CONTENT_URL: string;
+export declare const CONTENT_KEY: string;

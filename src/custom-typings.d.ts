@@ -3,6 +3,8 @@ declare var ENV: string;
 declare var HOST: string;
 declare var PORT: number;
 declare var STORE_DEV_TOOLS: string;
+declare var API_KEY: string;
+declare var CONTENT_KEY: string;
 declare var System: SystemJS;
 
 interface SystemJS {

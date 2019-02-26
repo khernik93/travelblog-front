@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import * as QuillNamespace from 'quill';
 import ImageUploader from 'quill-image-uploader';
-import { ApiClient } from '../../clients/api/api.client';
+import { ContentClient } from '../../clients/content/content.client';
 let Quill: any = QuillNamespace;
 
 @Component({
@@ -25,7 +25,7 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
 
   constructor(
-    private apiClient: ApiClient
+    private contentClient: ContentClient
   ) { }
 
   ngOnInit() {
@@ -50,7 +50,7 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   }
 
   upload(file: HTMLInputElement): Promise<String> {
-    return this.apiClient.uploadFile(file).toPromise();
+    return this.contentClient.uploadFile(file).toPromise();
   }
 
   ngOnDestroy() {

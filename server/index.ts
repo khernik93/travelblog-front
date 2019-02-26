@@ -1,19 +1,19 @@
 const express = require('express');
-const request = require('request');
 const path = require('path');
 const httpProxy = require('http-proxy');
 const apiProxy = httpProxy.createProxyServer();
+const { PROD_API_URL, PROD_CONTENT_URL } = require('../config/constants');
 
 const app = express();
 
 app.use(express.static('dist'));
 
 app.all('/api/*', function (req, res) {
-  apiProxy.web(req, res, { target: 'http://127.0.0.1:3001' });
+  apiProxy.web(req, res, { target: PROD_API_URL });
 });
 
 app.all('/resources/*', function (req, res) {
-  apiProxy.web(req, res, { target: 'http://127.0.0.1:3001', pathRewrite: {
+  apiProxy.web(req, res, { target: PROD_CONTENT_URL, pathRewrite: {
     '^/resources': ''
   } });
 });

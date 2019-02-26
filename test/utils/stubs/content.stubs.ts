@@ -4,7 +4,7 @@ import { PostsListService } from '../../../src/modules/content/containers/postsL
 
 export class ContentStubs {
 
-  static postId: string = "1";
+  static postId: string = '1';
 
   static commentsService(): jasmine.SpyObj<CommentsService> {
     return jasmine.createSpyObj('CommentsService', ['removeEmptyValues']);
@@ -28,5 +28,5 @@ export class ContentStubs {
       paramMap: of({get: () => ContentStubs.postId})
     };
   }
-  
-};
+
+}

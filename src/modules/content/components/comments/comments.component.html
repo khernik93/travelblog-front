@@ -1,8 +1,8 @@
-<div class="post-comments">
-  <h2>Comments</h2>
-  <ol class="comment-list" *ngIf="comments$ | async">
+<div class="post-comments" *ngIf="(comments$ | async) as comments">
+  <h2 *ngIf="comments.length > 0">Comments</h2>
+  <ol class="comment-list">
 
-    <li class="comment" *ngFor="let comment of comments$ | async">
+    <li class="comment" *ngFor="let comment of comments">
       <div class="comment-body">
         <div class="comment-wrap">
           <div class="comment-author">
@@ -35,7 +35,7 @@
 
 <div class="comments-form">
   <div class="comment-respond">
-    <h2 class="comment-reply-title">Leave a reply</h2>
+    <h3 class="comment-reply-title">Leave a reply</h3>
 
     <form class="comment-form" [formGroup]="addNewCommentForm">
       <input type="text" placeholder="Name" formControlName="name">

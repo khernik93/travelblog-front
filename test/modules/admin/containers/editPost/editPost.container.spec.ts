@@ -11,16 +11,17 @@ import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../../src/modules/
 import { State } from '../../../../utils/state/state';
 import { EditPostContainer } from '../../../../../src/modules/admin/containers/editPost/editPost.container';
 import { AdminStubs } from '../../../../utils/stubs/admin.stubs';
-import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { GetPost } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.actions';
 import { EditPost } from '../../../../../src/modules/admin/containers/editPost/store/editPost.actions';
+import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { ContentClient } from '../../../../../src/shared/clients/content/content.client';
 
 describe('EditPostContainer', () => {
 
   let store: MockStore<HeaderState>;
   let activatedRoute: jasmine.SpyObj<ActivatedRoute>;
-  let wysiwygService: jasmine.SpyObj<WysiwygService>;
+  let contentClient: jasmine.SpyObj<ContentClient>;
 
   let component: EditPostContainer;
   let fixture: ComponentFixture<EditPostContainer>;
@@ -28,7 +29,7 @@ describe('EditPostContainer', () => {
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
     activatedRoute = AdminStubs.activatedRoute();
-    wysiwygService = SharedStubs.getWysiwygServiceStub();
+    contentClient = SharedStubs.getContentClientStub();
 
     TestBed.configureTestingModule({
       imports: [...MODULE_IMPORTS, RouterTestingModule],
@@ -36,7 +37,7 @@ describe('EditPostContainer', () => {
       providers: [
         { provide: Store, useValue: store },
         { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: WysiwygService, useValue: wysiwygService }
+        { provide: ContentClient, use: contentClient }
       ]
     }).compileComponents();
   });

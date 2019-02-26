@@ -1,18 +1,13 @@
 <section id="posts-list">
-  <div class="post-wrap" *ngIf="post$ | async">
-    <div class="content-section posted-date">
-      <h4>{{ (post$ | async).createdAt | date:'medium' }}</h4>
-    </div>
-    <br>
-    <div class="content-section entry-title">
-      <h1>{{ (post$ | async).title }}</h1>
-    </div>
-    <div class="content-section tags-links">
-      <span *ngFor="let tag of (post$ | async).tags">#{{ tag }}</span>
-    </div>
-    <br>
+  <div class="post-wrap" *ngIf="post$ | async" @fadeToggle>
     <div class="content-section entry-content" [innerHTML]="(post$ | async).content | safeHtml">
       <!-- post content HTML -->
+    </div>
+    <div class="content-section tags-links text-left">
+      <span *ngFor="let tag of (post$ | async).tags">#{{ tag }}</span>
+    </div>
+    <div class="content-section posted-date text-left">
+      <h4>{{ (post$ | async).createdAt | date:'medium' }}</h4>
     </div>
     <div class="content-section entry-comments">
       <comments-container></comments-container>

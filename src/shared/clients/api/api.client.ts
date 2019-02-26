@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { map, delay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 
 import { TransferHttpService } from '../../services/transferHttp.service';
 import { AuthCredentials } from '../../../modules/auth/auth.model';
-import constants from '../../../config/constants';
 import {
   PostContentDTO, PostsDTO, SwiperDTO, TabDTO, CommentDTO
 } from './api.model';
@@ -39,7 +38,7 @@ export class ApiClient {
 
   private initializeHeaders() {
     this.headers = new HttpHeaders()
-      .set('X-Api-Key', 'aaa');
+      .set('X-Api-Key', API_KEY);
   }
 
   getRecentPosts(): Observable<PostContentDTO[]> {
@@ -147,7 +146,7 @@ export class ApiClient {
    * @param uri 
    */
   private prepareUrl(uri: string) {
-    return constants.apiUrl + uri;
+    return '/api' + uri;
   }
 
 }

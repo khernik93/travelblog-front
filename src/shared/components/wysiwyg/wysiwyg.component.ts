@@ -1,47 +1,55 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { WysiwygService } from './wysiwyg.service';
+import Quill from 'quill';
+import ImageUploader from 'quill-image-uploader';
+import { ContentClient } from '../../clients/content/content.client';
 
 @Component({
   selector: 'wysiwyg-component',
-  template: `
-    <app-ngx-editor [config]="editorConfig" 
-                    [(ngModel)]="content" 
-                    (ngModelChange)="onChange()"
-                    [placeholder]="placeholder"
-    ></app-ngx-editor>
-  `
+  templateUrl: './wysiwyg.component.html'
 })
 export class WysiwygComponent implements OnInit, OnDestroy {
 
   @Output() onContentChanged = new EventEmitter<string>();
-  @Input() placeholder: string = '';
   @Input() placeholder$: Observable<string>;
 
-  editorConfig = this.wysiwygService.config;
-  content: string;
-
+  content: string = '';
+  quillModules: any = { 
+    imageUploader: { 
+      upload: this.upload.bind(this)
+    }
+  };
+  
   private destroy$ = new Subject();
 
   constructor(
-    private wysiwygService: WysiwygService
+    private contentClient: ContentClient
   ) { }
 
   ngOnInit() {
+    this.registerQuillModules();
     if (this.placeholder$) {
       this.loadPlaceholder();
     }
   }
 
+  private registerQuillModules() {
+    Quill.register("modules/imageUploader", ImageUploader);
+  }
+
   private loadPlaceholder() {
     this.placeholder$
       .pipe(takeUntil(this.destroy$))
-      .subscribe(content => this.content = content);
+      .subscribe(placeholder => this.content = placeholder);
   }
 
-  onChange() {
+  changeContent() {
     this.onContentChanged.emit(this.content);
+  }
+
+  upload(file: HTMLInputElement): Promise<String> {
+    return this.contentClient.uploadFile(file).toPromise();
   }
 
   ngOnDestroy() {

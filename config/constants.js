@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const root = require('./helpers.js').root
 const ip = require('ip');
 
@@ -22,6 +22,17 @@ exports.DEV_PORT = 3000;
 exports.PROD_PORT = 8088;
 exports.PROD_DEVTOOL = 'source-map';
 exports.DEV_DEVTOOL = 'eval-source-map';
+
+/**
+ * Backend URLs
+ */
+exports.PROD_API_URL = 'http://backend:3001';
+exports.DEV_API_URL = 'http://127.0.0.1:3001';
+exports.API_KEY = process.env.API_KEY;
+
+exports.PROD_CONTENT_URL = 'http://content:3002';
+exports.DEV_CONTENT_URL = 'http://127.0.0.1:3002';
+exports.CONTENT_KEY = process.env.CONTENT_KEY;
 
 exports.SHOW_BUNDLE_ANALYZER = false;
 

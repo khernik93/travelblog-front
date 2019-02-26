@@ -34,7 +34,7 @@ describe('NotificationReducer', () => {
         ...initialState,
         notification: expectedNotification
       });
-    };
+    }
 
   }
 

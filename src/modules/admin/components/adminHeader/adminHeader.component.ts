@@ -9,10 +9,6 @@ export class AdminHeaderComponent {
 
   @Output('onSignOut') signOutEmitter = new EventEmitter<void>();
 
-  routes: any = {
-    home: '/'
-  };
-
   logout() {
     this.signOutEmitter.emit();
   }

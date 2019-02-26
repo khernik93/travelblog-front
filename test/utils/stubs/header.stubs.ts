@@ -5,5 +5,5 @@ export class HeaderStubs {
   static swiperService(): jasmine.SpyObj<SwiperService> {
     return jasmine.createSpyObj('SwiperService', ['configuration']);
   }
-  
-};
+
+}

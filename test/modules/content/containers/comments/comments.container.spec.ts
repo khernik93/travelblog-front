@@ -22,7 +22,7 @@ describe('CommentsContainer', () => {
   let fixture: ComponentFixture<CommentsContainer>;
 
   beforeEach(() => {
-    store = SharedStubs.getMockStoreStub<ContentState>()
+    store = SharedStubs.getMockStoreStub<ContentState>();
     commentsService = ContentStubs.commentsService();
 
     TestBed.configureTestingModule({

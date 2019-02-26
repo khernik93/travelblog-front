@@ -3,7 +3,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { NgxEditorModule } from 'ngx-editor';
+import { QuillModule } from 'ngx-quill';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
@@ -25,6 +25,7 @@ import { AdminRoutingModule } from './routing/adminRouting.module';
 import { AuthModule } from '../auth/auth.module';
 import { adminEffects } from './store/admin.effects';
 import { PostsService } from './services/posts.service';
+import { ContentClient } from '../../shared/clients/content/content.client';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent,
@@ -43,7 +44,7 @@ export const MODULE_IMPORTS = [
   CommonModule,
   FormsModule,
   ReactiveFormsModule,
-  NgxEditorModule,
+  QuillModule,
   HttpClientModule,
   RouterModule
 ];
@@ -66,7 +67,8 @@ const STORE_IMPORTS = [
   ],
   exports: [AdminComponent],
   providers: [
-    PostsService
+    PostsService,
+    ContentClient
   ]
 })
 export class AdminModule {

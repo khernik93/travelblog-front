@@ -19,7 +19,6 @@ import { NotificationComponent } from './components/notification/notification.co
 // Modules
 import { HeaderModule } from '../header/header.module';
 import { ContentModule } from '../content/content.module';
-import { FooterModule } from '../footer/footer.module';
 import { AdminModule } from '../admin/admin.module';
 import { AppRoutingModule } from './routing/appRouting.module';
 import { ContentRoutingModule } from '../content/routing/contentRouting.module';
@@ -33,7 +32,6 @@ import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { PreviousRouteService } from '../../shared/services/previousRoute.service';
 import { NotificationContainer } from './containers/notification/notification.container';
 import { LayoutContainer } from './containers/layout/layout.container';
-import { WysiwygService } from '../../shared/components/wysiwyg/wysiwyg.service';
 
 export const MODULE_DECLARATIONS = [
   NotFoundComponent,
@@ -55,7 +53,6 @@ export const MODULE_IMPORTS = [
 const ROOT_MODULE_IMPORTS = [
   HeaderModule,
   ContentModule,
-  FooterModule,
   AdminModule,
   AuthModule
 ];
@@ -89,7 +86,6 @@ const STORE_IMPORTS = [
     TransferHttpService,
     ApiClient,
     PreviousRouteService,
-    WysiwygService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],

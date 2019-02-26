@@ -5,27 +5,21 @@ import { By } from '@angular/platform-browser';
 
 import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../../src/modules/admin/admin.module';
 import { State } from '../../../../utils/state/state';
-import { WysiwygService } from '../../../../../src/shared/components/wysiwyg/wysiwyg.service';
-import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { PostsTableComponent } from '../../../../../src/modules/admin/components/postsTable/postsTable.component';
 
 describe('PostsTableComponent', () => {
 
   let component: PostsTableComponent;
   let fixture: ComponentFixture<PostsTableComponent>;
-  let wysiwygService: jasmine.SpyObj<WysiwygService>;
-  
+
   const posts = State.content.postsList.posts;
   const selectedTab = State.header.menu.selectedTab;
 
   beforeEach(() => {
-    wysiwygService = SharedStubs.getWysiwygServiceStub();
     TestBed.configureTestingModule({
       imports: [...MODULE_IMPORTS, RouterTestingModule],
       declarations: MODULE_DECLARATIONS,
-      providers: [
-        { provide: WysiwygService, useValue: wysiwygService }
-      ]
+      providers: []
     }).compileComponents();
   });
 
@@ -52,8 +46,8 @@ describe('PostsTableComponent', () => {
     WHEN component is loaded
     THEN all posts are visible
   `, () => {
-    const posts = fixture.debugElement.queryAll(By.css('.post-row'))
-    expect(posts.length).toEqual(State.content.postsList.posts.length);
+    const postsEl = fixture.debugElement.queryAll(By.css('.post-row'));
+    expect(postsEl.length).toEqual(State.content.postsList.posts.length);
   });
 
   it(`

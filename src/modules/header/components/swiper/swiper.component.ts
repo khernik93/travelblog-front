@@ -1,6 +1,8 @@
 import { Component, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
 import Swiper from 'swiper';
 import { SwiperService } from '../../containers/swiper/swiper.service';
+import { Observable } from 'rxjs';
+import { PostContentDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({
   selector: 'swiper-component',
@@ -10,6 +12,7 @@ import { SwiperService } from '../../containers/swiper/swiper.service';
 export class SwiperComponent implements OnChanges {
 
   @Input() photosForSelectedTab: string[];
+  @Input() post$: Observable<PostContentDTO>;
 
   private swiper: Swiper;
 

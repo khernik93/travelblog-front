@@ -1,12 +1,14 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { FadeToggleAnimation } from '../../../../shared/animations';
 
 @Component({
   selector: 'singlePost-component',
-  styleUrls: ['../postsList/postsList.component.scss'],
+  styleUrls: ['./singlePost.component.scss', '../postsList/postsList.component.scss'],
   templateUrl: './singlePost.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [FadeToggleAnimation]
 })
 export class SinglePostComponent {
 

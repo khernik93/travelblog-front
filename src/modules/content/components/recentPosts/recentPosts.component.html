@@ -1,18 +1,20 @@
 <section *ngIf="(recentPosts$ | async).length > 0">
-  <div class="recent-posts-title">
-    <h1>RECENTLY</h1>
-  </div>
-  <br><br>
-  <div class="post-wrap" *ngFor="let recentPost of recentPosts$ | async; let i = index">
-    <div class="content-section posted-date">
-      <h4>{{ recentPost.createdAt | date:'medium' }}</h4>
+  <div class="well" *ngIf="(recentPosts$ | async) as recentPosts">
+    <div class="well-title">
+      <h1>Recently</h1>
     </div>
-    <div class="content-section entry-title">
-      <h3>{{ recentPost.title }}</h3>
+    <br>
+    <div class="post-wrap" *ngFor="let recentPost of recentPosts; let i = index">
+      <div class="content-section posted-date">
+        <h4>{{ recentPost.createdAt | date:'medium' }}</h4>
+      </div>
+      <div class="content-section entry-title">
+        <h3 [routerLink]="contentRoutes.singlePost(recentPost.tab.id, recentPost.id)">{{ recentPost.title }}</h3>
+      </div>
+      <div class="content-section entry-tab">
+        <h4>( {{ recentPost.tab.name }} )</h4>
+      </div>
+      <br><br *ngIf="i !== recentPosts.length - 1">
     </div>
-    <div class="content-section tags-links">
-      <span *ngFor="let tag of recentPost.tags">#{{ tag }}</span>
-    </div>
-    <br><br>
   </div>
 </section>

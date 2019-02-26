@@ -7,24 +7,24 @@ import { MODULE_IMPORTS, MODULE_DECLARATIONS } from '../../../../../src/modules/
 import { PostFormComponent } from '../../../../../src/modules/admin/components/postForm/postForm.component';
 import { State } from '../../../../utils/state/state';
 import { ChangeDetectorRef } from '@angular/core';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
+import { ContentClient } from '../../../../../src/shared/clients/content/content.client';
 
 describe('PostFormComponent', () => {
 
   let component: PostFormComponent;
   let fixture: ComponentFixture<PostFormComponent>;
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let contentClient: jasmine.SpyObj<ContentClient>;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    contentClient = SharedStubs.getContentClientStub();
 
     TestBed.configureTestingModule({
       imports: [...MODULE_IMPORTS, RouterTestingModule],
       declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: ChangeDetectorRef },
-        { provide: ApiClient, useValue: apiClient }    
+        { provide: ContentClient, useValue: contentClient }
       ]
     }).compileComponents();
   });

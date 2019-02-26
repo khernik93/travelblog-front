@@ -10,7 +10,7 @@ import { AddNewPostContainer } from '../../../../../src/modules/admin/containers
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { State } from '../../../../utils/state/state';
 import { AddNewPost } from '../../../../../src/modules/admin/containers/addNewPost/store/addNewPost.actions';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { ContentClient } from '../../../../../src/shared/clients/content/content.client';
 
 describe('AddNewPostContainer', () => {
 
@@ -18,18 +18,18 @@ describe('AddNewPostContainer', () => {
 
   let component: AddNewPostContainer;
   let fixture: ComponentFixture<AddNewPostContainer>;
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let contentClient: jasmine.SpyObj<ContentClient>;
 
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
-    apiClient = SharedStubs.getApiClientStub();
+    contentClient = SharedStubs.getContentClientStub();
 
     TestBed.configureTestingModule({
       imports: MODULE_IMPORTS,
       declarations: MODULE_DECLARATIONS,
       providers: [
         { provide: Store, useValue: store },
-        { provide: ApiClient, use: apiClient }
+        { provide: ContentClient, use: contentClient }
       ]
     }).compileComponents();
   });

@@ -8,6 +8,7 @@ import { PostsListResponse } from '../responses/postsList.response';
 import { RecentPostsResponse } from '../responses/recentPosts.response';
 import { ApiClient } from '../../../src/shared/clients/api/api.client';
 import { CommentsResponse } from '../responses/comments.response';
+import { ContentClient } from '../../../src/shared/clients/content/content.client';
 
 export class SharedStubs {
 
@@ -24,6 +25,12 @@ export class SharedStubs {
       'deletePost': of(''),
       'addComment': of(''),
       'signIn': of('')
+    });
+  }
+
+  static getContentClientStub(): jasmine.SpyObj<ContentClient> {
+    return jasmine.createSpyObj('ContentClient', {
+      'uploadPhoto': of('')
     });
   }
 

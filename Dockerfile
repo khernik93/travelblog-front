@@ -1,6 +1,7 @@
 FROM node:10-alpine
 
-#RUN apk update && apk add bash
+RUN apk update && apk add bash
+RUN apk update && apk add vim
 
 WORKDIR /home/node
 COPY . /home/node

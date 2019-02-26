@@ -9,8 +9,8 @@ services:
       context: .
       dockerfile: Dockerfile
     environment:
-      API_KEY: ${API_KEY}
-      CONTENT_KEY: ${CONTENT_KEY}
+      API_KEY: ${API_KEY:?API_KEY has to be set}
+      CONTENT_KEY: ${CONTENT_KEY:?CONTENT_KEY has to be set}
     ports:
       - "80:3000"
     logging:

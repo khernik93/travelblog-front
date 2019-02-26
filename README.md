@@ -2,38 +2,39 @@
 
 ## Description
 
-This is a frontend of the travelling blog writen in angular 6 with redux pattern. 
+This is a frontend of the travelling blog writen in angular 6 with redux pattern. It's written in angular 7 with redux pattern
+for state management.
 
 ## Prequisites
 
 * npm > v6.5.0
+* node > v11.6.0
 
-## Installation
+## Installation and setting required env variables
 
 ```
 $ npm install
+$ export API_KEY=""
+$ export CONTENT_KEY=""
 ```
 
 ## Running in development mode
 
 ```
-$ export API_KEY=""
-$ export CONTENT_KEY=""
 $ npm run start
 ```
 
-This will build the project and run a webpack dev server - it will listen to all changes in the filesystem and rebuild
-the website accordingly.
+This will build the project first and then run a webpack dev server - it will listen to all changes in the filesystem and rebuild
+the website accordingly (hmr). Dev webpack, along with dev API urls, will be used.
 
 ## Running in production mode
 
 ```
-$ export API_KEY=""
-$ export CONTENT_KEY=""
 $ npm run start:prod
 ```
 
-This will build the project in production mode, and run a small node server which serves as production facade.
+This will build the project in production mode, and run a small node server which serves as production facade. Production webpack
+will be used, along with production API urls.
 
 ## Linting and executing tests
 
@@ -41,6 +42,8 @@ This will build the project in production mode, and run a small node server whic
 $ npm run lint
 $ npm run test
 ```
+
+@TODO This should be a githook.
 
 ## Measuring bundle performance
 

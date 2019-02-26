@@ -15,12 +15,13 @@ import { GetTabs } from '../../../../../src/modules/header/containers/menu/store
 import { GetPost } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.actions';
 import { EditPost } from '../../../../../src/modules/admin/containers/editPost/store/editPost.actions';
 import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { ContentClient } from '../../../../../src/shared/clients/content/content.client';
 
 describe('EditPostContainer', () => {
 
   let store: MockStore<HeaderState>;
   let activatedRoute: jasmine.SpyObj<ActivatedRoute>;
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let contentClient: jasmine.SpyObj<ContentClient>;
 
   let component: EditPostContainer;
   let fixture: ComponentFixture<EditPostContainer>;
@@ -28,7 +29,7 @@ describe('EditPostContainer', () => {
   beforeEach(() => {
     store = SharedStubs.getMockStoreStub<HeaderState>();
     activatedRoute = AdminStubs.activatedRoute();
-    apiClient = SharedStubs.getApiClientStub();
+    contentClient = SharedStubs.getContentClientStub();
 
     TestBed.configureTestingModule({
       imports: [...MODULE_IMPORTS, RouterTestingModule],
@@ -36,7 +37,7 @@ describe('EditPostContainer', () => {
       providers: [
         { provide: Store, useValue: store },
         { provide: ActivatedRoute, useValue: activatedRoute },
-        { provide: ApiClient, use: apiClient }
+        { provide: ContentClient, use: contentClient }
       ]
     }).compileComponents();
   });

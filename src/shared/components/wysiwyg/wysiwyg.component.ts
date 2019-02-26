@@ -1,10 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as QuillNamespace from 'quill';
+import Quill from 'quill';
 import ImageUploader from 'quill-image-uploader';
 import { ContentClient } from '../../clients/content/content.client';
-let Quill: any = QuillNamespace;
 
 @Component({
   selector: 'wysiwyg-component',
@@ -18,7 +17,7 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   content: string = '';
   quillModules: any = { 
     imageUploader: { 
-      upload: this.upload 
+      upload: this.upload.bind(this)
     }
   };
   

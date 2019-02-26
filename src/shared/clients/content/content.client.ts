@@ -5,7 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { TransferHttpService } from '../../services/transferHttp.service';
 
 const ROUTES: any = {
-  uploadPhoto: '/system/uploadPhoto'
+  uploadPhoto: '/upload'
 };
 
 @Injectable()

@@ -105,7 +105,6 @@ const outputConfig = (function webpackConfig(): WebpackConfig {
       },
       '/resources': {
         target: CONTENT_URL,
-        pathRewrite: {'^/resources': ''},
         secure: false
       }
     }

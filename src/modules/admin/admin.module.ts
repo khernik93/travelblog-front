@@ -25,6 +25,7 @@ import { AdminRoutingModule } from './routing/adminRouting.module';
 import { AuthModule } from '../auth/auth.module';
 import { adminEffects } from './store/admin.effects';
 import { PostsService } from './services/posts.service';
+import { ContentClient } from '../../shared/clients/content/content.client';
 
 export const MODULE_DECLARATIONS = [
   AdminComponent,
@@ -66,7 +67,8 @@ const STORE_IMPORTS = [
   ],
   exports: [AdminComponent],
   providers: [
-    PostsService
+    PostsService,
+    ContentClient
   ]
 })
 export class AdminModule {

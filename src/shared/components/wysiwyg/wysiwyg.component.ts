@@ -1,10 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import * as QuillNamespace from 'quill';
+import Quill from 'quill';
 import ImageUploader from 'quill-image-uploader';
-import { ApiClient } from '../../clients/api/api.client';
-let Quill: any = QuillNamespace;
+import { ContentClient } from '../../clients/content/content.client';
 
 @Component({
   selector: 'wysiwyg-component',
@@ -18,14 +17,14 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   content: string = '';
   quillModules: any = { 
     imageUploader: { 
-      upload: this.upload 
+      upload: this.upload.bind(this)
     }
   };
   
   private destroy$ = new Subject();
 
   constructor(
-    private apiClient: ApiClient
+    private contentClient: ContentClient
   ) { }
 
   ngOnInit() {
@@ -50,7 +49,7 @@ export class WysiwygComponent implements OnInit, OnDestroy {
   }
 
   upload(file: HTMLInputElement): Promise<String> {
-    return this.apiClient.uploadFile(file).toPromise();
+    return this.contentClient.uploadFile(file).toPromise();
   }
 
   ngOnDestroy() {

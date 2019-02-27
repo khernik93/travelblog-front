@@ -9,13 +9,19 @@ const app = express();
 app.use(express.static('dist'));
 
 app.all('/api/*', function (req, res) {
-  apiProxy.web(req, res, { target: PROD_API_URL });
+  apiProxy.web(req, res, { target: PROD_API_URL }, function (e) {
+    console.error(e);
+    res.status(500).send('Internal server error');
+  });
 });
 
 app.all('/resources/*', function (req, res) {
   apiProxy.web(req, res, { target: PROD_CONTENT_URL, pathRewrite: {
     '^/resources': ''
-  } });
+  } }, function (e) {
+    console.error(e);
+    res.status(500).send('Internal server error');
+  });
 });
 
 app.get('*', function (req, res) {

@@ -4,6 +4,12 @@ RUN apk update && apk add bash
 RUN apk update && apk add vim
 RUN apk update && apk add curl
 
+# Install required python dependencies
+RUN apk add --no-cache --virtual .gyp \
+        python \
+        make \
+        g++
+
 WORKDIR /home/app
 COPY . /home/app
 RUN chown -R node:node /home/app

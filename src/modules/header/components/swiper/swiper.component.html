@@ -1,14 +1,19 @@
 <div class="swiper-container">
 
+  <div class="swiper-overlay">
+    <logo-component></logo-component>
+    <menu-container></menu-container>
+    <div class="post-title-block" *ngIf="(post$ | async) as post">
+      <div class="post-title-block-inner">
+        <h1 class="text-center">{{ post.title }}</h1>
+      </div>
+    </div>
+  </div>
+
   <div class="swiper-wrapper">
     <div class="swiper-slide" *ngFor="let photo of photosForSelectedTab">
       <div class="swiper-content ajax-loader">
         <img [src]="photo" alt="">
-        <div class="post-title-block" *ngIf="(post$ | async) as post">
-          <div class="post-title-block-inner">
-              <h1 class="text-center">{{ post.title }}</h1>
-          </div>
-        </div>
       </div>
     </div>
   </div>

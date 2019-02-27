@@ -5,8 +5,6 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./header.component.scss'],
   template: `
     <header>
-      <logo-component></logo-component>
-      <menu-container></menu-container>
       <swiper-container></swiper-container>
     </header>
   `,

@@ -1,5 +1,4 @@
 import {
-  HOST,
   STORE_DEV_TOOLS,
   DEV_PORT,
   PROD_PORT,
@@ -59,7 +58,6 @@ const COPY_FOLDERS = (() => {
 const CONSTANTS = {
   DEV_SERVER: DEV_SERVER,
   ENV: JSON.stringify(ENV),
-  HOST: JSON.stringify(HOST),
   PORT: PORT,
   STORE_DEV_TOOLS: JSON.stringify(STORE_DEV_TOOLS),
   API_KEY: JSON.stringify(API_KEY),

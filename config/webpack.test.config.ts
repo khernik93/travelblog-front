@@ -1,7 +1,6 @@
 import {
   SHOW_BUNDLE_ANALYZER,
   STORE_DEV_TOOLS,
-  HOST,
   DEV_DEVTOOL,
   EXCLUDE_SOURCE_MAPS,
 } from './constants';
@@ -20,7 +19,6 @@ console.log('TEST BUILD: ', true);
 const CONSTANTS = {
   DEV_SERVER: JSON.stringify(false),
   ENV: JSON.stringify('develop'),
-  HOST: JSON.stringify(HOST),
   PORT: "0",
   STORE_DEV_TOOLS: JSON.stringify(STORE_DEV_TOOLS)
 };

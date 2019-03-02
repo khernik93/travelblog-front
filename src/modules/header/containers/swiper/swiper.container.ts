@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, Subject } from 'rxjs';
-import { filter, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { filter, distinctUntilChanged, takeUntil, skip } from 'rxjs/operators';
 import isEqual from 'lodash-es/isEqual';
 
 import { GetPhotos } from './store/swiper.actions';
@@ -40,6 +40,7 @@ export class SwiperContainer implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getPhotos();
+    this.preloadPhotos();
     this.filterPhotosBySelectedTab();
   }
 
@@ -48,6 +49,26 @@ export class SwiperContainer implements OnInit, OnDestroy {
    */
   private getPhotos(): void {
     this.store.dispatch(new GetPhotos());
+  }
+
+  /**
+   * Preload photos
+   */
+  private preloadPhotos(): void {
+    this.photos$
+      .pipe(
+        skip(1)
+      )
+      .subscribe((photos: SwiperDTO) => {
+        let images = [];
+        for (let i in photos) {
+          for (let j in photos[i]) {
+            let image = new Image();
+            image.src = photos[i][j];
+            images.push(image);
+          }
+        }
+      });
   }
 
   /**

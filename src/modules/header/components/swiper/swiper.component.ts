@@ -1,5 +1,5 @@
-import { Component, Input, ChangeDetectorRef, OnChanges } from '@angular/core';
-import Swiper from 'swiper';
+import { Component, Input, ChangeDetectorRef, OnChanges, ViewChild } from '@angular/core';
+import { SwiperDirective } from 'ngx-swiper-wrapper';
 import { SwiperService } from '../../containers/swiper/swiper.service';
 import { Observable } from 'rxjs';
 import { PostContentDTO } from '../../../../shared/clients/api/api.model';
@@ -13,8 +13,8 @@ export class SwiperComponent implements OnChanges {
 
   @Input() photosForSelectedTab: string[];
   @Input() post$: Observable<PostContentDTO>;
-
-  private swiper: Swiper;
+  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
+  config = this.swiperService.configuration;
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -33,17 +33,8 @@ export class SwiperComponent implements OnChanges {
    * 2. Call update() function on the Swiper object
    */
   private reinitializeSwiper(): void {
-    if (this.swiper) {
-      this.swiper.removeAllSlides();
-    }
+    this.directiveRef.update();
     this.changeDetectorRef.detectChanges();
-    
-    if (! this.swiper) {
-      const config = this.swiperService.configuration;
-      this.swiper = new Swiper(config.wrapper, config.options);
-    } else {
-      this.swiper.update();
-    }
   }
 
 }

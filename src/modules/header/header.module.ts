@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { SwiperModule } from 'ngx-swiper-wrapper';
 
 // Store
 import { headerReducers } from './store/header.reducers';
@@ -16,6 +17,7 @@ import { SwiperComponent } from './components/swiper/swiper.component';
 import { RouterModule } from '@angular/router';
 import { MenuContainer } from './containers/menu/menu.container';
 import { SwiperContainer } from './containers/swiper/swiper.container';
+import { SwiperService } from './containers/swiper/swiper.service';
 
 export const MODULE_DECLARATIONS = [
   HeaderComponent,
@@ -28,7 +30,8 @@ export const MODULE_DECLARATIONS = [
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  RouterModule
+  RouterModule,
+  SwiperModule
 ];
 
 const STORE_IMPORTS = [
@@ -43,7 +46,9 @@ const STORE_IMPORTS = [
     ...STORE_IMPORTS
   ],
   exports: [HeaderComponent],
-  providers: []
+  providers: [
+    SwiperService
+  ]
 })
 export class HeaderModule {
   constructor() { }

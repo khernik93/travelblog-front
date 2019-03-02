@@ -1,4 +1,4 @@
-<div class="swiper-container">
+<div class="swiper-container" [swiper]="config">
 
   <div class="swiper-overlay">
     <logo-component></logo-component>
@@ -12,7 +12,7 @@
 
   <div class="swiper-wrapper">
     <div class="swiper-slide" *ngFor="let photo of photosForSelectedTab">
-      <div class="swiper-content ajax-loader">
+      <div class="swiper-content">
         <img [src]="photo" alt="">
       </div>
     </div>

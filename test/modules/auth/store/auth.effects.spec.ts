@@ -30,7 +30,7 @@ describe('AuthEffects', () => {
   beforeEach(() => {
     apiClient = SharedStubs.getApiClientStub();
     activatedRoute = AuthStubs.activatedRoute();
-    router = AuthStubs.router();
+    router = SharedStubs.router();
     store = SharedStubs.getMockStoreStub<AppState>();
     cookieService = AuthStubs.cookieService();
 

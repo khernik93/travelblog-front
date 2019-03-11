@@ -1,7 +1,7 @@
 import { Component, Input, ChangeDetectorRef, OnChanges, ViewChild } from '@angular/core';
 import { SwiperDirective } from 'ngx-swiper-wrapper';
-import { SwiperService } from '../../containers/swiper/swiper.service';
 import { Observable } from 'rxjs';
+import { SwiperService } from '../../containers/swiper/swiper.service';
 import { PostContentDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({

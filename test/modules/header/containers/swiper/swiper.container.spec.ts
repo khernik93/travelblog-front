@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
 import cloneDeep from 'lodash-es/cloneDeep';
 
-import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
+import { MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
 import { HeaderState } from '../../../../../src/modules/header/store/header.reducers';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
@@ -27,12 +27,14 @@ describe('SwiperContainer', () => {
 
     TestBed.configureTestingModule({
       imports: MODULE_IMPORTS,
-      declarations: MODULE_DECLARATIONS,
+      declarations: [SwiperContainer],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: Store, useValue: store },
         { provide: ChangeDetectorRef },
         { provide: SwiperService, useValue: swiperService }
-      ]
+      ],
+
     }).compileComponents();
 
   });

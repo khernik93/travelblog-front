@@ -1,4 +1,5 @@
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { MockStore } from '../mocks/mockStore';
 import { PhotosResponse } from '../responses/photos.response';
@@ -11,6 +12,10 @@ import { CommentsResponse } from '../responses/comments.response';
 import { ContentClient } from '../../../src/shared/clients/content/content.client';
 
 export class SharedStubs {
+
+  static router(): jasmine.SpyObj<Router> {
+    return jasmine.createSpyObj('Router', ['navigateByUrl']);
+  }
 
   static getApiClientStub(): jasmine.SpyObj<ApiClient> {
     return jasmine.createSpyObj('ApiClient', {

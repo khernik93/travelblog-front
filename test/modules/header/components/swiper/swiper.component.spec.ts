@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { SwiperComponent } from '../../../../../src/modules/header/components/swiper/swiper.component';
-import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
+import { MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
 import { SwiperService } from '../../../../../src/modules/header/containers/swiper/swiper.service';
 import { HeaderStubs } from '../../../../utils/stubs/header.stubs';
 import { State } from '../../../../utils/state/state';
@@ -20,7 +20,8 @@ describe('SwiperComponent', () => {
 
     TestBed.configureTestingModule({
       imports: MODULE_IMPORTS,
-      declarations: MODULE_DECLARATIONS,
+      declarations: [SwiperComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: ChangeDetectorRef },
         { provide: SwiperService, useValue: swiperService }

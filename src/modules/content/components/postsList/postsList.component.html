@@ -15,25 +15,21 @@
       <div class="content-section posted-date">
         <h4>{{ post.createdAt | date:'medium' }}</h4>
       </div>
-      <br>
       <div class="content-section entry-title" *ngIf="(selectedTab$ | async) as selectedTab">
         <h1 [routerLink]="contentRoutes.singlePost(selectedTab.id, post.id)">{{ post.title }}</h1>
       </div>
       <div class="content-section tags-links">
         <span *ngFor="let tag of post.tags">#{{ tag }}</span>
       </div>
-      <br>
       <div class="content-section entry-content entry-content-restricted" [innerHTML]="post.content | safeHtml">
         <!-- Post content HTML -->
       </div>
       <div class="content-section read-more" *ngIf="(selectedTab$ | async) as selectedTab">
         <button [routerLink]="contentRoutes.singlePost(selectedTab.id, post.id)"><h4>read more</h4></button>
       </div>
-      <br><br><br><Br>
-      <div class="content-section" *ngIf="i !== posts.length - 1">
+      <div class="content-section line-break" *ngIf="i !== posts.length - 1">
         <lineBreak-component></lineBreak-component>
       </div>
-      <br><br><br>
     </div>
 
     <!-- Infinite scroll loader icon -->

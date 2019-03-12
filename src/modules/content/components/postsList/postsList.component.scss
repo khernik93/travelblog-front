@@ -15,6 +15,7 @@
 
 .post-wrap .content-section {
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .post-wrap .posted-date {
@@ -85,4 +86,8 @@
       color: $red;
     }
   }
+}
+
+.post-wrap .line-break {
+  margin: 50px 0;
 }

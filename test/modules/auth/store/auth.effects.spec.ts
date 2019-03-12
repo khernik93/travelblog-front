@@ -15,6 +15,7 @@ import { AuthStubs } from '../../../utils/stubs/auth.stubs';
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { CookieService } from '../../../../src/shared/services/cookie.service';
 import { AppState } from '../../../../src/modules/app/store/app.reducers';
+import { AuthService } from '../../../../src/modules/auth/auth.service';
 
 describe('AuthEffects', () => {
 
@@ -23,6 +24,7 @@ describe('AuthEffects', () => {
   let store: MockStore<AppState>;
   let cookieService: jasmine.SpyObj<CookieService>;
   let router: jasmine.SpyObj<Router>;
+  let authService: jasmine.SpyObj<AuthService>;
 
   let actions: TestActions;
   let effects: AuthEffects;
@@ -33,6 +35,7 @@ describe('AuthEffects', () => {
     router = SharedStubs.router();
     store = SharedStubs.getMockStoreStub<AppState>();
     cookieService = AuthStubs.cookieService();
+    authService = AuthStubs.authService();
 
     TestBed.configureTestingModule({
       imports: [
@@ -45,7 +48,8 @@ describe('AuthEffects', () => {
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: Store, useValue: store },
         { provide: CookieService, useValue: cookieService },
-        { provide: Router, useValue: router }
+        { provide: Router, useValue: router },
+        { provide: AuthService, useValue: authService }
       ]
     });
 

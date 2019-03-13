@@ -7,7 +7,7 @@ export class SwiperService {
   /**
    * Configuration object for initializing swiper element
    */
-  public configuration: SwiperConfigInterface = {
+  public CONFIGURATION: SwiperConfigInterface = {
     slidesPerView: 1,
     spaceBetween: 0,
     loop: true,

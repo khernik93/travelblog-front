@@ -17,7 +17,6 @@ import { SwiperComponent } from './components/swiper/swiper.component';
 import { RouterModule } from '@angular/router';
 import { MenuContainer } from './containers/menu/menu.container';
 import { SwiperContainer } from './containers/swiper/swiper.container';
-import { SwiperService } from './containers/swiper/swiper.service';
 
 export const MODULE_DECLARATIONS = [
   HeaderComponent,
@@ -46,9 +45,7 @@ const STORE_IMPORTS = [
     ...STORE_IMPORTS
   ],
   exports: [HeaderComponent],
-  providers: [
-    SwiperService
-  ]
+  providers: []
 })
 export class HeaderModule {
   constructor() { }

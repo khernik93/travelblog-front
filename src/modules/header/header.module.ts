@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { SwiperModule } from 'ngx-swiper-wrapper';
 
 // Store
 import { headerReducers } from './store/header.reducers';
@@ -29,8 +28,7 @@ export const MODULE_DECLARATIONS = [
 
 export const MODULE_IMPORTS = [
   CommonModule,
-  RouterModule,
-  SwiperModule
+  RouterModule
 ];
 
 const STORE_IMPORTS = [

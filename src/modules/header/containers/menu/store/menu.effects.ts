@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { exhaustMap, map, switchMap, tap, takeUntil, take, filter } from 'rxjs/operators';
+import { exhaustMap, map, switchMap, tap, filter, take, distinctUntilChanged } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import isEqual from 'lodash-es/isEqual';
 import { MenuActionTypes, SetTabs, SelectTab } from './menu.actions';
 import { ApiClient } from '../../../../../shared/clients/api/api.client';
 import { TabDTO } from '../../../../../shared/clients/api/api.model';
-import { Store } from '@ngrx/store';
 import { HeaderState } from '../../../store/header.reducers';
 import { selectTabs } from './menu.selectors';
 
@@ -23,6 +24,7 @@ export class MenuEffects {
             map((tabs: TabDTO[]) => ({ tabId: action.id, tabs }))
           )
       )),
+      distinctUntilChanged((x: any, y: any) => isEqual(x, y)),
       map((result: {tabId: number, tabs: TabDTO[]}) => (
         result.tabId ?
           result.tabs.filter(tab => tab.id == result.tabId)[0] :

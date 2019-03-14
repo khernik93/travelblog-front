@@ -25,7 +25,6 @@ import { SafeHtmlPipe } from '../app/pipes/safeHtml.pipe';
 
 // Services
 import { PostsListService } from './containers/postsList/postsList.service';
-import { SwiperService } from '../header/containers/swiper/swiper.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommentsService } from './containers/comments/comments.service';
 import { PostsListContainer } from './containers/postsList/postsList.container';
@@ -66,7 +65,6 @@ const STORE_IMPORTS = [
 
 const MODULE_PROVIDERS = [
   PostsListService,
-  SwiperService,
   CommentsService
 ];
 

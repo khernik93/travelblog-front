@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, Subject } from 'rxjs';
-import { filter, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { filter, distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
 import isEqual from 'lodash-es/isEqual';
 
 import { GetPhotos } from './store/swiper.actions';

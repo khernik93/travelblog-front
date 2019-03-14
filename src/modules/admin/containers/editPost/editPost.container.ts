@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { HeaderState } from '../../../header/store/header.reducers';
@@ -7,7 +7,7 @@ import { GetTabs } from '../../../header/containers/menu/store/menu.actions';
 import { TabDTO, Post, PostContentDTO } from '../../../../shared/clients/api/api.model';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { GetPost } from '../../../content/containers/singlePost/store/singlePost.actions';
+import { GetPost, ClearPost } from '../../../content/containers/singlePost/store/singlePost.actions';
 import { selectPost } from '../../../content/containers/singlePost/store/singlePost.selectors';
 import { EditPost } from './store/editPost.actions';
 
@@ -22,7 +22,7 @@ import { EditPost } from './store/editPost.actions';
     </postForm-component>
   `
 })
-export class EditPostContainer implements OnInit {
+export class EditPostContainer implements OnInit, OnDestroy {
 
   tabs$: Observable<TabDTO[]>;
   post$: Observable<PostContentDTO>;
@@ -52,6 +52,10 @@ export class EditPostContainer implements OnInit {
 
   editPost(post: Post) {
     this.store.dispatch(new EditPost(post));
+  }
+
+  ngOnDestroy() {
+    this.store.dispatch(new ClearPost());
   }
 
 }

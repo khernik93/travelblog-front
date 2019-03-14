@@ -30,7 +30,8 @@ export class SwiperContainer implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
 
   constructor(
-    private store: Store<HeaderState>
+    private store: Store<HeaderState>,
+    private ref: ChangeDetectorRef
   ) {
     this.selectedTab$ = this.store.select(selectSelectedTab);
     this.photos$ = this.store.select(selectPhotos);
@@ -61,6 +62,7 @@ export class SwiperContainer implements OnInit, OnDestroy {
       )
       .subscribe(([selectedTab, photos]) => {
         this.photosForSelectedTab = photos[selectedTab.id];
+        this.ref.detectChanges();
       });
   }
 

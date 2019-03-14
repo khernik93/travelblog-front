@@ -30,7 +30,11 @@ export class SwiperComponent implements OnChanges {
    * 	
    * call update() function on the Swiper object	
    */	
-  private reinitializeSwiper(): void {	
+  private reinitializeSwiper(): void {
+    const swiper = this.directiveRef.swiper();
+    if (swiper) {
+      swiper.removeAllSlides();
+    }
     this.directiveRef.update();
   }
 

@@ -17,7 +17,9 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SwiperComponent } from './components/swiper/swiper.component';
 import { MenuContainer } from './containers/menu/menu.container';
 import { SwiperContainer } from './containers/swiper/swiper.container';
-import { SwiperService } from './containers/swiper/swiper.service';
+
+// Services
+import { ProgressiveImageLoaderDirective } from '../../shared/directives/progressiveImageLoader.directive';
 
 export const MODULE_DECLARATIONS = [
   HeaderComponent,
@@ -25,7 +27,8 @@ export const MODULE_DECLARATIONS = [
   MenuContainer,
   MenuComponent,
   SwiperContainer,
-  SwiperComponent
+  SwiperComponent,
+  ProgressiveImageLoaderDirective
 ];
 
 export const MODULE_IMPORTS = [
@@ -46,9 +49,7 @@ const STORE_IMPORTS = [
     ...STORE_IMPORTS
   ],
   exports: [HeaderComponent],
-  providers: [
-    SwiperService
-  ]
+  providers: []
 })
 export class HeaderModule {
   constructor() { }

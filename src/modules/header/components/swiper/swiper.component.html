@@ -1,5 +1,4 @@
-<div class="swiper-container" 
-     [swiper]="config">
+<div class="swiper-container">
 
   <div class="swiper-overlay">
     <logo-component></logo-component>
@@ -11,25 +10,14 @@
     </div>
   </div>
 
-  <div class="swiper-wrapper">
-    <div class="swiper-slide" *ngFor="let photo of photosForSelectedTab">
+  <div class="swiper-wrapper" *ngIf="photosForSelectedTab">
+    <div class="swiper-slide">
       <div class="swiper-content">
-        <img data-src="{{ photo }}" alt="" class="swiper-lazy">
+        <img [src]="photosForSelectedTab[0] + '_thumb.jpg'"
+             image-loader
+             alt=""/>
       </div>
     </div>
-  </div>
-
-  <div class="swiper-pagination"></div>
-
-  <div class="swiper-button-next">
-    <span><svg xmlns="//www.w3.org/2000/svg" viewBox="0 0 27 44">
-        <path d="M27,22L27,22L5,44l-2.1-2.1L22.8,22L2.9,2.1L5,0L27,22L27,22z"></path>
-      </svg></span>
-  </div>
-  <div class="swiper-button-prev">
-    <span><svg xmlns="//www.w3.org/2000/svg" viewBox="0 0 27 44">
-        <path d="M0,22L22,0l2.1,2.1L4.2,22l19.9,19.9L22,44L0,22L0,22L0,22z"></path>
-      </svg></span>
   </div>
 
 </div>

@@ -9,33 +9,14 @@ import { SwiperService } from '../../containers/swiper/swiper.service';
   styleUrls: ['./swiper.component.scss'],
   templateUrl: './swiper.component.html'
 })
-export class SwiperComponent implements OnChanges {
+export class SwiperComponent {
 
   @Input() photosForSelectedTab: string[];
   @Input() post$: Observable<PostContentDTO>;
-  @ViewChild(SwiperDirective) directiveRef: SwiperDirective;
   config = this.swiperService.CONFIGURATION;
 
   constructor(
     private swiperService: SwiperService
   ) { }
-
-  ngOnChanges() {	
-    this.reinitializeSwiper();	
-  }
-
-  /**	
-   * Initializes swiper for the first time if not yet done, or updates photos	
-   * on state change:	
-   * 	
-   * call update() function on the Swiper object	
-   */	
-  private reinitializeSwiper(): void {
-    const swiper = this.directiveRef.swiper();
-    if (swiper) {
-      swiper.removeAllSlides();
-    }
-    this.directiveRef.update();
-  }
 
 }

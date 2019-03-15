@@ -1,9 +1,11 @@
-import { AfterContentInit, Directive, ElementRef, OnDestroy, Renderer2 } from "@angular/core";
+import { AfterContentInit, Directive, ElementRef, OnDestroy, Renderer2, OnChanges, Input } from "@angular/core";
 
 @Directive({
   selector: '[image-loader]'
 })
-export class ProgressiveImageLoaderDirective implements AfterContentInit, OnDestroy {
+export class ProgressiveImageLoaderDirective implements OnChanges, OnDestroy {
+
+  @Input('data-src') dataSrc: String;
 
   private nativeElement: HTMLElement;
   private cancelOnError: Function;
@@ -14,7 +16,7 @@ export class ProgressiveImageLoaderDirective implements AfterContentInit, OnDest
     private renderer: Renderer2
   ) { }
 
-  ngAfterContentInit(){
+  ngOnChanges() {
     this.registerEvents();
   }
 

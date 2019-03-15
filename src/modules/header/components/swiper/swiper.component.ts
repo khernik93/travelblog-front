@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SwiperDirective } from 'ngx-swiper-wrapper';
 import { PostContentDTO } from '../../../../shared/clients/api/api.model';
 
 @Component({

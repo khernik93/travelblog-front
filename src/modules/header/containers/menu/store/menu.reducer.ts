@@ -1,6 +1,6 @@
 import get from 'lodash-es/get';
 import { MenuActions, MenuActionTypes } from './menu.actions';
-import { TabDTO } from '../../../../../shared/clients/api/api.model';
+import { TabDTO } from '../../../../../shared/clients/backend/backend.model';
 
 export interface MenuState {
   selectedTab: TabDTO;

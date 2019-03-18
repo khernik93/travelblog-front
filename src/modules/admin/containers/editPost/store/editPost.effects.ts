@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { exhaustMap, catchError, map, take } from 'rxjs/operators';
-import { TabDTO, PostContentDTO } from '../../../../../shared/clients/api/api.model';
-import { ApiClient } from '../../../../../shared/clients/api/api.client';
+import { TabDTO, PostContentDTO } from '../../../../../shared/clients/backend/backend.model';
+import { BackendClient } from '../../../../../shared/clients/backend/backend.client';
 
 import {
   EditPostSuccess,
@@ -49,7 +49,7 @@ export class EditPostEffects {
 
   constructor(
     private actions$: Actions,
-    private apiClient: ApiClient,
+    private apiClient: BackendClient,
     private postsService: PostsService,
     private store: Store<HeaderState>
   ) { }

@@ -1,4 +1,4 @@
-import { PostContentDTO } from '../../../src/shared/clients/api/api.model';
+import { PostContentDTO } from '../../../src/shared/clients/backend/api.model';
 
 export const RecentPostsResponse: PostContentDTO[] = [
   {

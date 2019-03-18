@@ -5,7 +5,7 @@ import { catchError, map, tap, exhaustMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import get from 'lodash-es/get';
 import { AuthCredentials } from '../auth.model';
-import { ApiClient } from '../../../shared/clients/api/api.client';
+import { BackendClient } from '../../../shared/clients/backend/backend.client';
 import { CookieService } from '../../../shared/services/cookie.service';
 
 import { 
@@ -60,7 +60,7 @@ export class AuthEffects {
     private actions$: Actions,
     private route: ActivatedRoute,
     private router: Router,
-    private apiClient: ApiClient,
+    private apiClient: BackendClient,
     private cookieService: CookieService,
     private authService: AuthService
   ) { }

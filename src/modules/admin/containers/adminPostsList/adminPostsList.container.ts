@@ -5,7 +5,7 @@ import isEqual from 'lodash-es/isEqual';
 import { HeaderState } from '../../../header/store/header.reducers';
 import { selectTabs, selectSelectedTab } from '../../../header/containers/menu/store/menu.selectors';
 import { GetTabs, SelectTabById, SelectTab } from '../../../header/containers/menu/store/menu.actions';
-import { TabDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { TabDTO, PostContentDTO } from '../../../../shared/clients/backend/backend.model';
 import { filter, takeUntil, distinctUntilChanged } from 'rxjs/operators';
 import { GetPosts, ClearPosts } from '../../../content/containers/postsList/store/postsList.actions';
 import { selectPosts, selectLoading } from '../../../content/containers/postsList/store/postsList.selectors';

@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PostContentDTO, CommentDTO } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO, CommentDTO } from '../../../../shared/clients/backend/backend.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Comment } from '../../containers/comments/comments.model';
 

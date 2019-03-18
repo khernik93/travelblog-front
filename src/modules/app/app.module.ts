@@ -27,11 +27,14 @@ import { AuthRoutingModule } from '../auth/routing/authRouting.module';
 
 // Providers
 import { TransferHttpService } from '../../shared/services/transferHttp.service';
-import { ApiClient } from '../../shared/clients/api/api.client';
+import { BackendClient } from '../../shared/clients/backend/backend.client';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { PreviousRouteService } from '../../shared/services/previousRoute.service';
 import { NotificationContainer } from './containers/notification/notification.container';
 import { LayoutContainer } from './containers/layout/layout.container';
+import { BackendService } from '../../shared/clients/backend/backend.service';
+import { ContentClient } from '../../shared/clients/content/content.client';
+import { ContentService } from '../../shared/clients/content/content.service';
 
 export const MODULE_DECLARATIONS = [
   NotFoundComponent,
@@ -84,7 +87,10 @@ const STORE_IMPORTS = [
   ],
   providers: [
     TransferHttpService,
-    ApiClient,
+    BackendClient,
+    BackendService,
+    ContentClient,
+    ContentService,
     PreviousRouteService,
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
   ],

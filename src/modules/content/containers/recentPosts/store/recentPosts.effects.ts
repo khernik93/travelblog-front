@@ -3,8 +3,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, exhaustMap } from 'rxjs/operators';
 import { RecentPostsActionTypes, SetRecentPosts } from './recentPosts.actions';
-import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
-import { ApiClient } from '../../../../../shared/clients/api/api.client';
+import { PostContentDTO } from '../../../../../shared/clients/backend/backend.model';
+import { BackendClient } from '../../../../../shared/clients/backend/backend.client';
 
 @Injectable()
 export class RecentPostsEffects {
@@ -23,7 +23,7 @@ export class RecentPostsEffects {
 
   constructor(
     private actions$: Actions,
-    private apiClient: ApiClient
+    private apiClient: BackendClient
   ) { }
 
 }

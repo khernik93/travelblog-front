@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Post } from '../../../../../shared/clients/api/api.model';
+import { Post } from '../../../../../shared/clients/backend/backend.model';
 
 export enum EditPostActionTypes {
   EditPost = '[EditPost] Edit post',

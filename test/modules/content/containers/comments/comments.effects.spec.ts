@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { CommentsResponse } from '../../../../utils/responses/comments.response';
 import { CommentsEffects } from '../../../../../src/modules/content/containers/comments/store/comments.effects';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ContentState } from '../../../../../src/modules/content/store/content.reducers';
 import { MockStore } from '../../../../utils/mocks/mockStore';
@@ -23,7 +23,7 @@ import {
 
 describe('CommentsEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
   let store: MockStore<ContentState>;
 
   let actions: TestActions;
@@ -31,14 +31,14 @@ describe('CommentsEffects', () => {
   let ClonedCommentsResponse: typeof CommentsResponse;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
     store = SharedStubs.getMockStoreStub<ContentState>();
 
     TestBed.configureTestingModule({
       providers: [
         CommentsEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient },
+        { provide: BackendClient, useValue: apiClient },
         { provide: Store, useValue: store }
       ]
     });

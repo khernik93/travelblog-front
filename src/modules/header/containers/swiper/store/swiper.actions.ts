@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { SwiperDTO } from '../../../../../shared/clients/api/api.model';
+import { SwiperDTO } from '../../../../../shared/clients/backend/backend.model';
 
 export enum SwiperActionTypes {
   GetPhotos = '[Swiper] Get photos',

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HeaderState } from '../../../header/store/header.reducers';
 import { selectTabs } from '../../../header/containers/menu/store/menu.selectors';
 import { GetTabs } from '../../../header/containers/menu/store/menu.actions';
-import { TabDTO, Post, PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { TabDTO, Post, PostContentDTO } from '../../../../shared/clients/backend/backend.model';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { GetPost, ClearPost } from '../../../content/containers/singlePost/store/singlePost.actions';

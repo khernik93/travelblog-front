@@ -1,4 +1,4 @@
-import { Post, PostContentDTO } from '../../../src/shared/clients/api/api.model';
+import { Post, PostContentDTO } from '../../../src/shared/clients/backend/api.model';
 
 export const SinglePostResponse: PostContentDTO = {
   'id': 155,

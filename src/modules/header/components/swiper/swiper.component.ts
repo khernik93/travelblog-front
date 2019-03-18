@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../shared/clients/backend/backend.model';
 
 @Component({
   selector: 'swiper-component',

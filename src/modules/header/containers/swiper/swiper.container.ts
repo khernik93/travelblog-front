@@ -8,7 +8,7 @@ import { GetPhotos } from './store/swiper.actions';
 import { HeaderState } from '../../store/header.reducers';
 import { selectPhotos } from './store/swiper.selectors';
 import { selectSelectedTab } from '../menu/store/menu.selectors';
-import { TabDTO, SwiperDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { TabDTO, SwiperDTO, PostContentDTO } from '../../../../shared/clients/backend/backend.model';
 import { selectPost } from '../../../content/containers/singlePost/store/singlePost.selectors';
 
 @Component({

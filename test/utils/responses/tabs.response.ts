@@ -1,4 +1,4 @@
-import { TabDTO } from '../../../src/shared/clients/api/api.model';
+import { TabDTO } from '../../../src/shared/clients/backend/api.model';
 
 export const TabsResponse: TabDTO[] = [
     { 'id': 1, 'name': 'China' },

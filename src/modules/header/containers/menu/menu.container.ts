@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 import { GetTabs } from './store/menu.actions';
 import { HeaderState } from '../../store/header.reducers';
 import { selectTabs, selectSelectedTab } from './store/menu.selectors';
-import { TabDTO } from '../../../../shared/clients/api/api.model';
+import { TabDTO } from '../../../../shared/clients/backend/backend.model';
 
 @Component({
   selector: 'menu-container',

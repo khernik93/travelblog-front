@@ -8,24 +8,24 @@ import { GetPhotos, SetPhotos } from '../../../../../src/modules/header/containe
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { PhotosResponse } from '../../../../utils/responses/photos.response';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
 
 describe('SwiperEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
 
   let actions: TestActions;
   let effects: SwiperEffects;
   let ClonedPhotosResponse: typeof PhotosResponse;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         SwiperEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient }
+        { provide: BackendClient, useValue: apiClient }
       ]
     });
 

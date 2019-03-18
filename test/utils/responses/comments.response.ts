@@ -1,4 +1,4 @@
-import { CommentDTO } from '../../../src/shared/clients/api/api.model';
+import { CommentDTO } from '../../../src/shared/clients/backend/api.model';
 
 export const CommentsResponse: CommentDTO[] = [
   {

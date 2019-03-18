@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { HeaderState } from '../../../header/store/header.reducers';
 import { selectTabs } from '../../../header/containers/menu/store/menu.selectors';
 import { GetTabs } from '../../../header/containers/menu/store/menu.actions';
-import { TabDTO, Post } from '../../../../shared/clients/api/api.model';
+import { TabDTO, Post } from '../../../../shared/clients/backend/backend.model';
 import { AddNewPost } from './store/addNewPost.actions';
 
 @Component({

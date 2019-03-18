@@ -8,14 +8,14 @@ import { MenuEffects } from '../../../../../src/modules/header/containers/menu/s
 import { GetTabs, SetTabs, SelectTabById, SelectTab } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { TabsResponse } from '../../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { HeaderState } from '../../../../../src/modules/header/store/header.reducers';
 
 describe('MenuEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
   let store: MockStore<HeaderState>;
 
   let actions: TestActions;
@@ -23,14 +23,14 @@ describe('MenuEffects', () => {
   let ClonedTabsResponse: typeof TabsResponse;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
     store = SharedStubs.getMockStoreStub<HeaderState>();
 
     TestBed.configureTestingModule({
       providers: [
         MenuEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient },
+        { provide: BackendClient, useValue: apiClient },
         { provide: Store, useValue: store }
       ]
     });

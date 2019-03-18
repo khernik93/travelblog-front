@@ -14,7 +14,7 @@ import { AdminStubs } from '../../../../utils/stubs/admin.stubs';
 import { GetTabs } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { GetPost } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.actions';
 import { EditPost } from '../../../../../src/modules/admin/containers/editPost/store/editPost.actions';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
 import { ContentClient } from '../../../../../src/shared/clients/content/content.client';
 
 describe('EditPostContainer', () => {

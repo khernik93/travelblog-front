@@ -1,47 +1,39 @@
 import { Injectable } from "@angular/core";
 import { Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
 
+import { ContentService } from './content.service';
+import { Client } from '../client';
 import { TransferHttpService } from '../../services/transferHttp.service';
-
-const ROUTES: any = {
-  uploadPhoto: '/upload'
-};
 
 @Injectable()
 export class ContentClient {
 
-  private headers: HttpHeaders;
+  private client: Client;
 
   constructor(
+    private contentService: ContentService,
     private transferHttpService: TransferHttpService
-  ) { 
-    this.initializeHeaders();
-  }
-
-  private initializeHeaders() {
-    this.headers = new HttpHeaders()
-      .set('X-Api-Key', CONTENT_KEY);
+  ) {
+    this.client = new Client(
+      this.contentService,
+      this.transferHttpService
+    );
   }
 
   uploadFile(file: any): Observable<String> {
-    const url = this.prepareUrl(ROUTES.uploadPhoto);
-    let formData:FormData = new FormData();
+    let formData: FormData = new FormData();
     formData.append('file', file, file.name);
-    this.headers.append('Content-Type', 'multipart/form-data');
-    this.headers.append('Accept', 'application/json');
-    return this.transferHttpService.post(url, formData, {
-      headers: this.headers,
-      responseType: 'text'
-    });
-  }
 
-  /**
-   * Build absolute URL based on a path
-   * @param uri 
-   */
-  private prepareUrl(uri: string) {
-    return '/resources' + uri;
+    return this.client.sendPostRequest({
+      uri: this.client.routes.uploadPhoto,
+      payload: formData,
+      params: {
+        responseType: 'text',
+        headers: {
+          'Accept': 'application/json'
+        }
+      }
+    });
   }
 
 }

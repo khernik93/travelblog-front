@@ -5,8 +5,8 @@ import { exhaustMap, map, switchMap, tap, filter, take, distinctUntilChanged } f
 import { Store } from '@ngrx/store';
 import isEqual from 'lodash-es/isEqual';
 import { MenuActionTypes, SetTabs, SelectTab } from './menu.actions';
-import { ApiClient } from '../../../../../shared/clients/api/api.client';
-import { TabDTO } from '../../../../../shared/clients/api/api.model';
+import { BackendClient } from '../../../../../shared/clients/backend/backend.client';
+import { TabDTO } from '../../../../../shared/clients/backend/backend.model';
 import { HeaderState } from '../../../store/header.reducers';
 import { selectTabs } from './menu.selectors';
 
@@ -44,7 +44,7 @@ export class MenuEffects {
 
   constructor(
     private actions$: Actions,
-    private apiClient: ApiClient,
+    private apiClient: BackendClient,
     private store: Store<HeaderState>
   ) { }
 

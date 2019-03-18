@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { TabDTO, PostContentDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
+import { TabDTO, PostContentDTO, MetaDTO } from '../../../../../shared/clients/backend/backend.model';
 
 export enum PostsListActionTypes {
 

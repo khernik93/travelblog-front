@@ -4,8 +4,8 @@ import { Observable, of } from 'rxjs';
 import { map, exhaustMap, filter, catchError, take } from 'rxjs/operators';
 
 import { CommentsActionTypes, SetComments, AddCommentSuccess, AddCommentError } from './comments.actions';
-import { CommentDTO, PostContentDTO } from '../../../../../shared/clients/api/api.model';
-import { ApiClient } from '../../../../../shared/clients/api/api.client';
+import { CommentDTO, PostContentDTO } from '../../../../../shared/clients/backend/backend.model';
+import { BackendClient } from '../../../../../shared/clients/backend/backend.client';
 import { Store } from '@ngrx/store';
 import { ContentState } from '../../../store/content.reducers';
 import { selectPost } from '../../singlePost/store/singlePost.selectors';
@@ -56,7 +56,7 @@ export class CommentsEffects {
 
   constructor(
     private actions$: Actions,
-    private apiClient: ApiClient,
+    private apiClient: BackendClient,
     private store: Store<ContentState>
   ) { }
 

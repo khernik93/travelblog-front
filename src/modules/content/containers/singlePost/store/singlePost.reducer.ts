@@ -1,5 +1,5 @@
 import { SinglePostActions, SinglePostActionTypes } from './singlePost.actions';
-import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../../shared/clients/backend/backend.model';
 
 export interface SinglePostState {
   post: PostContentDTO

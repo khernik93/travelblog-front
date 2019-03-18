@@ -8,7 +8,7 @@ import { TryToGetPostsOnScroll, GetPostsInitial } from './store/postsList.action
 import { ContentState } from '../../store/content.reducers';
 import { selectSelectedTab } from '../../../header/containers/menu/store/menu.selectors';
 import { selectPosts, selectLoading, selectInitialized } from './store/postsList.selectors';
-import { PostContentDTO, TabDTO } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO, TabDTO } from '../../../../shared/clients/backend/backend.model';
 
 @Component({
   selector: 'postsList-container',

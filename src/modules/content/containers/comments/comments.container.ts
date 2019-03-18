@@ -4,7 +4,7 @@ import { Observable, pipe } from 'rxjs';
 import { take, skip, tap } from 'rxjs/operators';
 
 import { ContentState } from '../../store/content.reducers';
-import { PostContentDTO, CommentDTO } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO, CommentDTO } from '../../../../shared/clients/backend/backend.model';
 import { selectComments } from './store/comments.selectors';
 import { selectPost } from '../singlePost/store/singlePost.selectors';
 import { GetComments, AddComment } from './store/comments.actions';

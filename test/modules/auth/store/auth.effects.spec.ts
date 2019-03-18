@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 
-import { ApiClient } from '../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../src/shared/clients/api/api.client';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { AuthEffects } from '../../../../src/modules/auth/store/auth.effects';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
@@ -19,7 +19,7 @@ import { AuthService } from '../../../../src/modules/auth/auth.service';
 
 describe('AuthEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
   let activatedRoute: jasmine.SpyObj<ActivatedRoute>;
   let store: MockStore<AppState>;
   let cookieService: jasmine.SpyObj<CookieService>;
@@ -30,7 +30,7 @@ describe('AuthEffects', () => {
   let effects: AuthEffects;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
     activatedRoute = AuthStubs.activatedRoute();
     router = SharedStubs.router();
     store = SharedStubs.getMockStoreStub<AppState>();
@@ -44,7 +44,7 @@ describe('AuthEffects', () => {
       providers: [
         AuthEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient },
+        { provide: BackendClient, useValue: apiClient },
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: Store, useValue: store },
         { provide: CookieService, useValue: cookieService },

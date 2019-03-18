@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { map, exhaustMap, catchError, take } from 'rxjs/operators';
-import { PostContentDTO, TabDTO } from '../../../../../shared/clients/api/api.model';
-import { ApiClient } from '../../../../../shared/clients/api/api.client';
+import { PostContentDTO, TabDTO } from '../../../../../shared/clients/backend/backend.model';
+import { BackendClient } from '../../../../../shared/clients/backend/backend.client';
 import { SetSuccess } from '../../../../app/containers/notification/store/notification.actions';
 import { AddNewPostActionTypes, AddNewPostSuccess, AddNewPostError } from './addNewPost.actions';
 import { PostsService } from '../../../services/posts.service';
@@ -44,7 +44,7 @@ export class AddNewPostEffects {
 
   constructor(
     private actions$: Actions,
-    private apiClient: ApiClient,
+    private apiClient: BackendClient,
     private postsService: PostsService,
     private store: Store<HeaderState>
   ) { }

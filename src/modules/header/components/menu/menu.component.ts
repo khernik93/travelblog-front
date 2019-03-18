@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TabDTO } from '../../../../shared/clients/api/api.model';
+import { TabDTO } from '../../../../shared/clients/backend/backend.model';
 import { ContentRoutes, contentRoutes } from '../../../content/routing/contentRouting.routes';
 
 @Component({

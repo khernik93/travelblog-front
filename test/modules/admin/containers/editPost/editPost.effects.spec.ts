@@ -6,7 +6,7 @@ import cloneDeep from 'lodash-es/cloneDeep';
 
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { EditPostEffects } from '../../../../../src/modules/admin/containers/editPost/store/editPost.effects';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { EditPost, EditPostSuccess } from '../../../../../src/modules/admin/containers/editPost/store/editPost.actions';
 import { MockStore } from '../../../../utils/mocks/mockStore';
@@ -18,7 +18,7 @@ import { Post } from '../../../../../src/shared/clients/api/api.model';
 
 describe('EditPostEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
   let postsService: jasmine.SpyObj<PostsService>;
   let store: MockStore<HeaderState>;
 
@@ -27,7 +27,7 @@ describe('EditPostEffects', () => {
   let ClonedTabsResponse: typeof TabsResponse;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
     store = SharedStubs.getMockStoreStub<HeaderState>();
     postsService = AdminStubs.postsService();
 
@@ -35,7 +35,7 @@ describe('EditPostEffects', () => {
       providers: [
         EditPostEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient },
+        { provide: BackendClient, useValue: apiClient },
         { provide: PostsService, useValue: postsService },
         { provide: Store, useValue: store }
       ]

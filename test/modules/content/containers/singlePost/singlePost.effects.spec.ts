@@ -7,26 +7,26 @@ import { SinglePostResponse } from '../../../../utils/responses/singlePost.respo
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { SetPost, GetPost } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.actions';
 import { SinglePostEffects } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.effects';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ContentStubs } from '../../../../utils/stubs/content.stubs';
 
 describe('SinglePostEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
 
   let actions: TestActions;
   let effects: SinglePostEffects;
   let ClonedSinglePostResponse: typeof SinglePostResponse;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         SinglePostEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient }
+        { provide: BackendClient, useValue: apiClient }
       ]
     });
 

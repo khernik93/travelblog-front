@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { exhaustMap, catchError, map, take, concatMap, debounceTime } from 'rxjs/operators';
-import { PostsDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
-import { ApiClient } from '../../../../../shared/clients/api/api.client';
+import { PostsDTO, MetaDTO } from '../../../../../shared/clients/backend/backend.model';
+import { BackendClient } from '../../../../../shared/clients/backend/backend.client';
 import { Store } from '@ngrx/store';
 import { ContentState } from '../../../store/content.reducers';
 import { selectCanScroll, selectMeta } from './postsList.selectors';
@@ -78,8 +78,8 @@ export class PostsListEffects {
       ofType(PostsListActionTypes.GetPosts),
       exhaustMap((action: any) => (
         this.apiClient.getPosts(action.selectedTab.id, {
-          start: action.start, 
-          end: action.end 
+          start: action.start.toString(), 
+          end: action.end.toString()
         })
           .pipe(
             concatMap((response: PostsDTO) => ([
@@ -93,7 +93,7 @@ export class PostsListEffects {
 
   constructor(
     private actions$: Actions,
-    private apiClient: ApiClient,
+    private apiClient: BackendClient,
     private store: Store<HeaderState | ContentState>,
     private postsListService: PostsListService
   ) { }

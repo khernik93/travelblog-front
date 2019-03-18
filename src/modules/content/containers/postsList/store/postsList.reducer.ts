@@ -1,5 +1,5 @@
 import { PostsListActions, PostsListActionTypes } from './postsList.actions';
-import { PostContentDTO, MetaDTO } from '../../../../../shared/clients/api/api.model';
+import { PostContentDTO, MetaDTO } from '../../../../../shared/clients/backend/backend.model';
 import { AdminPostsListActions, AdminPostsListActionTypes } from '../../../../admin/containers/adminPostsList/store/adminPostsList.actions';
 
 export interface PostsListState {

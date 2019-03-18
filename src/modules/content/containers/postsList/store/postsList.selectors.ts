@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import { ContentState } from '../../../store/content.reducers';
 import { selectContent } from '../../../store/content.selectors';
-import { MetaDTO, PostContentDTO } from '../../../../../shared/clients/api/api.model';
+import { MetaDTO, PostContentDTO } from '../../../../../shared/clients/backend/backend.model';
 
 export const selectPosts = createSelector(
   selectContent,

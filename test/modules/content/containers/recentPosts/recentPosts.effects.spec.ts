@@ -7,25 +7,25 @@ import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { RecentPostsResponse } from '../../../../utils/responses/recentPosts.response';
 import { SetRecentPosts, GetRecentPosts } from '../../../../../src/modules/content/containers/recentPosts/store/recentPosts.actions';
 import { RecentPostsEffects } from '../../../../../src/modules/content/containers/recentPosts/store/recentPosts.effects';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 
 describe('RecentPostsEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
 
   let actions: TestActions;
   let effects: RecentPostsEffects;
   let ClonedRecentPostsResponse: typeof RecentPostsResponse;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
 
     TestBed.configureTestingModule({
       providers: [
         RecentPostsEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient }
+        { provide: BackendClient, useValue: apiClient }
       ]
     });
 

@@ -1,14 +1,14 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, Subject } from 'rxjs';
-import { filter, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { filter, distinctUntilChanged, takeUntil, tap } from 'rxjs/operators';
 import isEqual from 'lodash-es/isEqual';
 
 import { GetPhotos } from './store/swiper.actions';
 import { HeaderState } from '../../store/header.reducers';
 import { selectPhotos } from './store/swiper.selectors';
 import { selectSelectedTab } from '../menu/store/menu.selectors';
-import { TabDTO, SwiperDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { TabDTO, SwiperDTO, PostContentDTO } from '../../../../shared/clients/backend/backend.model';
 import { selectPost } from '../../../content/containers/singlePost/store/singlePost.selectors';
 
 @Component({
@@ -62,7 +62,7 @@ export class SwiperContainer implements OnInit, OnDestroy {
       )
       .subscribe(([selectedTab, photos]) => {
         this.photosForSelectedTab = photos[selectedTab.id];
-        this.ref.markForCheck();
+        this.ref.detectChanges();
       });
   }
 

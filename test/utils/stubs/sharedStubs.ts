@@ -1,4 +1,5 @@
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { MockStore } from '../mocks/mockStore';
 import { PhotosResponse } from '../responses/photos.response';
@@ -6,14 +7,18 @@ import { TabsResponse } from '../responses/tabs.response';
 import { SinglePostResponse } from '../responses/singlePost.response';
 import { PostsListResponse } from '../responses/postsList.response';
 import { RecentPostsResponse } from '../responses/recentPosts.response';
-import { ApiClient } from '../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../src/shared/clients/backend/backend.client';
 import { CommentsResponse } from '../responses/comments.response';
 import { ContentClient } from '../../../src/shared/clients/content/content.client';
 
 export class SharedStubs {
 
-  static getApiClientStub(): jasmine.SpyObj<ApiClient> {
-    return jasmine.createSpyObj('ApiClient', {
+  static router(): jasmine.SpyObj<Router> {
+    return jasmine.createSpyObj('Router', ['navigateByUrl']);
+  }
+
+  static getBackendClientStub(): jasmine.SpyObj<BackendClient> {
+    return jasmine.createSpyObj('BackendClient', {
       'getRecentPosts': of(RecentPostsResponse),
       'getPosts': of(PostsListResponse),
       'getPost': of(SinglePostResponse),

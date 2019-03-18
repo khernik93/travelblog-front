@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 
-import { ApiClient } from '../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../src/shared/clients/backend/backend.client';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { AuthEffects } from '../../../../src/modules/auth/store/auth.effects';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';
@@ -15,24 +15,27 @@ import { AuthStubs } from '../../../utils/stubs/auth.stubs';
 import { MockStore } from '../../../utils/mocks/mockStore';
 import { CookieService } from '../../../../src/shared/services/cookie.service';
 import { AppState } from '../../../../src/modules/app/store/app.reducers';
+import { AuthService } from '../../../../src/modules/auth/auth.service';
 
 describe('AuthEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
   let activatedRoute: jasmine.SpyObj<ActivatedRoute>;
   let store: MockStore<AppState>;
   let cookieService: jasmine.SpyObj<CookieService>;
   let router: jasmine.SpyObj<Router>;
+  let authService: jasmine.SpyObj<AuthService>;
 
   let actions: TestActions;
   let effects: AuthEffects;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
     activatedRoute = AuthStubs.activatedRoute();
-    router = AuthStubs.router();
+    router = SharedStubs.router();
     store = SharedStubs.getMockStoreStub<AppState>();
     cookieService = AuthStubs.cookieService();
+    authService = AuthStubs.authService();
 
     TestBed.configureTestingModule({
       imports: [
@@ -41,11 +44,12 @@ describe('AuthEffects', () => {
       providers: [
         AuthEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient },
+        { provide: BackendClient, useValue: apiClient },
         { provide: ActivatedRoute, useValue: activatedRoute },
         { provide: Store, useValue: store },
         { provide: CookieService, useValue: cookieService },
-        { provide: Router, useValue: router }
+        { provide: Router, useValue: router },
+        { provide: AuthService, useValue: authService }
       ]
     });
 

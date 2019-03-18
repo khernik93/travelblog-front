@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { takeUntil, filter, distinctUntilChanged } from 'rxjs/operators';
 import isEqual from 'lodash-es/isEqual';
-import { TabDTO, PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { TabDTO, PostContentDTO } from '../../../../shared/clients/backend/backend.model';
 import { AdminRoutes, adminRoutes } from '../../routing/adminRouting.routes';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MetaDTO } from '../../../../shared/clients/api/api.model';
+import { MetaDTO } from '../../../../shared/clients/backend/backend.model';
 
 @Injectable()
 export class PostsListService {

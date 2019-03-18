@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
-import { exhaustMap, map, switchMap, tap, takeUntil, take, filter } from 'rxjs/operators';
-import { MenuActionTypes, SetTabs, SelectTab } from './menu.actions';
-import { ApiClient } from '../../../../../shared/clients/api/api.client';
-import { TabDTO } from '../../../../../shared/clients/api/api.model';
+import { exhaustMap, map, switchMap, tap, filter, take, distinctUntilChanged } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import isEqual from 'lodash-es/isEqual';
+import { MenuActionTypes, SetTabs, SelectTab } from './menu.actions';
+import { BackendClient } from '../../../../../shared/clients/backend/backend.client';
+import { TabDTO } from '../../../../../shared/clients/backend/backend.model';
 import { HeaderState } from '../../../store/header.reducers';
 import { selectTabs } from './menu.selectors';
 
@@ -19,15 +20,17 @@ export class MenuEffects {
       switchMap((action: any) => (
         this.store.select(selectTabs)
           .pipe(
-            take(1),
+            take(2),
             map((tabs: TabDTO[]) => ({ tabId: action.id, tabs }))
           )
       )),
+      distinctUntilChanged((x: any, y: any) => isEqual(x, y)),
       map((result: {tabId: number, tabs: TabDTO[]}) => (
         result.tabId ?
           result.tabs.filter(tab => tab.id == result.tabId)[0] :
           result.tabs[0]
       )),
+      filter((tab: TabDTO) => !!tab),
       map((tab: TabDTO) => new SelectTab(tab))
     );
 
@@ -41,7 +44,7 @@ export class MenuEffects {
 
   constructor(
     private actions$: Actions,
-    private apiClient: ApiClient,
+    private apiClient: BackendClient,
     private store: Store<HeaderState>
   ) { }
 

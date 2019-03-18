@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { selectPost } from './store/singlePost.selectors';
 import { ContentState } from '../../store/content.reducers';
 import { ClearPost, GetPost } from './store/singlePost.actions';
-import { PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../shared/clients/backend/backend.model';
 
 @Component({
   selector: 'singlePost-container',

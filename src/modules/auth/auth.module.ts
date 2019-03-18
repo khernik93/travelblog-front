@@ -21,6 +21,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthReversedGuard } from './guards/authReversed.guard';
 import { CookieService } from '../../shared/services/cookie.service';
 import { SignInContainer } from './containers/signIn/signIn.container';
+import { AuthService } from './auth.service';
 
 export const MODULE_DECLARATIONS = [
   AuthComponent,
@@ -48,7 +49,8 @@ const STORE_IMPORTS = [
   providers: [
     AuthGuard,
     AuthReversedGuard,
-    CookieService
+    CookieService,
+    AuthService
   ]
 })
 export class AuthModule {

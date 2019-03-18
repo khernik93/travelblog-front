@@ -16,9 +16,7 @@ app.all('/api/*', function (req, res) {
 });
 
 app.all('/resources/*', function (req, res) {
-  apiProxy.web(req, res, { target: PROD_CONTENT_URL, pathRewrite: {
-    '^/resources': ''
-  } }, function (e) {
+  apiProxy.web(req, res, { target: PROD_CONTENT_URL }, function (e) {
     console.error(e);
     res.status(500).send('Internal server error');
   });

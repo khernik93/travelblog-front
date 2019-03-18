@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PostContentDTO, TabDTO } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO, TabDTO } from '../../../../shared/clients/backend/backend.model';
 import { ContentRoutes, contentRoutes } from '../../routing/contentRouting.routes';
 import { FadeToggleAnimation } from '../../../../shared/animations';
 

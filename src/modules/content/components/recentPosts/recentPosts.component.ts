@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../shared/clients/backend/backend.model';
 import { ContentRoutes, contentRoutes } from '../../routing/contentRouting.routes';
 
 @Component({

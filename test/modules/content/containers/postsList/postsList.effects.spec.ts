@@ -8,7 +8,7 @@ import { TabsResponse } from '../../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { PostsListResponse } from '../../../../utils/responses/postsList.response';
 import { PostsListEffects } from '../../../../../src/modules/content/containers/postsList/store/postsList.effects';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ContentState } from '../../../../../src/modules/content/store/content.reducers';
 import { PostsListService } from '../../../../../src/modules/content/containers/postsList/postsList.service';
@@ -28,7 +28,7 @@ import {
 
 describe('PostsListEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
   let store: MockStore<ContentState>;
   let postsListService: jasmine.SpyObj<PostsListService>;
 
@@ -38,7 +38,7 @@ describe('PostsListEffects', () => {
   let ClonedPostsListResponse: typeof PostsListResponse;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
     store = SharedStubs.getMockStoreStub<ContentState>();
     postsListService = ContentStubs.postsListService();
 
@@ -46,7 +46,7 @@ describe('PostsListEffects', () => {
       providers: [
         PostsListEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient },
+        { provide: BackendClient, useValue: apiClient },
         { provide: Store, useValue: store },
         { provide: PostsListService, useValue: postsListService }
       ]

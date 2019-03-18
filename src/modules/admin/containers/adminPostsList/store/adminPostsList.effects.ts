@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { exhaustMap, catchError, map } from 'rxjs/operators';
-import { ApiClient } from '../../../../../shared/clients/api/api.client';
+import { BackendClient } from '../../../../../shared/clients/backend/backend.client';
 
 import {
   AdminPostsListActionTypes,
@@ -36,7 +36,7 @@ export class AdminPostsListEffects {
 
   constructor(
     private actions$: Actions,
-    private apiClient: ApiClient
+    private apiClient: BackendClient
   ) { }
 
 }

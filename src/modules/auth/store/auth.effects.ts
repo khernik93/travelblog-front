@@ -5,9 +5,8 @@ import { catchError, map, tap, exhaustMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import get from 'lodash-es/get';
 import { AuthCredentials } from '../auth.model';
-import { ApiClient } from '../../../shared/clients/api/api.client';
+import { BackendClient } from '../../../shared/clients/backend/backend.client';
 import { CookieService } from '../../../shared/services/cookie.service';
-import constants from '../../../config/constants';
 
 import { 
   SetAuthenticated,
@@ -15,6 +14,7 @@ import {
   AuthActionTypes,
   SignInError
 } from './auth.actions';
+import { AuthService } from '../auth.service';
 
 @Injectable()
 export class AuthEffects {
@@ -60,10 +60,11 @@ export class AuthEffects {
     private actions$: Actions,
     private route: ActivatedRoute,
     private router: Router,
-    private apiClient: ApiClient,
-    private cookieService: CookieService
+    private apiClient: BackendClient,
+    private cookieService: CookieService,
+    private authService: AuthService
   ) { }
 
-  private authCookieKey: string = constants.auth.cookieKey;
+  private authCookieKey: string = this.authService.cookieKey;
 
 }

@@ -6,7 +6,7 @@ import cloneDeep from 'lodash-es/cloneDeep';
 
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { AddNewPostEffects } from '../../../../../src/modules/admin/containers/addNewPost/store/addNewPost.effects';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { AddNewPost, AddNewPostSuccess } from '../../../../../src/modules/admin/containers/addNewPost/store/addNewPost.actions';
 import { MockStore } from '../../../../utils/mocks/mockStore';
@@ -14,11 +14,11 @@ import { HeaderState } from '../../../../../src/modules/header/store/header.redu
 import { PostsService } from '../../../../../src/modules/admin/services/posts.service';
 import { AdminStubs } from '../../../../utils/stubs/admin.stubs';
 import { TabsResponse } from '../../../../utils/responses/tabs.response';
-import { Post } from '../../../../../src/shared/clients/api/api.model';
+import { Post } from '../../../../../src/shared/clients/backend/backend.model';
 
 describe('AddNewPostEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
   let postsService: jasmine.SpyObj<PostsService>;
   let store: MockStore<HeaderState>;
 
@@ -27,7 +27,7 @@ describe('AddNewPostEffects', () => {
   let ClonedTabsResponse: typeof TabsResponse;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
     store = SharedStubs.getMockStoreStub<HeaderState>();
     postsService = AdminStubs.postsService();
 
@@ -35,7 +35,7 @@ describe('AddNewPostEffects', () => {
       providers: [
         AddNewPostEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient },
+        { provide: BackendClient, useValue: apiClient },
         { provide: PostsService, useValue: postsService },
         { provide: Store, useValue: store }
       ]

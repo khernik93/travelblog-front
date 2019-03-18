@@ -1,5 +1,5 @@
 import { RecentPostsActions, RecentPostsActionTypes } from './recentPosts.actions';
-import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../../shared/clients/backend/backend.model';
 
 export interface RecentPostsState {
   recentPosts: PostContentDTO[]

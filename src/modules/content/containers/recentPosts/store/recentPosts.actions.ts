@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { PostContentDTO } from '../../../../../shared/clients/api/api.model';
+import { PostContentDTO } from '../../../../../shared/clients/backend/backend.model';
 
 export enum RecentPostsActionTypes {
   GetRecentPosts = '[RecentPosts] Get recent posts',

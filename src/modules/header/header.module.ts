@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { RouterModule } from '@angular/router';
 
 // Store
 import { headerReducers } from './store/header.reducers';
@@ -13,9 +14,11 @@ import { HeaderComponent } from './header.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { SwiperComponent } from './components/swiper/swiper.component';
-import { RouterModule } from '@angular/router';
 import { MenuContainer } from './containers/menu/menu.container';
 import { SwiperContainer } from './containers/swiper/swiper.container';
+
+// Services
+import { ProgressiveImageLoaderDirective } from '../../shared/directives/progressiveImageLoader.directive';
 
 export const MODULE_DECLARATIONS = [
   HeaderComponent,
@@ -23,7 +26,8 @@ export const MODULE_DECLARATIONS = [
   MenuContainer,
   MenuComponent,
   SwiperContainer,
-  SwiperComponent
+  SwiperComponent,
+  ProgressiveImageLoaderDirective
 ];
 
 export const MODULE_IMPORTS = [

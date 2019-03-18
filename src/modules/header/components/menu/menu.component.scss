@@ -67,6 +67,7 @@ nav {
 .menu li a {
   padding: 4px 0;
   cursor: pointer;
+  color: $lightgrey;
   &:hover {
     color: $red;
   }

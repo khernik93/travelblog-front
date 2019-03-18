@@ -1,7 +1,7 @@
 <quill-editor [style]="{height: '300px'}" 
               [(ngModel)]="content"
               [modules]="quillModules"
-              (onContentChanged)="changeContent()">
+              (onContentChanged)="changeContent($event)">
   <div quill-editor-toolbar>
     <span class="ql-formats">
       <select class="ql-font">

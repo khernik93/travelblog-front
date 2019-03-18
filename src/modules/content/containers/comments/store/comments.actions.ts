@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { CommentDTO } from '../../../../../shared/clients/api/api.model';
+import { CommentDTO } from '../../../../../shared/clients/backend/backend.model';
 import { Comment } from '../comments.model';
 
 export enum CommentsActionTypes {

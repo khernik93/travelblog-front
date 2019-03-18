@@ -1,29 +1,24 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { SwiperComponent } from '../../../../../src/modules/header/components/swiper/swiper.component';
-import { MODULE_DECLARATIONS, MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
-import { SwiperService } from '../../../../../src/modules/header/containers/swiper/swiper.service';
-import { HeaderStubs } from '../../../../utils/stubs/header.stubs';
+import { MODULE_IMPORTS } from '../../../../../src/modules/header/header.module';
 import { State } from '../../../../utils/state/state';
 
 describe('SwiperComponent', () => {
   
-  let swiperService: jasmine.SpyObj<SwiperService>;
 
   let component: SwiperComponent;
   let fixture: ComponentFixture<SwiperComponent>;
 
   beforeEach(() => {
-    swiperService = HeaderStubs.swiperService();
-
     TestBed.configureTestingModule({
       imports: MODULE_IMPORTS,
-      declarations: MODULE_DECLARATIONS,
+      declarations: [SwiperComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
-        { provide: ChangeDetectorRef },
-        { provide: SwiperService, useValue: swiperService }
+        { provide: ChangeDetectorRef }
       ]
     }).compileComponents();
   });
@@ -39,13 +34,13 @@ describe('SwiperComponent', () => {
 
   it(`
     WHEN a tab is selected
-    THEN its photos should be visible
+    THEN its photo is visible (just one because swiper was removed)
   `, () => {
     const photos = State.header.swiper.photos[1];
     component.photosForSelectedTab = photos;
     fixture.detectChanges();
     const images = fixture.debugElement.queryAll(By.css('.swiper-wrapper img'));
-    expect(images.length).toBe(photos.length);
+    expect(images.length).toBe(1);
   });
 
 });

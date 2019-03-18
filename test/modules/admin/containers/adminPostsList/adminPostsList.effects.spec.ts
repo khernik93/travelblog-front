@@ -4,7 +4,7 @@ import { hot, cold } from 'jasmine-marbles';
 import { Store } from '@ngrx/store';
 
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
-import { ApiClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { HeaderState } from '../../../../../src/modules/header/store/header.reducers';
@@ -15,7 +15,7 @@ import { DeletePost, DeletePostSuccess } from '../../../../../src/modules/admin/
 
 describe('AdminPostsListEffects', () => {
 
-  let apiClient: jasmine.SpyObj<ApiClient>;
+  let apiClient: jasmine.SpyObj<BackendClient>;
   let postsService: jasmine.SpyObj<PostsService>;
   let store: MockStore<HeaderState>;
 
@@ -23,7 +23,7 @@ describe('AdminPostsListEffects', () => {
   let effects: AdminPostsListEffects;
 
   beforeEach(() => {
-    apiClient = SharedStubs.getApiClientStub();
+    apiClient = SharedStubs.getBackendClientStub();
     store = SharedStubs.getMockStoreStub<HeaderState>();
     postsService = AdminStubs.postsService();
 
@@ -31,7 +31,7 @@ describe('AdminPostsListEffects', () => {
       providers: [
         AdminPostsListEffects,
         { provide: Actions, useFactory: getActions },
-        { provide: ApiClient, useValue: apiClient },
+        { provide: BackendClient, useValue: apiClient },
         { provide: PostsService, useValue: postsService },
         { provide: Store, useValue: store }
       ]

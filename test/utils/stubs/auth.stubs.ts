@@ -1,8 +1,6 @@
-export class AuthStubs {
+import { AuthService } from "../../../src/modules/auth/auth.service";
 
-  static router() {
-    return jasmine.createSpyObj('Router', ['navigateByUrl']);
-  }
+export class AuthStubs {
 
   static activatedRoute() {
     return jasmine.createSpyObj('ActivatedRoute', {
@@ -17,6 +15,10 @@ export class AuthStubs {
       'isCookieSet',
       'removeCookie'
     ]);
+  }
+
+  static authService(): jasmine.SpyObj<AuthService> {
+    return jasmine.createSpyObj('AuthService', ['cookieKey']);
   }
 
 }

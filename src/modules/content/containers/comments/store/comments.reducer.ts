@@ -1,5 +1,5 @@
 import { CommentsActionTypes, CommentsActions } from './comments.actions';
-import { CommentDTO } from '../../../../../shared/clients/api/api.model';
+import { CommentDTO } from '../../../../../shared/clients/backend/backend.model';
 
 export interface CommentsState {
   comments: CommentDTO[]

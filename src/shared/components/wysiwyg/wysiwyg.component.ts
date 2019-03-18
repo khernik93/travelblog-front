@@ -44,12 +44,13 @@ export class WysiwygComponent implements OnInit, OnDestroy {
       .subscribe(placeholder => this.content = placeholder);
   }
 
-  changeContent() {
-    this.onContentChanged.emit(this.content);
+  changeContent(content) {
+    this.onContentChanged.emit(content.html);
   }
 
   upload(file: HTMLInputElement): Promise<String> {
-    return this.contentClient.uploadFile(file).toPromise();
+    return this.contentClient.uploadFile(file).toPromise()
+      .catch(() => '')
   }
 
   ngOnDestroy() {

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetect
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
-import { TabDTO, Post, PostContentDTO } from '../../../../shared/clients/api/api.model';
+import { TabDTO, Post, PostContentDTO } from '../../../../shared/clients/backend/backend.model';
 
 @Component({
   selector: 'postForm-component',

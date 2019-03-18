@@ -3,8 +3,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { map, exhaustMap } from 'rxjs/operators';
 import { SwiperActionTypes, SetPhotos } from './swiper.actions';
-import { SwiperDTO } from '../../../../../shared/clients/api/api.model';
-import { ApiClient } from '../../../../../shared/clients/api/api.client';
+import { SwiperDTO } from '../../../../../shared/clients/backend/backend.model';
+import { BackendClient } from '../../../../../shared/clients/backend/backend.client';
 
 @Injectable()
 export class SwiperEffects {
@@ -23,7 +23,7 @@ export class SwiperEffects {
 
   constructor(
     private actions$: Actions,
-    private apiClient: ApiClient
+    private apiClient: BackendClient
   ) { }
 
 }

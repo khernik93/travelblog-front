@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { CommentsResponse } from '../../../../utils/responses/comments.response';
 import { CommentsEffects } from '../../../../../src/modules/content/containers/comments/store/comments.effects';
-import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ContentState } from '../../../../../src/modules/content/store/content.reducers';
 import { MockStore } from '../../../../utils/mocks/mockStore';

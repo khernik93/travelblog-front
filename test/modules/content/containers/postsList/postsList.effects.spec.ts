@@ -8,7 +8,7 @@ import { TabsResponse } from '../../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { PostsListResponse } from '../../../../utils/responses/postsList.response';
 import { PostsListEffects } from '../../../../../src/modules/content/containers/postsList/store/postsList.effects';
-import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ContentState } from '../../../../../src/modules/content/store/content.reducers';
 import { PostsListService } from '../../../../../src/modules/content/containers/postsList/postsList.service';

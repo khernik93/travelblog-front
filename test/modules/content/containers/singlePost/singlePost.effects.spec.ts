@@ -7,7 +7,7 @@ import { SinglePostResponse } from '../../../../utils/responses/singlePost.respo
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { SetPost, GetPost } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.actions';
 import { SinglePostEffects } from '../../../../../src/modules/content/containers/singlePost/store/singlePost.effects';
-import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { ContentStubs } from '../../../../utils/stubs/content.stubs';
 

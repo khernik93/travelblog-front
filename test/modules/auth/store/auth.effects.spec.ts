@@ -6,7 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Store } from '@ngrx/store';
 
-import { BackendClient } from '../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../src/shared/clients/backend/backend.client';
 import { TestActions, getActions } from '../../../utils/mocks/testActions';
 import { AuthEffects } from '../../../../src/modules/auth/store/auth.effects';
 import { SharedStubs } from '../../../utils/stubs/sharedStubs';

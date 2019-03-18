@@ -8,7 +8,7 @@ import { MenuEffects } from '../../../../../src/modules/header/containers/menu/s
 import { GetTabs, SetTabs, SelectTabById, SelectTab } from '../../../../../src/modules/header/containers/menu/store/menu.actions';
 import { TabsResponse } from '../../../../utils/responses/tabs.response';
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
-import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { MockStore } from '../../../../utils/mocks/mockStore';
 import { HeaderState } from '../../../../../src/modules/header/store/header.reducers';

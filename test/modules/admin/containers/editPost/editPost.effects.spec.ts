@@ -6,7 +6,7 @@ import cloneDeep from 'lodash-es/cloneDeep';
 
 import { TestActions, getActions } from '../../../../utils/mocks/testActions';
 import { EditPostEffects } from '../../../../../src/modules/admin/containers/editPost/store/editPost.effects';
-import { BackendClient } from '../../../../../src/shared/clients/api/api.client';
+import { BackendClient } from '../../../../../src/shared/clients/backend/backend.client';
 import { SharedStubs } from '../../../../utils/stubs/sharedStubs';
 import { EditPost, EditPostSuccess } from '../../../../../src/modules/admin/containers/editPost/store/editPost.actions';
 import { MockStore } from '../../../../utils/mocks/mockStore';
